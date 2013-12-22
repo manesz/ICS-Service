@@ -1,0 +1,22 @@
+#Deny from all
+#RewriteEngine on
+#RewriteCond $1 !^(index\.php|assets|robots\.txt)
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ /index.php/$1 [L]
+
+#RewriteEngine on
+#RewriteCond $1 !^(index\.php|resources|images|robots\.txt\.jpg)
+#RewriteCond %{REQUEST_URI} !\.(jpg|png|css|js)$
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?/$1 [L]
+#RewriteEngine On
+#RewriteRule ^(.*)$ index.php/$1 [L]

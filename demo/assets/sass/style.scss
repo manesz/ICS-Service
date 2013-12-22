@@ -1,0 +1,105 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@import "compass";
+
+// FontAwesome
+@import "font-awesome/font-awesome";
+
+// Glyphicons
+@import "glyphicons";
+
+// Colors
+@import "colors";
+
+// Overwrite bootstrap styling
+@import "bootstrap-override";
+
+// Media Query
+@import "media-queries";
+
+// Page structure
+@import "structure";
+
+// Page elements
+@import "elements";
+
+// Custom pages
+@import "pages";
+
+// Plugin styling
+@import "plugins";
+
+html,body{
+	height:100%;
+}
+
+body{
+	background: #fff;
+	font-family: 'Open Sans', sans-serif;
+	font-size:13px !important;
+}
+
+a{
+	color:$blue;
+	&:focus{
+		outline:none;
+		text-decoration:none;
+	}
+}
+
+.ulreset{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.nopadding{
+	padding: 0 !important;
+}
+
+.row-fluid.margin-top{
+	margin-top: 30px;
+}
+
+.visible-480{
+	display: none;
+}
+
+.box-sortable{
+	background: #eee;
+	border:1px dotted #333;
+}
+
+.colors{
+	@extend .ulreset;
+
+	&.small{
+		&>li{
+			height: 20px;
+			width: 20px;
+
+			&>a,&>span{
+				height:20px;
+				width:20px;
+			}
+		}
+	}
+
+	&>li{
+		height:40px;
+		margin:0 5px 5px 0;
+		width: 40px;
+		float:left;
+
+		&>a,&>span{
+			width:40px;
+			height:40px;
+			display: block;
+		}
+	}
+}
+
+.basic-margin{
+	&>li,  &>a{
+		margin: 0 5px 5px 0;
+	}
+}
