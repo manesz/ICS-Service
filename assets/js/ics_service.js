@@ -14,6 +14,7 @@ $(function () {
     $("a").click(function(){
         if (this.href.indexOf("#") < 0){
             openUrl(this.href);
+            return false;
         }
     });
 });
@@ -71,13 +72,15 @@ function innerHtml(id, href) {
 }
 
 function openUrl(url) {
+    var id = "#main";
+    $(id).empty();
+    $(id).html(strWaitImage);
     $("body, html").animate({
             scrollTop: $("body").position().top
         },
         100,
         function () {
         });
-    $("#main").html(strWaitImage);
     window.location.href = url;
     return false;
 }

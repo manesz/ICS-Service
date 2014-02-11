@@ -169,7 +169,7 @@ $baseUrl = base_url();
 <![endif]-->
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="<?php echo $baseUrl; ?>assets/img/favicon.ico"/>
+<link rel="shortcut icon" href="<?php echo $baseUrl; ?>assets/img/logo.ico"/>
 <!-- Apple devices Homescreen icon -->
 <link rel="apple-touch-icon-precomposed" href="<?php echo $baseUrl; ?>assets/img/apple-touch-icon-precomposed.png"/>
 
