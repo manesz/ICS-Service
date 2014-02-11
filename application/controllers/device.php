@@ -22,6 +22,22 @@ class Device extends CI_Controller
     private $selectMenu = "device";
     function index()
     {
+        $data = array(
+            "selectMenu" => $this->selectMenu
+        );
+        $this->load->view("device/list", $data);
+    }
+
+    function deviceList()
+    {
+        $data = array(
+            "selectMenu" => $this->selectMenu
+        );
+        $this->load->view("device/list", $data);
+    }
+
+    function deviceAdd()
+    {
         $post = $this->input->post();
         if ($post) {
             $result = $this->Device_model->deviceAdd($post);
@@ -35,17 +51,7 @@ class Device extends CI_Controller
         $data = array(
             "selectMenu" => $this->selectMenu
         );
-        $this->load->view("device/view", $data);
-    }
-
-    function deviceList()
-    {
-        $this->load->view("device/list");
-    }
-
-    function deviceAdd()
-    {
-        $this->load->view("device/add");
+        $this->load->view("device/add", $data);
     }
 
     function deviceEdit($id)

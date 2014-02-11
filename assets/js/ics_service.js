@@ -61,7 +61,7 @@ function innerHtml(id, href) {
     $(id).html(strWaitImage);
     $(id).load(href, function(){
         //jQuery.validator();
-        $("#testDT").dataTable();
+//        $("#testDT").dataTable();
     });
 }
 
