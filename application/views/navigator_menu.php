@@ -2,6 +2,9 @@
 
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
+$id = @$this->session->userdata['id'];
+$arrMember = $this->Member_model->memberList($id);
+extract((array)$arrMember[0]);
 ?>
 <div id="navigation">
     <div class="container-fluid">
@@ -60,16 +63,22 @@ $baseUrl = base_url();
 
         <div class="user">
             <div class="dropdown">
-                <a href="#" class='dropdown-toggle' data-toggle="dropdown">
-                    <?php echo @$this->session->userdata['firstname']; ?>
-                    <img src="<?php echo $baseUrl . @$this->session->userdata['image_path']; ?>" alt="">
+                <a href="#" class='dropdown-toggle' data-toggle="dropdown" style="height: 24px; min-width: 140px;">
+                    <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$firs_tname; ?></span>
+
+                    <div style="width: 24px; height: 24px;margin: 0 auto; overflow:hidden; position: relative; float: right;">
+                        <img src="<?php
+                        if (file_exists($baseUrl . @$image)) {
+                            echo $baseUrl . $image;
+                        } else {
+                            echo $baseUrl . "assets/img/no_avatar.jpg";
+                        }
+                        ?>" alt="">
+                    </div>
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a href="#">Edit profile</a>
-                    </li>
-                    <li>
-                        <a href="#">Account settings</a>
+                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit profile</a>
                     </li>
                     <li>
                         <a href="<?php echo $webUrl; ?>signout">Sign out</a>
