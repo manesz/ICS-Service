@@ -22,6 +22,14 @@ class Company extends CI_Controller
     private $selectMenu = "company";
     function index()
     {
+        $data = array(
+            "selectMenu" => $this->selectMenu
+        );
+        $this->load->view("company/list", $data);
+    }
+
+    function companyAdd()
+    {
         $post = $this->input->post();
         if ($post) {
             $result = $this->Company_model->companyAdd($post);
@@ -35,17 +43,7 @@ class Company extends CI_Controller
         $data = array(
             "selectMenu" => $this->selectMenu
         );
-        $this->load->view("company/view", $data);
-    }
-
-    function companyList()
-    {
-        $this->load->view("company/list");
-    }
-
-    function companyAdd()
-    {
-        $this->load->view("company/add");
+        $this->load->view("company/add", $data);
     }
 
     function companyEdit($id)

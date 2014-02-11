@@ -2,15 +2,17 @@
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 
+$this->load->view("header");
+$this->load->view("navigator_menu");
 $objModule = $this->Module_model->moduleList();
 ?>
 
 <script>
-    var url_post_data = "<?php echo $webUrl; ?>member";
-    var urlList = "<?php echo $webUrl; ?>member/memberList";
+    var url_post_data = "<?php echo $webUrl; ?>member/memberAdd";
+    var urlList = "<?php echo $webUrl; ?>member";
     $(document).ready(function () {
         $('#btnCancel').click(function () {
-            innerHtml('#main', urlList);
+            openUrl(urlList);
             return false;
         });
 
@@ -45,62 +47,56 @@ $objModule = $this->Module_model->moduleList();
                     alert('** เกิดข้อผิดพลาด');
                     enableID("btnSave");
                 } else {
-                    innerHtml('#main', urlList);
+                    openUrl(urlList);
                 }
             }
         );
     }
 </script>
-<div class="container-fluid">
-    <div class="page-header">
-        <div class="pull-left">
-            <h1>MEMBER</h1>
-        </div>
-    </div>
-    <!-- END: .page-header -->
-</div>
-<!-- END:.container-fluid -->
+<div class="container-fluid" id="content">
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
+    <?php
+    $this->load->view("sidebar_menu");
+    ?>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="pull-left">
+                    <h1>New Member</h1>
+                </div>
+            </div>
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>member">MEMBER</a>
+                        <a class="link" href="<?php echo $webUrl; ?>member">Member</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">ADD MEMBER</a>
+                        <a class="link" href="#">New Member</a>
                     </li>
                 </ul>
                 <div class="close-bread">
                     <a href="#"><i class="icon-remove"></i></a>
                 </div>
             </div>
-            <!-- END: ,breadcrumbs -->
-        </div>
-    </div>
-</div>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="box box-color box-bordered">
-                <div class="box-content nopadding">
-                    <form action="" method="POST"
-                          class='form-horizontal form-column form-bordered form-validate'
-                          id="formPost" name="formPost">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box box-color box-bordered">
                         <div class="box-title">
                             <h3>
-                                <i class="icon-list"></i> ADD MEMBER
+                                <i class="icon-list"></i> Member
                             </h3>
                         </div>
                         <!-- END: .box-title -->
+                        <div class="box-content nopadding">
+                    <form action="" method="POST"
+                          class='form-horizontal form-column form-bordered form-validate'
+                          id="formPost" name="formPost">
 
                         <div class="span6">
                             <div class="control-group">
@@ -202,9 +198,18 @@ $objModule = $this->Module_model->moduleList();
                         <!--END:span6 -->
 
                     </form>
+                        </div>
+                        <!-- END: .box-content nopadding -->
+                    </div>
+                    <!-- END: .box -->
                 </div>
-
+                <!-- END: .span12 -->
             </div>
+            <!-- END: .row-fluid -->
+
         </div>
-    </div>
-</div>
+        <!-- END: #main -->
+    </div><!-- END: .container-fluid -->
+<?php
+$this->load->view("footer");
+?>

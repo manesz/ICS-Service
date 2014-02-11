@@ -15,7 +15,7 @@ extract((array)$arrMember[0]);
         <ul class='main-nav'>
             <!-- #### Dashbaord #### -->
             <li class="<?php echo $selectMenu == "dashboard" ? "active" : ""; ?>">
-                <a href="<?php echo $webUrl; ?>dashboard"><span>Dashboard</span></a>
+                <a class="link" href="<?php echo $webUrl; ?>dashboard"><span>Dashboard</span></a>
             </li>
             <!-- #### Company #### -->
             <li class="<?php echo $selectMenu == "company" ? "active" : ""; ?>">
@@ -24,11 +24,11 @@ extract((array)$arrMember[0]);
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo $webUrl; ?>company">Company List</a></li>
-                    <li><a href="<?php echo $webUrl; ?>company?page=add">Company Add</a></li>
-                    <li><a href="#">Report 1</a></li>
-                    <li><a href="#">Report 2</a></li>
-                    <li><a href="#">Report 3</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>company">Company List</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>company/companyAdd">Company Add</a></li>
+                    <li><a class="link" href="#">Report 1</a></li>
+                    <li><a class="link" href="#">Report 2</a></li>
+                    <li><a class="link" href="#">Report 3</a></li>
                 </ul>
             </li>
             <!-- #### Device #### -->
@@ -38,11 +38,11 @@ extract((array)$arrMember[0]);
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo $webUrl; ?>device">Device List</a></li>
-                    <li><a href="<?php echo $webUrl; ?>device?page=add">Device Add</a></li>
-                    <li><a href="#">Report 1</a></li>
-                    <li><a href="#">Report 2</a></li>
-                    <li><a href="#">Report 3</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>device">Device List</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>device/deviceAdd">Device Add</a></li>
+                    <li><a class="link" href="#">Report 1</a></li>
+                    <li><a class="link" href="#">Report 2</a></li>
+                    <li><a class="link" href="#">Report 3</a></li>
                 </ul>
             </li>
             <!-- #### Settings #### -->
@@ -52,8 +52,8 @@ extract((array)$arrMember[0]);
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo $webUrl; ?>member">Users</a></li>
-                    <li><a href="#">Logs</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>member">Users</a></li>
+                    <li><a class="link" href="#">Logs</a></li>
                     <!--            <li><a href="#">Calendars</a></li>-->
                     <!--            <li><a href="#">Tasks</a></li>-->
                     <!--            <li><a href="#">News</a></li>-->
@@ -78,10 +78,10 @@ extract((array)$arrMember[0]);
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit profile</a>
+                        <a class="link" href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit profile</a>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>signout">Sign out</a>
+                        <a class="link" href="<?php echo $webUrl; ?>signout">Sign out</a>
                     </li>
                 </ul>
             </div>

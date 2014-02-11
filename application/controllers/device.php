@@ -28,14 +28,6 @@ class Device extends CI_Controller
         $this->load->view("device/list", $data);
     }
 
-    function deviceList()
-    {
-        $data = array(
-            "selectMenu" => $this->selectMenu
-        );
-        $this->load->view("device/list", $data);
-    }
-
     function deviceAdd()
     {
         $post = $this->input->post();

@@ -22,6 +22,15 @@ class Member extends CI_Controller
     private $selectMenu = "settings";
     function index()
     {
+        $data = array(
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "users"
+        );
+        $this->load->view("member/list", $data);
+    }
+
+    function memberAdd()
+    {
         $post = $this->input->post();
         if ($post) {
             $result = $this->Member_model->memberAdd($post);
@@ -32,20 +41,6 @@ class Member extends CI_Controller
             }
             exit();
         }
-        $data = array(
-            'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "users"
-        );
-        $this->load->view("member/view", $data);
-    }
-
-    function memberList()
-    {
-        $this->load->view("member/list");
-    }
-
-    function memberAdd()
-    {
         $data = array(
             'message' => "",
             'selectMenu' => $this->selectMenu,

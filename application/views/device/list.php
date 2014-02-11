@@ -8,21 +8,7 @@ $objData = $this->Device_model->deviceList();
 
 ?>
 <script>
-    var urlList = "<?php echo $webUrl; ?>device/deviceList";
-    function deleteClick(url) {
-        if (confirm("คุณต้องการลบข้อมูลใช่หรือไม่")) {
-            $.post(url,
-                function (result) {
-                    if (result == "delete fail") {
-                        alert('** เกิดการผิดพลาด');
-                    } else {
-                        openUrl(urlList);
-                    }
-                }
-            );
-        }
-        return false;
-    }
+    var urlList = "<?php echo $webUrl; ?>device";
 </script>
 <div class="container-fluid" id="content">
 
@@ -39,11 +25,11 @@ $objData = $this->Device_model->deviceList();
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="active" href="<?php echo $webUrl; ?>device">Device</a>
+                        <a class="active link" href="<?php echo $webUrl; ?>device">Device</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -92,12 +78,11 @@ $objData = $this->Device_model->deviceList();
                                 <td><?php echo $value->datesheet; ?></td>
                                 <td><?php echo $value->update_datetime; ?></td>
                                 <td class="hidden-400">
-                                    <a href="#"
-                                       onclick="openUrl('<?php echo $webUrl; ?>device/deviceEdit/<?php echo $value->id; ?>'); return false;"
-                                       class="btn" rel="tooltip" title="" data-original-title="Edit"><i
+                                    <a href="<?php echo $webUrl; ?>device/deviceEdit/<?php echo $value->id; ?>"
+                                       class="btn link" rel="tooltip" title="" data-original-title="Edit"><i
                                             class="icon-edit"></i></a>
                                     <a href="#messageDeleteData" class="btn" rel="tooltip" title="" data-original-title="Delete"
-                                       onclick="deleteClick('<?php echo $webUrl; ?>device/deviceDelete/<?php echo $value->id; ?>');"
+                                       onclick="urlDelete='<?php echo $webUrl; ?>device/deviceDelete/<?php echo $value->id; ?>';"
                                        role="button" data-toggle="modal">
                                         <i class="icon-remove"></i>
                                     </a>

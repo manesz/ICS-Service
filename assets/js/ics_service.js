@@ -1,3 +1,4 @@
+var urlDelete = "";
 $(function () {
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");
@@ -8,6 +9,12 @@ $(function () {
             enableID("btnSignIn");
         }
         return false;
+    });
+
+    $("a").click(function(){
+        if (this.href.indexOf("#") < 0){
+            openUrl(this.href);
+        }
     });
 });
 
@@ -60,12 +67,17 @@ function innerHtml(id, href) {
     $(id).empty();
     $(id).html(strWaitImage);
     $(id).load(href, function(){
-        //jQuery.validator();
-//        $("#testDT").dataTable();
     });
 }
 
 function openUrl(url) {
+    $("body, html").animate({
+            scrollTop: $("body").position().top
+        },
+        100,
+        function () {
+        });
+    $("#main").html(strWaitImage);
     window.location.href = url;
     return false;
 }
@@ -108,4 +120,16 @@ function removeImage(path) {
             }
         );
     }
+}
+function deleteData() {
+    $.post(urlDelete,
+        function (result) {
+            if (result == "delete fail") {
+                alert('** เกิดการผิดพลาด');
+            } else {
+                openUrl(urlList);
+            }
+        }
+    );
+    return false;
 }

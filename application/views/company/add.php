@@ -2,14 +2,17 @@
 
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
+
+$this->load->view("header");
+$this->load->view("navigator_menu");
 ?>
 <script>
 
-    var url_post_data = "<?php echo $webUrl; ?>company";
-    var urlList = "<?php echo $webUrl; ?>company/companyList";
+    var url_post_data = "<?php echo $webUrl; ?>company/companyAdd";
+    var urlList = "<?php echo $webUrl; ?>company";
     $(document).ready(function () {
         $('#btnCancel').click(function () {
-            innerHtml('#main', urlList);
+            openUrl(urlList);
             return false;
         });
 
@@ -44,25 +47,24 @@ $baseUrl = base_url();
                     alert('** เกิดข้อผิดพลาด');
                     enableID("btnSave");
                 } else {
-                    innerHtml('#main', urlList);
+                    openUrl(urlList);
                 }
             }
         );
     }
 </script>
-<div class="container-fluid">
-    <div class="page-header">
-        <div class="pull-left">
-            <h1>COMPANY</h1>
-        </div>
-    </div>
-    <!-- END: .page-header -->
-</div>
-<!-- END:.container-fluid -->
+<div class="container-fluid" id="content">
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
+    <?php
+    $this->load->view("sidebar_menu");
+    ?>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="pull-left">
+                    <h1>New Company</h1>
+                </div>
+            </div>
             <div class="breadcrumbs">
                 <ul>
                     <li>
@@ -70,36 +72,31 @@ $baseUrl = base_url();
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>company">COMPANY</a>
+                        <a href="<?php echo $webUrl; ?>company">Company</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">ADD COMPANY</a>
+                        <a class="" href="#">New Company</a>
                     </li>
                 </ul>
                 <div class="close-bread">
                     <a href="#"><i class="icon-remove"></i></a>
                 </div>
             </div>
-            <!-- END: ,breadcrumbs -->
-        </div>
-    </div>
-</div>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="box box-color box-bordered">
-                <div class="box-content nopadding">
-                    <form action="" method="POST"
-                          class='form-horizontal form-column form-bordered form-validate'
-                          id="formPost" name="formPost">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box box-color box-bordered">
                         <div class="box-title">
                             <h3>
-                                <i class="icon-list"></i> ADD COMPANY
+                                <i class="icon-list"></i> Company
                             </h3>
                         </div>
                         <!-- END: .box-title -->
+                        <div class="box-content nopadding">
+                    <form action="" method="POST"
+                          class='form-horizontal form-column form-bordered form-validate'
+                          id="formPost" name="formPost">
 
                         <div class="span6">
                             <div class="control-group">
@@ -197,9 +194,18 @@ $baseUrl = base_url();
                         <!--END:span6 -->
 
                     </form>
+                        </div>
+                        <!-- END: .box-content nopadding -->
+                    </div>
+                    <!-- END: .box -->
                 </div>
-
+                <!-- END: .span12 -->
             </div>
+            <!-- END: .row-fluid -->
+
         </div>
-    </div>
-</div>
+        <!-- END: #main -->
+    </div><!-- END: .container-fluid -->
+<?php
+$this->load->view("footer");
+?>

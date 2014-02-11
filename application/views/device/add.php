@@ -9,7 +9,7 @@ $this->load->view("navigator_menu");
     <script>
 
         var url_post_data = "<?php echo $webUrl; ?>device/deviceAdd";
-        var urlList = "<?php echo $webUrl; ?>device/deviceList";
+        var urlList = "<?php echo $webUrl; ?>device";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(urlList);
@@ -68,15 +68,15 @@ $this->load->view("sidebar_menu");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>device">Device</a>
+                        <a class="link" href="<?php echo $webUrl; ?>device">Device</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="" href="#">New Device</a>
+                        <a class="link" href="#">New Device</a>
                     </li>
                 </ul>
                 <div class="close-bread">
