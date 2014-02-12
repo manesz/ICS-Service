@@ -1,4 +1,5 @@
 var urlDelete = "";
+var strWaitImage = "<div class='wait'></div>";
 $(function () {
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");
@@ -21,7 +22,7 @@ $(function () {
 
 //function list
 function userAuthen() {
-    $("#authenResult").html('');
+    $("#authenResult").html(strWaitImage);
     var data = {
         username: $("#username").val(),
         password: $("#password").val()
@@ -56,8 +57,6 @@ function signOut() {
     });
 }*/
 
-var strWaitImage = "<div align='center'><img width='50' height='50' src='" +
-    baseUrl + "assets/img/loading.gif'/></div>";
 function innerHtml(id, href) {
     $("body, html").animate({
             scrollTop: $("body").position().top

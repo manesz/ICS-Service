@@ -3,7 +3,11 @@ $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $this->load->view("header");
 ?>
-    <script src="<?php echo $baseUrl; ?>assets/js/ics_service.js"></script>
+<script>
+    function addWait(){
+
+    }
+</script>
     <body class='login'>
     <div class="wrapper">
         <h1>
@@ -16,7 +20,7 @@ $this->load->view("header");
         <div class="login-body">
             <h2>SIGN IN</h2>
 
-            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn">
+            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn" onsubmit="addWait()">
                 <div class="control-group">
                     <div class="email controls">
                         <input type="text" id="username" name='username' placeholder="Username / Email"
