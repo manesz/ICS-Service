@@ -12,7 +12,7 @@ $baseUrl = base_url();
 <!-- Apple devices fullscreen -->
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
-<title>Shipping CRM</title>
+<title>ICS Service</title>
 <script>
     var baseUrl = "<?php echo $baseUrl; ?>";
     var webUrl = "<?php echo $webUrl; ?>";

@@ -63,11 +63,11 @@ extract((array)$arrMember[0]);
 
         <div class="user">
             <div class="dropdown">
-                <a href="#" class='dropdown-toggle' data-toggle="dropdown" style="height: 24px; min-width: 140px;">
-                    <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$firs_tname; ?></span>
+                <a href="#" class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
+                    <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$first_name; ?></span>
 
                     <div style="width: 24px; height: 24px;margin: 0 auto; overflow:hidden; position: relative; float: right;">
-                        <img src="<?php
+                        <img style="margin-left: 0;" src="<?php
                         if (file_exists($baseUrl . @$image)) {
                             echo $baseUrl . $image;
                         } else {
