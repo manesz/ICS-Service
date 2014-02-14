@@ -1,5 +1,5 @@
 var urlDelete = "";
-var strWaitImage = "<div class='wait'></div>";
+var strWaitImage = "<div class='wait hidden'></div>";
 $(function () {
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");
@@ -12,8 +12,9 @@ $(function () {
         return false;
     });
 
+    $("#main").prepend(strWaitImage);
     $("a").click(function(){
-        if (this.href.indexOf("#") < 0){
+        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0){
             openUrl(this.href);
             return false;
         }
@@ -71,17 +72,22 @@ function innerHtml(id, href) {
 }
 
 function openUrl(url) {
-    var id = "#main";
-    $(id).empty();
-    $(id).html(strWaitImage);
+//    var id = "#main";
+//    $(id).empty();
+//    $(id).html(strWaitImage);
+    $(".wait").removeClass("hidden");
     $("body, html").animate({
             scrollTop: $("body").position().top
         },
         100,
         function () {
         });
-    window.location.href = url;
+    setTimeout(redirectUrl(url), 1000);
     return false;
+}
+
+function redirectUrl(url) {
+    window.location.href = url;
 }
 
 function disableID(id) {
