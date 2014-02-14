@@ -94,7 +94,7 @@ $this->load->view("navigator_menu");
                         </div>
                         <!-- END: .box-title -->
                         <div class="box-content nopadding">
-                    <form action="" method="POST"
+                    <form action="" method="POST" autocomplete="off"
                           class='form-horizontal form-column form-bordered form-validate'
                           id="formPost" name="formPost">
 
