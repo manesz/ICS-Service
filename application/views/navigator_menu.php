@@ -68,7 +68,7 @@ extract((array)$arrMember[0]);
 
                     <div style="width: 24px; height: 24px;margin: 0 auto; overflow:hidden; position: relative; float: right;">
                         <img style="margin-left: 0;" src="<?php
-                        if (file_exists($baseUrl . @$image)) {
+                        if (file_exists(@$image)) {
                             echo $baseUrl . $image;
                         } else {
                             echo $baseUrl . "assets/img/no_avatar.jpg";
