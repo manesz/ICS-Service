@@ -74,6 +74,15 @@ $baseUrl = base_url();
         </ul>
         <ul class="subnav-menu">
             <li class='dropdown'>
+                <a href="#" data-toggle="dropdown">Position</a>
+                <ul class="dropdown-menu">
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting/positionList">List</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting/positionAdd">Add new</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="subnav-menu">
+            <li class='dropdown'>
                 <a href="#" data-toggle="dropdown">Modules</a>
                 <ul class="dropdown-menu">
                     <li><a class="link" href="<?php echo $webUrl; ?>setting">List</a></li>

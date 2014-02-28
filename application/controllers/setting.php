@@ -88,25 +88,25 @@ class Setting extends CI_Controller
         echo "Delete Success!";
     }
 
-//------------------------------------------Department----------------------------------------------//
-    function departmentList()
+//------------------------------------------Position----------------------------------------------//
+    function positionList()
     {
         $data = array(
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments",
-            'permission' => $this->checkPermission("Departments", 0),
-            'permissionInsert' => $this->checkPermission("Departments", 1),
-            'permissionUpdate' => $this->checkPermission("Departments", 2),
-            'permissionDelete' => $this->checkPermission("Departments", 3)
+            'selectSubMenu' => "position",
+            'permission' => $this->checkPermission("Position", 0),
+            'permissionInsert' => $this->checkPermission("Position", 1),
+            'permissionUpdate' => $this->checkPermission("Position", 2),
+            'permissionDelete' => $this->checkPermission("Position", 3)
         );
-        $this->load->view("department/list", $data);
+        $this->load->view("position/list", $data);
     }
 
-    function departmentAdd()
+    function positionAdd()
     {
         $post = $this->input->post();
         if ($post) {
-            $result = $this->Department_model->departmentAdd($post);
+            $result = $this->Position_model->positionAdd($post);
             if ($result){
                 echo "add success";
             } else {
@@ -117,17 +117,17 @@ class Setting extends CI_Controller
         $data = array(
             'message' => "",
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments",
-            'permission' => $this->checkPermission("Departments", 1)
+            'selectSubMenu' => "position",
+            'permission' => $this->checkPermission("Position", 1)
         );
-        $this->load->view('department/add', $data);
+        $this->load->view('position/add', $data);
     }
 
-    function departmentEdit($id)
+    function positionEdit($id)
     {
         $post = $this->input->post();
         if ($post) {
-            $result = $this->Department_model->departmentEdit($id, $post);
+            $result = $this->Position_model->positionEdit($id, $post);
             if ($result) {
                 echo "edit success";
             } else {
@@ -139,15 +139,15 @@ class Setting extends CI_Controller
             'message' => "",
             'id' => $id,
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments",
-            'permission' => $this->checkPermission("Departments", 2)
+            'selectSubMenu' => "position",
+            'permission' => $this->checkPermission("Position", 2)
         );
-        $this->load->view('department/edit', $data);
+        $this->load->view('position/edit', $data);
     }
 
-    function departmentDelete($id)
+    function positionDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'ics_department');
+        $result = $this->Constant_model->setPublish($id, 'ics_position');
         if (!$result)
         {
             echo "delete fail";
