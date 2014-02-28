@@ -93,7 +93,11 @@ class Setting extends CI_Controller
     {
         $data = array(
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments"
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 0),
+            'permissionInsert' => $this->checkPermission("Departments", 1),
+            'permissionUpdate' => $this->checkPermission("Departments", 2),
+            'permissionDelete' => $this->checkPermission("Departments", 3)
         );
         $this->load->view("department/list", $data);
     }
@@ -113,7 +117,8 @@ class Setting extends CI_Controller
         $data = array(
             'message' => "",
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments"
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 1)
         );
         $this->load->view('department/add', $data);
     }
@@ -134,14 +139,15 @@ class Setting extends CI_Controller
             'message' => "",
             'id' => $id,
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "departments"
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 2)
         );
         $this->load->view('department/edit', $data);
     }
 
     function departmentDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'department');
+        $result = $this->Constant_model->setPublish($id, 'ics_department');
         if (!$result)
         {
             echo "delete fail";

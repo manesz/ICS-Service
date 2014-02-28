@@ -2,33 +2,18 @@
 
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
-$this->load->view("cms/header");
-$this->load->view("cms/navigator");
+$this->load->view("header");
+$this->load->view("navigator_menu");
 
 $objData = $this->Department_model->departmentList();
 ?>
 
     <script>
-        function deleteClick(url) {
-            if (confirm("คุณต้องการลบข้อมูลใช่หรือไม่")) {
-                $.post(url,
-                    function (result) {
-                        if (result == "delete fail") {
-                            alert('** เกิดการผิดพลาด');
-                        } else {
-                            alert(result);
-                            window.location.reload();
-                        }
-                    }
-                );
-            }
-            return false;
-        }
     </script>
     <div class="container-fluid" id="content">
 
         <?php
-        $this->load->view("cms/sidebar");
+        $this->load->view("sidebar_menu");
         ?>
         <div id="main">
             <div class="container-fluid">
@@ -40,11 +25,11 @@ $objData = $this->Department_model->departmentList();
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                            <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a class="active" href="#">Department</a>
+                            <a class="active link" href="<?php echo $webUrl; ?>setting/departmentList">Department</a>
                         </li>
                     </ul>
                     <div class="close-bread">
@@ -59,11 +44,11 @@ $objData = $this->Department_model->departmentList();
                                     <i class="icon-list"></i>
                                     Department
                                 </h3>
+
                                 <div class="actions">
-                                    <a href="#" class="btn btn-mini content-refresh"><i title="Refresh" class="icon-refresh"></i></a>
-                                    <a href="#" class="btn btn-mini content-remove"><i title="Remove Table" class="icon-remove"></i></a>
-                                    <a href="#" class="btn btn-mini content-slideUp"><i title="Hide" class="icon-angle-down"></i></a>
-                                    <a href="<?php echo $webUrl; ?>setting/departmentAdd" class="btn btn-mini"><i title="Add" class="icon-plus"></i></a>
+                                    <a href="<?php echo $webUrl; ?>setting/departmentAdd" class="btn btn-mini">
+                                        <i title="Add"
+                                           class="icon-plus"></i></a>
                                 </div>
                             </div>
                             <div class="box-content nopadding">
@@ -71,10 +56,10 @@ $objData = $this->Department_model->departmentList();
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>title</th>
-                                        <th>description</th>
-                                        <th>create_datetime</th>
-                                        <th>update_datetime</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Create Datetime</th>
+                                        <th>Update Datetime</th>
                                         <th>Edit</th>
                                     </tr>
                                     </thead>
@@ -90,10 +75,15 @@ $objData = $this->Department_model->departmentList();
                                             <td><?php echo "$value->create_datetime"; ?></td>
                                             <td><?php echo $value->update_datetime; ?></td>
                                             <td class="hidden-400">
-                                                <a href="#" onclick="openUrl('<?php echo $webUrl; ?>setting/departmentEdit/<?php echo $value->id; ?>'); return false;"
-                                                   class="btn" rel="tooltip" title="" data-original-title="Edit"><i class="icon-edit"></i></a>
-                                                <a href="#" class="btn" rel="tooltip" title="" data-original-title="Delete"
-                                                   onclick="return deleteClick('<?php echo $webUrl; ?>setting/departmentDelete/<?php echo $value->id; ?>');"><i class="icon-remove"></i></a>
+                                                <a href="<?php echo $webUrl; ?>setting/departmentEdit/<?php echo $value->id; ?>"
+                                                   class="btn link" rel="tooltip" title="" data-original-title="Edit"><i
+                                                        class="icon-edit"></i></a>
+                                                <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                                                   data-original-title="Delete"
+                                                   onclick="urlDelete='<?php echo $webUrl; ?>setting/departmentDelete/<?php echo $value->id; ?>';"
+                                                   role="button" data-toggle="modal">
+                                                    <i class="icon-remove"></i>
+                                                </a>
                                             </td>
                                         </tr>
 
@@ -110,4 +100,4 @@ $objData = $this->Department_model->departmentList();
         </div>
     </div>
 <?php
-$this->load->view("cms/footer");
+$this->load->view("footer");

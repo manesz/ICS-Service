@@ -2,17 +2,16 @@
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 
-$this->load->view("cms/header");
-$this->load->view("cms/navigator");
+$this->load->view("header");
+$this->load->view("navigator_menu");
 
 ?>
     <script>
-
-        var url_new_data = "<?php echo $webUrl; ?>setting/departmentAdd";
-        var urlList = "<?php echo $webUrl; ?>setting/departmentList";
+        var url_post_data = "<?php echo $webUrl; ?>setting/departmentAdd";
+        var url_list = "<?php echo $webUrl; ?>setting/departmentList";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
-                window.location.href = urlList;
+                openUrl(url_list);
                 return false;
             });
 
@@ -27,31 +26,18 @@ $this->load->view("cms/navigator");
                     }
                 });
                 if (checkPost) {
-                    postData($(this).serialize(), false);
+                    postData(url_post_data, $(this).serialize(), url_list);
                 } else {
                     enableID("btnSave");
                 }
                 return false;
             });
         });
-
-        function postData(data) {
-            $.post(url_new_data, data,
-                function (result) {
-                    if (result == "add fail") {
-                        alert('** เกิดข้อผิดพลาด');
-                        enableID("btnSave");
-                    } else {
-                        window.location.href = urlList
-                    }
-                }
-            );
-        }
     </script>
 <div class="container-fluid" id="content">
 
 <?php
-$this->load->view("cms/sidebar");
+$this->load->view("sidebar_menu");
 ?>
     <div id="main">
         <div class="container-fluid">
@@ -63,15 +49,15 @@ $this->load->view("cms/sidebar");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>departmentList">Department</a>
+                        <a class="link" href="<?php echo $webUrl; ?>setting/departmentList">Department</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="" href="#">New Department</a>
+                        <a class="link" href="#">New Department</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -134,5 +120,5 @@ $this->load->view("cms/sidebar");
         <!-- END: #main -->
     </div><!-- END: .container-fluid -->
 <?php
-$this->load->view("cms/footer");
+$this->load->view("footer");
 ?>
