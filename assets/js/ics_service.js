@@ -58,23 +58,79 @@ function signOut() {
     });
 }*/
 
-function innerHtml(id, href) {
-    $("body, html").animate({
-            scrollTop: $("body").position().top
-        },
-        100,
-        function () {
+function postData(url, data, urlRedirect) {
+    disableID("btnAdd");
+    disableID("btnSave");
+    disableID("btnCancel");
+    $.post(url, data, function (result) {
+        if (result == "add fail" || result == "edit fail") {
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+        } else {
+            clickNotifyUpdate();
+            if (urlRedirect != "")
+                openUrl(urlRedirect);
+        }
+        enableID("btnAdd");
+        enableID("btnSave");
+        enableID("btnCancel");
+    })
+        .done(function () {
+            //alert("second success");
+        })
+        .fail(function () {
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+            enableID("btnAdd");
+            enableID("btnSave");
+            enableID("btnCancel");
+        })
+        .always(function () {
+            //alert("finished");
         });
+}
+
+function postDataSetHtml(id, url, data) {
     $(id).empty();
     $(id).html(strWaitImage);
-    $(id).load(href, function(){
+    if (url.indexOf('?') > -1) {
+        url = url + "&url_type=inner";
+    } else {
+        url = url + "?url_type=inner";
+    }
+    $.post(url, data, function (result) {
+        $(id).fadeIn(300, function () {
+            $(this).html(result);
+        });
+    })
+        .done(function () {
+            //alert("second success");
+        })
+        .fail(function () {
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+        })
+        .always(function () {
+            //alert("finished");
+        });
+}
+
+function innerHtml(id, href) {
+    $(id).empty();
+    $(id).html(strWaitImage);
+    if (href.indexOf('?') > -1) {
+        href = href + "&url_type=inner";
+    } else {
+        href = href + "?url_type=inner";
+    }
+    $(id).load(href);
+    $(id).load(href, function (response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: ";
+            $(id).html(msg + xhr.status + " " + xhr.statusText);
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+        }
     });
 }
 
 function openUrl(url) {
-//    var id = "#main";
-//    $(id).empty();
-//    $(id).html(strWaitImage);
     $(".wait").removeClass("hidden");
     $("body, html").animate({
             scrollTop: $("body").position().top
@@ -130,14 +186,38 @@ function removeImage(path) {
     }
 }
 function deleteData() {
-    $.post(urlDelete,
-        function (result) {
+    if (urlDelete != "") {
+        $.post(urlDelete, function (result) {
             if (result == "delete fail") {
-                alert('** เกิดการผิดพลาด');
+                clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
             } else {
-                openUrl(urlList);
+                clickNotifyUpdate();
+                openUrl(window.location.href);
             }
-        }
-    );
-    return false;
+        })
+            .done(function () {
+                //alert("second success");
+            })
+            .fail(function () {
+                clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+            })
+            .always(function () {
+                //alert("finished");
+            });
+    }
+}
+function clickNotifyUpdate() {
+    //btnNotifyUpdate
+    $("#btnNotifyUpdate").click();
+    $(".gritter-with-image").addClass("gritter-without-image");
+    $(".gritter-without-image").removeClass("gritter-with-image");
+    $(".gritter-item img").remove();
+
+}
+function clickNotifyError(message) {
+    $("#btnNotifyError").attr('data-notify-message', message);
+    $("#btnNotifyError").click();
+    $(".gritter-with-image").addClass("gritter-without-image");
+    $(".gritter-without-image").removeClass("gritter-with-image");
+    $(".gritter-item img").remove();
 }

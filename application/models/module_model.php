@@ -14,15 +14,19 @@ class Module_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+
     }
 
+    public $arrModule = array("list", "insert", "update", "delete", "report1", "report2", "report3");
+    public $strCheckNon = "0,0,0,0,0,0,0";
+    public $strCheckAll = "1,1,1,1,1,1,1";
     function moduleList($id = 0)
     {
         $strSql = $id == 0 ? "" : " AND id = $id";
         $sql = "
             SELECT
               *
-            FROM `module`
+            FROM `ics_module`
             WHERE 1
             AND publish = 1
             $strSql
@@ -47,8 +51,8 @@ class Module_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('module', $data);
-        return $id = $this->db->insert_id('module');
+        $this->db->insert('ics_module', $data);
+        return $id = $this->db->insert_id('ics_module');
     }
 
     function moduleEdit($id, $post)
@@ -60,7 +64,7 @@ class Module_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        return $this->db->update('module', $data, array('id' => $id));
+        return $this->db->update('ics_module', $data, array('id' => $id));
     }
 
     function moduleSet($id, $post)
@@ -84,5 +88,108 @@ class Module_model extends CI_Model
             }
         }
         return true;
+    }
+
+
+    function checkModuleByName($module = "")
+    {
+        $id = @$this->session->userdata['id'];
+        $strAnd = " AND c.`user_id` = $id";
+        $strAnd .= $module == "" ? "" : " AND a.title = '$module'";
+        $sql = "
+            SELECT
+              a.*
+              ,b.`permission`
+            FROM
+              `ics_module` a
+              INNER JOIN `ics_permission` b
+                ON (
+                  a.`id` = b.`module_id`
+                  AND b.`publish` = 1
+                )
+              INNER JOIN `ics_user_group` c
+                ON (
+                  c.`permission_id` = b.`id`
+                  AND c.`publish` = 1
+                )
+            WHERE 1
+              AND a.`publish` = 1
+              AND b.permission != '$this->strCheckNon'
+              $strAnd
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            $result = $query->result();
+            return $result;
+        } else {
+            return (object)array();
+        }
+    }
+
+    function checkModuleByPermission($module = "", $index = "")
+    {
+        $id = @$this->session->userdata['id'];
+        $strAnd = " AND c.`user_id` = $id";
+        $strAnd .= $module == "" ? "" : " AND a.title = '$module'";
+        $sql = "
+            SELECT
+              a.*
+              ,b.`permission`
+            FROM
+              `ics_module` a
+              INNER JOIN `ics_permission` b
+                ON (
+                  a.`id` = b.`module_id`
+                  AND b.`publish` = 1
+                )
+              INNER JOIN `ics_user_group` c
+                ON (
+                  c.`permission_id` = b.`id`
+                  AND c.`publish` = 1
+                )
+            WHERE 1
+              AND a.`publish` = 1
+              $strAnd
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            $result = $query->result();
+            $strPermission = $result[0]->permission;
+            $expPermission = explode(',', $strPermission);
+            $permission = $this->arrModule[$index];
+            switch ($permission) {
+                case $this->arrModule[0]:
+                    $result = $expPermission[0] == 1 ? true : false;
+                    break;
+                case $this->arrModule[1]:
+                    $result = $expPermission[1] == 1 ? true : false;
+                    break;
+                case $this->arrModule[2]:
+                    $result = $expPermission[2] == 1 ? true : false;
+                    break;
+                case $this->arrModule[3]:
+                    $result = $expPermission[3] == 1 ? true : false;
+                    break;
+                case $this->arrModule[4]:
+                    $result = $expPermission[4] == 1 ? true : false;
+                    break;
+                case $this->arrModule[5]:
+                    $result = $expPermission[5] == 1 ? true : false;
+                    break;
+                case $this->arrModule[6]:
+                    $result = $expPermission[6] == 1 ? true : false;
+                    break;
+                default:
+                    $result = false;
+            }
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    function getStrCheckAll()
+    {
+        return $this->strCheckAll;
     }
 }

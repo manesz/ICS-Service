@@ -13,12 +13,23 @@ class Setting extends CI_Controller
     }
     private $selectMenu = "settings";
 
+//------------------------------------------Check Permission----------------------------------------------//
+
+    function checkPermission($module, $index)
+    {
+        return $this->Module_model->checkModuleByPermission($module, $index);
+    }
+
 //------------------------------------------Module----------------------------------------------//
     function index()
     {
         $data = array(
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "modules"
+            'selectSubMenu' => "modules",
+            'permission' => $this->checkPermission("Modules", 0),
+            'permissionInsert' => $this->checkPermission("Modules", 1),
+            'permissionUpdate' => $this->checkPermission("Modules", 2),
+            'permissionDelete' => $this->checkPermission("Modules", 3)
         );
         $this->load->view("module/list", $data);
     }
@@ -38,7 +49,8 @@ class Setting extends CI_Controller
         $data = array(
             'message' => "",
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "modules"
+            'selectSubMenu' => "modules",
+            'permission' => $this->checkPermission("Modules", 1)
         );
         $this->load->view('module/add', $data);
     }
@@ -59,14 +71,15 @@ class Setting extends CI_Controller
             'message' => "",
             'id' => $id,
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "modules"
+            'selectSubMenu' => "modules",
+            'permission' => $this->checkPermission("Modules", 2)
         );
         $this->load->view('module/edit', $data);
     }
 
     function moduleDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'module');
+        $result = $this->Constant_model->setPublish($id, 'ics_module');
         if (!$result)
         {
             echo "delete fail";

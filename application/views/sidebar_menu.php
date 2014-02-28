@@ -67,8 +67,8 @@ $baseUrl = base_url();
             <li class='dropdown'>
                 <a href="#" data-toggle="dropdown">Departments</a>
                 <ul class="dropdown-menu">
-                    <li><a class="link" href="#">List</a></li>
-                    <li><a class="link" href="#">Add new</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting/departmentList">List</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting/departmentAdd">Add new</a></li>
                 </ul>
             </li>
         </ul>
@@ -76,8 +76,8 @@ $baseUrl = base_url();
             <li class='dropdown'>
                 <a href="#" data-toggle="dropdown">Modules</a>
                 <ul class="dropdown-menu">
-                    <li><a class="link" href="#">List</a></li>
-                    <li><a class="link" href="#">Add new</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting">List</a></li>
+                    <li><a class="link" href="<?php echo $webUrl; ?>setting/moduleAdd">Add new</a></li>
                 </ul>
             </li>
         </ul>
