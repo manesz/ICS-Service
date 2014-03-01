@@ -8,6 +8,7 @@ class Department_model extends CI_Model
         parent::__construct();
     }
 
+    private $tableName = "ics_department";
     function departmentList($id = 0)
     {
         $strSql = $id == 0 ? "" : " AND id = $id";
@@ -15,7 +16,7 @@ class Department_model extends CI_Model
             SELECT
               *
             FROM
-              `department`
+              `$this->tableName`
             WHERE 1
             $strSql
             AND publish = 1
@@ -39,8 +40,8 @@ class Department_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('department', $data);
-        return $id = $this->db->insert_id('department');
+        $this->db->insert($this->tableName, $data);
+        return $id = $this->db->insert_id($this->tableName);
     }
 
     function departmentEdit($id, $post)
@@ -52,6 +53,6 @@ class Department_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        return $this->db->update('department', $data, array('id' => $id));
+        return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 }

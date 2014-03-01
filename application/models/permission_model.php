@@ -16,6 +16,9 @@ class Permission_model extends CI_Model
         parent::__construct();
     }
 
+
+    private $tableName = "ics_permission";
+    private $tbUserGroup = "ics_user_group";
     /**
      * @param $id | member id
      * @param $moduleID | module id
@@ -29,8 +32,8 @@ class Permission_model extends CI_Model
               b.id AS permission_id,
               b.permission
             FROM
-              `user_group` a
-              INNER JOIN `permission` b
+              `$this->tbUserGroup` a
+              INNER JOIN `$this->tableName` b
                 ON (
                   a.`permission_id` = b.`id`
                   AND b.`publish` = 1
@@ -60,8 +63,8 @@ class Permission_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );//var_dump($data);exit;
-        $this->db->insert('permission', $data);
-        return $id = $this->db->insert_id('permission');
+        $this->db->insert($this->tableName, $data);
+        return $id = $this->db->insert_id($this->tableName);
     }
 
     function permissionEdit($id, $moduleID, $permission)
@@ -71,7 +74,7 @@ class Permission_model extends CI_Model
             'permission  ' => $permission,
             'update_datetime' => date('Y-m-d H:i:s'),
         );
-        return $this->db->update('permission', $data, array('id' => $id));
+        return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
     function userGroupNew($userID, $permissionID)
@@ -83,7 +86,7 @@ class Permission_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('user_group', $data);
-        return $id = $this->db->insert_id('user_group');
+        $this->db->insert($this->tbUserGroup, $data);
+        return $id = $this->db->insert_id($this->tbUserGroup);
     }
 }

@@ -20,11 +20,22 @@ class Member extends CI_Controller
     }
 
     private $selectMenu = "settings";
+    private $moduleName = "Users";
+
+    function checkPermission($index)
+    {
+        return $this->Module_model->checkModuleByPermission($this->moduleName, $index);
+    }
+
     function index()
     {
         $data = array(
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "users"
+            'selectSubMenu' => $this->moduleName,
+            'permission' => $this->checkPermission(0),
+            'permissionInsert' => $this->checkPermission(1),
+            'permissionUpdate' => $this->checkPermission(2),
+            'permissionDelete' => $this->checkPermission(3)
         );
         $this->load->view("member/list", $data);
     }
@@ -34,7 +45,7 @@ class Member extends CI_Controller
         $post = $this->input->post();
         if ($post) {
             $result = $this->Member_model->memberAdd($post);
-            if ($result){
+            if ($result) {
                 echo $result;
             } else {
                 echo 'add fail';
@@ -44,7 +55,8 @@ class Member extends CI_Controller
         $data = array(
             'message' => "",
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "users"
+            'selectSubMenu' => $this->moduleName,
+            'permission' => $this->checkPermission(1)
         );
         $this->load->view('member/add', $data);
     }
@@ -52,7 +64,7 @@ class Member extends CI_Controller
     function memberEdit($id)
     {
         $post = $this->input->post();
-        if ($post) {//var_dump($post);exit;
+        if ($post) { //var_dump($post);exit;
             $result = $this->Member_model->memberEdit($id, $post);
             if ($result) {
                 echo "edit success";
@@ -65,16 +77,20 @@ class Member extends CI_Controller
             'message' => "",
             'id' => $id,
             'selectMenu' => $this->selectMenu,
-            'selectSubMenu' => "users"
+            'selectSubMenu' => $this->moduleName,
+            'permission' => $this->checkPermission(2)
         );
-        $this->load->view('member/edit', $data);
+        if (is_numeric($id)) {
+            $this->load->view('member/edit', $data);
+        } else {
+            $this->load->view('member/list', $data);
+        }
     }
 
     function memberDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'member');
-        if (!$result)
-        {
+        $result = $this->Constant_model->setPublish($id, $this->Member_model->getTableName());
+        if (!$result) {
             echo "delete fail";
             exit;
         }
@@ -90,6 +106,21 @@ class Member extends CI_Controller
                 echo "edit success";
             } else {
                 echo "edit fail";
+            }
+        }
+        exit();
+    }
+
+    function memberCheckDuplicate()
+    {
+        $post = $this->input->post();
+        if ($post) {
+            extract($post);
+            $result = $this->Member_model->checkDuplicate($username);
+            if ($result) {
+                echo "true";
+            } else {
+                echo "false";
             }
         }
         exit();

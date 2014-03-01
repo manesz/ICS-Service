@@ -20,13 +20,16 @@ class Module_model extends CI_Model
     public $arrModule = array("list", "insert", "update", "delete", "report1", "report2", "report3");
     public $strCheckNon = "0,0,0,0,0,0,0";
     public $strCheckAll = "1,1,1,1,1,1,1";
+    private $tableName = "ics_module";
+    private $tbPermission = "ics_permission";
+    private $tbUserGroup = "ics_user_group";
     function moduleList($id = 0)
     {
         $strSql = $id == 0 ? "" : " AND id = $id";
         $sql = "
             SELECT
               *
-            FROM `ics_module`
+            FROM `$this->tableName`
             WHERE 1
             AND publish = 1
             $strSql
@@ -51,8 +54,8 @@ class Module_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('ics_module', $data);
-        return $id = $this->db->insert_id('ics_module');
+        $this->db->insert($this->tableName, $data);
+        return $id = $this->db->insert_id($this->tableName);
     }
 
     function moduleEdit($id, $post)
@@ -64,7 +67,7 @@ class Module_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        return $this->db->update('ics_module', $data, array('id' => $id));
+        return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
     function moduleSet($id, $post)
@@ -101,13 +104,13 @@ class Module_model extends CI_Model
               a.*
               ,b.`permission`
             FROM
-              `ics_module` a
-              INNER JOIN `ics_permission` b
+              `$this->tableName` a
+              INNER JOIN `$this->tbPermission` b
                 ON (
                   a.`id` = b.`module_id`
                   AND b.`publish` = 1
                 )
-              INNER JOIN `ics_user_group` c
+              INNER JOIN `$this->tbUserGroup` c
                 ON (
                   c.`permission_id` = b.`id`
                   AND c.`publish` = 1
@@ -136,13 +139,13 @@ class Module_model extends CI_Model
               a.*
               ,b.`permission`
             FROM
-              `ics_module` a
-              INNER JOIN `ics_permission` b
+              `$this->tableName` a
+              INNER JOIN `$this->tbPermission` b
                 ON (
                   a.`id` = b.`module_id`
                   AND b.`publish` = 1
                 )
-              INNER JOIN `ics_user_group` c
+              INNER JOIN `$this->tbUserGroup` c
                 ON (
                   c.`permission_id` = b.`id`
                   AND c.`publish` = 1

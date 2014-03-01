@@ -67,7 +67,7 @@ class Device extends CI_Controller
 
     function deviceDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'device');
+        $result = $this->Constant_model->setPublish($id, "ics_device");
         if (!$result)
         {
             echo "delete fail";

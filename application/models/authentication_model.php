@@ -22,7 +22,7 @@ class Authentication_model extends CI_Model
         $sql = "
             SELECT
               *
-            FROM `member`
+            FROM `ics_member`
             WHERE 1
             AND (
               `username` = '$username'

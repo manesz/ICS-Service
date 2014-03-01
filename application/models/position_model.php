@@ -8,6 +8,7 @@ class Position_model extends CI_Model
         parent::__construct();
     }
 
+    private $tableName = "ics_position";
     function positionList($id = 0)
     {
         $strSql = $id == 0 ? "" : " AND id = $id";
@@ -15,7 +16,7 @@ class Position_model extends CI_Model
             SELECT
               *
             FROM
-              `ics_position`
+              `$this->tableName`
             WHERE 1
             $strSql
             AND publish = 1
@@ -39,8 +40,8 @@ class Position_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('ics_position', $data);
-        return $id = $this->db->insert_id('ics_position');
+        $this->db->insert($this->tableName, $data);
+        return $id = $this->db->insert_id($this->tableName);
     }
 
     function positionEdit($id, $post)
@@ -52,6 +53,6 @@ class Position_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        return $this->db->update('ics_position', $data, array('id' => $id));
+        return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 }

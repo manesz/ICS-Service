@@ -45,13 +45,9 @@ $objData = $this->Member_model->memberList();
                                 </h3>
 
                                 <div class="actions">
-                                    <a href="#" class="btn btn-mini content-refresh"><i title="Refresh"
-                                                                                        class="icon-refresh"></i></a>
-                                    <!--                                <a href="#" class="btn btn-mini content-remove"><i title="Remove Table" class="icon-remove"></i></a>-->
-                                    <a href="#" class="btn btn-mini content-slideUp"><i title="Hide"
-                                                                                        class="icon-angle-down"></i></a>
-                                    <a class="link" href="<?php echo $webUrl; ?>member/memberAdd" class="btn btn-mini"><i title="Add"
-                                                                                                             class="icon-plus"></i></a>
+                                    <a href="<?php echo $webUrl; ?>member/memberAdd" class="btn btn-mini">
+                                        <i title="Add"
+                                           class="icon-plus"></i></a>
                                 </div>
                             </div>
                             <div class="box-content nopadding">
@@ -77,8 +73,8 @@ $objData = $this->Member_model->memberList();
                                         <tr>
                                             <td class="center"><?php echo $value->id; ?></td>
                                             <td><?php echo $value->username; ?></td>
-                                            <td><?php echo "$value->first_name $value->last_name"; ?></td>
-                                            <td><?php echo $value->telephone; ?></td>
+                                            <td><?php echo "$value->firstname $value->lastname"; ?></td>
+                                            <td><?php echo $value->phone; ?></td>
                                             <td><?php echo "$value->mobile"; ?></td>
                                             <td><?php echo $value->email; ?></td>
                                             <td><?php echo $value->update_datetime; ?></td>

@@ -17,13 +17,14 @@ class Company_model extends CI_Model
         parent::__construct();
     }
 
+    private $tableName = "ics_department";
     function companyList($id = 0, $type = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
         $sql = "
             SELECT
               *
-            FROM company
+            FROM $this->tableName
             WHERE 1
             AND publish = 1
             $strAnd
@@ -63,8 +64,8 @@ class Company_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->db->insert('company', $data);
-        return $id = $this->db->insert_id('company');
+        $this->db->insert($this->tableName, $data);
+        return $id = $this->db->insert_id($this->tableName);
     }
 
     function companyEdit($id, $post)
@@ -92,7 +93,7 @@ class Company_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        return $this->db->update('company', $data, array('id' => $id));
+        return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
 

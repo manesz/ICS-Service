@@ -118,6 +118,7 @@ $autoload['model'] = array(
     "Device_model",
     "Department_model",
     "Position_model",
+    "Permission_model",
     "Upload_model",
 );
 
