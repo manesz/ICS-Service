@@ -503,15 +503,24 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                         }
                         ?>
                         <fieldset>
-                            <legend>Module : <?php echo $value->title; ?></legend>
+                            <div class="box box-color orange box-small box-bordered span11">
+                                <div class="box-title">
+                                    <h3>
+                                        <i class="glyphicon-keys"></i>
+                                        Module : <?php echo $value->title; ?>
+                                    </h3>
+                                </div>
+                            </div>
+<!--                            <legend>Module : --><?php //echo $value->title; ?>
+<!--                            </legend>-->
                             <!--หน้าสลับลำดับ-->
-                            <div class="span6">
+                            <div class="span12">
                                 <input type="checkbox" id="cbModuleAll_<?php echo $value->id; ?>"
                                     <?php echo $checkBoxAll; ?>
                                        onclick="return setValueModuleAll(<?php echo $value->id; ?>);">
                                 <label class="cbInLine" for="cbModuleAll_<?php echo $value->id; ?>">All</label>
                             </div>
-                            <div class="span6">
+                            <div class="span12">
                                 <div class="span2">
                                     <input id="list_<?php echo $value->id; ?>" type="checkbox"
                                            class="cbModule_<?php echo $value->id; ?>"
@@ -534,7 +543,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                                     <label class="cbInLine" for="update_<?php echo $value->id; ?>">update</label>
                                 </div>
                             </div>
-                            <div class="span6">
+                            <div class="span12">
                                 <div class="span2">
                                     <input id="delete_<?php echo $value->id; ?>" type="checkbox"
                                            class="cbModule_<?php echo $value->id; ?>"
@@ -557,7 +566,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                                     <label class="cbInLine" for="report2_<?php echo $value->id; ?>">report 2</label>
                                 </div>
                             </div>
-                            <div class="span6">
+                            <div class="span12">
                                 <div class="span2">
                                     <input id="report3_<?php echo $value->id; ?>" type="checkbox"
                                            class="cbModule_<?php echo $value->id; ?>"
