@@ -39,6 +39,9 @@ $this->load->view("navigator_menu");
                 return false;
             });
         });
+        window.CKEDITOR.disableAutoInline = true;
+//        window.CKEDITOR.inline('description');
+        CKEDITOR.replace('description');
     </script>
 <div class="container-fluid" id="content">
 
@@ -85,9 +88,28 @@ $this->load->view("sidebar_menu");
                                 <form action="" method="POST" autocomplete="off"
                                       class='form-horizontal form-column form-bordered form-validate'
                                       id="formPost" name="formPost">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <label for="name" class="control-label">Title :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="title" id="title" placeholder="Title"
+                                                       class="input-block-level" data-rule-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="description" class="control-label">Description :</label>
+
+                                            <div class="controls">
+                                                <textarea name="description" id="description" rows="5"
+                                                          class="input-block-level"
+                                                          data-rule-required="true"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="span6">
                                         <div class="control-group">
-                                            <label for="image" class="control-label">Image</label>
+                                            <label for="image" class="control-label">Image1: </label>
 
                                             <div class="controls">
                                                 <div class="fileupload fileupload-new" id="image"
@@ -111,49 +133,31 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                     </div>
-                                    <!--END:span6 -->
                                     <div class="span6">
                                         <div class="control-group">
-                                            <label for="name" class="control-label">Name :</label>
+                                            <label for="name" class="control-label">Title Image1 :</label>
 
                                             <div class="controls">
-                                                <input type="text" name="name" id="name" placeholder="Name"
+                                                <input type="text" name="title" id="title" placeholder="Title"
                                                        class="input-block-level" data-rule-required="true">
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="model" class="control-label">Model :</label>
+                                            <label for="description" class="control-label">Description1 :</label>
 
                                             <div class="controls">
-                                                <input type="text" name="model" id="model" placeholder="Model"
-                                                       class="input-block-level" data-rule-required="true">
+                                                <textarea name="description" id="description" rows="5"
+                                                          class="input-block-level"></textarea>
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <label for="brand" class="control-label">Brand :</label>
 
-                                            <div class="controls">
-                                                <input type="text" name="brand" id="brand" placeholder="Brand"
-                                                       class="input-block-level" data-rule-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="type" class="control-label">Type :</label>
+                                    </div>
 
-                                            <div class="controls">
-                                                <input type="text" name="type" id="type" placeholder="Type"
-                                                       class="input-block-level" data-rule-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="datesheet" class="control-label">Date Sheet :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="datesheet" id="datesheet"
-                                                       placeholder="Date input"
-                                                       class="input-block-level datepick" data-rule-required="true"
-                                                       data-rule-dateiso="true">
-                                            </div>
+                                    <div class="span12">
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-inverse" id="btnAddOtherImage">Add
+                                                Other Image
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="span12">

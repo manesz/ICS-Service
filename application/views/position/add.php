@@ -91,7 +91,7 @@ $this->load->view("sidebar_menu");
 
                                                 <div class="controls">
                                                     <textarea name="description" id="description" rows="5"
-                                                              class="input-block-level"></textarea>
+                                                              class="input-block-level ckedi"></textarea>
                                                 </div>
                                             </div>
                                         </div>
