@@ -73,7 +73,7 @@ $objData = $this->Member_model->memberList();
                                         <tr>
                                             <td class="center"><?php echo $value->id; ?></td>
                                             <td><?php echo $value->username; ?></td>
-                                            <td><?php echo "$value->firstname $value->lastname"; ?></td>
+                                            <td><?php echo @"$value->prefix$value->firstname $value->lastname"; ?></td>
                                             <td><?php echo $value->phone; ?></td>
                                             <td><?php echo "$value->mobile"; ?></td>
                                             <td><?php echo $value->email; ?></td>

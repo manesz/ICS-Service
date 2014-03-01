@@ -119,6 +119,7 @@ class Module_model extends CI_Model
               AND a.`publish` = 1
               AND b.permission != '$this->strCheckNon'
               $strAnd
+              ORDER BY a.sort, a.id
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {
@@ -153,6 +154,7 @@ class Module_model extends CI_Model
             WHERE 1
               AND a.`publish` = 1
               $strAnd
+              ORDER BY a.sort, a.id
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {
