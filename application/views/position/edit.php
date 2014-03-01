@@ -20,14 +20,7 @@ extract($arrData);
 
             $("#formPost").submit(function () {
                 disableID("btnSave");
-                var checkPost = true;
-                $("#formPost .error").each(function () {
-                    var className = $(this).attr('class');
-                    var index = className.indexOf("valid");
-                    if (index < 0) {
-                        checkPost = false;
-                    }
-                });
+                var checkPost = checkValidateForm("#formPost");
                 if (checkPost) {
                     postData(url_post_data, $(this).serialize(), url_list);
                 } else {

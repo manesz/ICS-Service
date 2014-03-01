@@ -17,7 +17,7 @@ class Company_model extends CI_Model
         parent::__construct();
     }
 
-    private $tableName = "ics_department";
+    private $tableName = "ics_company";
     function companyList($id = 0, $type = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";

@@ -20,14 +20,7 @@ extract($arrData);
 
             $("#formPost").submit(function () {
                 disableID("btnSave");
-                var checkPost = true;
-                $("#formPost .error").each(function () {
-                    var className = $(this).attr('class');
-                    var index = className.indexOf("valid");
-                    if (index < 0) {
-                        checkPost = false;
-                    }
-                });
+                var checkPost = checkValidateForm("#formPost");
                 if (checkPost) {
                     postData(url_post_data, $(this).serialize(), url_list);
                 } else {
@@ -77,41 +70,46 @@ $this->load->view("sidebar_menu");
                             </h3>
                         </div>
                         <!-- END: .box-title -->
-                        <div class="box-content nopadding">
-                            <form action="" method="POST" autocomplete="off"
-                                  class='form-horizontal form-column form-bordered form-validate'
-                                  id="formPost" name="formPost">
-                                <div class="span12">
-                                    <div class="span6">
-                                        <div class="control-group">
-                                            <label for="title" class="control-label">Title :</label>
+                        <?php if (@$permission): ?>
+                            <div class="box-content nopadding">
+                                <form action="" method="POST" autocomplete="off"
+                                      class='form-horizontal form-column form-bordered form-validate'
+                                      id="formPost" name="formPost">
+                                    <div class="span12">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <label for="title" class="control-label">Title :</label>
 
-                                            <div class="controls">
-                                                <input type="text" name="title" id="title"
-                                                       placeholder="Text input" class="input-block-level"
-                                                       data-rule-required="true" value="<?php echo @$title; ?>">
+                                                <div class="controls">
+                                                    <input type="text" name="title" id="title"
+                                                           placeholder="Text input" class="input-block-level"
+                                                           data-rule-required="true" value="<?php echo @$title; ?>">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="span6">
+                                        <div class="span6">
 
-                                        <div class="control-group">
-                                            <label for="description" class="control-label">Description :</label>
+                                            <div class="control-group">
+                                                <label for="description" class="control-label">Description :</label>
 
-                                            <div class="controls">
-                                                <textarea name="description" id="description" rows="5"
-                                                          class="input-block-level"><?php echo @$description; ?></textarea>
+                                                <div class="controls">
+                                                    <textarea name="description" id="description" rows="5"
+                                                              class="input-block-level"><?php echo @$description; ?></textarea>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary" id="btnSave">Save changes
+                                            </button>
+                                            <button type="button" class="btn" id="btnCancel">Cancel</button>
+                                        </div>
                                     </div>
-                                    <div class="form-actions">
-                                        <button type="submit" class="btn btn-primary" id="btnSave">Save changes</button>
-                                        <button type="button" class="btn" id="btnCancel">Cancel</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- END: .box-content nopadding -->
+                                </form>
+                            </div>
+                            <!-- END: .box-content nopadding -->
+                        <?php else:
+                            $this->load->view("permission_page");
+                        endif;?>
                     </div>
                     <!-- END: .box -->
                 </div>

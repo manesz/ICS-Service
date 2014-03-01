@@ -290,289 +290,289 @@ $this->load->view("sidebar_menu");
         </h3>
     </div>
     <!-- END: .box-title -->
-    <?php //if (@$permission): ?>
-    <div class="box-content nopadding">
-    <ul class="tabs tabs-inline tabs-top">
-        <li class='active' id="liPorfile">
-            <a href="#profile" data-toggle='tab'><i class="icon-user"></i> Profile</a>
-        </li>
-        <li id="liModulePermission">
-            <a href="#module_permission" data-toggle='tab'><i class="icon-lock"></i> Module Permission</a>
-        </li>
-    </ul>
-    <div class="tab-content tab-content-top tab-content-inline tab-content-bottom nopadding"
-         style="margin-top: 20px !important;">
-    <div class="tab-pane active" id="profile">
-        <form action="" method="POST" autocomplete="off"
-              class='form-horizontal form-column form-bordered form-validate'
-              id="formPost" name="formPost">
-            <input type="hidden" name="employee_number" id="employee_number"
-                   value="<?php echo strtotime(date("Y-m-d H:i:s")); ?>">
-            <input type="hidden" name="user_group" id="user_group" value="0"/>
+    <?php if (@$permission): ?>
+        <div class="box-content nopadding">
+        <ul class="tabs tabs-inline tabs-top">
+            <li class='active' id="liPorfile">
+                <a href="#profile" data-toggle='tab'><i class="icon-user"></i> Profile</a>
+            </li>
+            <li id="liModulePermission">
+                <a href="#module_permission" data-toggle='tab'><i class="icon-lock"></i> Module Permission</a>
+            </li>
+        </ul>
+        <div class="tab-content tab-content-top tab-content-inline tab-content-bottom nopadding"
+             style="margin-top: 20px !important;">
+        <div class="tab-pane active" id="profile">
+            <form action="" method="POST" autocomplete="off"
+                  class='form-horizontal form-column form-bordered form-validate'
+                  id="formPost" name="formPost">
+                <input type="hidden" name="employee_number" id="employee_number"
+                       value="<?php echo strtotime(date("Y-m-d H:i:s")); ?>">
+                <input type="hidden" name="user_group" id="user_group" value="0"/>
 
-            <div class="span6">
-                <div class="control-group">
-                    <label for="image" class="control-label">Image</label>
+                <div class="span6">
+                    <div class="control-group">
+                        <label for="image" class="control-label">Image</label>
 
-                    <div class="controls">
-                        <div class="fileupload fileupload-new" id="image" data-provides="fileupload">
-                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                <img src="<?php echo $baseUrl; ?>assets/img/no_img.gif"/>
-                            </div>
-                            <div class="fileupload-preview fileupload-exists thumbnail"
-                                 style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                            <div>
+                        <div class="controls">
+                            <div class="fileupload fileupload-new" id="image" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="<?php echo $baseUrl; ?>assets/img/no_img.gif"/>
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
                             <span class="btn btn-file">
                                 <span class="fileupload-new">Select image</span>
                                 <span class="fileupload-exists">Change</span>
                                 <input type="file" id="imagefile" name='imagefile'/>
                             </span>
-                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="control-group" id="controlUsername">
-                    <label for="textfield" class="control-label">Username</label>
+                    <div class="control-group" id="controlUsername">
+                        <label for="textfield" class="control-label">Username</label>
 
-                    <div class="controls">
-                        <div class="input-append">
-                            <input type="text" id="username" name="username" autocomplete="off">
-                            <a href="javascript:checkUsername();" class="btn add-on"><i
-                                    class="icon-refresh"></i></a>
-                        </div>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input type="text" id="username" name="username" autocomplete="off">
+                                <a href="javascript:checkUsername();" class="btn add-on"><i
+                                        class="icon-refresh"></i></a>
+                            </div>
                         <span class="help-block">
                             Please enter a username
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label for="password" class="control-label">Password</label>
+                    <div class="control-group">
+                        <label for="password" class="control-label">Password</label>
 
-                    <div class="controls">
-                        <div class="input-xlarge">
-                            <input type="password" class='complexify-me input-block-level'
-                                   name="password" id="password" data-rule-required="true" data-rule-minlength="4">
+                        <div class="controls">
+                            <div class="input-xlarge">
+                                <input type="password" class='complexify-me input-block-level'
+                                       name="password" id="password" data-rule-required="true" data-rule-minlength="4">
 													<span class="help-block">
 														<div class="progress progress-info">
                                                             <div class="bar bar-red" style="width: 0%"></div>
                                                         </div>
 													</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="firstname" class="control-label">First name</label>
+
+                        <div class="controls">
+                            <input type="text" name="firstname" id="firstname" placeholder="First name"
+                                   class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="lastname" class="control-label">Last name</label>
+
+                        <div class="controls">
+                            <input type="text" name="lastname" id="lastname" placeholder="Last name"
+                                   class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label for="firstname" class="control-label">First name</label>
+                <div class="span6">
+                    <div class="control-group">
+                        <label for="prefix" class="control-label">Prefix</label>
 
-                    <div class="controls">
-                        <input type="text" name="firstname" id="firstname" placeholder="First name"
-                               class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
+                        <div class="controls">
+                            <select name="prefix" id="prefix" data-rule-required="true">
+                                <option value=""></option>
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Mrs.">Mrs.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Gender</label>
+
+                        <div class="controls">
+                            <label for="gender1" class="radio">
+                                <input id="gender1" name="gender" type="radio" value=""
+                                       onclick="$('#gender').val('0');" data-rule-required="true"/>Man</label>
+                            <label for="gender2" class="radio">
+                                <input id="gender2" name="gender" type="radio" value=""
+                                       onclick="$('#gender').val('1');" data-rule-required="true"/>Women</label>
+
+                            <input type="hidden" value="" id="gender">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="age" class="control-label">Age</label>
+
+                        <div class="controls">
+                            <input type="text" name="age" id="age" placeholder="Age"
+                                   class="input-xlarge" data-rule-number="true" data-rule-required="true">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="department_id" class="control-label">Department</label>
+
+                        <div class="controls">
+                            <select name="department_id" id="department_id" data-rule-required="true">
+                                <option value=""></option>
+                                <?php foreach ($arrDepartment as $key => $value): ?>
+                                    <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="phone" class="control-label">Phone</label>
+
+                        <div class="controls">
+                            <input type="text" name="phone" id="phone" placeholder="Phone"
+                                   class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="position_id" class="control-label">Position</label>
+
+                        <div class="controls">
+                            <select name="position_id" id="position_id" data-rule-required="true">
+                                <option value=""></option>
+                                <?php foreach ($arrPosition as $key => $value): ?>
+                                    <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="mobile" class="control-label">Mobile</label>
+
+                        <div class="controls">
+                            <input type="text" name="mobile" id="mobile" placeholder="Mobile"
+                                   class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="email" class="control-label">Email</label>
+
+                        <div class="controls">
+                            <input type="text" name="email" id="email" placeholder="Email"
+                                   class="input-xlarge" data-rule-email="true" data-rule-required="true">
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label for="lastname" class="control-label">Last name</label>
-
-                    <div class="controls">
-                        <input type="text" name="lastname" id="lastname" placeholder="Last name"
-                               class="input-xlarge" data-rule-required="true" data-rule-minlength="2">
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label for="prefix" class="control-label">Prefix</label>
-
-                    <div class="controls">
-                        <select name="prefix" id="prefix" data-rule-required="true">
-                            <option value=""></option>
-                            <option value="Mr.">Mr.</option>
-                            <option value="Ms.">Ms.</option>
-                            <option value="Miss">Miss</option>
-                            <option value="Mrs.">Mrs.</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Gender</label>
-
-                    <div class="controls">
-                        <label for="gender1" class="radio">
-                            <input id="gender1" name="gender" type="radio" value=""
-                                   onclick="$('#gender').val('0');" data-rule-required="true"/>Man</label>
-                        <label for="gender2" class="radio">
-                            <input id="gender2" name="gender" type="radio" value=""
-                                   onclick="$('#gender').val('1');" data-rule-required="true"/>Women</label>
-
-                        <input type="hidden" value="" id="gender">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="age" class="control-label">Age</label>
-
-                    <div class="controls">
-                        <input type="text" name="age" id="age" placeholder="Age"
-                               class="input-xlarge" data-rule-number="true" data-rule-required="true">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="department_id" class="control-label">Department</label>
-
-                    <div class="controls">
-                        <select name="department_id" id="department_id" data-rule-required="true">
-                            <option value=""></option>
-                            <?php foreach ($arrDepartment as $key => $value): ?>
-                                <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="phone" class="control-label">Phone</label>
-
-                    <div class="controls">
-                        <input type="text" name="phone" id="phone" placeholder="Phone"
-                               class="input-xlarge">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="position_id" class="control-label">Position</label>
-
-                    <div class="controls">
-                        <select name="position_id" id="position_id" data-rule-required="true">
-                            <option value=""></option>
-                            <?php foreach ($arrPosition as $key => $value): ?>
-                                <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="mobile" class="control-label">Mobile</label>
-
-                    <div class="controls">
-                        <input type="text" name="mobile" id="mobile" placeholder="Mobile"
-                               class="input-xlarge">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="email" class="control-label">Email</label>
-
-                    <div class="controls">
-                        <input type="text" name="email" id="email" placeholder="Email"
-                               class="input-xlarge" data-rule-email="true" data-rule-required="true">
-                    </div>
-                </div>
-            </div>
-            <div class="span12">
-                <div class="control-group">
-                    <label for="address" class="control-label">Address</label>
-
-                    <div class="controls">
-                        <textarea name="address" id="address" rows="5" class="input-block-level"></textarea>
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" id="btnSave1" class="btn btn-primary">Save</button>
-                    <button type="button" id="btnCancel1" class="btn">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="tab-pane" id="module_permission">
-        <form id="formPost2" name="formPost2" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-            <div class="row-fluid">
-                <style>
-                    .cbInLine {
-                        display: inline-block;
-                        margin-left: 5px;
-                    }
-                </style>
                 <div class="span12">
-                    <?php foreach ($objModule as $key => $value): ?>
-<?php
-                        ?>
-                        <fieldset>
-                            <legend>Module : <?php echo $value->title; ?></legend>
-                            <!--หน้าสลับลำดับ-->
-                            <div class="span6">
-                                <input type="checkbox" id="cbModuleAll_<?php echo $value->id; ?>"
-                                       onclick="return setValueModuleAll(<?php echo $value->id; ?>);">
-                                <label class="cbInLine" for="cbModuleAll_<?php echo $value->id; ?>">All</label>
-                            </div>
-                            <div class="span6">
+                    <div class="control-group">
+                        <label for="address" class="control-label">Address</label>
 
-                                <div class="span2">
-                                    <input id="list_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[0] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="list_<?php echo $value->id; ?>">list</label>
-                                </div>
-                                <div class="span2">
-                                    <input id="insert_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[1] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="insert_<?php echo $value->id; ?>">insert</label>
-                                </div>
-                                <div class="span2">
-                                    <input id="update_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[2] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="update_<?php echo $value->id; ?>">update</label>
-                                </div>
-                            </div>
-                            <div class="span6">
-                                <div class="span2">
-                                    <input id="delete_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[3] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="delete_<?php echo $value->id; ?>">delete</label>
-                                </div>
-                                <div class="span2">
-                                    <input id="report1_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[4] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report1_<?php echo $value->id; ?>">report 1</label>
-                                </div>
-                                <div class="span2">
-                                    <input id="report2_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[5] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report2_<?php echo $value->id; ?>">report 2</label>
-                                </div>
-                            </div>
-                            <div class="span6">
-                                <div class="span2">
-                                    <input id="report3_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
-                                        <?php echo @$arrCheck[6] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report3_<?php echo $value->id; ?>">report 3</label>
-                                </div>
-                            </div>
-                        </fieldset>
-                    <?php endforeach; ?>
+                        <div class="controls">
+                            <textarea name="address" id="address" rows="5" class="input-block-level"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="btnSave1" class="btn btn-primary">Save</button>
+                        <button type="button" id="btnCancel1" class="btn">Cancel</button>
+                    </div>
                 </div>
-            </div>
-            <div class="span12">
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" id="btnSave2">Save changes</button>
-                    <button type="button" class="btn" id="btnCancel2">Cancel</button>
+            </form>
+        </div>
+
+        <div class="tab-pane" id="module_permission">
+            <form id="formPost2" name="formPost2" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+                <div class="row-fluid">
+                    <style>
+                        .cbInLine {
+                            display: inline-block;
+                            margin-left: 5px;
+                        }
+                    </style>
+                    <div class="span12">
+                        <?php foreach ($objModule as $key => $value): ?>
+                            <?php
+                            ?>
+                            <fieldset>
+                                <legend>Module : <?php echo $value->title; ?></legend>
+                                <!--หน้าสลับลำดับ-->
+                                <div class="span6">
+                                    <input type="checkbox" id="cbModuleAll_<?php echo $value->id; ?>"
+                                           onclick="return setValueModuleAll(<?php echo $value->id; ?>);">
+                                    <label class="cbInLine" for="cbModuleAll_<?php echo $value->id; ?>">All</label>
+                                </div>
+                                <div class="span6">
+
+                                    <div class="span2">
+                                        <input id="list_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[0] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="list_<?php echo $value->id; ?>">list</label>
+                                    </div>
+                                    <div class="span2">
+                                        <input id="insert_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[1] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="insert_<?php echo $value->id; ?>">insert</label>
+                                    </div>
+                                    <div class="span2">
+                                        <input id="update_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[2] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="update_<?php echo $value->id; ?>">update</label>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="span2">
+                                        <input id="delete_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[3] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="delete_<?php echo $value->id; ?>">delete</label>
+                                    </div>
+                                    <div class="span2">
+                                        <input id="report1_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[4] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="report1_<?php echo $value->id; ?>">report 1</label>
+                                    </div>
+                                    <div class="span2">
+                                        <input id="report2_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[5] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="report2_<?php echo $value->id; ?>">report 2</label>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="span2">
+                                        <input id="report3_<?php echo $value->id; ?>" type="checkbox"
+                                               class="cbModule_<?php echo $value->id; ?>"
+                                            <?php echo @$arrCheck[6] == "1" ? "checked" : ""; ?>
+                                               onclick="return setValueModule(<?php echo $value->id; ?>);">
+                                        <label class="cbInLine" for="report3_<?php echo $value->id; ?>">report 3</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    </div>
-    </div>
-    <?php //else:
-    // $this->load->view("permission_page");
-    //endif;
+                <div class="span12">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSave2">Save changes</button>
+                        <button type="button" class="btn" id="btnCancel2">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+        </div>
+    <?php else:
+        $this->load->view("permission_page");
+    endif;
     ?>
     </div>
     <!-- END: .box -->
