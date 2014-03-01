@@ -47,6 +47,9 @@ $route['signin'] = 'authentication';
 $route['signout'] = 'authentication/signOut';
 
 
+//Issue
+$route['issue/add'] = 'issue/issueAdd';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

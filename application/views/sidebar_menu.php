@@ -209,7 +209,7 @@ endforeach;
             <a href="<?php echo $webUrl; ?>issue">List</a>
         </li>
         <li class=''>
-            <a href="#" data-toggle="dropdown">Add new</a>
+            <a href="<?php echo $webUrl; ?>issue/add#" data-toggle="dropdown">Add new</a>
         </li>
     </ul>
 </div>

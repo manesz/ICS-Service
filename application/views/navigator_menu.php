@@ -140,7 +140,7 @@ $objCheckModule = $this->Module_model->checkModuleByName();
 
                                 <?php endif; ?>
                                 <?php if (@$expResult[1]): ?>
-                                    <li><a href="<?php echo $webUrl; ?>issue/issueAdd">Add new</a></li>
+                                    <li><a href="<?php echo $webUrl; ?>issue/add">Add new</a></li>
                                 <?php endif; ?>
 
 

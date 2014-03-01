@@ -119,6 +119,7 @@ $autoload['model'] = array(
     "Department_model",
     "Position_model",
     "Permission_model",
+    "Issue_model",
     "Upload_model",
 );
 
