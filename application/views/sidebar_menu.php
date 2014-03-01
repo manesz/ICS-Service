@@ -199,6 +199,20 @@ endforeach;
     ?>
 </div>
 
+<!-- #### Issue #### -->
+<div class="subnav subnav-hidden">
+    <div class="subnav-title">
+        <a href="#" class='toggle-subnav'><span>Issue</span></a>
+    </div>
+    <ul class="subnav-menu">
+        <li class=''>
+            <a href="<?php echo $webUrl; ?>issue">List</a>
+        </li>
+        <li class=''>
+            <a href="#" data-toggle="dropdown">Add new</a>
+        </li>
+    </ul>
+</div>
 <!-- #### Singout #### -->
 <div class="subnav subnav-hidden">
     <div class="subnav-title">

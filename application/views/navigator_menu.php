@@ -121,12 +121,42 @@ $objCheckModule = $this->Module_model->checkModuleByName();
                     endforeach;
                     ?> </ul>
             </li>
+            <?php foreach ($objCheckModule as $key => $value) :
+                $expResult = explode(',', $value->permission);
+                switch ($value->title) {
+                    case "Issue":
+                        ?>
+                        <!-- #### Issue #### -->
+                        <li class="<?php echo $selectMenu == "Issue" ? "active" : ""; ?>">
+                            <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                                <span>Issue</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <?php if (@$expResult[0]): ?>
+
+                                    <li><a href="<?php echo $webUrl; ?>issue">List</a></li>
+
+                                <?php endif; ?>
+                                <?php if (@$expResult[1]): ?>
+                                    <li><a href="<?php echo $webUrl; ?>issue/issueAdd">Add new</a></li>
+                                <?php endif; ?>
+
+
+                            </ul>
+                        </li>
+                        <?php break; ?>
+                    <?php
+                }
+            endforeach;
+            ?>
         </ul>
 
         <div class="user">
             <div class="dropdown">
                 <a href="#" class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
-                    <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$first_name; ?></span>
+                    <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$username; ?></span>
 
                     <div
                         style="width: 24px; height: 24px;margin: 0 auto; overflow:hidden; position: relative; float: right;">

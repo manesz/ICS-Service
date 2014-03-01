@@ -162,7 +162,15 @@ function removeImage(path) {
                     $("#imgThumbnail").html('<img src="' + noImgUrl + '">');
                 }
             }
-        );
+        ).done(function () {
+                //alert("second success");
+            })
+            .fail(function () {
+                clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+            })
+            .always(function () {
+                //alert("finished");
+            });
     }
 }
 function deleteData() {
