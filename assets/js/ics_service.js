@@ -202,6 +202,15 @@ function clickNotifyError(message) {
     $(".gritter-item img").remove();
 }
 
+function scrollTop() {
+    $("body, html").animate({
+            scrollTop: $("body").position().top
+        },
+        500,
+        function () {
+        });
+}
+
 $(function () {
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");

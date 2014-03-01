@@ -46,13 +46,16 @@ $objData = $this->Module_model->moduleList();
                                 </h3>
 
                                 <div class="actions">
-                                    <a href="<?php echo $webUrl; ?>setting/moduleAdd" class="btn btn-mini">
-                                        <i title="Add"
-                                           class="icon-plus"></i></a>
+                                    <?php if (@$permissionInsert): ?>
+                                        <a href="<?php echo $webUrl; ?>setting/moduleAdd" class="btn btn-mini">
+                                            <i title="Add"
+                                               class="icon-plus"></i></a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="box-content nopadding">
-                                <table class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
+                                <table
+                                    class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -75,15 +78,20 @@ $objData = $this->Module_model->moduleList();
                                             <td><?php echo "$value->create_datetime"; ?></td>
                                             <td><?php echo $value->update_datetime; ?></td>
                                             <td class="hidden-400">
-                                                <a href="<?php echo $webUrl; ?>setting/moduleEdit/<?php echo $value->id; ?>"
-                                                   class="btn link" rel="tooltip" title="" data-original-title="Edit"><i
-                                                        class="icon-edit"></i></a>
-                                                <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
-                                                   data-original-title="Delete"
-                                                   onclick="urlDelete='<?php echo $webUrl; ?>setting/moduleDelete/<?php echo $value->id; ?>';"
-                                                   role="button" data-toggle="modal">
-                                                    <i class="icon-remove"></i>
-                                                </a>
+                                                <?php if (@$permissionUpdate): ?>
+                                                    <a href="<?php echo $webUrl; ?>setting/moduleEdit/<?php echo $value->id; ?>"
+                                                       class="btn link" rel="tooltip" title=""
+                                                       data-original-title="Edit"><i
+                                                            class="icon-edit"></i></a>
+                                                <?php endif; ?>
+                                                <?php if (@$permissionDelete): ?>
+                                                    <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                                                       data-original-title="Delete"
+                                                       onclick="urlDelete='<?php echo $webUrl; ?>setting/moduleDelete/<?php echo $value->id; ?>';"
+                                                       role="button" data-toggle="modal">
+                                                        <i class="icon-remove"></i>
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
 

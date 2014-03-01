@@ -486,7 +486,14 @@ $this->load->view("sidebar_menu");
                             <?php
                             ?>
                             <fieldset>
-                                <legend>Module : <?php echo $value->title; ?></legend>
+                                <div class="box box-color orange box-small box-bordered span11">
+                                    <div class="box-title">
+                                        <h3>
+                                            <i class="glyphicon-keys"></i>
+                                            Module : <?php echo $value->title; ?>
+                                        </h3>
+                                    </div>
+                                </div>
                                 <!--หน้าสลับลำดับ-->
                                 <div class="span6">
                                     <input type="checkbox" id="cbModuleAll_<?php echo $value->id; ?>"

@@ -45,9 +45,11 @@ $objData = $this->Member_model->memberList();
                                 </h3>
 
                                 <div class="actions">
-                                    <a href="<?php echo $webUrl; ?>member/memberAdd" class="btn btn-mini">
-                                        <i title="Add"
-                                           class="icon-plus"></i></a>
+                                    <?php if (@$permissionInsert): ?>
+                                        <a href="<?php echo $webUrl; ?>member/memberAdd" class="btn btn-mini">
+                                            <i title="Add"
+                                               class="icon-plus"></i></a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="box-content nopadding">
@@ -79,15 +81,20 @@ $objData = $this->Member_model->memberList();
                                             <td><?php echo $value->email; ?></td>
                                             <td><?php echo $value->update_datetime; ?></td>
                                             <td class="hidden-400">
-                                                <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $value->id; ?>"
-                                                   class="btn link" rel="tooltip" title="" data-original-title="Edit"><i
-                                                        class="icon-edit"></i></a>
-                                                <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
-                                                   data-original-title="Delete"
-                                                   onclick="urlDelete='<?php echo $webUrl; ?>member/memberDelete/<?php echo $value->id; ?>?type=1';"
-                                                   role="button" data-toggle="modal">
-                                                    <i class="icon-remove"></i>
-                                                </a>
+                                                <?php if (@$permissionUpdate): ?>
+                                                    <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $value->id; ?>"
+                                                       class="btn link" rel="tooltip" title=""
+                                                       data-original-title="Edit"><i
+                                                            class="icon-edit"></i></a>
+                                                <?php endif; ?>
+                                                <?php if (@$permissionDelete): ?>
+                                                    <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                                                       data-original-title="Delete"
+                                                       onclick="urlDelete='<?php echo $webUrl; ?>member/memberDelete/<?php echo $value->id; ?>?type=1';"
+                                                       role="button" data-toggle="modal">
+                                                        <i class="icon-remove"></i>
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
 
