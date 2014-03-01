@@ -1,25 +1,5 @@
 var urlDelete = "";
 var strWaitImage = "<div class='wait hidden'></div>";
-$(function () {
-    $("#frmSignIn").submit(function () {
-        disableID("btnSignIn");
-        var checkPost = checkValidateForm("#frmSignIn");
-        if (checkPost) {
-            userAuthen();
-        } else {
-            enableID("btnSignIn");
-        }
-        return false;
-    });
-
-    $("#main").prepend(strWaitImage);
-    $("a").click(function(){
-        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0){
-            openUrl(this.href);
-            return false;
-        }
-    });
-});
 
 //function list
 function userAuthen() {
@@ -221,3 +201,27 @@ function clickNotifyError(message) {
     $(".gritter-without-image").removeClass("gritter-with-image");
     $(".gritter-item img").remove();
 }
+
+$(function () {
+    $("#frmSignIn").submit(function () {
+        disableID("btnSignIn");
+        var checkPost = checkValidateForm("#frmSignIn");
+        if (checkPost) {
+            userAuthen();
+        } else {
+            enableID("btnSignIn");
+        }
+        return false;
+    });
+
+    $("#main").prepend(strWaitImage);
+    $("a").click(function(){
+        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0){
+            openUrl(this.href);
+            return false;
+        }
+    });
+    $("#title").focus();
+    $("#name").focus();
+    $("#to").focus();
+});

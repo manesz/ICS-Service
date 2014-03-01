@@ -20,10 +20,21 @@ class Company extends CI_Controller
     }
 
     private $selectMenu = "company";
+    private $moduleName = "Company";
+
+    function checkPermission($index)
+    {
+        return $this->Module_model->checkModuleByPermission($this->moduleName, $index);
+    }
+
     function index()
     {
         $data = array(
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(0),
+            'permissionInsert' => $this->checkPermission(1),
+            'permissionUpdate' => $this->checkPermission(2),
+            'permissionDelete' => $this->checkPermission(3)
         );
         $this->load->view("company/list", $data);
     }
@@ -41,7 +52,8 @@ class Company extends CI_Controller
             exit();
         }
         $data = array(
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(1)
         );
         $this->load->view("company/add", $data);
     }
@@ -60,7 +72,8 @@ class Company extends CI_Controller
         }
         $data = array(
             'id' => $id,
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(2)
         );
         $this->load->view("company/edit", $data);
     }

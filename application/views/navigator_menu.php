@@ -23,7 +23,7 @@ $objCheckModule = $this->Module_model->checkModuleByName();
                         <?php if (@$expResult[0]): ?>
                         <!-- #### Dashbaord #### -->
                         <li class="<?php echo $selectMenu == "dashboard" ? "active" : ""; ?>">
-                            <a class="link" href="<?php echo $webUrl; ?>dashboard"><span>Dashboard</span></a>
+                            <a href="<?php echo $webUrl; ?>dashboard"><span>Dashboard</span></a>
                         </li>
                     <?php endif; ?>
                         <?php break; ?>
@@ -105,14 +105,14 @@ $objCheckModule = $this->Module_model->checkModuleByName();
                             case "Users":
                                 ?><?php if (@$expResult[0]):?>
 
-                                <li><a class="link" href="<?php echo $webUrl; ?>member">Users</a></li>
+                                <li><a href="<?php echo $webUrl; ?>member">Users</a></li>
 
                             <?php endif; ?>
                                 <?php break; ?>
                             <?php
                             case "Log":
                                 ?><?php if (@$expResult[0]):?>
-                                <li><a class="link" href="#">Log</a></li>
+                                <li><a href="#">Log</a></li>
                             <?php endif; ?>
                                 <?php break; ?>
 
@@ -141,11 +141,11 @@ $objCheckModule = $this->Module_model->checkModuleByName();
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit
+                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit
                             profile</a>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>signout">Sign out</a>
+                        <a href="<?php echo $webUrl; ?>signout">Sign out</a>
                     </li>
                 </ul>
             </div>

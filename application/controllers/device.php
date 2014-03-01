@@ -18,12 +18,22 @@ class Device extends CI_Controller
         //check สถานะ login
         $this->Authentication_model->checkSignIn();
     }
-
     private $selectMenu = "device";
+    private $moduleName = "Device";
+
+    function checkPermission($index)
+    {
+        return $this->Module_model->checkModuleByPermission($this->moduleName, $index);
+    }
+
     function index()
     {
         $data = array(
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(0),
+            'permissionInsert' => $this->checkPermission(1),
+            'permissionUpdate' => $this->checkPermission(2),
+            'permissionDelete' => $this->checkPermission(3)
         );
         $this->load->view("device/list", $data);
     }
@@ -41,7 +51,8 @@ class Device extends CI_Controller
             exit();
         }
         $data = array(
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(1)
         );
         $this->load->view("device/add", $data);
     }
@@ -49,7 +60,7 @@ class Device extends CI_Controller
     function deviceEdit($id)
     {
         $post = $this->input->post();
-        if ($post) {//var_dump($post);exit;
+        if ($post) {
             $result = $this->Device_model->deviceEdit($id, $post);
             if ($result) {
                 echo "edit success";
@@ -60,7 +71,8 @@ class Device extends CI_Controller
         }
         $data = array(
             'id' => $id,
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(2)
         );
         $this->load->view("device/edit", $data);
     }

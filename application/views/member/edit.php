@@ -37,15 +37,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
 
         $("#formPost").submit(function () {
             disableID("btnSave1");
-            var checkPost = true;
-            $(".error").each(function () {
-                var className = $(this).attr('class');
-                var index = className.indexOf("valid");
-                if (index < 0) {
-                    checkPost = false;
-                    $(this).first().focus();
-                }
-            });
+            var checkPost = checkValidateForm("#formPost");
             if (checkPost) {
                 postData();
             } else {
@@ -82,6 +74,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     clickNotifyError('เกิดข้อผิดพลาด**');
                     enableID("btnSave1");
                 } else {
+                    clickNotifyUpdate();
                     <?php if($permissionUpdate || $usernameLogin == 'admin'):?>
                     $("#btnSave1").hide();
                     $("#btnCancel1").hide();

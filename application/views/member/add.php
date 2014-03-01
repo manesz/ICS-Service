@@ -47,14 +47,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
         $("#formPost").submit(function () {
             disableID("btnSave1");
             disableID("btnCancel1");
-            var checkPost = true;
-            $(".error").each(function () {
-                var className = $(this).attr('class');
-                var index = className.indexOf("valid");
-                if (index < 0) {
-                    checkPost = false;
-                }
-            });
+            var checkPost = checkValidateForm("#formPost");
             if (checkPost) {
                 postNewData();
             } else {
