@@ -88,6 +88,74 @@ class Setting extends CI_Controller
         echo "Delete Success!";
     }
 
+    //------------------------------------------Department----------------------------------------------//
+    function departmentList()
+    {
+        $data = array(
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 0),
+            'permissionInsert' => $this->checkPermission("Departments", 1),
+            'permissionUpdate' => $this->checkPermission("Departments", 2),
+            'permissionDelete' => $this->checkPermission("Departments", 3)
+        );
+        $this->load->view("department/list", $data);
+    }
+
+    function departmentAdd()
+    {
+        $post = $this->input->post();
+        if ($post) {
+            $result = $this->Department_model->departmentAdd($post);
+            if ($result){
+                echo "add success";
+            } else {
+                echo 'add fail';
+            }
+            exit();
+        }
+        $data = array(
+            'message' => "",
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 1)
+        );
+        $this->load->view('department/add', $data);
+    }
+
+    function departmentEdit($id)
+    {
+        $post = $this->input->post();
+        if ($post) {
+            $result = $this->Department_model->departmentEdit($id, $post);
+            if ($result) {
+                echo "edit success";
+            } else {
+                echo "edit fail";
+            }
+            exit();
+        }
+        $data = array(
+            'message' => "",
+            'id' => $id,
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "departments",
+            'permission' => $this->checkPermission("Departments", 2)
+        );
+        $this->load->view('department/edit', $data);
+    }
+
+    function departmentDelete($id)
+    {
+        $result = $this->Constant_model->setPublish($id, 'ics_department');
+        if (!$result)
+        {
+            echo "delete fail";
+            exit;
+        }
+        echo "Delete Success!";
+    }
+
 //------------------------------------------Position----------------------------------------------//
     function positionList()
     {
