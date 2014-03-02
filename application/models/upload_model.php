@@ -59,6 +59,46 @@ class Upload_model extends CI_Model
             }
             return $newName;
         }
+        return false;
+    }
+
+    function convertImageName($data = null, $imageName = "", $imagePatch = "'uploads/", $fileType = "image")
+    {
+
+        if ($data) {
+            //$data_image
+            //$imageName
+            //$fileType
+            //$imagePatch
+
+            $getFileType = explode(';', $data);
+            $getFileType = $getFileType[0];
+            $getFileType = explode('/', $getFileType);
+            $getFileType = $getFileType[1];
+
+            $fileName = @$imageName;
+            if (!empty($fileName)) {
+                $fileName = explode('\\', $fileName);
+                $fileName = $fileName[count($fileName) - 1];
+            } else {
+                $fileName = ".$getFileType";
+            }
+            $fileName = str_replace(' ', '_', $fileName);
+            $fileName = date("Ymd") . "-" . date('His') . "-$fileType-" . $fileName;
+            $newName = "$imagePatch$fileName";
+
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = str_replace(" ", '+', $data);
+            $data = base64_decode($data);
+
+            $result = file_put_contents($newName, $data);
+            if (!$result) {
+                return false;
+            }
+            return $newName;
+        }
+        return false;
     }
 
     function createFolder($path)

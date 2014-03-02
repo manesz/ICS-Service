@@ -42,7 +42,7 @@ class Issue extends CI_Controller
     {
         $post = $this->input->post();
         if ($post) {
-            $result = $this->Device_model->issueAdd($post);
+            $result = $this->Issue_model->issueAdd($post);
             if ($result){
                 echo "add success";
             } else {
@@ -61,7 +61,7 @@ class Issue extends CI_Controller
     {
         $post = $this->input->post();
         if ($post) {
-            $result = $this->Device_model->issueEdit($id, $post);
+            $result = $this->Issue_model->issueEdit($id, $post);
             if ($result) {
                 echo "edit success";
             } else {

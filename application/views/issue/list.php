@@ -55,11 +55,9 @@ $objData = $this->Issue_model->issueList();
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Model</th>
-                                            <th>Brand</th>
-                                            <th>Type</th>
-                                            <th>Date Sheet</th>
+                                            <th>Title</th>
+                                            <th>Status</th>
+                                            <th>Crate Time</th>
                                             <th>Update Time</th>
                                             <th>Edit</th>
                                         </tr>
@@ -70,11 +68,9 @@ $objData = $this->Issue_model->issueList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $value->id; ?></td>
-                                                <td><?php echo $value->name; ?></td>
-                                                <td><?php echo $value->model; ?></td>
-                                                <td><?php echo "$value->brand"; ?></td>
-                                                <td><?php echo $value->type; ?></td>
-                                                <td><?php echo $value->datesheet; ?></td>
+                                                <td><?php echo @$value->title; ?></td>
+                                                <td><?php echo @$value->status; ?></td>
+                                                <td><?php echo $value->create_datetime; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>

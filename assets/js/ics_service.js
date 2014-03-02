@@ -16,29 +16,33 @@ function userAuthen() {
         success: function (data) {
             $("#authenResult").html(data);
             enableID("btnSignIn");
+        }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
         }
+
     });//END: ajax
 }//END: userAuthen
 
 
 /*
-function signOut() {
-    alert("signOut");//DEBUG
-    var data = {
-        page: "signin",
-        action: "signOut"
-    }
-    $.ajax({
-        type: "POST",
-        url: "functions.php",
-        data: data,
-        success: function (data) {
-            $("#resultSignOut").html(data);
-        }
-    });
-}*/
+ function signOut() {
+ alert("signOut");//DEBUG
+ var data = {
+ page: "signin",
+ action: "signOut"
+ }
+ $.ajax({
+ type: "POST",
+ url: "functions.php",
+ data: data,
+ success: function (data) {
+ $("#resultSignOut").html(data);
+ }
+ });
+ }*/
 
 function postData(url, data, urlRedirect) {
+    showWaitImage();
     disableID("btnAdd");
     disableID("btnSave");
     disableID("btnCancel");
@@ -50,9 +54,11 @@ function postData(url, data, urlRedirect) {
             if (urlRedirect != "")
                 openUrl(urlRedirect);
         }
+//        alert(result);
         enableID("btnAdd");
         enableID("btnSave");
         enableID("btnCancel");
+        hideWaitImage();
     })
         .done(function () {
             //alert("second success");
@@ -62,6 +68,7 @@ function postData(url, data, urlRedirect) {
             enableID("btnAdd");
             enableID("btnSave");
             enableID("btnCancel");
+            hideWaitImage();
         })
         .always(function () {
             //alert("finished");
@@ -110,7 +117,7 @@ function innerHtml(id, href) {
     });
 }
 
-function openUrl(url) {
+function showWaitImage() {
     $(".wait").removeClass("hidden");
     $("body, html").animate({
             scrollTop: $("body").position().top
@@ -118,6 +125,14 @@ function openUrl(url) {
         100,
         function () {
         });
+}
+function hideWaitImage() {
+
+    $(".wait").addClass("hidden");
+}
+
+function openUrl(url) {
+    showWaitImage();
     setTimeout(redirectUrl(url), 1000);
     return false;
 }
@@ -219,6 +234,24 @@ function scrollTop() {
         });
 }
 
+function showHtmlFadeIn(id, focusID) {
+    var time = 800;
+    $(id).hide();
+    $(id).fadeIn(time, function () {
+        $(this).removeClass("hidden");
+        if (focusID != undefined) {
+            $(focusID).focus();
+        }
+    });
+}
+function showHtmlFadeOut(id) {
+    var time = 800;
+    $(id).fadeOut(time, function () {
+        $(this).addClass("hidden");
+    });
+
+}
+
 $(function () {
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");
@@ -232,8 +265,8 @@ $(function () {
     });
 
     $("#main").prepend(strWaitImage);
-    $("a").click(function(){
-        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0){
+    $("a").click(function () {
+        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0) {
             openUrl(this.href);
             return false;
         }

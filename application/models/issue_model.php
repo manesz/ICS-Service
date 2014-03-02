@@ -17,6 +17,9 @@ class Issue_model extends CI_Model
     }
 
     private $tableName = "ics_issue";
+    private $tableImageName = "ics_image";
+    private $tableMapImageName = "ics_map_image_issue";
+
     function issueList($id = 0, $type = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
@@ -40,27 +43,67 @@ class Issue_model extends CI_Model
     function issueAdd($post)
     {
         extract($post);
-
-        $imagePath = $this->Upload_model->uploadBase64($post);
-        if (!empty($imagePath)) {
-            $this->Upload_model->loadImage($imagePath);
-            $this->Upload_model->resizeToWidth(300);
-            $this->Upload_model->save($imagePath);
-        }
-
+        $memberID = @$this->session->userdata['id'];
+        $objMember = $this->Member_model->memberList($memberID);
+        $companyID = $objMember[0]->company_id;
         $data = array(
-            'name' => trim($name),
-            'model' => trim($model),
-            'brand' => trim($brand),
-            'type' => @$type,
-            'image' => @$imagePath,
-            'datesheet' => @$datesheet,
+            'title' => trim(@$title),
+            'description' => @$description,
+            'status' => "create",
+            'company_id' => @$companyID,
+            'member_id' => @$memberID,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
         $this->db->insert($this->tableName, $data);
-        return $id = $this->db->insert_id($this->tableName);
+        $issueID = $this->db->insert_id($this->tableName);
+        if (!$issueID) return false;
+
+        //Add Image
+        if (!empty($array_image)) {
+            foreach ($array_image as $value) {
+                $image_name = @$value[0];
+                $image_data = @$value[1];
+                $image_title = @$value[2];
+                $image_description = @$value[3];
+                $imagePath = $this->Upload_model->convertImageName($image_data, $image_name, @$imagePatch, @$fileType);
+                if ($imagePath) {
+                    $this->Upload_model->loadImage($imagePath);
+                    //$this->Upload_model->resizeToWidth(300);
+                    $this->Upload_model->save($imagePath);
+                } else {
+                    $imagePath = '';
+                }
+
+                //add table image
+                $data = array(
+                    'title' => trim($image_title),
+                    'description' => $image_description,
+                    'image' => $imagePath,
+                    'create_datetime' => date('Y-m-d H:i:s'),
+                    'update_datetime' => "0000-00-00 00:00:00",
+                    'publish' => 1,
+                );
+                $this->db->insert($this->tableImageName, $data);
+                $imageID = $this->db->insert_id($this->tableImageName);
+                if (!$imageID) return false;
+
+                //add table map
+                $data = array(
+                    'image_id' => $imageID,
+                    'issue_id' => $issueID,
+                    'create_datetime' => date('Y-m-d H:i:s'),
+                    'update_datetime' => "0000-00-00 00:00:00",
+                    'publish' => 1,
+                );
+                $this->db->insert($this->tableMapImageName, $data);
+                $mapID = $this->db->insert_id($this->tableMapImageName);
+                if (!$mapID) return false;
+            }
+
+        }
+        return $issueID;
     }
 
     function issueEdit($id, $post)
