@@ -20,9 +20,17 @@ class Issue_model extends CI_Model
     private $tableImageName = "ics_image";
     private $tableMapImageName = "ics_map_image_issue";
 
-    function issueList($id = 0, $type = "")
+    function issueList($id = 0)
     {
+        $memberID = @$this->session->userdata['id'];
+        $objMember = $this->Member_model->memberList($memberID);
+        $companyID = $objMember[0]->company_id;
+
         $strAnd = $id == 0 ? "" : " AND id = $id";
+        if ($companyID != 1) {
+            $strAnd .= " AND company_id = $companyID";
+        }
+
         $sql = "
             SELECT
               *
@@ -102,6 +110,8 @@ class Issue_model extends CI_Model
                 if (!$mapID) return false;
             }
 
+        }else {
+
         }
         return $issueID;
     }
@@ -131,5 +141,26 @@ class Issue_model extends CI_Model
         return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
-
+    function getImageByIssueID($issueID = 0) {
+        $strAnd = $issueID == 0?"" :" AND a.issue_id = $issueID ";
+        $sql = "
+            SELECT
+              b.*,
+              a.id AS map_id
+            FROM $this->tableMapImageName a
+            INNER JOIN $this->tableImageName b ON (
+              a.image_id = b.id AND b.publish = 1
+            )
+            WHERE 1
+            AND a.publish = 1
+            $strAnd
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            $result = $query->result();
+            return $result;
+        } else {
+            return (object)array();
+        }
+    }
 }

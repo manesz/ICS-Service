@@ -169,7 +169,7 @@ function removeImage(path) {
             },
             function (result) {
                 if (result == "delete fail") {
-                    alert('** เกิดข้อผิดพลาด');
+                    clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
                 } else {
                     $("#image_path").html("");
                     $("#groupBtn").show();

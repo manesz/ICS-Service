@@ -107,12 +107,12 @@ $this->load->view("sidebar_menu");
                                                     <div class="fileupload-preview fileupload-exists thumbnail"
                                                          style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                     <div>
-                                            <span id="groupBtn"
-                                                  class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
-                                                <span class="fileupload-new">Select image</span>
-                                                <span class="fileupload-exists">Change</span>
-                                                <input type="file" name='imagefile' id="imagefile"/>
-                                            </span>
+                                                        <span id="groupBtn"
+                                                              class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
+                                                            <span class="fileupload-new">Select image</span>
+                                                            <span class="fileupload-exists">Change</span>
+                                                            <input type="file" name='imagefile' id="imagefile"/>
+                                                        </span>
                                                         <?php if (file_exists(@$image)): ?>
                                                             <input type="button" id="btnDeleteImage"
                                                                    onclick="removeImage('<?php echo $image; ?>');"
