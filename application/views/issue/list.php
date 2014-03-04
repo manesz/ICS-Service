@@ -56,6 +56,8 @@ $objData = $this->Issue_model->issueList();
                                         <tr>
                                             <th>ID</th>
                                             <th>Title</th>
+                                            <th>Company_TH</th>
+                                            <th>Company_EN</th>
                                             <th>Status</th>
                                             <th>Crate Time</th>
                                             <th>Update Time</th>
@@ -69,6 +71,8 @@ $objData = $this->Issue_model->issueList();
                                             <tr>
                                                 <td class="center"><?php echo $value->id; ?></td>
                                                 <td><?php echo @$value->title; ?></td>
+                                                <td><?php echo @$value->name_th; ?></td>
+                                                <td><?php echo @$value->name_en; ?></td>
                                                 <td><?php echo @$value->status; ?></td>
                                                 <td><?php echo $value->create_datetime; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>

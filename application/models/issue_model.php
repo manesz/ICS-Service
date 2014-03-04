@@ -19,6 +19,7 @@ class Issue_model extends CI_Model
     private $tableName = "ics_issue";
     private $tableImageName = "ics_image";
     private $tableMapImageName = "ics_map_image_issue";
+    private $tableCompanyName = "ics_company";
 
     function issueList($id = 0)
     {
@@ -27,17 +28,22 @@ class Issue_model extends CI_Model
         $usernameLogin = @$this->session->userdata['username'];
         $companyID = $objMember[0]->company_id;
 
-        $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strAnd = $id == 0 ? "" : " AND a.id = $id";
         if ($usernameLogin != 'admin') {
-            $strAnd .= " AND company_id = $companyID";
+            $strAnd .= " AND a.company_id = $companyID";
         }
 
         $sql = "
             SELECT
-              *
-            FROM $this->tableName
+              a.*,
+              b.name_th,
+              b.name_en
+            FROM $this->tableName a
+            INNER JOIN $this->tableCompanyName b ON (
+              a.company_id = b.id AND b.publish = 1
+            )
             WHERE 1
-            AND publish = 1
+            AND a.publish = 1
             $strAnd
         ";
         $query = $this->db->query($sql);
