@@ -6,6 +6,54 @@ $id = @$this->session->userdata['id'];
 $arrMember = $this->Member_model->memberList($id);
 extract((array)$arrMember[0]);
 $objCheckModule = $this->Module_model->checkModuleByName();
+$checkShowISPOTMenu = false;
+$checkShowSettingMenu = false;
+$checkShowIssueMenu = false;
+foreach ($objCheckModule as $key => $value) {
+    $expResult = explode(',', $value->permission);
+    switch ($value->title) {
+        case "Company":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowISPOTMenu = true;
+            }
+            break;
+        case "Device":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowISPOTMenu = true;
+            }
+            break;
+        case "Users":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowSettingMenu = true;
+            }
+            break;
+        case "Departments":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowSettingMenu = true;
+            }
+            break;
+        case "Position":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowSettingMenu = true;
+            }
+            break;
+        case "Modules":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowSettingMenu = true;
+            }
+            break;
+        case "Log":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowSettingMenu = true;
+            }
+            break;
+        case "Issue":
+            if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
+                $checkShowIssueMenu = true;
+            }
+            break;
+    }
+}
 ?>
 <div id="navigation">
     <div class="container-fluid">
@@ -92,7 +140,7 @@ $objCheckModule = $this->Module_model->checkModuleByName();
             ?>
 
             <!-- #### Settings #### -->
-            <li class="<?php echo $selectMenu == "settings" ? "active" : ""; ?>">
+            <li class="<?php echo $selectMenu == "settings" ? "active" : ""; ?> <?php echo $checkShowSettingMenu ? "": 'hidden'; ?>">
                 <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Settings</span>
                     <span class="caret"></span>
@@ -107,6 +155,24 @@ $objCheckModule = $this->Module_model->checkModuleByName();
 
                                 <li><a href="<?php echo $webUrl; ?>member">Users</a></li>
 
+                            <?php endif; ?>
+                                <?php break; ?>
+                            <?php
+                            case "Departments":
+                                ?><?php if (@$expResult[0]):?>
+                                <li><a href="<?php echo $webUrl; ?>setting/departmentList">Departments</a></li>
+                            <?php endif; ?>
+                                <?php break; ?>
+                            <?php
+                            case "Position":
+                                ?><?php if (@$expResult[0]):?>
+                                <li><a href="<?php echo $webUrl; ?>setting/positionList">Position</a></li>
+                            <?php endif; ?>
+                                <?php break; ?>
+                            <?php
+                            case "Modules":
+                                ?><?php if (@$expResult[0]):?>
+                                <li><a href="<?php echo $webUrl; ?>setting">Modules</a></li>
                             <?php endif; ?>
                                 <?php break; ?>
                             <?php
@@ -127,7 +193,7 @@ $objCheckModule = $this->Module_model->checkModuleByName();
                     case "Issue":
                         ?>
                         <!-- #### Issue #### -->
-                        <li class="<?php echo $selectMenu == "Issue" ? "active" : ""; ?>">
+                        <li class="<?php echo $selectMenu == "Issue" ? "active" : ""; ?> <?php echo $checkShowIssueMenu ? "": 'hidden'; ?>">
                             <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
                                 <span>Issue</span>
                                 <span class="caret"></span>
