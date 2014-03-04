@@ -122,7 +122,6 @@ function showWaitImage() {
     //focusToDiv('main')
 }
 function hideWaitImage() {
-
     $(".wait").addClass("hidden");
 }
 
@@ -227,16 +226,16 @@ function clickNotifyError(message) {
 }
 
 function focusToDiv(id, focusID) {
-    if (id != undefined) {
-        if (id.indexOf('#') < 0 ) {
-            id = "#" + id;
-        }
-    }
-    if (focusID != undefined ){
-        if (focusID.indexOf('#') < 0 ){
-            focusID = "#" + focusID;
-        }
-    }
+//    if (id != undefined) {
+//        if (id.indexOf('#') < 0 ) {
+//            id = "#" + id;
+//        }
+//    }
+//    if (focusID != undefined ){
+//        if (focusID.indexOf('#') < 0 ){
+//            focusID = "#" + focusID;
+//        }
+//    }
     $('html, body').animate({ scrollTop: $(id).offset().top }, 'slow', function () {
         if (focusID != undefined) {
             $(focusID).focus();

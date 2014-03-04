@@ -7,6 +7,7 @@ $this->load->view("navigator_menu");
 
 $arrDepartment = $this->Department_model->departmentList();
 $arrPosition = $this->Position_model->positionList();
+$arrCompany = $this->Company_model->companyList();
 
 $objModule = $this->Module_model->moduleList();
 $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
@@ -408,11 +409,24 @@ $this->load->view("sidebar_menu");
                         </div>
                     </div>
                     <div class="control-group">
+                        <label for="company_id" class="control-label">Company</label>
+
+                        <div class="controls">
+                            <select name="company_id" id="company_id" data-rule-required="true">
+                                <option value=""></option>
+                                <?php foreach ($arrCompany as $key => $value): ?>
+                                    <option value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label for="department_id" class="control-label">Department</label>
 
                         <div class="controls">
                             <select name="department_id" id="department_id" data-rule-required="true">
                                 <option value=""></option>
+                                <option value="0">-</option>
                                 <?php foreach ($arrDepartment as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
                                 <?php endforeach; ?>
@@ -433,6 +447,7 @@ $this->load->view("sidebar_menu");
                         <div class="controls">
                             <select name="position_id" id="position_id" data-rule-required="true">
                                 <option value=""></option>
+                                <option value="0">-</option>
                                 <?php foreach ($arrPosition as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
                                 <?php endforeach; ?>
@@ -452,7 +467,7 @@ $this->load->view("sidebar_menu");
 
                         <div class="controls">
                             <input type="text" name="email" id="email" placeholder="Email"
-                                   class="input-xlarge" data-rule-email="true" data-rule-required="true">
+                                   class="input-xlarge" data-rule-required="true">
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,8 @@ $usernameLogin = @$this->session->userdata['username'];
 
 $arrDepartment = $this->Department_model->departmentList();
 $arrPosition = $this->Position_model->positionList();
+$arrCompany = $this->Company_model->companyList();
+
 $arrMember = $this->Member_model->memberList($id);
 extract((array)$arrMember[0]);
 
@@ -75,29 +77,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     enableID("btnSave1");
                 } else {
                     clickNotifyUpdate();
-                    <?php if($permissionUpdate || $usernameLogin == 'admin'):?>
-                    $("#btnSave1").hide();
-                    $("#btnCancel1").hide();
-                    if (confirm("บันทึกสำเร็จ ไปแท็บ Module Permission\nใช่ หรือไม่")) {
-                        $("#liPorfile").removeClass("active");
-                        $("#liModulePermission").addClass("active");
-
-                        $("#profile").removeClass("active");
-                        $("#module_permission").addClass("active");
-
-                        $("body, html").animate({
-                                scrollTop: $("body").position().top
-                            },
-                            100,
-                            function () {
-                            });
-                    } else {
-                        openUrl(url_list);
-                    }
-                    <?php else:?>
-
                     openUrl(url_list);
-                    <?php endif;?>
                 }
             }
         )
@@ -412,11 +392,25 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     </div>
                 </div>
                 <div class="control-group">
+                    <label for="company_id" class="control-label">Company</label>
+
+                    <div class="controls">
+                        <select name="company_id" id="company_id" data-rule-required="true">
+                            <option value=""></option>
+                            <?php foreach ($arrCompany as $key => $value): ?>
+                                <option value="<?php echo $value->id; ?>"
+                                    <?php echo @$company_id == $value->id ? 'selected' : '' ?>><?php echo $value->name_th; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label for="department_id" class="control-label">Department</label>
 
                     <div class="controls">
                         <select name="department_id" id="department_id" data-rule-required="true">
                             <option value=""></option>
+                            <option value="0">-</option>
                             <?php foreach ($arrDepartment as $key => $value): ?>
                                 <option value="<?php echo $value->id; ?>"
                                     <?php echo $department_id == $value->id ? 'selected' : '' ?>
@@ -439,6 +433,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     <div class="controls">
                         <select name="position_id" id="position_id" data-rule-required="true">
                             <option value=""></option>
+                            <option value="0">-</option>
                             <?php foreach ($arrPosition as $key => $value): ?>
                                 <option value="<?php echo $value->id; ?>"
                                     <?php echo $position_id == $value->id ? 'selected' : '' ?>><?php echo $value->title; ?></option>
@@ -460,7 +455,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     <div class="controls">
                         <input type="text" name="email" id="email" placeholder="Email"
                                class="input-xlarge" value="<?php echo $email; ?>"
-                               data-rule-email="true" data-rule-required="true">
+                                data-rule-required="true">
                     </div>
                 </div>
             </div>
