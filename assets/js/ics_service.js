@@ -284,7 +284,7 @@ $(function () {
 
     $("#main").prepend(strWaitImage);
     $("a").click(function () {
-        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0) {
+        if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0 && this.href != "") {
             openUrl(this.href);
             return false;
         }

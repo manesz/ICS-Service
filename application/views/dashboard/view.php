@@ -49,6 +49,7 @@ $this->load->view("navigator_menu");
     </div>
     <!-- END: ,breadcrumbs -->
 
+<?php if (@$permission): ?>
     <div class="row-fluid">
         <div class="span6-fluid">
             <div class="box">
@@ -69,7 +70,6 @@ $this->load->view("navigator_menu");
                         <a href="#new-task" data-toggle="modal" class='btn'><i class="icon-plus-sign"></i> Add Task</a>
                     </div>
                 </div>
-                <?php if (@$permission): ?>
                     <div class="box-content nopadding">
                         <ul class="tasklist">
                             <li class='bookmarked'>
@@ -154,10 +154,6 @@ $this->load->view("navigator_menu");
                             </li>
                         </ul>
                     </div>
-                <?php else:
-                    $this->load->view("permission_page");
-                endif;
-                ?>
             </div>
         </div>
     </div>
@@ -309,6 +305,10 @@ $this->load->view("navigator_menu");
     </div>
     </div>
     <!-- END: container-fluid -->
+    <?php else:
+        $this->load->view("permission_page");
+    endif;
+    ?>
     </div>
 
 
