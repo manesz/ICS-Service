@@ -136,11 +136,14 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
             imagePatch: 'uploads/member/',
             imageName: imageName
         });
+        showWaitImage();
         $.post(url_post_data, data,
             function (result) {
                 if (result == "add fail") {
                     clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+                    hideWaitImage();
                 } else {
+                    hideWaitImage();
                     <?php if(@$permissionUpdate):?>
                     clickNotifyUpdate();
                     memberID = result;
@@ -164,6 +167,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
             .fail(function () {
                 clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
                 enableID("btnFinish");
+                hideWaitImage();
             })
             .always(function () {
                 //alert("finished");
