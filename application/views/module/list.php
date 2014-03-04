@@ -53,54 +53,59 @@ $objData = $this->Module_model->moduleList();
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="box-content nopadding">
-                                <table
-                                    class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Create Datetime</th>
-                                        <th>Update Datetime</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <?php
-                                    foreach ($objData as $key => $value):
-                                        ?>
+                            <?php if (@$permission): ?>
+                                <div class="box-content nopadding">
+                                    <table
+                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td class="center"><?php echo $value->id; ?></td>
-                                            <td><?php echo $value->title; ?></td>
-                                            <td><?php echo $value->description; ?></td>
-                                            <td><?php echo "$value->create_datetime"; ?></td>
-                                            <td><?php echo $value->update_datetime; ?></td>
-                                            <td class="hidden-400">
-                                                <?php if (@$permissionUpdate): ?>
-                                                    <a href="<?php echo $webUrl; ?>setting/moduleEdit/<?php echo $value->id; ?>"
-                                                       class="btn link" rel="tooltip" title=""
-                                                       data-original-title="Edit"><i
-                                                            class="icon-edit"></i></a>
-                                                <?php endif; ?>
-                                                <?php if (@$permissionDelete): ?>
-                                                    <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
-                                                       data-original-title="Delete"
-                                                       onclick="urlDelete='<?php echo $webUrl; ?>setting/moduleDelete/<?php echo $value->id; ?>';"
-                                                       role="button" data-toggle="modal">
-                                                        <i class="icon-remove"></i>
-                                                    </a>
-                                                <?php endif; ?>
-                                            </td>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Create Datetime</th>
+                                            <th>Update Datetime</th>
+                                            <th>Edit</th>
                                         </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    <?php
-                                    endforeach;
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <?php
+                                        foreach ($objData as $key => $value):
+                                            ?>
+                                            <tr>
+                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td><?php echo $value->title; ?></td>
+                                                <td><?php echo $value->description; ?></td>
+                                                <td><?php echo "$value->create_datetime"; ?></td>
+                                                <td><?php echo $value->update_datetime; ?></td>
+                                                <td class="hidden-400">
+                                                    <?php if (@$permissionUpdate): ?>
+                                                        <a href="<?php echo $webUrl; ?>setting/moduleEdit/<?php echo $value->id; ?>"
+                                                           class="btn link" rel="tooltip" title=""
+                                                           data-original-title="Edit"><i
+                                                                class="icon-edit"></i></a>
+                                                    <?php endif; ?>
+                                                    <?php if (@$permissionDelete): ?>
+                                                        <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                                                           data-original-title="Delete"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>setting/moduleDelete/<?php echo $value->id; ?>';"
+                                                           role="button" data-toggle="modal">
+                                                            <i class="icon-remove"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else:
+                                $this->load->view("permission_page");
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>

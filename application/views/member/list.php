@@ -52,58 +52,63 @@ $objData = $this->Member_model->memberList();
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="box-content nopadding">
-                                <table
-                                    class="table table-hover  dataTable dataTable-tools table-bordered dataTable-scroll-x"
-                                    id="">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Name</th>
-                                        <th>Telephone</th>
-                                        <th>Mobile</th>
-                                        <th>Email</th>
-                                        <th>Update Time</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    foreach ($objData as $key => $value):
-                                        ?>
+                            <?php if (@$permission): ?>
+                                <div class="box-content nopadding">
+                                    <table
+                                        class="table table-hover  dataTable dataTable-tools table-bordered dataTable-scroll-x"
+                                        id="">
+                                        <thead>
                                         <tr>
-                                            <td class="center"><?php echo $value->id; ?></td>
-                                            <td><?php echo $value->username; ?></td>
-                                            <td><?php echo @"$value->prefix$value->firstname $value->lastname"; ?></td>
-                                            <td><?php echo $value->phone; ?></td>
-                                            <td><?php echo "$value->mobile"; ?></td>
-                                            <td><?php echo $value->email; ?></td>
-                                            <td><?php echo $value->update_datetime; ?></td>
-                                            <td class="hidden-400">
-                                                <?php if (@$permissionUpdate): ?>
-                                                    <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $value->id; ?>"
-                                                       class="btn link" rel="tooltip" title=""
-                                                       data-original-title="Edit"><i
-                                                            class="icon-edit"></i></a>
-                                                <?php endif; ?>
-                                                <?php if (@$permissionDelete): ?>
-                                                    <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
-                                                       data-original-title="Delete"
-                                                       onclick="urlDelete='<?php echo $webUrl; ?>member/memberDelete/<?php echo $value->id; ?>?type=1';"
-                                                       role="button" data-toggle="modal">
-                                                        <i class="icon-remove"></i>
-                                                    </a>
-                                                <?php endif; ?>
-                                            </td>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Name</th>
+                                            <th>Telephone</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>Update Time</th>
+                                            <th>Edit</th>
                                         </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach ($objData as $key => $value):
+                                            ?>
+                                            <tr>
+                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td><?php echo $value->username; ?></td>
+                                                <td><?php echo @"$value->prefix$value->firstname $value->lastname"; ?></td>
+                                                <td><?php echo $value->phone; ?></td>
+                                                <td><?php echo "$value->mobile"; ?></td>
+                                                <td><?php echo $value->email; ?></td>
+                                                <td><?php echo $value->update_datetime; ?></td>
+                                                <td class="hidden-400">
+                                                    <?php if (@$permissionUpdate): ?>
+                                                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $value->id; ?>"
+                                                           class="btn link" rel="tooltip" title=""
+                                                           data-original-title="Edit"><i
+                                                                class="icon-edit"></i></a>
+                                                    <?php endif; ?>
+                                                    <?php if (@$permissionDelete): ?>
+                                                        <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                                                           data-original-title="Delete"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>member/memberDelete/<?php echo $value->id; ?>?type=1';"
+                                                           role="button" data-toggle="modal">
+                                                            <i class="icon-remove"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
 
-                                    <?php
-                                    endforeach;
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else:
+                                $this->load->view("permission_page");
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
