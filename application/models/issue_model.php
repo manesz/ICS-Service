@@ -29,7 +29,7 @@ class Issue_model extends CI_Model
         $companyID = $objMember[0]->company_id;
 
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
-        if ($usernameLogin != 'admin') {
+        if ($usernameLogin != 'admin' && $companyID != 1) {
             $strAnd .= " AND a.company_id = $companyID";
         }
 
