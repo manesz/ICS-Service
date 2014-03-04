@@ -410,7 +410,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     <div class="controls">
                         <select name="department_id" id="department_id" data-rule-required="true">
                             <option value=""></option>
-                            <option value="0">-</option>
+                            <option value="0" <?php echo $department_id == 0 ? 'selected' : '' ?>>-</option>
                             <?php foreach ($arrDepartment as $key => $value): ?>
                                 <option value="<?php echo $value->id; ?>"
                                     <?php echo $department_id == $value->id ? 'selected' : '' ?>
@@ -433,7 +433,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     <div class="controls">
                         <select name="position_id" id="position_id" data-rule-required="true">
                             <option value=""></option>
-                            <option value="0">-</option>
+                            <option value="0" <?php echo $position_id == 0 ? 'selected' : '' ?>>-</option>
                             <?php foreach ($arrPosition as $key => $value): ?>
                                 <option value="<?php echo $value->id; ?>"
                                     <?php echo $position_id == $value->id ? 'selected' : '' ?>><?php echo $value->title; ?></option>
