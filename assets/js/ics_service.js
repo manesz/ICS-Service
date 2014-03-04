@@ -119,12 +119,7 @@ function innerHtml(id, href) {
 
 function showWaitImage() {
     $(".wait").removeClass("hidden");
-    $("body, html").animate({
-            scrollTop: $("body").position().top
-        },
-        100,
-        function () {
-        });
+    //focusToDiv('main')
 }
 function hideWaitImage() {
 
@@ -133,7 +128,10 @@ function hideWaitImage() {
 
 function openUrl(url) {
     showWaitImage();
-    setTimeout(redirectUrl(url), 1000);
+//    setTimeout(redirectUrl(url), 1000);
+    $('html, body').animate({ scrollTop: $("body").offset().top }, 'slow', function () {
+        redirectUrl(url)
+    });
     return false;
 }
 
@@ -218,11 +216,32 @@ function clickNotifyUpdate() {
 
 }
 function clickNotifyError(message) {
+    if (message == undefined) {
+        message = 'เกิดข้อผิดพลาด กรุณาลองใหม่';
+    }
     $("#btnNotifyError").attr('data-notify-message', message);
     $("#btnNotifyError").click();
     $(".gritter-with-image").addClass("gritter-without-image");
     $(".gritter-without-image").removeClass("gritter-with-image");
     $(".gritter-item img").remove();
+}
+
+function focusToDiv(id, focusID) {
+    if (id != undefined) {
+        if (id.indexOf('#') < 0 ) {
+            id = "#" + id;
+        }
+    }
+    if (focusID != undefined ){
+        if (focusID.indexOf('#') < 0 ){
+            focusID = "#" + focusID;
+        }
+    }
+    $('html, body').animate({ scrollTop: $(id).offset().top }, 'slow', function () {
+        if (focusID != undefined) {
+            $(focusID).focus();
+        }
+    });
 }
 
 function scrollTop() {
@@ -240,7 +259,7 @@ function showHtmlFadeIn(id, focusID) {
     $(id).fadeIn(time, function () {
         $(this).removeClass("hidden");
         if (focusID != undefined) {
-            $(focusID).focus();
+            focusToDiv(id, focusID);
         }
     });
 }

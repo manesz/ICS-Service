@@ -14,6 +14,7 @@ extract((array)$objIssue[0]);
         var url_post_data = "<?php echo $webUrl; ?>issue/issueEdit/<?php echo @$id; ?>";
         var url_list = "<?php echo $webUrl; ?>issue";
         var countImage = <?php echo count((array)$objImage);?>;
+        var issue_page = 'edit';
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -100,7 +101,7 @@ $this->load->view("sidebar_menu");
 
                             <div class="actions">
                                 <a href="#" id="btnRemoveImage_-0"
-                                   onclick="return removeBox(this.id);"
+                                   onclick="return removeBox(this);"
                                    class="btn btn-mini"><i class="icon-remove"></i></a>
                             </div>
                         </div>
@@ -112,6 +113,7 @@ $this->load->view("sidebar_menu");
                                     <div class="controls">
                                         <div class="fileupload fileupload-new" id="image_-0"
                                              data-provides="fileupload">
+                                            <input class="oldID" type="hidden" value="0">
                                             <div class="fileupload-new thumbnail"
                                                  style="width: 200px; height: 150px;">
                                                 <img
@@ -120,7 +122,6 @@ $this->load->view("sidebar_menu");
                                             <div id="image_preview_-0"
                                                  class="fileupload-preview fileupload-exists thumbnail"
                                                  style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                                                <input type="hidden" value="0">
                                                  </div>
                                             <div>
                                                 <span class="btn btn-file">
@@ -171,8 +172,8 @@ $this->load->view("sidebar_menu");
                                 </h3>
                                 <?php if ($key): ?>
                                     <div class="actions">
-                                        <a href="#" id="btnRemoveImage_-<?php echo $key + 1; ?>"
-                                           onclick="return removeBox(this.id);"
+                                        <a href="#<?php echo $value->id; ?>" id="btnRemoveImage_-<?php echo $key + 1; ?>"
+                                           onclick="return removeBox(this);"
                                            class="btn btn-mini"><i class="icon-remove"></i></a>
                                     </div>
                                 <?php endif; ?>
@@ -187,6 +188,7 @@ $this->load->view("sidebar_menu");
                                             <div class="fileupload fileupload-new"
                                                  id="image_-<?php echo $key + 1; ?>"
                                                  data-provides="fileupload">
+                                                <input class="oldID" type="hidden" value="<?php echo $value->id; ?>">
                                                 <div id="imgThumbnail_-<?php echo $key + 1; ?>"
                                                      class="fileupload-new thumbnail"
                                                      style="width: 200px; height: 150px;">
@@ -198,7 +200,6 @@ $this->load->view("sidebar_menu");
                                                 <div id="image_preview_-<?php echo $key + 1; ?>"
                                                      class="fileupload-preview fileupload-exists thumbnail"
                                                      style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                                                    <input type="hidden" value="<?php echo $value->id; ?>">
                                                 </div>
                                                 <div>
                                                     <span id="groupBtn_-<?php echo $key + 1; ?>"

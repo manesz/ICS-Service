@@ -11,6 +11,7 @@ $this->load->view("navigator_menu");
         var url_post_data = "<?php echo $webUrl; ?>issue/issueAdd";
         var url_list = "<?php echo $webUrl; ?>issue";
         var countImage = 0;
+        var issue_page = 'add';
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -95,7 +96,7 @@ $this->load->view("sidebar_menu");
 
                                                 <div class="actions">
                                                     <a href="#" id="btnRemoveImage_-0"
-                                                       onclick="return removeBox(this.id);"
+                                                       onclick="return removeBox(this);"
                                                        class="btn btn-mini"><i class="icon-remove"></i></a>
                                                 </div>
                                             </div>
@@ -107,6 +108,7 @@ $this->load->view("sidebar_menu");
                                                         <div class="controls">
                                                             <div class="fileupload fileupload-new" id="image_-0"
                                                                  data-provides="fileupload">
+                                                                <input class="oldID" type="hidden" value="0"></div>
                                                                 <div class="fileupload-new thumbnail"
                                                                      style="width: 200px; height: 150px;">
                                                                     <img
@@ -115,7 +117,6 @@ $this->load->view("sidebar_menu");
                                                                 <div id="image_preview_-0"
                                                                      class="fileupload-preview fileupload-exists thumbnail"
                                                                      style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                                                                    <input type="hidden" value="0"></div>
                                                                 <div>
                                                                     <span class="btn btn-file">
                                                                         <span class="fileupload-new">Select image</span>

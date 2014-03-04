@@ -18,6 +18,7 @@ class Issue extends CI_Controller
         //check สถานะ login
         $this->Authentication_model->checkSignIn();
     }
+
     private $selectMenu = "Issue";
     private $moduleName = "Issue";
 
@@ -43,7 +44,7 @@ class Issue extends CI_Controller
         $post = $this->input->post();
         if ($post) {
             $result = $this->Issue_model->issueAdd($post);
-            if ($result){
+            if ($result) {
                 echo "add success";
             } else {
                 echo 'add fail';
@@ -80,11 +81,22 @@ class Issue extends CI_Controller
     function issueDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, "ics_issue");
-        if (!$result)
-        {
+        if (!$result) {
             echo "delete fail";
             exit;
         }
         echo "Delete Success!";
+    }
+
+    function deleteImage($id)
+    {
+        if ($id) {
+            $result = $this->Issue_model->removeImage($id);
+            if ($result) {
+                echo "delete success";
+                exit;
+            }
+        }
+        echo "delete fail";
     }
 }
