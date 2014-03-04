@@ -24,10 +24,11 @@ class Issue_model extends CI_Model
     {
         $memberID = @$this->session->userdata['id'];
         $objMember = $this->Member_model->memberList($memberID);
+        $usernameLogin = @$this->session->userdata['username'];
         $companyID = $objMember[0]->company_id;
 
         $strAnd = $id == 0 ? "" : " AND id = $id";
-        if ($companyID != 1) {
+        if ($usernameLogin != 'admin') {
             $strAnd .= " AND company_id = $companyID";
         }
 
