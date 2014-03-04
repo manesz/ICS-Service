@@ -108,7 +108,7 @@ $this->load->view("sidebar_menu");
                                                         <div class="controls">
                                                             <div class="fileupload fileupload-new" id="image_-0"
                                                                  data-provides="fileupload">
-                                                                <input class="oldID" type="hidden" value="0"></div>
+                                                                <input class="oldID" type="hidden" value="0">
                                                                 <div class="fileupload-new thumbnail"
                                                                      style="width: 200px; height: 150px;">
                                                                     <img
@@ -117,12 +117,14 @@ $this->load->view("sidebar_menu");
                                                                 <div id="image_preview_-0"
                                                                      class="fileupload-preview fileupload-exists thumbnail"
                                                                      style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                                                                </div>
                                                                 <div>
-                                                                    <span class="btn btn-file">
-                                                                        <span class="fileupload-new">Select image</span>
-                                                                        <span class="fileupload-exists">Change</span>
-                                                                        <input type="file" id="imagefile_-0" name='imagefile_-0'/>
-                                                                    </span>
+                                                <span class="btn btn-file">
+                                                    <span class="fileupload-new">Select image</span>
+                                                    <span class="fileupload-exists">Change</span>
+                                                    <input type="file" id="imagefile_-0"
+                                                           name='imagefile_-0'/>
+                                                </span>
                                                                     <a href="#" class="btn fileupload-exists"
                                                                        data-dismiss="fileupload">Remove</a>
                                                                 </div>
