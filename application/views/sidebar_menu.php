@@ -69,8 +69,7 @@ foreach ($objCheckModule as $key => $value) :
             <!-- #### Dashboard #### -->
             <div class="subnav subnav-hidden">
                 <div class="subnav-title">
-                    <a href="<?php echo $webUrl; ?>dashboard" class='toggle-subnav'><i
-                            class=""></i><span>Dashboard</span></a>
+                    <a href="<?php echo $webUrl; ?>dashboard" class='toggle-subnav'><span>Dashboard</span></a>
                 </div>
             </div>
         <?php endif; ?>
@@ -251,7 +250,7 @@ endforeach;
 <!-- #### Issue #### -->
 <div class="subnav subnav-hidden">
     <div class="subnav-title <?php echo $checkShowIssueMenu ? "": 'hidden'; ?>">
-        <a href="#" class='toggle-subnav'><span>Issue</span></a>
+        <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Issue</span></a>
     </div>
     <ul class="subnav-menu">
         <li class=''>
@@ -262,6 +261,7 @@ endforeach;
         </li>
     </ul>
 </div>
+
 <!-- #### Singout #### -->
 <div class="subnav subnav-hidden">
     <div class="subnav-title">

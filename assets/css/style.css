@@ -4572,7 +4572,7 @@ label, input, button, select, textarea {
 }
 
 #left .subnav .subnav-menu>li.dropdown.open .dropdown-menu {
-    left: 100%;
+    left: 99%;
     top: 0;
     border-color: #aaa;
     border-left: 0;
