@@ -76,15 +76,21 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                 imagePatch: 'uploads/member/',
                 imageName: imageName
             });
+            showWaitImage();
             $.post(url_post_data, data,
                 function (result) {
                     if (result == "edit fail") {
                         clickNotifyError('เกิดข้อผิดพลาด**');
                         enableID("btnSave1");
+                        hideWaitImage();
                     } else {
                         clickNotifyUpdate();
                         enableID("btnSave1");
+                        <?php if (@$id == $memberId):?>
                         openUrl(window.location.href);
+                        <?php else: ?>
+                        openUrl(url_list);
+                        <?php endif;?>
                     }
                 }
             )
@@ -93,6 +99,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                 })
                 .fail(function () {
                     clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+                    hideWaitImage();
                 })
                 .always(function () {
                     //alert("finished");
@@ -312,14 +319,14 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <label for="textfield" class="control-label">Username</label>
 
             <div class="controls">
-                <?php if ($checkEditUser):?>
-                <div class="input-append">
-                    <input type="text" id="username" name="username" autocomplete="off"
-                           value="<?php echo $username; ?>">
-                    <a href="javascript:checkUsername();" class="btn add-on"><i class="icon-refresh"></i></a>
+                <?php if ($checkEditUser): ?>
+                    <div class="input-append">
+                        <input type="text" id="username" name="username" autocomplete="off"
+                               value="<?php echo $username; ?>">
+                        <a href="javascript:checkUsername();" class="btn add-on"><i class="icon-refresh"></i></a>
 
-                </div>
-                        <span class="help-block">
+                    </div>
+                    <span class="help-block">
                             Please enter a username
                         </span>
                 <?php else : ?>
@@ -407,7 +414,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <label for="company_id" class="control-label">Company</label>
 
             <div class="controls">
-                <?php if ($checkEditUser):?>
+                <?php if ($checkEditUser): ?>
                     <select name="company_id" id="company_id" data-rule-required="true">
                         <option value=""></option>
                         <?php foreach ($arrCompany as $key => $value): ?>
@@ -415,9 +422,9 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                                 <?php echo @$company_id == $value->id ? 'selected' : '' ?>><?php echo $value->name_th; ?></option>
                         <?php endforeach; ?>
                     </select>
-                <?php else:?>
+                <?php else: ?>
                     <?php foreach ($arrCompany as $key => $value): ?>
-                    <?php echo @$company_id == $value->id ?$value->name_th:""; ?>
+                        <?php echo @$company_id == $value->id ? $value->name_th : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
@@ -426,7 +433,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <label for="department_id" class="control-label">Department</label>
 
             <div class="controls">
-                <?php if ($checkEditUser):?>
+                <?php if ($checkEditUser): ?>
                     <select name="department_id" id="department_id" data-rule-required="true">
                         <option value=""></option>
                         <option value="0" <?php echo $department_id == 0 ? 'selected' : '' ?>>-</option>
@@ -436,10 +443,10 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                                 ><?php echo $value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
-                <?php else:?>
+                <?php else: ?>
                     <?php echo $department_id == 0 ? '-' : '' ?>
                     <?php foreach ($arrDepartment as $key => $value): ?>
-                        <?php echo @$department_id == $value->id ?$value->name_th:""; ?>
+                        <?php echo @$department_id == $value->id ? $value->name_th : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
@@ -456,7 +463,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <label for="position_id" class="control-label">Position</label>
 
             <div class="controls">
-                <?php if ($checkEditUser):?>
+                <?php if ($checkEditUser): ?>
                     <select name="position_id" id="position_id" data-rule-required="true">
                         <option value=""></option>
                         <option value="0" <?php echo $position_id == 0 ? 'selected' : '' ?>>-</option>
@@ -465,10 +472,10 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                                 <?php echo $position_id == $value->id ? 'selected' : '' ?>><?php echo $value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
-                <?php else:?>
+                <?php else: ?>
                     <?php echo @$position_id == 0 ? '-' : '' ?>
                     <?php foreach ($arrPosition as $key => $value): ?>
-                        <?php echo @$position_id == $value->id ?$value->name_th:""; ?>
+                        <?php echo @$position_id == $value->id ? $value->name_th : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
