@@ -9525,8 +9525,26 @@ a:focus {
 .wait {
     background-image: url("../img/loading.gif");
     width: 150px;
-    height: 50px;
+    height: 5px;
     background-repeat:repeat-x;
     background-size: 50px 5px;
     margin: 0 auto;
+}
+
+.wait-ontop {
+    background-image: url("../img/loading.gif");
+    background-repeat:no-repeat;
+    background-size: 40px 5px;
+    background-position: 50%;
+    /*width: 150px;*/
+    height: 5px;
+    margin: 0 auto;
+
+    background-color: #fff;
+    position:fixed !important;
+    /*top:0;*/
+    width:100%;
+    z-index:100;
+
+
 }

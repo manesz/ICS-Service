@@ -1,5 +1,6 @@
 var urlDelete = "";
 var strWaitImage = "<div class='wait hidden'></div>";
+var strWaitImageOnTop = "<div class='wait-ontop hidden'></div>";
 
 //function list
 function userAuthen() {
@@ -125,16 +126,25 @@ function hideWaitImage() {
     $(".wait").addClass("hidden");
 }
 
+function showWaitImageOnTop() {
+    $(".wait-ontop").removeClass("hidden");
+    //focusToDiv('main')
+}
+function hideWaitImageOnTop() {
+    $(".wait-ontop").addClass("hidden");
+}
+
 function openUrl(url) {
-    showWaitImage();
+    showWaitImageOnTop();
 //    setTimeout(redirectUrl(url), 1000);
-    $('html, body').animate({ scrollTop: $("body").offset().top }, 'slow', function () {
-        redirectUrl(url)
-    });
+    //$('html, body').animate({ scrollTop: $("body").offset().top }, 'slow', function () {
+        redirectUrl(url);
+    //});
     return false;
 }
 
 function redirectUrl(url) {
+    showWaitImageOnTop();
     window.location.href = url;
 }
 
@@ -282,7 +292,7 @@ $(function () {
         return false;
     });
 
-    $("#main").prepend(strWaitImage);
+    $("#navigation").prepend(strWaitImageOnTop);
     $("a").click(function () {
         if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0 && this.href != "") {
             openUrl(this.href);
