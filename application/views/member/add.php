@@ -14,7 +14,7 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
 ?>
 
     <script>
-    var url_post_data = "<?php echo $webUrl; ?>member/memberAdd";
+    var url_post_data = "<?php echo $webUrl; ?>member/add";
     var url_list = "<?php echo $webUrl; ?>member";
     var url_edit_module = "<?php echo $webUrl; ?>member/memberSetModule/";
     var url_check_duplicate = "<?php echo $webUrl; ?>member/memberCheckDuplicate/";
@@ -271,7 +271,7 @@ $this->load->view("sidebar_menu");
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a class="link" href="#">New Member</a>
+                <a class="link" href="<?php echo $webUrl; ?>member/add">New Member</a>
             </li>
         </ul>
         <div class="close-bread">

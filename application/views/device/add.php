@@ -8,7 +8,7 @@ $this->load->view("navigator_menu");
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>device/deviceAdd";
+        var url_post_data = "<?php echo $webUrl; ?>device/add";
         var url_list = "<?php echo $webUrl; ?>device";
         $(document).ready(function () {
             $('#btnCancel').click(function () {

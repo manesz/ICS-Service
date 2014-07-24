@@ -8,7 +8,7 @@ $this->load->view("navigator_menu");
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>company/companyAdd";
+        var url_post_data = "<?php echo $webUrl; ?>company/add";
         var url_list = "<?php echo $webUrl; ?>company";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -63,7 +63,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="" href="#">New Company</a>
+                        <a class="" href="<?php echo $webUrl; ?>company/add">New Company</a>
                     </li>
                 </ul>
                 <div class="close-bread">

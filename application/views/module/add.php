@@ -7,8 +7,8 @@ $this->load->view("navigator_menu");
 
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>setting/moduleAdd";
-        var url_list = "<?php echo $webUrl; ?>setting";
+        var url_post_data = "<?php echo $webUrl; ?>module/add";
+        var url_list = "<?php echo $webUrl; ?>module";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -42,15 +42,15 @@ $this->load->view("sidebar_menu");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>setting">Module</a>
+                        <a href="<?php echo $webUrl; ?>module">Module</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">New Module</a>
+                        <a href="<?php echo $webUrl; ?>module/add">New Module</a>
                     </li>
                 </ul>
                 <div class="close-bread">

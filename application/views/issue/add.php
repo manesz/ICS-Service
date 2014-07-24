@@ -8,7 +8,7 @@ $this->load->view("navigator_menu");
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>issue/issueAdd";
+        var url_post_data = "<?php echo $webUrl; ?>issue/add";
         var url_list = "<?php echo $webUrl; ?>issue";
         var countImage = 0;
         var issue_page = 'add';
@@ -43,7 +43,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">New Issue</a>
+                        <a class="link" href="<?php echo $webUrl; ?>issue/add">New Issue</a>
                     </li>
                 </ul>
                 <div class="close-bread">

@@ -7,10 +7,10 @@ $baseUrl = base_url();
 
 $arrDevice = $this->Device_model->deviceList($id);
 extract((array)$arrDevice[0]);
+$pathFileManager = "uploads/device/files/$id";
 ?>
     <script>
-
-        var url_post_data = "<?php echo $webUrl; ?>device/deviceEdit/<?php echo @$id; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>device/edit/<?php echo @$id; ?>";
         var url_list = "<?php echo $webUrl; ?>device";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -88,7 +88,7 @@ $this->load->view("sidebar_menu");
                                       class='form-horizontal form-column form-bordered form-validate'
                                       id="formPost" name="formPost">
 
-                                    <div class="span6">
+                                    <div class="span12">
                                         <div class="control-group">
                                             <input type="hidden" id="image_path" name="image_path"
                                                    value="<?php echo !file_exists(@$image) ? "" : $image; ?>"/>
@@ -125,15 +125,12 @@ $this->load->view("sidebar_menu");
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--END:span6 -->
-                                    <div class="span6">
                                         <div class="control-group">
                                             <label for="name" class="control-label">Name :</label>
 
                                             <div class="controls">
                                                 <input type="text" name="name" id="name" placeholder="Name"
-                                                       class="input-block-level" data-rule-required="true"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$name; ?>">
                                             </div>
                                         </div>
@@ -142,7 +139,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="model" id="model" placeholder="Model"
-                                                       class="input-block-level" value="<?php echo @$model; ?>"
+                                                       class="input-xlarge" value="<?php echo @$model; ?>"
                                                        data-rule-required="true">
                                             </div>
                                         </div>
@@ -151,7 +148,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="brand" id="brand" placeholder="Brand"
-                                                       class="input-block-level" data-rule-required="true"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$brand; ?>">
                                             </div>
                                         </div>
@@ -160,7 +157,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="type" id="type" placeholder="Type"
-                                                       class="input-block-level" data-rule-required="true"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$type; ?>">
                                             </div>
                                         </div>
@@ -170,8 +167,19 @@ $this->load->view("sidebar_menu");
                                             <div class="controls">
                                                 <input type="text" name="datesheet" id="datesheet"
                                                        placeholder="Date input"
-                                                       class="input-block-level datepick" data-rule-required="true"
+                                                       class="input-xlarge datepick" data-rule-required="true"
                                                        data-rule-dateiso="true" value="<?php echo @$datesheet; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="box">
+                                                <div class="box-title">
+                                                    <h3><i class="icon-th"></i> Upload Image</h3>
+                                                </div>
+                                                <div class="box-content nopadding">
+                                                    <div class="file-manager" id="status_deliverd"
+                                                         data="<?php echo "$pathFileManager/status_deliverd"; ?>"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

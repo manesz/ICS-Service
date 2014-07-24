@@ -90,7 +90,7 @@ foreach ($objCheckModule as $key => $value) {
                                     <li><a href="<?php echo $webUrl; ?>company">List</a></li>
                                 <?php endif; ?>
                                 <?php if (@$expResult[1]): ?>
-                                    <li><a href="<?php echo $webUrl; ?>company/companyAdd">Add new</a></li>
+                                    <li><a href="<?php echo $webUrl; ?>company/add">Add new</a></li>
                                 <?php endif; ?>
                                 <?php if (@$expResult[4]): ?>
                                     <li><a href="#">Report-1</a></li>
@@ -119,7 +119,7 @@ foreach ($objCheckModule as $key => $value) {
                                     <li><a href="<?php echo $webUrl; ?>device">List</a></li>
                                 <?php endif; ?>
                                 <?php if (@$expResult[1]): ?>
-                                    <li><a href="<?php echo $webUrl; ?>device/deviceAdd">Add new</a></li>
+                                    <li><a href="<?php echo $webUrl; ?>device/add">Add new</a></li>
                                 <?php endif; ?>
                                 <?php if (@$expResult[4]): ?>
                                     <li><a href="#">Report-1</a></li>
@@ -160,19 +160,19 @@ foreach ($objCheckModule as $key => $value) {
                             <?php
                             case "Departments":
                                 ?><?php if (@$expResult[0]):?>
-                                <li><a href="<?php echo $webUrl; ?>setting/departmentList">Departments</a></li>
+                                <li><a href="<?php echo $webUrl; ?>department">Departments</a></li>
                             <?php endif; ?>
                                 <?php break; ?>
                             <?php
                             case "Position":
                                 ?><?php if (@$expResult[0]):?>
-                                <li><a href="<?php echo $webUrl; ?>setting/positionList">Position</a></li>
+                                <li><a href="<?php echo $webUrl; ?>position">Position</a></li>
                             <?php endif; ?>
                                 <?php break; ?>
                             <?php
                             case "Modules":
                                 ?><?php if (@$expResult[0]):?>
-                                <li><a href="<?php echo $webUrl; ?>setting">Modules</a></li>
+                                <li><a href="<?php echo $webUrl; ?>module">Modules</a></li>
                             <?php endif; ?>
                                 <?php break; ?>
                             <?php
@@ -237,7 +237,7 @@ foreach ($objCheckModule as $key => $value) {
                 </a>
                 <ul class="dropdown-menu pull-right">
                     <li>
-                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>">Edit
+                        <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>">Edit
                             profile</a>
                     </li>
                     <li>

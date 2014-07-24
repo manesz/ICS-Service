@@ -10,8 +10,8 @@ $arrData = (array)$arrData[0];
 extract($arrData);
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>setting/moduleEdit/<?php echo $id; ?>";
-        var url_list = "<?php echo $webUrl; ?>setting";
+        var url_post_data = "<?php echo $webUrl; ?>module/edit/<?php echo $id; ?>";
+        var url_list = "<?php echo $webUrl; ?>module";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -45,15 +45,15 @@ $this->load->view("sidebar_menu");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>setting">Module</a>
+                        <a href="<?php echo $webUrl; ?>module">Module</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">Edit Module</a>
+                        <a href="<?php echo $webUrl; ?>module/edit/<?php echo $id; ?>">Edit Module</a>
                     </li>
                 </ul>
                 <div class="close-bread">

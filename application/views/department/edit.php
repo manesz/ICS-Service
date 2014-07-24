@@ -10,8 +10,8 @@ $arrData = (array)$arrData[0];
 extract($arrData);
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>setting/departmentEdit/<?php echo $id; ?>";
-        var url_list = "<?php echo $webUrl; ?>setting/departmentList";
+        var url_post_data = "<?php echo $webUrl; ?>department/edit/<?php echo $id; ?>";
+        var url_list = "<?php echo $webUrl; ?>department";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -49,11 +49,11 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>setting/departmentList">Department</a>
+                        <a class="link" href="<?php echo $webUrl; ?>department">Department</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">Edit Department</a>
+                        <a class="link" href="<?php echo $webUrl; ?>department/edit/<?php echo $id; ?>">Edit Department</a>
                     </li>
                 </ul>
                 <div class="close-bread">

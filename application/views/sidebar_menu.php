@@ -97,7 +97,7 @@ endforeach;
                                 <li><a href="<?php echo $webUrl; ?>company">List</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>company/companyAdd">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>company/add">Add new</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[4]): ?>
                                 <li><a href="#">Report-1</a></li>
@@ -125,7 +125,7 @@ endforeach;
                                 <li><a href="<?php echo $webUrl; ?>device">List</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>device/deviceAdd">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>device/add">Add new</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[4]): ?>
                                 <li><a href="#">Report-1</a></li>
@@ -166,7 +166,7 @@ endforeach;
                                 <li><a href="<?php echo $webUrl; ?>member">List</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>member/memberAdd">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>member/add">Add new</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -181,11 +181,11 @@ endforeach;
                         <a href="#" data-toggle="dropdown">Departments</a>
                         <ul class="dropdown-menu">
                             <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting/departmentList">List</a>
+                                <li><a href="<?php echo $webUrl; ?>department">List</a>
                                 </li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting/departmentAdd">Add new</a>
+                                <li><a href="<?php echo $webUrl; ?>department/add">Add new</a>
                                 </li>
                             <?php endif; ?>
                         </ul>
@@ -201,10 +201,10 @@ endforeach;
                         <a href="#" data-toggle="dropdown">Position</a>
                         <ul class="dropdown-menu">
                             <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting/positionList">List</a></li>
+                                <li><a href="<?php echo $webUrl; ?>position">List</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting/positionAdd">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>position/add">Add new</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -219,10 +219,10 @@ endforeach;
                         <a href="#" data-toggle="dropdown">Modules</a>
                         <ul class="dropdown-menu">
                             <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting">List</a></li>
+                                <li><a href="<?php echo $webUrl; ?>module">List</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>setting/moduleAdd">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>module/add">Add new</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>

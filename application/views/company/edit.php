@@ -10,7 +10,7 @@ extract((array)$objData[0]);
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>company/companyEdit/<?php echo $id; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>company/edit/<?php echo $id; ?>";
         var url_list = "<?php echo $webUrl; ?>company";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -65,7 +65,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">Edit Device</a>
+                        <a class="link" href="<?php echo $webUrl; ?>company/edit/<?php echo $id; ?>">Edit Device</a>
                     </li>
                 </ul>
                 <div class="close-bread">

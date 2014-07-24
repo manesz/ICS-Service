@@ -7,8 +7,8 @@ $this->load->view("navigator_menu");
 
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>setting/departmentAdd";
-        var url_list = "<?php echo $webUrl; ?>setting/departmentList";
+        var url_post_data = "<?php echo $webUrl; ?>department/add";
+        var url_list = "<?php echo $webUrl; ?>department";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -53,11 +53,11 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>setting/departmentList">Department</a>
+                        <a class="link" href="<?php echo $webUrl; ?>department">Department</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">New Department</a>
+                        <a class="link" href="<?php echo $webUrl; ?>department/add">New Department</a>
                     </li>
                 </ul>
                 <div class="close-bread">

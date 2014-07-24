@@ -27,7 +27,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 ?>
 
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>member/memberEdit/<?php echo $id; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>";
         var url_list = "<?php echo $webUrl; ?>member";
         var url_edit_module = "<?php echo $webUrl; ?>member/memberSetModule/<?php echo $id; ?>";
         var url_check_duplicate = "<?php echo $webUrl; ?>member/memberCheckDuplicate/";
@@ -232,15 +232,15 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a class="link" href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a class="link" href="<?php echo $webUrl; ?>member">Member</a>
+                <a href="<?php echo $webUrl; ?>member">Member</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a class="link" href="#">Edit Member</a>
+                <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>">Edit Member</a>
             </li>
         </ul>
         <div class="close-bread">

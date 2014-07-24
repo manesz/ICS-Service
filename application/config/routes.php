@@ -47,8 +47,41 @@ $route['signin'] = 'authentication';
 $route['signout'] = 'authentication/signOut';
 
 
+//Member
+$route['member/add'] = 'member/memberadd';
+$route['member/edit/(:any).*'] = 'member/memberedit/$1';
+$route['member/delete/(:any).*'] = 'member/memberdelete/$1';
+
+//Company
+$route['company/add'] = 'company/companyadd';
+$route['company/edit/(:any).*'] = 'company/companyedit/$1';
+$route['company/delete/(:any).*'] = 'company/companydelete/$1';
+
+//Device
+$route['device/add'] = 'device/deviceadd';
+$route['device/edit/(:any).*'] = 'device/deviceedit/$1';
+$route['device/delete/(:any).*'] = 'device/devicedelete/$1';
+
 //Issue
-$route['issue/add'] = 'issue/issueAdd';
+$route['issue/add'] = 'issue/issueadd';
+$route['issue/edit/(:any).*'] = 'issue/issueedit/$1';
+$route['issue/delete/(:any).*'] = 'issue/issueelete/$1';
+
+//Settings
+$route['module'] = 'setting';
+$route['module/add'] = 'setting/moduleadd';
+$route['module/edit/(:any).*'] = 'setting/moduleedit/$1';
+$route['module/delete/(:any).*'] = 'setting/moduledelete/$1';
+
+$route['department'] = 'setting/departmentList';
+$route['department/add'] = 'setting/departmentadd';
+$route['department/edit/(:any).*'] = 'setting/departmentedit/$1';
+$route['department/delete/(:any).*'] = 'setting/departmentdelete/$1';
+
+$route['position'] = 'setting/positionList';
+$route['position/add'] = 'setting/positionadd';
+$route['position/edit/(:any).*'] = 'setting/positionedit/$1';
+$route['position/delete/(:any).*'] = 'setting/positiondelete/$1';
 
 
 /* End of file routes.php */

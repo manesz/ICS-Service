@@ -11,7 +11,7 @@ extract((array)$objIssue[0]);
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>issue/issueEdit/<?php echo @$id; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>issue/edit/<?php echo @$id; ?>";
         var url_list = "<?php echo $webUrl; ?>issue";
         var countImage = <?php echo count((array)$objImage);?>;
         var issue_page = 'edit';
@@ -46,7 +46,7 @@ $this->load->view("sidebar_menu");
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a class="link" href="#">Edit Issue</a>
+                <a class="link" href="<?php echo $webUrl; ?>issue/edit/<?php echo @$id; ?>">Edit Issue</a>
             </li>
         </ul>
         <div class="close-bread">

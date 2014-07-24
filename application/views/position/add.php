@@ -7,8 +7,8 @@ $this->load->view("navigator_menu");
 
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>setting/positionAdd";
-        var url_list = "<?php echo $webUrl; ?>setting/positionList";
+        var url_post_data = "<?php echo $webUrl; ?>position/add";
+        var url_list = "<?php echo $webUrl; ?>position";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -46,11 +46,11 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>setting/positionList">Position</a>
+                        <a class="link" href="<?php echo $webUrl; ?>position">Position</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="#">New Position</a>
+                        <a class="link" href="<?php echo $webUrl; ?>position/add">New Position</a>
                     </li>
                 </ul>
                 <div class="close-bread">
