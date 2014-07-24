@@ -27,6 +27,28 @@ class Helper_model extends CI_Model
         return $out;
     }
 
+    function createFolder($path)
+    {
+        $flgCreate = mkdir($path, 0777, true);
+        return $flgCreate;
+    }
+
+    function checkHaveFolder($path, $create = false)
+    {
+        if (is_dir($path)) //create the folder if it's not already exists
+        {
+            return true;
+        } else {
+            if ($create) {
+                if (!$this->createFolder($path)) {
+                    return "Create False";
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     function utf8_to_tis620($string)
     {
         $str = $string;
@@ -78,10 +100,10 @@ class Helper_model extends CI_Model
 
     function calMicroTime($start, $end)
     {
-        $duration = $end-$start;
-        $hours = (int)($duration/60/60);
-        $minutes = (int)($duration/60)-$hours*60;
-        $seconds = (int)$duration-$hours*60*60-$minutes*60;
+        $duration = $end - $start;
+        $hours = (int)($duration / 60 / 60);
+        $minutes = (int)($duration / 60) - $hours * 60;
+        $seconds = (int)$duration - $hours * 60 * 60 - $minutes * 60;
         return "$hours:$minutes:$seconds";
     }
 

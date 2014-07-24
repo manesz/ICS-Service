@@ -7,7 +7,8 @@ $baseUrl = base_url();
 
 $arrDevice = $this->Device_model->deviceList($id);
 extract((array)$arrDevice[0]);
-$pathFileManager = "uploads/device/files/$id";
+$pathFileManager = "uploads/device/$id/files/";
+$this->Helper_model->checkHaveFolder($pathFileManager, true);
 ?>
     <script>
         var url_post_data = "<?php echo $webUrl; ?>device/edit/<?php echo @$id; ?>";
