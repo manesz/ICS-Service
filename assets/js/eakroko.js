@@ -485,9 +485,10 @@ $(document).ready(function () {
         $(".file-manager").each(function () {
             var $el = $(this);
             var data = $el.attr('data');
+            var urlConnector = baseUrl + 'assets/js/plugins/elfinder/php/connector.php?path=' + data +
+                '&base_url=' + baseUrl;//alert(urlConnector);
             $el.elfinder({
-                url: baseUrl + 'assets/js/plugins/elfinder/php/connector.php?path=' + data +
-                    '&base_url=' + baseUrl
+                url: urlConnector
             });
         });
     }

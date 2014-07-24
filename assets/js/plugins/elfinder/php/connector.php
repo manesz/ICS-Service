@@ -2,10 +2,10 @@
 
 error_reporting(0); // Set E_ALL for debuging
 
-include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderConnector.class.php';
-include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinder.class.php';
-include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderVolumeDriver.class.php';
-include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderVolumeLocalFileSystem.class.php';
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderConnector.class.php';
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinder.class.php';
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeDriver.class.php';
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeLocalFileSystem.class.php';
 // Required for MySQL storage connector
 // include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeMySQL.class.php';
 // Required for FTP connector support
@@ -36,22 +36,31 @@ function access($attr, $path, $data, $volume) {
 		:  null;                                    // else elFinder decide it itself
 }
 
-
+$getPath = @$_GET['path'];// ตัวอย่าง path=uploads/folder_name
+$baseUrl = @$_GET['base_url'];
+if (!$getPath) {
+    $pathFolder = '../files/';
+    $urlFolder = dirname($_SERVER['PHP_SELF']) . '/../files/';
+} else {
+    $getPath = str_replace('#', "", $getPath);
+    $pathFolder = "../../../../../$getPath/";
+    $urlFolder = $baseUrl . $getPath;//dirname($_SERVER['PHP_SELF']) . "/$getPath/";
+}
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $opts = array(
-	// 'debug' => true,
+	 'debug' => true,
 	'roots' => array(
 		array(
 			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => '../files/',         // path to files (REQUIRED)
-			'URL'           => dirname($_SERVER['PHP_SELF']) . '/../files/', // URL to files (REQUIRED)
+			'path'          => $pathFolder,         // path to files (REQUIRED)
+			'URL'           => $urlFolder, // URL to files (REQUIRED)
 			'accessControl' => 'access',             // disable and hide dot starting files (OPTIONAL)
 			'attributes' => array(
 		        array(
 		            'pattern' => '!^/*.*$!',
 		            'read' => true,
-		            'write' => false,
+		            'write' => true,
 		            'locked' => true
 		        )
 		    ),

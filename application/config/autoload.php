@@ -110,6 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array(
+    "Helper_model",
     "Authentication_model",
     "Constant_model",
     "Member_model",

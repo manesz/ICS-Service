@@ -25,6 +25,9 @@ $baseUrl = base_url();
     <!-- jQuery UI -->
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/jquery-ui/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+    <!-- Elfinder -->
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/elfinder/elfinder.min.css">
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/elfinder/theme.css">
     <!-- Notify -->
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/gritter/jquery.gritter.css">
     <!-- PageGuide -->
@@ -74,9 +77,12 @@ $baseUrl = base_url();
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-    <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.draggable.min.js"></script>
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.selectable.min.js"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.droppable.min.js"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.draggable.min.js"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/jquery-ui/jquery.ui.spinner.js"></script>
     <!-- Touch enable for jquery UI -->
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/touch-punch/jquery.touch-punch.min.js"></script>
     <!-- slimScroll -->
@@ -89,6 +95,8 @@ $baseUrl = base_url();
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/vmap/jquery.vmap.sampledata.js"></script>
     <!-- Bootbox -->
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/bootbox/jquery.bootbox.js"></script>
+    <!-- Elfinder -->
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/elfinder/elfinder.min.js"></script>
     <!-- Notify -->
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/gritter/jquery.gritter.min.js"></script>
     <!-- Masked inputs -->
