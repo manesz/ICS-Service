@@ -88,7 +88,7 @@ $this->load->view("sidebar_menu");
                                       class='form-horizontal form-column form-bordered form-validate'
                                       id="formPost" name="formPost">
 
-                                    <div class="span6">
+                                    <div class="span12">
                                         <div class="control-group">
                                             <input type="hidden" id="image_path" name="image_path"
                                                    value="<?php echo !file_exists(@$image) ? "" : $image; ?>"/>
@@ -130,7 +130,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="email" id="email" placeholder="Text input"
-                                                       class="input-block-level" value="<?php echo @$email; ?>"
+                                                       class="input-xlarge" value="<?php echo @$email; ?>"
                                                        data-rule-email="true" data-rule-required="true">
                                             </div>
                                         </div>
@@ -139,18 +139,24 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="fax" id="fax" placeholder="Text input"
-                                                       class="input-block-level" value="<?php echo @$fax; ?>">
+                                                       class="input-xlarge" value="<?php echo @$fax; ?>">
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--END:span6 -->
-                                    <div class="span6">
+                                        <div class="control-group">
+                                            <label for="taxpayer_number" class="control-label">เลขที่ผู้เสียภาษี :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="taxpayer_number" id="taxpayer_number" placeholder="Text input"
+                                                       class="input-xlarge"
+                                                   value="<?php echo @$taxpayer_number; ?>">
+                                            </div>
+                                        </div>
                                         <div class="control-group">
                                             <label for="name_th" class="control-label">ชื่อภาษาไทย :</label>
 
                                             <div class="controls">
                                                 <input type="text" name="name_th" id="name_th" placeholder="Text input"
-                                                       class="input-block-level" value="<?php echo @$name_th; ?>"
+                                                       class="input-xlarge" value="<?php echo @$name_th; ?>"
                                                        data-rule-required="true">
                                             </div>
                                         </div>
@@ -159,7 +165,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <textarea id="address_th" name="address_th"
-                                                          class="input-block-level"><?php echo @$address_th; ?></textarea>
+                                                          class="input-xlarge"><?php echo @$address_th; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -167,7 +173,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="name_en" id="name_en" placeholder="Text input"
-                                                       class="input-block-level" data-rule-required="true"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$name_en; ?>">
                                             </div>
                                         </div>
@@ -176,7 +182,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <textarea id="address_en" name="address_en"
-                                                          class="input-block-level"><?php echo @$address_en; ?></textarea>
+                                                          class="input-xlarge"><?php echo @$address_en; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -185,7 +191,7 @@ $this->load->view("sidebar_menu");
                                             <div class="controls">
                                                 <input type="text" name="telephone" id="telephone"
                                                        placeholder="Text input"
-                                                       class="input-block-level" data-rule-required="true"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$telephone; ?>">
                                             </div>
                                         </div>
@@ -194,7 +200,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <textarea id="remark" name="remark"
-                                                          class="input-block-level"><?php echo @$remark; ?></textarea>
+                                                          class="input-xlarge"><?php echo @$remark; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
