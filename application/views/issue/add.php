@@ -35,15 +35,15 @@ $this->load->view("sidebar_menu");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>issue">Issue</a>
+                        <a href="<?php echo $webUrl; ?>issue">Issue</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>issue/add">New Issue</a>
+                        <a href="<?php echo $webUrl; ?>issue/add">New Issue</a>
                     </li>
                 </ul>
                 <div class="close-bread">

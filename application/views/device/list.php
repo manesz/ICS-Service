@@ -25,7 +25,7 @@ $objData = $this->Device_model->deviceList();
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a class="active link" href="<?php echo $webUrl; ?>device">Device</a>
+                            <a class="active" href="<?php echo $webUrl; ?>device">Device</a>
                         </li>
                     </ul>
                     <div class="close-bread">
@@ -43,7 +43,7 @@ $objData = $this->Device_model->deviceList();
 
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
-                                        <a href="<?php echo $webUrl; ?>device/deviceAdd" class="btn btn-mini"><i
+                                        <a href="<?php echo $webUrl; ?>device/add" class="btn btn-mini"><i
                                                 title="Add" class="icon-plus"></i></a>
                                     <?php endif; ?>
                                 </div>
@@ -78,15 +78,15 @@ $objData = $this->Device_model->deviceList();
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>device/deviceEdit/<?php echo $value->id; ?>"
-                                                           class="btn link" rel="tooltip" title=""
+                                                        <a href="<?php echo $webUrl; ?>device/edit/<?php echo $value->id; ?>"
+                                                           class="btn" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
                                                     <?php endif; ?>
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>device/deviceDelete/<?php echo $value->id; ?>';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>device/delete/<?php echo $value->id; ?>';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>

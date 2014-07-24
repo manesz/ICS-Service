@@ -21,7 +21,7 @@ $objData = $this->Issue_model->issueList();
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
+                            <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
@@ -78,7 +78,7 @@ $objData = $this->Issue_model->issueList();
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>issue/issueEdit/<?php echo $value->id; ?>"
+                                                        <a href="<?php echo $webUrl; ?>issue/edit/<?php echo $value->id; ?>"
                                                            class="btn link" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
@@ -86,7 +86,7 @@ $objData = $this->Issue_model->issueList();
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>issue/issueDelete/<?php echo $value->id; ?>';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>issue/delete/<?php echo $value->id; ?>';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>

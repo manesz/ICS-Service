@@ -24,11 +24,11 @@ $objData = $this->Member_model->memberList();
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
+                            <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a class="active link" href="<?php echo $webUrl; ?>member">Member</a>
+                            <a class="active" href="<?php echo $webUrl; ?>member">Member</a>
                         </li>
                     </ul>
                     <div class="close-bread">
@@ -46,7 +46,7 @@ $objData = $this->Member_model->memberList();
 
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
-                                        <a href="<?php echo $webUrl; ?>member/memberAdd" class="btn btn-mini">
+                                        <a href="<?php echo $webUrl; ?>member/add" class="btn btn-mini">
                                             <i title="Add"
                                                class="icon-plus"></i></a>
                                     <?php endif; ?>
@@ -83,15 +83,15 @@ $objData = $this->Member_model->memberList();
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>member/memberEdit/<?php echo $value->id; ?>"
-                                                           class="btn link" rel="tooltip" title=""
+                                                        <a href="<?php echo $webUrl; ?>member/edit/<?php echo $value->id; ?>"
+                                                           class="btn" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
                                                     <?php endif; ?>
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>member/memberDelete/<?php echo $value->id; ?>?type=1';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>member/delete/<?php echo $value->id; ?>?type=1';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>

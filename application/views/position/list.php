@@ -30,7 +30,7 @@ var_dump($permissionUpdate);
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a class="active link" href="<?php echo $webUrl; ?>setting/positionList">Position</a>
+                            <a class="active" href="<?php echo $webUrl; ?>position">Position</a>
                         </li>
                     </ul>
                     <div class="close-bread">
@@ -48,7 +48,7 @@ var_dump($permissionUpdate);
 
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
-                                        <a href="<?php echo $webUrl; ?>setting/positionAdd" class="btn btn-mini">
+                                        <a href="<?php echo $webUrl; ?>position/add" class="btn btn-mini">
                                             <i title="Add"
                                                class="icon-plus"></i></a>
                                     <?php endif; ?>
@@ -81,15 +81,15 @@ var_dump($permissionUpdate);
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>setting/positionEdit/<?php echo $value->id; ?>"
-                                                           class="btn link" rel="tooltip" title=""
+                                                        <a href="<?php echo $webUrl; ?>position/edit/<?php echo $value->id; ?>"
+                                                           class="btn" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
                                                     <?php endif; ?>
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>setting/positionDelete/<?php echo $value->id; ?>';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>position/delete/<?php echo $value->id; ?>';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>

@@ -17,14 +17,7 @@ $this->load->view("navigator_menu");
 
             $("#formPost").submit(function () {
                 disableID("btnSave");
-                var checkPost = true;
-                $("#formPost .error").each(function () {
-                    var className = $(this).attr('class');
-                    var index = className.indexOf("valid");
-                    if (index < 0) {
-                        checkPost = false;
-                    }
-                });
+                var checkPost = checkValidateForm("#formPost");
                 if (checkPost) {
                     postData(url_post_data, $(this).serialize(), url_list);
                 } else {
@@ -49,15 +42,15 @@ $this->load->view("sidebar_menu");
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>department">Department</a>
+                        <a href="<?php echo $webUrl; ?>department">Department</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a class="link" href="<?php echo $webUrl; ?>department/add">New Department</a>
+                        <a href="<?php echo $webUrl; ?>department/add">New Department</a>
                     </li>
                 </ul>
                 <div class="close-bread">

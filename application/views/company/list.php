@@ -46,7 +46,7 @@ $objData = $this->Company_model->companyList();
 
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
-                                        <a href="<?php echo $webUrl; ?>company/companyAdd" class="btn btn-mini"><i
+                                        <a href="<?php echo $webUrl; ?>company/add" class="btn btn-mini"><i
                                                 title="Add" class="icon-plus"></i></a>
                                     <?php endif; ?>
                                 </div>
@@ -79,7 +79,7 @@ $objData = $this->Company_model->companyList();
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>company/companyEdit/<?php echo $value->id; ?>"
+                                                        <a href="<?php echo $webUrl; ?>company/edit/<?php echo $value->id; ?>"
                                                            class="btn link" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
@@ -87,7 +87,7 @@ $objData = $this->Company_model->companyList();
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>company/companyDelete/<?php echo $value->id; ?>';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>company/delete/<?php echo $value->id; ?>';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>
