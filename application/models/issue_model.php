@@ -21,7 +21,7 @@ class Issue_model extends CI_Model
     private $tableMapImageName = "ics_map_image_issue";
     private $tableCompanyName = "ics_company";
 
-    function issueList($id = 0)
+    function issueList($id = 0, $orderBy = "")
     {
         $memberID = @$this->session->userdata['id'];
         $objMember = $this->Member_model->memberList($memberID);
@@ -32,6 +32,7 @@ class Issue_model extends CI_Model
         if ($usernameLogin != 'admin' && $companyID != 1) {
             $strAnd .= " AND a.company_id = $companyID";
         }
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
 
         $sql = "
             SELECT
@@ -45,6 +46,7 @@ class Issue_model extends CI_Model
             WHERE 1
             AND a.publish = 1
             $strAnd
+            $strOrder
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {

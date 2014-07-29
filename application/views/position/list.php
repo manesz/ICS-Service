@@ -60,7 +60,7 @@ var_dump($permissionUpdate);
                                         class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>Create Datetime</th>
@@ -74,7 +74,7 @@ var_dump($permissionUpdate);
                                         foreach ($objData as $key => $value):
                                             ?>
                                             <tr>
-                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->title; ?></td>
                                                 <td><?php echo $value->description; ?></td>
                                                 <td><?php echo "$value->create_datetime"; ?></td>

@@ -54,7 +54,7 @@ $objData = $this->Issue_model->issueList();
                                         class="table table-hover table-nomargin dataTable dataTable-tools table-bordered display dataTable-scroll-x">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Title</th>
                                             <th>Company_TH</th>
                                             <th>Company_EN</th>
@@ -69,7 +69,7 @@ $objData = $this->Issue_model->issueList();
                                         foreach ($objData as $key => $value):
                                             ?>
                                             <tr>
-                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo @$value->title; ?></td>
                                                 <td><?php echo @$value->name_th; ?></td>
                                                 <td><?php echo @$value->name_en; ?></td>

@@ -59,7 +59,7 @@ $objData = $this->Member_model->memberList();
                                         id="">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Username</th>
                                             <th>Name</th>
                                             <th>Telephone</th>
@@ -74,7 +74,7 @@ $objData = $this->Member_model->memberList();
                                         foreach ($objData as $key => $value):
                                             ?>
                                             <tr>
-                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->username; ?></td>
                                                 <td><?php echo @"$value->prefix$value->firstname $value->lastname"; ?></td>
                                                 <td><?php echo $value->phone; ?></td>

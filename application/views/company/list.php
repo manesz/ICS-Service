@@ -57,7 +57,7 @@ $objData = $this->Company_model->companyList();
                                         class="table table-hover table-nomargin dataTable dataTable-tools table-bordered display dataTable-scroll-x">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Name TH</th>
                                             <th>Name EN</th>
                                             <th>Telephone</th>
@@ -71,7 +71,7 @@ $objData = $this->Company_model->companyList();
                                         foreach ($objData as $key => $value):
                                             ?>
                                             <tr>
-                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->name_th; ?></td>
                                                 <td><?php echo $value->name_en; ?></td>
                                                 <td><?php echo "$value->telephone"; ?></td>

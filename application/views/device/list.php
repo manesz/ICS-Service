@@ -54,7 +54,7 @@ $objData = $this->Device_model->deviceList();
                                         class="table table-hover table-nomargin dataTable dataTable-tools table-bordered display dataTable-scroll-x">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Model</th>
                                             <th>Brand</th>
@@ -69,7 +69,7 @@ $objData = $this->Device_model->deviceList();
                                         foreach ($objData as $key => $value):
                                             ?>
                                             <tr>
-                                                <td class="center"><?php echo $value->id; ?></td>
+                                                <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->name; ?></td>
                                                 <td><?php echo $value->model; ?></td>
                                                 <td><?php echo "$value->brand"; ?></td>

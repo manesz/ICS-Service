@@ -9,17 +9,19 @@ class Department_model extends CI_Model
     }
 
     private $tableName = "ics_department";
-    function departmentList($id = 0)
+    function departmentList($id = 0, $orderBy = "")
     {
-        $strSql = $id == 0 ? "" : " AND id = $id";
+        $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
         $sql = "
             SELECT
               *
             FROM
               `$this->tableName`
             WHERE 1
-            $strSql
             AND publish = 1
+            $strAnd
+            $strOrder
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {

@@ -23,16 +23,18 @@ class Module_model extends CI_Model
     private $tableName = "ics_module";
     private $tbPermission = "ics_permission";
     private $tbUserGroup = "ics_user_group";
-    function moduleList($id = 0)
+    function moduleList($id = 0, $orderBy = "")
     {
-        $strSql = $id == 0 ? "" : " AND id = $id";
+        $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
         $sql = "
             SELECT
               *
             FROM `$this->tableName`
             WHERE 1
             AND publish = 1
-            $strSql
+            $strAnd
+            $strOrder
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {

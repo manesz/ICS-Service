@@ -21,9 +21,10 @@ class Member_model extends CI_Model
     private $tableNamePosition = "ics_position";
 
 
-    function memberList($id = 0)
+    function memberList($id = 0, $orderBy = "")
     {
-        $strSql = $id == 0 ? " AND a.username NOT LIKE '%admin%'" : " AND a.id = $id";
+        $strAnd = $id == 0 ? " AND a.username NOT LIKE '%admin%'" : " AND a.id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
         $sql = "
             SELECT
               a.*,
@@ -37,7 +38,8 @@ class Member_model extends CI_Model
                 ON (a.`department_id` = c.`id` AND c.publish = 1)
             WHERE 1
             AND a.publish = 1
-            $strSql
+            $strAnd
+            $strOrder
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {

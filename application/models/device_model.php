@@ -18,9 +18,10 @@ class Device_model extends CI_Model
     }
 
     private $tableName = "ics_device";
-    function deviceList($id = 0, $type = "")
+    function deviceList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
         $sql = "
             SELECT
               *
@@ -28,6 +29,7 @@ class Device_model extends CI_Model
             WHERE 1
             AND publish = 1
             $strAnd
+            $strOrder
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {
