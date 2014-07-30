@@ -111,7 +111,6 @@ $autoload['language'] = array();
 
 $autoload['model'] = array(
     "Helper_model",
-    "Authentication_model",
     "Constant_model",
     "Member_model",
     "Module_model",
@@ -122,6 +121,8 @@ $autoload['model'] = array(
     "Permission_model",
     "Issue_model",
     "Upload_model",
+    "Log_model",
+    "Authentication_model",
 );
 
 

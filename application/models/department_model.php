@@ -42,6 +42,7 @@ class Department_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
+        $this->Log_model->logAdd('add department', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
         return $id = $this->db->insert_id($this->tableName);
     }
@@ -55,6 +56,7 @@ class Department_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
+        $this->Log_model->logAdd('edit department', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 }

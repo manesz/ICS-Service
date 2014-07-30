@@ -63,6 +63,7 @@ class Permission_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );//var_dump($data);exit;
+        $this->Log_model->logAdd('add permission', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
         return $id = $this->db->insert_id($this->tableName);
     }
@@ -74,6 +75,7 @@ class Permission_model extends CI_Model
             'permission  ' => $permission,
             'update_datetime' => date('Y-m-d H:i:s'),
         );
+        $this->Log_model->logAdd('edit permission', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 
@@ -86,6 +88,7 @@ class Permission_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
+        $this->Log_model->logAdd('add user group', $this->tbUserGroup, __LINE__, $data);
         $this->db->insert($this->tbUserGroup, $data);
         return $id = $this->db->insert_id($this->tbUserGroup);
     }

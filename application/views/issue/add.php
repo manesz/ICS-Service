@@ -156,7 +156,7 @@ $this->load->view("sidebar_menu");
                                     </div>
                                     <div class="span12">
                                         <div class="form-actions">
-                                            <button type="button" class="btn btn-inverse" id="btnAddOtherImage">+ Image
+                                            <button type="button" class="btn btn-info" id="btnAddOtherImage">+ Image <i class="icon-picture"></i>
                                             </button>
                                         </div>
                                     </div>

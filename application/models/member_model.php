@@ -82,6 +82,7 @@ class Member_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
+        $this->Log_model->logAdd('add member', $this->tableNameMember, __LINE__,$data);
         $this->db->insert($this->tableNameMember, $data);
         return $id = $this->db->insert_id($this->tableNameMember);
     }
@@ -195,6 +196,7 @@ class Member_model extends CI_Model
                 );
             }
         }
+        $this->Log_model->logAdd('edit member', $this->tableNameMember, __LINE__,$data);
         return $this->db->update($this->tableNameMember, $data, array('id' => $id));
     }
 

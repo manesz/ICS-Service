@@ -139,4 +139,13 @@ class Constant_model extends CI_Model
             return $arrData;
         }
     }
+
+    //---------------------------------Table name--------------------------------//
+    public $tbLog = "ics_log";
+    public $tbCompany = "ics_company";
+    public $tbMember = "ics_member";
+    public $sessionName = "ics_session_url";
+
+    //---------------------------------End Table name--------------------------------//
+
 }

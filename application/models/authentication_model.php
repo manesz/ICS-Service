@@ -13,8 +13,13 @@ class Authentication_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableNameMember = $this->Constant_model->tbMember;
+        $this->sessionName = $this->Constant_model->sessionName;
     }
 
+    private $tableNameMember = "";
+    private $sessionName = "";
+    private $strCheck = "ics_check";
     function signIn($post)
     {
         extract($post);
@@ -36,10 +41,15 @@ class Authentication_model extends CI_Model
         if ($query->num_rows()) {
             $result = $query->result();
             $result = (array)$result[0];
-            $sessionUrl = @$this->session->userdata['ics_session_url'];
-            $result['ics_session_url'] = $sessionUrl;
-            $result['ics_check'] = 'true';
+            $sessionUrl = @$this->session->userdata[$this->sessionName];
+            //$this->Log_model->deleteLog();
+
+            $result[$this->sessionName] = $sessionUrl;
+            $result[$this->strCheck] = 'true';
             $this->session->set_userdata($result);
+
+            $this->Log_model->logAdd('Sign in',
+                $this->tableNameMember, __LINE__, array('id'=> $result['id'], 'username' => $result['username']));
 //            session_start();
 //            $_SESSION['userdata'] = $this->session->userdata;
 //            $_SESSION['webUrl'] = $this->Constant_model->webUrl();
@@ -55,15 +65,17 @@ class Authentication_model extends CI_Model
         session_start();
 //        unset($_SESSION["userdata"]);
 //        $_SESSION['webUrl'] = $this->Constant_model->webUrl();
+        $this->Log_model->logAdd('Sign out',
+            $this->tableNameMember, __LINE__, null);
         return true;
     }
 
     function checkSignIn()
     {
-        if (empty($this->session->userdata['ics_check'])) {
+        if (empty($this->session->userdata[$this->strCheck])) {
             $webUrl = $this->Constant_model->webUrl();
             $setSession = array(
-                'ics_session_url' => $webUrl . uri_string()
+                $this->sessionName => $webUrl . uri_string()
             );
             $this->session->set_userdata($setSession);
             redirect($this->Constant_model->webUrl() . "signin");
