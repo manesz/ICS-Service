@@ -18,7 +18,7 @@ $this->load->view("header");
             <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn">
                 <div class="control-group">
                     <div class="email controls">
-                        <input type="text" id="username" name='username' placeholder="Username / Email"
+                        <input type="text" id="username" autofocus="" name='username' placeholder="Username / Email"
                                class='input-block-level' data-rule-required="true">
                     </div>
                 </div>
