@@ -5,9 +5,9 @@ $baseUrl = base_url();
 $this->load->view("header");
 $this->load->view("navigator_menu");
 
-$arrDepartment = $this->Department_model->departmentList();
-$arrPosition = $this->Position_model->positionList();
-$arrCompany = $this->Company_model->companyList();
+$objDepartment = $this->Department_model->departmentList();
+$objPosition = $this->Position_model->positionList();
+$objCompany = $this->Company_model->companyList();
 
 $objModule = $this->Module_model->moduleList();
 $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
@@ -111,8 +111,8 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
                     );
                 }
             }).done(function () {
-                    //alert("second success");
-                })
+                //alert("second success");
+            })
                 .fail(function () {
                     clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
                     enableID("btnFinish");
@@ -418,7 +418,7 @@ $this->load->view("sidebar_menu");
                         <div class="controls">
                             <select name="company_id" id="company_id" data-rule-required="true">
                                 <option value=""></option>
-                                <?php foreach ($arrCompany as $key => $value): ?>
+                                <?php foreach ($objCompany as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -431,7 +431,7 @@ $this->load->view("sidebar_menu");
                             <select name="department_id" id="department_id" data-rule-required="true">
                                 <option value=""></option>
                                 <option value="0">-</option>
-                                <?php foreach ($arrDepartment as $key => $value): ?>
+                                <?php foreach ($objDepartment as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -452,7 +452,7 @@ $this->load->view("sidebar_menu");
                             <select name="position_id" id="position_id" data-rule-required="true">
                                 <option value=""></option>
                                 <option value="0">-</option>
-                                <?php foreach ($arrPosition as $key => $value): ?>
+                                <?php foreach ($objPosition as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -589,7 +589,8 @@ $this->load->view("sidebar_menu");
         </div>
         </div>
         </div>
-    <?php else:
+    <?php
+    else:
         $this->load->view("permission_page");
     endif;
     ?>

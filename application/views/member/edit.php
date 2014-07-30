@@ -9,8 +9,8 @@ $memberId = @$this->session->userdata['id'];
 $usernameLogin = @$this->session->userdata['username'];
 $companyIDLogin = @$this->session->userdata['company_id'];
 
-$arrDepartment = $this->Department_model->departmentList();
-$arrPosition = $this->Position_model->positionList();
+$objDepartment = $this->Department_model->departmentList();
+$objPosition = $this->Position_model->positionList();
 $arrCompany = $this->Company_model->companyList();
 
 $arrMember = $this->Member_model->memberList($id);
@@ -437,16 +437,16 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                     <select name="department_id" id="department_id" data-rule-required="true">
                         <option value=""></option>
                         <option value="0" <?php echo $department_id == 0 ? 'selected' : '' ?>>-</option>
-                        <?php foreach ($arrDepartment as $key => $value): ?>
+                        <?php foreach ($objDepartment as $key => $value): ?>
                             <option value="<?php echo $value->id; ?>"
                                 <?php echo @$department_id == $value->id ? 'selected' : '' ?>
                                 ><?php echo $value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
-                    <?php echo $department_id == 0 ? '-' : '' ?>
-                    <?php foreach ($arrDepartment as $key => $value): ?>
-                        <?php echo @$department_id == $value->id ? $value->name_th : ""; ?>
+                    <?php echo @$department_id == 0 ? '-' : '' ?>
+                    <?php foreach ($objDepartment as $key => $value): ?>
+                        <?php echo @$department_id == $value->id ? $value->title : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
@@ -467,15 +467,15 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                     <select name="position_id" id="position_id" data-rule-required="true">
                         <option value=""></option>
                         <option value="0" <?php echo $position_id == 0 ? 'selected' : '' ?>>-</option>
-                        <?php foreach ($arrPosition as $key => $value): ?>
+                        <?php foreach ($objPosition as $key => $value): ?>
                             <option value="<?php echo $value->id; ?>"
                                 <?php echo $position_id == $value->id ? 'selected' : '' ?>><?php echo $value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
                     <?php echo @$position_id == 0 ? '-' : '' ?>
-                    <?php foreach ($arrPosition as $key => $value): ?>
-                        <?php echo @$position_id == $value->id ? $value->name_th : ""; ?>
+                    <?php foreach ($objPosition as $key => $value): ?>
+                        <?php echo @$position_id == $value->id ? $value->title : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
