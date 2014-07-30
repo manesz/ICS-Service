@@ -63,14 +63,18 @@ class Permission_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );//var_dump($data);exit;
-        $this->Log_model->logAdd('add permission', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
-        return $id = $this->db->insert_id($this->tableName);
+        $id = $this->db->insert_id($this->tableName);
+        if (!$id) return false;
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add permission', $this->tableName, __LINE__, $data);
+        return $id;
     }
 
     function permissionEdit($id, $moduleID, $permission)
     {
         $data = array(
+            'id' => $id,
             'module_id  ' => intval($moduleID),
             'permission  ' => $permission,
             'update_datetime' => date('Y-m-d H:i:s'),
@@ -82,6 +86,7 @@ class Permission_model extends CI_Model
     function userGroupNew($userID, $permissionID)
     {
         $data = array(
+            'id' => $userID,
             'user_id' => intval($userID),
             'permission_id  ' => intval($permissionID),
             'create_datetime' => date('Y-m-d H:i:s'),

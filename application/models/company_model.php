@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: Administrator
@@ -6,8 +7,6 @@
  * Time: 19:35 น.
  * To change this template use File | Settings | File Templates.
  */
-
-
 class Company_model extends CI_Model
 {
 
@@ -18,6 +17,7 @@ class Company_model extends CI_Model
     }
 
     private $tableName = "ics_company";
+
     function companyList($id = 0, $type = "", $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
@@ -67,9 +67,12 @@ class Company_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->Log_model->logAdd('add company', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
-        return $id = $this->db->insert_id($this->tableName);
+        $id = $this->db->insert_id($this->tableName);
+        if (!$id) return false;
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add company', $this->tableName, __LINE__, $data);
+        return $id;
     }
 
     function companyEdit($id, $post)
@@ -85,6 +88,7 @@ class Company_model extends CI_Model
         }
 
         $data = array(
+            'id' => $id,
             'name_th' => @$name_th,
             'name_en' => @$name_en,
             'taxpayer_number' => @$taxpayer_number,
@@ -101,6 +105,4 @@ class Company_model extends CI_Model
         $this->Log_model->logAdd('edit company', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));
     }
-
-
 }

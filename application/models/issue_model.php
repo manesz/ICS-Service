@@ -73,10 +73,11 @@ class Issue_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->Log_model->logAdd('add issue', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
         $issueID = $this->db->insert_id($this->tableName);
         if (!$issueID) return false;
+        $data['id'] = $issueID;
+        $this->Log_model->logAdd('add issue', $this->tableName, __LINE__, $data);
 
         //Add Image
         if (!empty($array_image)) {
@@ -103,10 +104,11 @@ class Issue_model extends CI_Model
                     'update_datetime' => "0000-00-00 00:00:00",
                     'publish' => 1,
                 );
-                $this->Log_model->logAdd('add image', $this->tableImageName, __LINE__, $data);
                 $this->db->insert($this->tableImageName, $data);
                 $imageID = $this->db->insert_id($this->tableImageName);
                 if (!$imageID) return false;
+                $data['id'] = $imageID;
+                $this->Log_model->logAdd('add image', $this->tableImageName, __LINE__, $data);
 
                 //add table map
                 $data = array(
@@ -116,10 +118,11 @@ class Issue_model extends CI_Model
                     'update_datetime' => "0000-00-00 00:00:00",
                     'publish' => 1,
                 );
-                $this->Log_model->logAdd('add map image', $this->tableMapImageName, __LINE__, $data);
                 $this->db->insert($this->tableMapImageName, $data);
                 $mapID = $this->db->insert_id($this->tableMapImageName);
                 if (!$mapID) return false;
+                $data['id'] = $mapID;
+                $this->Log_model->logAdd('add map image', $this->tableMapImageName, __LINE__, $data);
             }
 
         } else {
@@ -160,6 +163,7 @@ class Issue_model extends CI_Model
                         );
                     } else { //ไม่ได้สร้างรูปใหม่
                         $data = array(
+                            'id' => $old_image_id,
                             'title' => trim($image_title),
                             'description' => $image_description,
                             'update_datetime' => date('Y-m-d H:i:s'),
@@ -190,10 +194,11 @@ class Issue_model extends CI_Model
                         'update_datetime' => "0000-00-00 00:00:00",
                         'publish' => 1,
                     );
-                    $this->Log_model->logAdd('add image', $this->tableImageName, __LINE__, $data);
                     $this->db->insert($this->tableImageName, $data);
                     $imageID = $this->db->insert_id($this->tableImageName);
                     if (!$imageID) return false;
+                    $data['id'] = $imageID;
+                    $this->Log_model->logAdd('add image', $this->tableImageName, __LINE__, $data);
 
                     //add table map
                     $data = array(
@@ -203,10 +208,12 @@ class Issue_model extends CI_Model
                         'update_datetime' => "0000-00-00 00:00:00",
                         'publish' => 1,
                     );
-                    $this->Log_model->logAdd('add map image', $this->tableMapImageName, __LINE__, $data);
+
                     $this->db->insert($this->tableMapImageName, $data);
                     $mapID = $this->db->insert_id($this->tableMapImageName);
                     if (!$mapID) return false;
+                    $data['id'] = $mapID;
+                    $this->Log_model->logAdd('add map image', $this->tableMapImageName, __LINE__, $data);
                 }
 
             }
@@ -216,6 +223,7 @@ class Issue_model extends CI_Model
         $objMember = $this->Member_model->memberList($memberID);
         $companyID = $objMember[0]->company_id;
         $data = array(
+            'id' => $id,
             'title' => trim(@$title),
             'description' => @$description,
 //            'status' => "create",

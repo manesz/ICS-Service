@@ -62,9 +62,12 @@ class Device_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->Log_model->logAdd('add device', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
-        return $id = $this->db->insert_id($this->tableName);
+        $id = $this->db->insert_id($this->tableName);
+        if (!$id) return false;
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add device', $this->tableName, __LINE__, $data);
+        return $id;
     }
 
     function deviceEdit($id, $post)
@@ -80,6 +83,7 @@ class Device_model extends CI_Model
         }
 
         $data = array(
+            'id' => $id,
             'name' => trim($name),
             'model' => trim($model),
             'brand' => trim($brand),

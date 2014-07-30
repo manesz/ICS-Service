@@ -42,15 +42,19 @@ class Department_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->Log_model->logAdd('add department', $this->tableName, __LINE__, $data);
         $this->db->insert($this->tableName, $data);
-        return $id = $this->db->insert_id($this->tableName);
+        $id = $this->db->insert_id($this->tableName);
+        if (!$id) return false;
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add department', $this->tableName, __LINE__, $data);
+        return $id;
     }
 
     function departmentEdit($id, $post)
     {
         extract($post);
         $data = array(
+            'id' => $id,
             'title' => trim(@$title),
             'description' => trim(@$description),
             'update_datetime' => date('Y-m-d H:i:s'),

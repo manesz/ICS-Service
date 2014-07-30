@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: Administrator
@@ -6,8 +7,6 @@
  * Time: 22:55 น.
  * To change this template use File | Settings | File Templates.
  */
-
-
 class Member_model extends CI_Model
 {
     function __construct()
@@ -82,9 +81,12 @@ class Member_model extends CI_Model
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
         );
-        $this->Log_model->logAdd('add member', $this->tableNameMember, __LINE__,$data);
         $this->db->insert($this->tableNameMember, $data);
-        return $id = $this->db->insert_id($this->tableNameMember);
+        $id = $this->db->insert_id($this->tableNameMember);
+        if (!$id) return false;
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add member', $this->tableNameMember, __LINE__, $data);
+        return $id;
     }
 
     function memberEdit($id, $post)
@@ -105,7 +107,7 @@ class Member_model extends CI_Model
             $this->Upload_model->resizeToWidth(300);
             $this->Upload_model->save($imagePath);
         }
-        if ($password == "") {//ไม่เปลี่ยพาส
+        if ($password == "") { //ไม่เปลี่ยพาส
             if ($checkEditUser) {
                 $data = array(
                     'employee_number' => ($employee_number),
@@ -127,7 +129,7 @@ class Member_model extends CI_Model
                     'update_datetime' => date('Y-m-d H:i:s'),
                     'publish' => 1,
                 );
-            } else {//ไม่เป็น admin
+            } else { //ไม่เป็น admin
                 $data = array(
                     'employee_number' => ($employee_number),
                     //'username' => trim($username),
@@ -149,8 +151,8 @@ class Member_model extends CI_Model
                     'publish' => 1,
                 );
             }
-        } else {//เปลี่ยนพาส
-            if ($checkEditUser) {//เป็น admin
+        } else { //เปลี่ยนพาส
+            if ($checkEditUser) { //เป็น admin
                 $data = array(
                     'employee_number' => ($employee_number),
                     'username' => trim($username),
@@ -172,8 +174,8 @@ class Member_model extends CI_Model
                     'update_datetime' => date('Y-m-d H:i:s'),
                     'publish' => 1,
                 );
-            }else {//ไม่เป็น admin
-                $data =  array(
+            } else { //ไม่เป็น admin
+                $data = array(
                     'employee_number' => ($employee_number),
 //            'username' => trim($username),
                     'password' => md5($password),
@@ -196,7 +198,8 @@ class Member_model extends CI_Model
                 );
             }
         }
-        $this->Log_model->logAdd('edit member', $this->tableNameMember, __LINE__,$data);
+        $data['id'] = $id;
+        $this->Log_model->logAdd('edit member', $this->tableNameMember, __LINE__, $data);
         return $this->db->update($this->tableNameMember, $data, array('id' => $id));
     }
 

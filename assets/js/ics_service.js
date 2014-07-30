@@ -42,6 +42,39 @@ function userAuthen() {
  });
  }*/
 
+function logFeed() {
+    var $el = $("#log_feed");
+//    var random = new Array('<span class="label"><i class="icon-plus"></i></span> <a href="#">John Doe</a> added a new photo','<span class="label label-success"><i class="icon-user"></i></span> New user registered','<span class="label label-info"><i class="icon-shopping-cart"></i></span> New order received','<span class="label label-warning"><i class="icon-comment"></i></span> <a href="#">John Doe</a> commented on <a href="#">News #123</a>');
+    var auto = $el.parents(".box").find(".box-title .actions .custom-checkbox").hasClass("checkbox-active");
+//    var randomIndex = Math.floor(Math.random() * 4);
+//    var newElement = random[randomIndex];
+    var url_feed = webUrl + 'dashboard?feed=true';
+    $.post(url_feed, { max_feed: max_feed + 1}, function (result) {
+        if (auto && result != "null") {
+            max_feed++;
+            $el.prepend("<tr><td>" + result + "</td></tr>").find("tr").first().hide();
+            $el.find("tr").first().fadeIn();
+            if ($el.find("tbody tr").length > 50) {
+                $el.find("tbody tr").last().fadeOut(400, function () {
+                    $(this).remove();
+                });
+            }
+        }
+        slimScrollUpdate($el.parents(".scrollable"));
+        setTimeout(function () {
+            logFeed();
+        }, 5000);//update ทุกๆ 5 วินาที
+    })
+        .done(function () {
+            //alert("second success");
+        })
+        .fail(function () {
+            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+        })
+        .always(function () {
+            //alert("finished");
+        });
+}
 function postData(url, data, urlRedirect) {
     showWaitImage();
     disableID("btnAdd");
@@ -138,7 +171,7 @@ function openUrl(url) {
     showWaitImageOnTop();
 //    setTimeout(redirectUrl(url), 1000);
     //$('html, body').animate({ scrollTop: $("body").offset().top }, 'slow', function () {
-        redirectUrl(url);
+    redirectUrl(url);
     //});
     return false;
 }

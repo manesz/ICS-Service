@@ -61,18 +61,18 @@ class Authentication_model extends CI_Model
 
     function signOut()
     {
+        $this->Log_model->logAdd('Sign out',
+            $this->tableNameMember, __LINE__, null);
         $this->session->sess_destroy();
         session_start();
 //        unset($_SESSION["userdata"]);
 //        $_SESSION['webUrl'] = $this->Constant_model->webUrl();
-        $this->Log_model->logAdd('Sign out',
-            $this->tableNameMember, __LINE__, null);
         return true;
     }
 
     function checkSignIn()
     {
-        if (empty($this->session->userdata[$this->strCheck])) {
+        if (empty($this->session->userdata[$this->strCheck]) && !$_GET) {
             $webUrl = $this->Constant_model->webUrl();
             $setSession = array(
                 $this->sessionName => $webUrl . uri_string()

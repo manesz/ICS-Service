@@ -14,19 +14,25 @@ class Log_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->tableName = $this->Constant_model->tbLog;
+        $this->tableMember = $this->Constant_model->tbMember;
     }
 
     private $tableName = "";
+    private $tableMember = "";
 
-    function logList($id = 0, $type = "")
+    function logList($id = 0, $orderBy, $limit)
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
+        $limit = $limit ? " LIMIT $limit" : " LIMIT 50";
         $sql = "
             SELECT
               *
             FROM $this->tableName
             WHERE 1
             $strAnd
+            $strOrder
+            $limit
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {
@@ -34,6 +40,32 @@ class Log_model extends CI_Model
             return $result;
         } else {
             return (object)array();
+        }
+    }
+
+    function feedList($max_feed = 0)
+    {
+        $strAND = $max_feed ? " AND a.id = $max_feed" : "";
+        $sql = "
+            SELECT
+              a.*,
+              CONCAT(b.prefix,
+              b.firstname, ' ',
+              b.lastname) AS name
+            FROM $this->tableName a
+            INNER JOIN $this->tableMember b
+            ON (a.member_id = b.id)
+            WHERE 1
+            $strAND
+            ORDER BY a.id DESC
+            LIMIT 50
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            $result = $query->result();
+            return $result;
+        } else {
+            return null;
         }
     }
 
@@ -48,9 +80,9 @@ class Log_model extends CI_Model
             $data["table"] = $table;
         } else {
             $data = array(
-                'id' =>$memberId,
-                'username' =>$username,
-                'line' =>$line,
+                'id' => $memberId,
+                'username' => $username,
+                'line' => $line,
                 'table' => $table,
             );
         }
