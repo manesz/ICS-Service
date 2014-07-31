@@ -6,9 +6,10 @@ class Department_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbDepartment;
     }
 
-    private $tableName = "ics_department";
+    private $tableName = "";
     function departmentList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";

@@ -79,7 +79,7 @@ class Setting extends CI_Controller
 
     function moduleDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'ics_module');
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbModule);
         if (!$result)
         {
             echo "delete fail";
@@ -147,7 +147,7 @@ class Setting extends CI_Controller
 
     function departmentDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'ics_department');
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbDepartment);
         if (!$result)
         {
             echo "delete fail";
@@ -215,7 +215,7 @@ class Setting extends CI_Controller
 
     function positionDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'ics_position');
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbPosition);
         if (!$result)
         {
             echo "delete fail";

@@ -14,9 +14,10 @@ class Company_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbCompany;
     }
 
-    private $tableName = "ics_company";
+    private $tableName = "";
 
     function companyList($id = 0, $type = "", $orderBy = "")
     {

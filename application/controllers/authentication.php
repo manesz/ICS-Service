@@ -20,7 +20,7 @@ class Authentication extends CI_Controller
     {
         $post = $this->input->post();
         $message = "";
-        $sessionUrl = @$this->session->userdata['ics_session_url'];
+        $sessionUrl = @$this->session->userdata[$this->Constant_model->tbModule->sessionName];
         if ($post) {
             $resultLogin = $this->Authentication_model->signIn($post);
             if ($resultLogin) {

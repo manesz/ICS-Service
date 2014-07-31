@@ -89,7 +89,7 @@ class Member extends CI_Controller
 
     function memberDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, $this->Member_model->getTableName());
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbMember);
         if (!$result) {
             echo "delete fail";
             exit;

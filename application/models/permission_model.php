@@ -14,11 +14,13 @@ class Permission_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbPermission;
+        $this->tbUserGroup = $this->Constant_model->tbUserGroup;
     }
 
 
-    private $tableName = "ics_permission";
-    private $tbUserGroup = "ics_user_group";
+    private $tableName = "";
+    private $tbUserGroup = "";
     /**
      * @param $id | member id
      * @param $moduleID | module id

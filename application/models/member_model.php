@@ -13,11 +13,14 @@ class Member_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableNameMember = $this->Constant_model->tbMember;
+        $this->tableNameDepartment = $this->Constant_model->tbDepartment;
+        $this->tableNamePosition = $this->Constant_model->tbPosition;
     }
 
-    private $tableNameMember = "ics_member";
-    private $tableNameDepartment = "ics_department";
-    private $tableNamePosition = "ics_position";
+    private $tableNameMember = "";
+    private $tableNameDepartment = "";
+    private $tableNamePosition = "";
 
 
     function memberList($id = 0, $orderBy = "")

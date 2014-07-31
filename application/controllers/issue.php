@@ -80,7 +80,7 @@ class Issue extends CI_Controller
 
     function issueDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, "ics_issue");
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbIssue);
         if (!$result) {
             echo "delete fail";
             exit;

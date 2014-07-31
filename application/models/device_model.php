@@ -15,9 +15,10 @@ class Device_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbDevice;
     }
 
-    private $tableName = "ics_device";
+    private $tableName = "";
     function deviceList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";

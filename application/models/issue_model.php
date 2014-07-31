@@ -14,12 +14,16 @@ class Issue_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbIssue;
+        $this->tableImageName = $this->Constant_model->tbImage;
+        $this->tableMapImageName = $this->Constant_model->tbMapImageIssue;
+        $this->tableCompanyName = $this->Constant_model->tbCompany;
     }
 
-    private $tableName = "ics_issue";
-    private $tableImageName = "ics_image";
-    private $tableMapImageName = "ics_map_image_issue";
-    private $tableCompanyName = "ics_company";
+    private $tableName = "";
+    private $tableImageName = "";
+    private $tableMapImageName = "";
+    private $tableCompanyName = "";
 
     function issueList($id = 0, $orderBy = "")
     {

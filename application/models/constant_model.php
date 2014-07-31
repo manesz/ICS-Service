@@ -141,10 +141,19 @@ class Constant_model extends CI_Model
     }
 
     //---------------------------------Table name--------------------------------//
+    public $sessionName = "ics_session_url";
     public $tbLog = "ics_log";
     public $tbCompany = "ics_company";
+    public $tbDevice = "ics_device";
     public $tbMember = "ics_member";
-    public $sessionName = "ics_session_url";
+    public $tbIssue = "ics_issue";
+    public $tbImage = "ics_image";
+    public $tbMapImageIssue = "ics_map_image_issue";
+    public $tbDepartment = "ics_department";
+    public $tbPosition = "ics_position";
+    public $tbModule = "ics_module";
+    public $tbPermission = "ics_permission";
+    public $tbUserGroup = "ics_user_group";
 
     //---------------------------------End Table name--------------------------------//
 

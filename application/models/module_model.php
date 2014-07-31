@@ -14,15 +14,17 @@ class Module_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
-
+        $this->tableName = $this->Constant_model->tbModule;
+        $this->tbPermission = $this->Constant_model->tbPermission;
+        $this->tbUserGroup = $this->Constant_model->tbUserGroup;
     }
 
     public $arrModule = array("list", "insert", "update", "delete", "report1", "report2", "report3");
     public $strCheckNon = "0,0,0,0,0,0,0";
     public $strCheckAll = "1,1,1,1,1,1,1";
-    private $tableName = "ics_module";
-    private $tbPermission = "ics_permission";
-    private $tbUserGroup = "ics_user_group";
+    private $tableName = "";
+    private $tbPermission = "";
+    private $tbUserGroup = "";
     function moduleList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
@@ -43,7 +45,6 @@ class Module_model extends CI_Model
         } else {
             return (object)array();
         }
-
     }
 
     function moduleAdd($post)

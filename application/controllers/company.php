@@ -80,7 +80,7 @@ class Company extends CI_Controller
 
     function companyDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, 'ics_company');
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbCompany);
         if (!$result)
         {
             echo "delete fail";

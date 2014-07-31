@@ -6,9 +6,10 @@ class Position_model extends CI_Model
     {
         // Call the Model constructor
         parent::__construct();
+        $this->tableName = $this->Constant_model->tbPosition;
     }
 
-    private $tableName = "ics_position";
+    private $tableName = "";
     function positionList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
