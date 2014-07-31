@@ -223,4 +223,79 @@ class Setting extends CI_Controller
         }
         echo "Delete Success!";
     }
+
+//------------------------------------------Log----------------------------------------------//
+    function logList()
+    {
+        $post = $this->input->post();
+        if ($post || $_GET) {
+            echo json_encode(
+                $this->Log_model->get_data($_GET)
+            );
+            exit;
+        }
+        $data = array(
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "log",
+            'permission' => $this->checkPermission("Log", 0),
+            'permissionInsert' => $this->checkPermission("Log", 1),
+            'permissionUpdate' => $this->checkPermission("Log", 2),
+            'permissionDelete' => $this->checkPermission("Log", 3)
+        );
+        $this->load->view("log/list", $data);
+    }
+
+    function logAdd()
+    {
+        $post = $this->input->post();
+        if ($post) {
+            $result = $this->Log_model->logAdd($post);
+            if ($result){
+                echo "add success";
+            } else {
+                echo 'add fail';
+            }
+            exit();
+        }
+        $data = array(
+            'message' => "",
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "log",
+            'permission' => $this->checkPermission("Log", 1)
+        );
+        $this->load->view('log/add', $data);
+    }
+
+    function logEdit($id)
+    {
+        $post = $this->input->post();
+        if ($post) {
+            $result = $this->Log_model->logEdit($id, $post);
+            if ($result) {
+                echo "edit success";
+            } else {
+                echo "edit fail";
+            }
+            exit();
+        }
+        $data = array(
+            'message' => "",
+            'id' => $id,
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => "log",
+            'permission' => $this->checkPermission("Log", 2)
+        );
+        $this->load->view('log/edit', $data);
+    }
+
+    function logDelete($id)
+    {
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbLog);
+        if (!$result)
+        {
+            echo "delete fail";
+            exit;
+        }
+        echo "Delete Success!";
+    }
 }

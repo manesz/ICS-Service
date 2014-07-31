@@ -73,15 +73,20 @@ $route['module/add'] = 'setting/moduleadd';
 $route['module/edit/(:any).*'] = 'setting/moduleedit/$1';
 $route['module/delete/(:any).*'] = 'setting/moduledelete/$1';
 
-$route['department'] = 'setting/departmentList';
+$route['department'] = 'setting/departmentlist';
 $route['department/add'] = 'setting/departmentadd';
 $route['department/edit/(:any).*'] = 'setting/departmentedit/$1';
 $route['department/delete/(:any).*'] = 'setting/departmentdelete/$1';
 
-$route['position'] = 'setting/positionList';
+$route['position'] = 'setting/positionlist';
 $route['position/add'] = 'setting/positionadd';
 $route['position/edit/(:any).*'] = 'setting/positionedit/$1';
 $route['position/delete/(:any).*'] = 'setting/positiondelete/$1';
+
+$route['log'] = 'setting/loglist';
+$route['log/add'] = 'setting/logadd';
+$route['log/edit/(:any).*'] = 'setting/logedit/$1';
+$route['log/delete/(:any).*'] = 'setting/logdelete/$1';
 
 
 /* End of file routes.php */
