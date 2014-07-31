@@ -81,8 +81,8 @@ if ($_GET) {
                                         <thead>
                                         <tr>
                                             <th class="span2">#</th>
-                                            <th class="span3">Title</th>
                                             <th class="span5">Name</th>
+                                            <th class="span3">Title</th>
                                             <th class='span2'>Date Create</th>
                                         </tr>
                                         </thead>

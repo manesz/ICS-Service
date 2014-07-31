@@ -382,11 +382,10 @@ class Log_model extends CI_Model
         $primaryKey = "a.id";
         $columns = array(
             array('db' => 'a.id', 'dt' => 0),
-            array('db' => 'a.title', 'dt' => 1),
             array('db' => "CONCAT(b.prefix,
               b.firstname, ' ',
-              b.lastname) AS name", 'dt' => 2),
-//            array('db' => 'a.description', 'dt' => 3),
+              b.lastname) AS name", 'dt' => 1),
+            array('db' => 'a.title', 'dt' => 2),
             array(
                 'db' => 'a.create_datetime',
                 'dt' => 3,
@@ -413,8 +412,8 @@ class Log_model extends CI_Model
         );
         $columnsShow = array(
             array('db' => 'id', 'dt' => 0),
-            array('db' => 'title', 'dt' => 1),
-            array('db' => 'name', 'dt' => 2),
+            array('db' => 'name', 'dt' => 1),
+            array('db' => 'title', 'dt' => 2),
 //            array('db' => 'description', 'dt' => 3),
             array(
                 'db' => 'create_datetime',
