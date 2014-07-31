@@ -6,7 +6,6 @@ $this->load->view("header");
 $this->load->view("navigator_menu");
 
 $objData = $this->Position_model->positionList();
-var_dump($permissionUpdate);
 ?>
 
     <script>
