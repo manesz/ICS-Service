@@ -3,6 +3,36 @@ $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $this->load->view("header");
 ?>
+<!--        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+    <script>
+        $(function () {
+            if (localStorage.chkbx && localStorage.chkbx != '') {
+                $('#username').val(localStorage.usrname);
+                $('#password').val(localStorage.pass);
+                $(".remember div").addClass('checked');
+            } else {
+                $('#remember_me').removeAttr('checked');
+                $('#username').val('');
+                $('#password').val('');
+            }
+
+            $('#remember_me').click(function () {
+                addRememberMe();
+            });
+        });
+        function addRememberMe() {
+            if ($('#remember_me').is(':checked')) {
+                // save username and password
+                localStorage.usrname = $('#username').val();
+                localStorage.pass = $('#password').val();
+                localStorage.chkbx = $('#remember_me').val();
+            } else {
+                localStorage.usrname = '';
+                localStorage.pass = '';
+                localStorage.chkbx = '';
+            }
+        }
+    </script>
     <body class='login'>
     <div class="wrapper">
         <h1>
@@ -15,7 +45,8 @@ $this->load->view("header");
         <div class="login-body">
             <h2>SIGN IN</h2>
 
-            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn">
+            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn"
+                onsubmit="addRememberMe();">
                 <div class="control-group">
                     <div class="email controls">
                         <input type="text" id="username" autofocus="" name='username' placeholder="Username / Email"
@@ -29,9 +60,12 @@ $this->load->view("header");
                     </div>
                 </div>
                 <div class="submit">
-                    <!--                <div class="remember">-->
-                    <!--                    <input type="checkbox" name="remember" class='icheck-me' data-skin="square" data-color="blue" id="remember"> <label for="remember">Remember me</label>-->
-                    <!--                </div>-->
+                    <div class="remember">
+                        <input type="checkbox" name="remember_me"
+                               class='icheck-me' data-skin="square" data-color="blue"
+                               id="remember_me">
+                        <label for="remember_me">Remember me</label>
+                    </div>
                     <input type="submit" id="btnSignIn" value="Sign me in" class='btn btn-primary'>
                 </div>
             </form>
