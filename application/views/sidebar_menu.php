@@ -235,7 +235,7 @@ endforeach;
                 <?php if (@$expResult[0]): ?>
                 <ul class="subnav-menu">
                     <li class=''>
-                        <a href="#" data-toggle="dropdown">Log</a>
+                        <a href="<?php echo $webUrl; ?>log" data-toggle="dropdown">Log</a>
                     </li>
                 </ul>
 
