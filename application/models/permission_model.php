@@ -88,7 +88,6 @@ class Permission_model extends CI_Model
     function userGroupNew($userID, $permissionID)
     {
         $data = array(
-            'id' => $userID,
             'user_id' => intval($userID),
             'permission_id  ' => intval($permissionID),
             'create_datetime' => date('Y-m-d H:i:s'),
