@@ -9,6 +9,7 @@ $arrDevice = $this->Device_model->deviceList($id);
 extract((array)$arrDevice[0]);
 $pathFileManager = "uploads/device/$id/files/";
 $this->Helper_model->checkHaveFolder($pathFileManager, true);
+$objCompany = $this->Company_model->companyList();
 ?>
     <script>
         var url_post_data = "<?php echo $webUrl; ?>device/edit/<?php echo @$id; ?>";
@@ -66,7 +67,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">Edit Device</a>
+                        <a href="<?php echo $webUrl; ?>device/edit/<?php echo $id; ?>">Edit Device</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -124,6 +125,24 @@ $this->load->view("sidebar_menu");
                                                            data-dismiss="fileupload">Remove</a>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="company_id" class="control-label">Company :</label>
+
+                                            <div class="controls">
+                                                <div class="input-xlarge">
+                                                    <select name="company_id" id="company_id"
+                                                            class='chosen-select'>
+                                                        <option value=""></option>
+                                                        <?php foreach ($objCompany as $key => $value): ?>
+                                                            <option <?php echo @$company_id == $value->id ? 'selected' : ''; ?>
+                                                                value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
+                                                        <?php endforeach; ?>
+                                                        <option
+                                                            <?php echo @$company_id == 0 ? 'selected' : ''; ?>
+                                                            value="0">No Company</option>
+                                                    </select></div>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -196,7 +215,8 @@ $this->load->view("sidebar_menu");
                                 </form>
                             </div>
                             <!-- END: .box-content nopadding -->
-                        <?php else:
+                        <?php
+                        else:
                             $this->load->view("permission_page");
                         endif;
                         ?>

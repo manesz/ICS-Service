@@ -55,6 +55,7 @@ $objData = $this->Device_model->deviceList();
                                         <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Company</th>
                                             <th>Name</th>
                                             <th>Model</th>
                                             <th>Brand</th>
@@ -70,6 +71,7 @@ $objData = $this->Device_model->deviceList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
+                                                <td><?php echo $value->name_th ? $value->name_th: '-'; ?></td>
                                                 <td><?php echo $value->name; ?></td>
                                                 <td><?php echo $value->model; ?></td>
                                                 <td><?php echo "$value->brand"; ?></td>
