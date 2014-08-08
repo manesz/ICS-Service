@@ -62,6 +62,11 @@ $route['device/add'] = 'device/deviceadd';
 $route['device/edit/(:any).*'] = 'device/deviceedit/$1';
 $route['device/delete/(:any).*'] = 'device/devicedelete/$1';
 
+//Device
+$route['quotation/add'] = 'quotation/quotationadd';
+$route['quotation/edit/(:any).*'] = 'quotation/quotationdit/$1';
+$route['quotation/delete/(:any).*'] = 'quotation/quotationdelete/$1';
+
 //Issue
 $route['issue/add'] = 'issue/issueadd';
 $route['issue/edit/(:any).*'] = 'issue/issueedit/$1';
