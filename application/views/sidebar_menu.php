@@ -139,6 +139,32 @@ endforeach;
                     </li>
                 </ul>
             <?php endif; ?>
+                <?php break;
+            case "Customer":
+                ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
+                <ul class="subnav-menu">
+                    <li class='dropdown'>
+                        <a href="#" data-toggle="dropdown">Customer</a>
+                        <ul class="dropdown-menu">
+                            <?php if (@$expResult[0]): ?>
+                                <li><a href="<?php echo $webUrl; ?>customer">List</a></li>
+                            <?php endif; ?>
+                            <?php if (@$expResult[1]): ?>
+                                <li><a href="<?php echo $webUrl; ?>customer/add">Add new</a></li>
+                            <?php endif; ?>
+<!--                            --><?php //if (@$expResult[4]): ?>
+<!--                                <li><a href="#">Report-1</a></li>-->
+<!--                            --><?php //endif; ?>
+<!--                            --><?php //if (@$expResult[5]): ?>
+<!--                                <li><a href="#">Report-2</a></li>-->
+<!--                            --><?php //endif; ?>
+<!--                            --><?php //if (@$expResult[6]): ?>
+<!--                                <li><a href="#">Report-3</a></li>-->
+<!--                            --><?php //endif; ?>
+                        </ul>
+                    </li>
+                </ul>
+            <?php endif; ?>
 
                 <?php break; ?>
             <?php

@@ -57,12 +57,17 @@ $route['company/add'] = 'company/companyadd';
 $route['company/edit/(:any).*'] = 'company/companyedit/$1';
 $route['company/delete/(:any).*'] = 'company/companydelete/$1';
 
+//Customer
+$route['customer/add'] = 'customer/customeradd';
+$route['customer/edit/(:any).*'] = 'customer/customeredit/$1';
+$route['customer/delete/(:any).*'] = 'customer/customerdelete/$1';
+
 //Device
 $route['device/add'] = 'device/deviceadd';
 $route['device/edit/(:any).*'] = 'device/deviceedit/$1';
 $route['device/delete/(:any).*'] = 'device/devicedelete/$1';
 
-//Device
+//Quotation
 $route['quotation/add'] = 'quotation/quotationadd';
 $route['quotation/edit/(:any).*'] = 'quotation/quotationdit/$1';
 $route['quotation/delete/(:any).*'] = 'quotation/quotationdelete/$1';
