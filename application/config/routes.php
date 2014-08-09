@@ -67,6 +67,11 @@ $route['device/add'] = 'device/deviceadd';
 $route['device/edit/(:any).*'] = 'device/deviceedit/$1';
 $route['device/delete/(:any).*'] = 'device/devicedelete/$1';
 
+//Project
+$route['project/add'] = 'project/projectadd';
+$route['project/edit/(:any).*'] = 'project/projectedit/$1';
+$route['project/delete/(:any).*'] = 'project/projectdelete/$1';
+
 //Quotation
 $route['quotation/add'] = 'quotation/quotationadd';
 $route['quotation/edit/(:any).*'] = 'quotation/quotationdit/$1';

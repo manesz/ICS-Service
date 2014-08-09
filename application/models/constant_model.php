@@ -144,7 +144,9 @@ class Constant_model extends CI_Model
     public $sessionName = "ics_session_url";
     public $tbLog = "ics_log";
     public $tbCompany = "ics_company";
+    public $tbCustomer = "ics_customer";
     public $tbDevice = "ics_device";
+    public $tbProject = "ics_project";
     public $tbMember = "ics_member";
     public $tbIssue = "ics_issue";
     public $tbImage = "ics_image";
@@ -154,6 +156,8 @@ class Constant_model extends CI_Model
     public $tbModule = "ics_module";
     public $tbPermission = "ics_permission";
     public $tbUserGroup = "ics_user_group";
+    public $tbQuotation = "ics_quotation";
+    public $tbQuotationItem = "ics_quotation_item";
 
     //---------------------------------End Table name--------------------------------//
 

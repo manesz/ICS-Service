@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: Administrator
@@ -6,8 +7,6 @@
  * Time: 22:55 น.
  * To change this template use File | Settings | File Templates.
  */
-
-
 class Upload_model extends CI_Model
 {
     function __construct()
@@ -46,6 +45,7 @@ class Upload_model extends CI_Model
             }
             $fileName = str_replace(' ', '_', $fileName);
             $fileName = date("Ymd") . "-" . date('His') . "-$fileType-" . $fileName;
+            if (!$this->checkCreateFolder(@$imagePatch))return false;
             $newName = "$imagePatch$fileName";
 
             list($type, $data) = explode(';', $data);
@@ -85,6 +85,7 @@ class Upload_model extends CI_Model
             }
             $fileName = str_replace(' ', '_', $fileName);
             $fileName = date("Ymd") . "-" . date('His') . "-$fileType-" . $fileName;
+            if (!$this->checkCreateFolder(@$imagePatch))return false;
             $newName = "$imagePatch$fileName";
 
             list($type, $data) = explode(';', $data);
@@ -101,17 +102,25 @@ class Upload_model extends CI_Model
         return false;
     }
 
-    function createFolder($path)
+    function checkCreateFolder($path)
     {
-        $folderName = date("Y-m-d");
-        $pathFolder = "$path/$folderName";
-        if (!is_dir($pathFolder)) //create the folder if it's not already exists
+
+        if (!is_dir($path)) //create the folder if it's not already exists
         {
-            $flgCreate = mkdir($pathFolder, 0777, true);
+            $flgCreate = mkdir($path, 0777, true);
             if (!$flgCreate) {
                 return "Create False";
             }
         }
+        return true;
+    }
+
+    function createFolder($path)
+    {
+        $folderName = date("Y-m-d");
+        $pathFolder = "$path/$folderName";
+        if (!$this->checkCreateFolder($pathFolder))
+            return false;
         $this->pathUpload = $pathFolder;
         return $folderName;
     }
