@@ -74,7 +74,7 @@ class Setting extends CI_Controller
             'selectSubMenu' => "modules",
             'permission' => $this->checkPermission("Modules", 2)
         );
-        $this->load->view('module/edit', $data);
+        $this->load->view('module/add', $data);
     }
 
     function moduleDelete($id)

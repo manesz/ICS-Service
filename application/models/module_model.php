@@ -28,7 +28,7 @@ class Module_model extends CI_Model
     function moduleList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND id = $id";
-        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY sort ASC";
         $sql = "
             SELECT
               *
@@ -52,6 +52,7 @@ class Module_model extends CI_Model
         extract($post);
         $data = array(
             'title' => trim(@$title),
+            'sort' => trim(@$sort),
             'description' => trim(@$description),
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
@@ -71,6 +72,7 @@ class Module_model extends CI_Model
         $data = array(
             'id' => $id,
             'title' => trim(@$title),
+            'sort' => trim(@$sort),
             'description' => trim(@$description),
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
@@ -108,7 +110,7 @@ class Module_model extends CI_Model
         $id = @$this->session->userdata['id'];
         $strAnd = " AND c.`user_id` = $id";
         $strAnd .= $module == "" ? "" : " AND a.title = '$module'";
-        $sql = "
+        echo $sql = "
             SELECT
               a.*
               ,b.`permission`
@@ -128,7 +130,7 @@ class Module_model extends CI_Model
               AND a.`publish` = 1
               AND b.permission != '$this->strCheckNon'
               $strAnd
-              ORDER BY a.sort, a.id
+              ORDER BY a.sort ASC
         ";
         $query = $this->db->query($sql);
         if ($query->num_rows()) {

@@ -1,13 +1,18 @@
 <?php
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
-
 $this->load->view("header");
 $this->load->view("navigator_menu");
 
+$id = $id ? $id : 0;
+if ($id) {
+    $arrData = $this->Module_model->ModuleList($id);
+    $arrData = (array)$arrData[0];
+    extract($arrData);
+}
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>module/add";
+        var url_post_data = "<?php echo $webUrl; ?>module/<?php echo $id?"edit/$id":"add"; ?>";
         var url_list = "<?php echo $webUrl; ?>module";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -36,13 +41,13 @@ $this->load->view("sidebar_menu");
         <div class="container-fluid">
             <div class="page-header">
                 <div class="pull-left">
-                    <h1>New Module</h1>
+                    <h1><?php echo $id ? "Edit" : "Add"; ?> Module</h1>
                 </div>
             </div>
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
@@ -50,7 +55,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>module/add">New Module</a>
+                        <a href="<?php echo $webUrl; ?>module/<?php echo $id?"edit/$id":"add"; ?>"><?php echo $id ? "Edit" : "Add"; ?> Module</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -73,26 +78,34 @@ $this->load->view("sidebar_menu");
                                       class='form-horizontal form-column form-bordered form-validate'
                                       id="formPost" name="formPost">
                                     <div class="span12">
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label for="title" class="control-label">Title :</label>
+                                        <div class="control-group">
+                                            <label for="title" class="control-label">Title :</label>
 
-                                                <div class="controls">
-                                                    <input type="text" name="title" id="title"
-                                                           placeholder="Text input" class="input-block-level"
-                                                           data-rule-required="true">
-                                                </div>
+                                            <div class="controls">
+                                                <input type="text" name="title" id="title"
+                                                       placeholder="Text input" class="input-block-level"
+                                                       data-rule-required="true" value="<?php echo @$title; ?>">
                                             </div>
                                         </div>
-                                        <div class="span6">
 
-                                            <div class="control-group">
-                                                <label for="description" class="control-label">Description :</label>
+                                        <div class="control-group">
+                                            <label for="sort" class="control-label">Sort :</label>
 
-                                                <div class="controls">
-                                                    <textarea name="description" id="description" rows="5"
-                                                              class="input-block-level"></textarea>
-                                                </div>
+                                            <div class="controls">
+                                                <input type="text" name="sort" id="sort"
+                                                       placeholder="Text input" class="input-xlarge"
+                                                       data-rule-required="true"
+                                                       data-rule-number="true"
+                                                       maxlength="3"
+                                                       value="<?php echo @$sort ? $sort : "999"; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="description" class="control-label">Description :</label>
+
+                                            <div class="controls">
+                                                <textarea name="description" id="description" rows="5"
+                                                          class="input-block-level"><?php echo @$description; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-actions">
@@ -104,10 +117,10 @@ $this->load->view("sidebar_menu");
                                 </form>
                             </div>
                             <!-- END: .box-content nopadding -->
-                        <?php else:
+                        <?php
+                        else:
                             $this->load->view("permission_page");
-                        endif;
-                        ?>
+                        endif;?>
                     </div>
                     <!-- END: .box -->
                 </div>
@@ -120,4 +133,3 @@ $this->load->view("sidebar_menu");
     </div><!-- END: .container-fluid -->
 <?php
 $this->load->view("footer");
-?>
