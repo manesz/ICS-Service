@@ -9562,3 +9562,6 @@ a:focus {
 .text-align-center {
     text-align: center !important;
 }
+.text-align-right {
+    text-align: right !important;
+}

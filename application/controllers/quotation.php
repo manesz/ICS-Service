@@ -77,9 +77,34 @@ class Quotation extends CI_Controller
         $this->load->view("quotation/add", $data);
     }
 
+    function quotationItemEdit($id)
+    {
+        $post = $this->input->post();
+        if ($post) {
+            $result = $this->Quotation_model->quotationItemEdit($id, $post);
+            if ($result) {
+                echo "edit success";
+            } else {
+                echo "edit fail";
+            }
+            exit();
+        }
+    }
+
     function quotationDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbQuotation);
+        if (!$result)
+        {
+            echo "delete fail";
+            exit;
+        }
+        echo "Delete Success!";
+    }
+
+    function quotationItemDelete($id)
+    {
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbQuotationItem);
         if (!$result)
         {
             echo "delete fail";

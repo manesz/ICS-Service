@@ -85,7 +85,7 @@ function postData(url, data, urlRedirect) {
             clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
         } else {
             clickNotifyUpdate();
-            if (urlRedirect != "")
+            if (urlRedirect != "" && urlRedirect != false)
                 openUrl(urlRedirect);
         }
 //        alert(result);
