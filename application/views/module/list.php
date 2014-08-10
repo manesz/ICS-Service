@@ -61,6 +61,7 @@ $objData = $this->Module_model->moduleList();
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
+                                            <th>Sort</th>
                                             <th>Description</th>
                                             <th>Create Datetime</th>
                                             <th>Update Datetime</th>
@@ -75,6 +76,7 @@ $objData = $this->Module_model->moduleList();
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->title; ?></td>
+                                                <td><?php echo $value->sort; ?></td>
                                                 <td><?php echo $value->description; ?></td>
                                                 <td><?php echo "$value->create_datetime"; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
