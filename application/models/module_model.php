@@ -110,7 +110,7 @@ class Module_model extends CI_Model
         $id = @$this->session->userdata['id'];
         $strAnd = " AND c.`user_id` = $id";
         $strAnd .= $module == "" ? "" : " AND a.title = '$module'";
-        echo $sql = "
+        $sql = "
             SELECT
               a.*
               ,b.`permission`
