@@ -4,7 +4,7 @@ $baseUrl = base_url();
 $this->load->view("header");
 $this->load->view("navigator_menu");
 
-$id = $id ? $id : 0;
+$id = @$id ? $id : 0;
 if ($id) {
     $arrData = $this->Module_model->ModuleList($id);
     $arrData = (array)$arrData[0];
