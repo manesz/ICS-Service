@@ -438,14 +438,6 @@ $this->load->view("sidebar_menu");
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="phone" class="control-label">Phone</label>
-
-                        <div class="controls">
-                            <input type="text" name="phone" id="phone" placeholder="Phone"
-                                   class="input-xlarge">
-                        </div>
-                    </div>
-                    <div class="control-group">
                         <label for="position_id" class="control-label">Position</label>
 
                         <div class="controls">
@@ -459,10 +451,26 @@ $this->load->view("sidebar_menu");
                         </div>
                     </div>
                     <div class="control-group">
+                        <label for="phone" class="control-label">Phone</label>
+
+                        <div class="controls">
+                            <input type="text" name="phone" id="phone" placeholder="Phone"
+                                   class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label for="mobile" class="control-label">Mobile</label>
 
                         <div class="controls">
                             <input type="text" name="mobile" id="mobile" placeholder="Mobile"
+                                   class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="fax" class="control-label">Fax</label>
+
+                        <div class="controls">
+                            <input type="text" name="fax" id="fax" placeholder="Fax"
                                    class="input-xlarge">
                         </div>
                     </div>

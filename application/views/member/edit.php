@@ -27,10 +27,10 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 ?>
 
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>";
-        var url_list = "<?php echo $webUrl; ?>member";
-        var url_edit_module = "<?php echo $webUrl; ?>member/memberSetModule/<?php echo $id; ?>";
-        var url_check_duplicate = "<?php echo $webUrl; ?>member/memberCheckDuplicate/";
+        var url_post_data = "<?php echo @$webUrl; ?>member/edit/<?php echo @$id; ?>";
+        var url_list = "<?php echo @$webUrl; ?>member";
+        var url_edit_module = "<?php echo @$webUrl; ?>member/memberSetModule/<?php echo @$id; ?>";
+        var url_check_duplicate = "<?php echo @$webUrl; ?>member/memberCheckDuplicate/";
         var old_username = "<?php echo @$username; ?>";
         $(document).ready(function () {
             $("#btnCancel1").click(function () {
@@ -232,15 +232,15 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
     <div class="breadcrumbs">
         <ul>
             <li>
-                <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                <a href="<?php echo @$webUrl; ?>Dashboard">Home</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a href="<?php echo $webUrl; ?>member">Member</a>
+                <a href="<?php echo @$webUrl; ?>member">Member</a>
                 <i class="icon-angle-right"></i>
             </li>
             <li>
-                <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>">Edit Member</a>
+                <a href="<?php echo @$webUrl; ?>member/edit/<?php echo @$id; ?>">Edit Member</a>
             </li>
         </ul>
         <div class="close-bread">
@@ -277,8 +277,8 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
     <form action="#" method="POST" autocomplete="off"
           class='form-horizontal form-column form-bordered form-validate'
           id="formPost" name="formPost">
-    <input type="hidden" name="employee_number" id="employee_number" value="<?php echo $employee_number; ?>">
-    <input type="hidden" name="user_group" id="user_group" value="<?php echo $user_group; ?>">
+    <input type="hidden" name="employee_number" id="employee_number" value="<?php echo @$employee_number; ?>">
+    <input type="hidden" name="user_group" id="user_group" value="<?php echo @$user_group; ?>">
 
     <div class="span6">
         <div class="control-group">
@@ -306,7 +306,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                                             </span>
                         <?php if (file_exists(@$image_path)): ?>
                             <input type="button" id="btnDeleteImage"
-                                   onclick="removeImage('<?php echo $image_path; ?>');" class="btn"
+                                   onclick="removeImage('<?php echo @$image_path; ?>');" class="btn"
                                    value="Remove">
                         <?php endif; ?>
                         <a href="#" class="btn fileupload-exists"
@@ -322,7 +322,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                 <?php if ($checkEditUser): ?>
                     <div class="input-append">
                         <input type="text" id="username" name="username" autocomplete="off"
-                               value="<?php echo $username; ?>">
+                               value="<?php echo @$username; ?>">
                         <a href="javascript:checkUsername();" class="btn add-on"><i class="icon-refresh"></i></a>
 
                     </div>
@@ -330,7 +330,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                             Please enter a username
                         </span>
                 <?php else : ?>
-                    <?php echo $username; ?>
+                    <?php echo @$username; ?>
                 <?php endif; ?>
             </div>
         </div>
@@ -355,7 +355,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
             <div class="controls">
                 <input type="text" name="firstname" id="firstname" placeholder="First name"
-                       class="input-xlarge" value="<?php echo $firstname; ?>"
+                       class="input-xlarge" value="<?php echo @$firstname; ?>"
                        data-rule-required="true" data-rule-minlength="2">
             </div>
         </div>
@@ -364,7 +364,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
             <div class="controls">
                 <input type="text" name="lastname" id="lastname" placeholder="Last name"
-                       class="input-xlarge" value="<?php echo $lastname; ?>"
+                       class="input-xlarge" value="<?php echo @$lastname; ?>"
                        data-rule-required="true" data-rule-minlength="2">
             </div>
         </div>
@@ -376,10 +376,10 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <div class="controls">
                 <select name="prefix" id="prefix" data-rule-required="true">
                     <option value=""></option>
-                    <option <?php echo $prefix == 'Mr.' ? "selected" : ""; ?> value="Mr.">Mr.</option>
-                    <option <?php echo $prefix == 'Ms.' ? "selected" : ""; ?> value="Ms.">Ms.</option>
-                    <option <?php echo $prefix == 'Miss' ? "selected" : ""; ?> value="Miss">Miss</option>
-                    <option <?php echo $prefix == 'Mrs.' ? "selected" : ""; ?> value="Mrs.">Mrs.</option>
+                    <option <?php echo @$prefix == 'Mr.' ? "selected" : ""; ?> value="Mr.">Mr.</option>
+                    <option <?php echo @$prefix == 'Ms.' ? "selected" : ""; ?> value="Ms.">Ms.</option>
+                    <option <?php echo @$prefix == 'Miss' ? "selected" : ""; ?> value="Miss">Miss</option>
+                    <option <?php echo @$prefix == 'Mrs.' ? "selected" : ""; ?> value="Mrs.">Mrs.</option>
                 </select>
             </div>
         </div>
@@ -390,12 +390,12 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                 <label for="gender1" class="radio">
                     <input id="gender1" name="gender" type="radio" value=""
                            onclick="$('#gender').val('0');"
-                        <?php echo $gender == 0 ? "checked" : ""; ?>
+                        <?php echo @$gender == 0 ? "checked" : ""; ?>
                            data-rule-required="true"/>Man</label>
                 <label for="gender2" class="radio">
                     <input id="gender2" name="gender" type="radio" value=""
                            onclick="$('#gender').val('1');"
-                        <?php echo $gender == 1 ? "checked" : ""; ?>
+                        <?php echo @$gender == 1 ? "checked" : ""; ?>
                            data-rule-required="true"/>Women</label>
 
                 <input type="hidden" value="" id="gender">
@@ -406,7 +406,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
             <div class="controls">
                 <input type="text" name="age" id="age" placeholder="Age"
-                       class="input-xlarge" value="<?php echo $age; ?>"
+                       class="input-xlarge" value="<?php echo @$age; ?>"
                        data-rule-number="true" data-rule-required="true"/>
             </div>
         </div>
@@ -418,8 +418,8 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                     <select name="company_id" id="company_id" data-rule-required="true">
                         <option value=""></option>
                         <?php foreach ($arrCompany as $key => $value): ?>
-                            <option value="<?php echo $value->id; ?>"
-                                <?php echo @$company_id == $value->id ? 'selected' : '' ?>><?php echo $value->name_th; ?></option>
+                            <option value="<?php echo @$value->id; ?>"
+                                <?php echo @$company_id == $value->id ? 'selected' : '' ?>><?php echo @$value->name_th; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
@@ -436,11 +436,11 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                 <?php if ($checkEditUser): ?>
                     <select name="department_id" id="department_id" data-rule-required="true">
                         <option value=""></option>
-                        <option value="0" <?php echo $department_id == 0 ? 'selected' : '' ?>>-</option>
+                        <option value="0" <?php echo @$department_id == 0 ? 'selected' : '' ?>>-</option>
                         <?php foreach ($objDepartment as $key => $value): ?>
-                            <option value="<?php echo $value->id; ?>"
+                            <option value="<?php echo @$value->id; ?>"
                                 <?php echo @$department_id == $value->id ? 'selected' : '' ?>
-                                ><?php echo $value->title; ?></option>
+                                ><?php echo @$value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
@@ -452,24 +452,16 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             </div>
         </div>
         <div class="control-group">
-            <label for="phone" class="control-label">Phone</label>
-
-            <div class="controls">
-                <input type="text" name="phone" id="phone" placeholder="Phone"
-                       class="input-xlarge" value="<?php echo $phone; ?>">
-            </div>
-        </div>
-        <div class="control-group">
             <label for="position_id" class="control-label">Position</label>
 
             <div class="controls">
                 <?php if ($checkEditUser): ?>
                     <select name="position_id" id="position_id" data-rule-required="true">
                         <option value=""></option>
-                        <option value="0" <?php echo $position_id == 0 ? 'selected' : '' ?>>-</option>
+                        <option value="0" <?php echo @$position_id == 0 ? 'selected' : '' ?>>-</option>
                         <?php foreach ($objPosition as $key => $value): ?>
-                            <option value="<?php echo $value->id; ?>"
-                                <?php echo $position_id == $value->id ? 'selected' : '' ?>><?php echo $value->title; ?></option>
+                            <option value="<?php echo @$value->id; ?>"
+                                <?php echo @$position_id == $value->id ? 'selected' : '' ?>><?php echo @$value->title; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
@@ -481,11 +473,27 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             </div>
         </div>
         <div class="control-group">
+            <label for="phone" class="control-label">Phone</label>
+
+            <div class="controls">
+                <input type="text" name="phone" id="phone" placeholder="Phone"
+                       class="input-xlarge" value="<?php echo @$phone; ?>">
+            </div>
+        </div>
+        <div class="control-group">
             <label for="mobile" class="control-label">Mobile</label>
 
             <div class="controls">
                 <input type="text" name="mobile" id="mobile" placeholder="Mobile"
-                       class="input-xlarge" value="<?php echo $mobile; ?>">
+                       class="input-xlarge" value="<?php echo @$mobile; ?>">
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="fax" class="control-label">Fax</label>
+
+            <div class="controls">
+                <input type="text" name="fax" id="fax" placeholder="Fax"
+                       class="input-xlarge" value="<?php echo @$fax; ?>">
             </div>
         </div>
         <div class="control-group">
@@ -493,7 +501,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
             <div class="controls">
                 <input type="text" name="email" id="email" placeholder="Email"
-                       class="input-xlarge" value="<?php echo $email; ?>"
+                       class="input-xlarge" value="<?php echo @$email; ?>"
                        data-rule-required="true">
             </div>
         </div>
@@ -504,7 +512,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
             <div class="controls">
                 <textarea name="address" id="address" rows="5"
-                          class="input-block-level"><?php echo $address; ?></textarea>
+                          class="input-block-level"><?php echo @$address; ?></textarea>
             </div>
         </div>
         <div class="form-actions">
@@ -541,72 +549,72 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                                 <div class="box-title">
                                     <h3>
                                         <i class="glyphicon-keys"></i>
-                                        Module : <?php echo $value->title; ?>
+                                        Module : <?php echo @$value->title; ?>
                                     </h3>
                                 </div>
                             </div>
-                            <!--                            <legend>Module : --><?php //echo $value->title; ?>
+                            <!--                            <legend>Module : --><?php //echo @$value->title; ?>
                             <!--                            </legend>-->
                             <!--หน้าสลับลำดับ-->
                             <div class="span12">
-                                <input type="checkbox" id="cbModuleAll_<?php echo $value->id; ?>"
-                                    <?php echo $checkBoxAll; ?>
-                                       onclick="return setValueModuleAll(<?php echo $value->id; ?>);">
-                                <label class="cbInLine" for="cbModuleAll_<?php echo $value->id; ?>">All</label>
+                                <input type="checkbox" id="cbModuleAll_<?php echo @$value->id; ?>"
+                                    <?php echo @$checkBoxAll; ?>
+                                       onclick="return setValueModuleAll(<?php echo @$value->id; ?>);">
+                                <label class="cbInLine" for="cbModuleAll_<?php echo @$value->id; ?>">All</label>
                             </div>
                             <div class="span12">
                                 <div class="span2">
-                                    <input id="list_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="list_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[0] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="list_<?php echo $value->id; ?>">list</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="list_<?php echo @$value->id; ?>">list</label>
                                 </div>
                                 <div class="span2">
-                                    <input id="insert_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="insert_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[1] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="insert_<?php echo $value->id; ?>">insert</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="insert_<?php echo @$value->id; ?>">insert</label>
                                 </div>
                                 <div class="span2">
-                                    <input id="update_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="update_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[2] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="update_<?php echo $value->id; ?>">update</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="update_<?php echo @$value->id; ?>">update</label>
                                 </div>
                             </div>
                             <div class="span12">
                                 <div class="span2">
-                                    <input id="delete_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="delete_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[3] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="delete_<?php echo $value->id; ?>">delete</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="delete_<?php echo @$value->id; ?>">delete</label>
                                 </div>
                                 <div class="span2">
-                                    <input id="report1_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="report1_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[4] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report1_<?php echo $value->id; ?>">report 1</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="report1_<?php echo @$value->id; ?>">report 1</label>
                                 </div>
                                 <div class="span2">
-                                    <input id="report2_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="report2_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[5] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report2_<?php echo $value->id; ?>">report 2</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="report2_<?php echo @$value->id; ?>">report 2</label>
                                 </div>
                             </div>
                             <div class="span12">
                                 <div class="span2">
-                                    <input id="report3_<?php echo $value->id; ?>" type="checkbox"
-                                           class="cbModule_<?php echo $value->id; ?>"
+                                    <input id="report3_<?php echo @$value->id; ?>" type="checkbox"
+                                           class="cbModule_<?php echo @$value->id; ?>"
                                         <?php echo @$arrCheck[6] == "1" ? "checked" : ""; ?>
-                                           onclick="return setValueModule(<?php echo $value->id; ?>);">
-                                    <label class="cbInLine" for="report3_<?php echo $value->id; ?>">report 3</label>
+                                           onclick="return setValueModule(<?php echo @$value->id; ?>);">
+                                    <label class="cbInLine" for="report3_<?php echo @$value->id; ?>">report 3</label>
                                 </div>
                             </div>
                         </fieldset>
