@@ -62,15 +62,17 @@ $objData = $this->Quotation_model->quotationList();
                             <?php if (@$permission): ?>
                                 <div class="box-content nopadding">
                                     <table
-                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
+                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered dataTable-scroll-x">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Project</th>
-                                            <th>Company</th>
-                                            <th>Quotation Date</th>
-                                            <th>Update Datetime</th>
-                                            <th>Edit</th>
+                                            <th class="">#</th>
+                                            <th class="">Quotation No</th>
+                                            <th class="">Project</th>
+                                            <th class="">Company</th>
+                                            <th class="">Total Amount</th>
+                                            <th class="">Quotation Date</th>
+                                            <th class="">Update Datetime</th>
+                                            <th class="">Edit</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -80,23 +82,11 @@ $objData = $this->Quotation_model->quotationList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key + 1; ?></td>
-                                                <td><?php if ($value->project_name_en && $value->project_name_th) {
-                                                        echo "$value->project_name_en ($value->project_name_th)";
-                                                    } else if (!$value->project_name_en && $value->project_name_th) {
-                                                        echo $value->project_name_th;
-                                                    } else {
-                                                        echo '-';
-                                                    } ?></td>
-                                                <td><?php if ($value->company_name_en && $value->company_name_th) {
-                                                        echo "$value->company_name_en ($value->company_name_th)";
-                                                    } else if (!$value->company_name_en && $value->company_name_th) {
-                                                        echo $value->company_name_th;
-                                                    } else {
-                                                        echo '-';
-                                                    } ?></td>
+                                                <td><?php echo $value->quotation_no; ?></td>
+                                                <td><?php echo $value->project_name_th; ?></td>
+                                                <td><?php echo $value->company_name_th; ?></td>
+                                                <td><?php echo number_format($value->total_amount, 2); ?></td>
                                                 <td><?php echo "$value->quotation_date"; ?></td>
-                                                <!--                                                <td>-->
-                                                <?php //echo "$value->quotation_date"; ?><!--</td>-->
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
@@ -109,14 +99,14 @@ $objData = $this->Quotation_model->quotationList();
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
                                                            onclick="urlDelete='<?php echo $webUrl; ?>quotation/delete/<?php echo $value->id; ?>';"
-                                                           role="button" data-toggle="modal">
+                                                           data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>
                                                     <?php endif; ?>
                                                     <a href="<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Print"><i
-                                                            class="icon-print"></i></a>
+                                                            class="icon-print"></i></a>&nbsp;
                                                     <a href="<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Download Excel"><i

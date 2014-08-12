@@ -18,20 +18,29 @@ if ($id) {
     $objQuotationItems = $this->Quotation_model->quotationItemList(0, $id);
 } else {
     $quotation_no = $this->Quotation_model->genQuotationNo();
+    $proposer = @$this->session->userdata['firstname'] . " " . @$this->session->userdata['lastname'];
+    $mobile = @$this->session->userdata['mobile'];
+    $telephone = @$this->session->userdata['phone'];
+    $fax = @$this->session->userdata['fax'];
+    $email = @$this->session->userdata['email'];
 }
 $objProject = $this->Project_model->projectList();
 $objCompany = $this->Company_model->companyList();
+
 $arrayCompanyName = array();
+$arrayCompanyData = array();
 $arrayCompanyAddress = array();
 $arrayCompanyTelephone = array();
 $arrayCompanyFax = array();
 $arrayCompanyEmail = array();
 foreach ($objCompany as $key => $value) {
-    if ($value->name_th && $value->name_th != '-') {
-        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
-    } else if ($value->name_en && $value->name_en != '-') {
-        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
-    }
+    $name_th = str_replace('"', "'", $value->name_th);
+//    if ($value->name_th && $value->name_th != '-') {
+//        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
+//    } else if ($value->name_en && $value->name_en != '-') {
+//        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
+//    }
+    $arrayCompanyName[] = $name_th;
     $arrayCompanyAddress[] = $value->address_th;
     $arrayCompanyTelephone[] = $value->telephone;
     $arrayCompanyFax[] = $value->fax;
@@ -39,13 +48,17 @@ foreach ($objCompany as $key => $value) {
 }
 
 $objCustomer = $this->Customer_model->customerList();
-$arrayCustomer = array();
+$arrayCustomerName = array();
+$arrayCustomerData = array();
 foreach ($objCustomer as $key => $value) {
-    if ($value->name_th && $value->name_th != '-') {
-        $arrayCustomer[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
-    } else if ($value->name_en && $value->name_en != '-') {
-        $arrayCustomer[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
-    }
+    $name_th = str_replace('"', "'", $value->name_th);
+//    if ($value->name_th && $value->name_th != '-') {
+//        $arrayCustomerName[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
+//    } else if ($value->name_en && $value->name_en != '-') {
+//        $arrayCustomerName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
+//    }
+    $arrayCustomerName[] = $name_th;
+    $arrayCustomerData[] = "['$value->company_name_th', '$value->address_th', '$value->mobile', '$value->telephone', '$value->fax', '$value->email']";
 }
 
 ?>
@@ -54,6 +67,12 @@ foreach ($objCustomer as $key => $value) {
         var url_list = "<?php echo $webUrl; ?>quotation";
         var url_post_edit_item = "<?php echo $webUrl; ?>quotation/item/edit/";
         var url_post_delete_item = "<?php echo $webUrl; ?>quotation/item/delete/";
+
+        var array_company_name = [<?php echo "'". implode("', '", $arrayCompanyName) . "'"; ?>];
+        var array_company_data = [<?php echo implode(',', $arrayCompanyData); ?>];
+
+        var array_customer_name = [<?php echo "'". implode("', '", $arrayCustomerName) . "'"; ?>];
+        var array_customer_data = [<?php echo implode(',', $arrayCustomerData); ?>];
     </script>
     <script src="<?php echo $baseUrl; ?>assets/js/ics_quotation.js"></script>
 <div class="container-fluid" id="content">
@@ -112,16 +131,15 @@ $this->load->view("sidebar_menu");
                 <label for="project_id" class="control-label">Project :</label>
 
                 <div class="controls">
-                    <div class="input-xlarge">
-                        <select name="project_id" id="project_id"
-                                class='chosen-select'>
-                            <option value=""></option>
-                            <?php foreach ($objProject as $key => $value): ?>
-                                <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
-                                    value="<?php echo $value->id; ?>"><?php
-                                    if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
-                            <?php endforeach; ?>
-                        </select></div>
+                    <select name="project_id" id="project_id" data-rule-required="true"
+                            class="input-xlarge" autofocus="">
+                        <option value="">-- Select Project --</option>
+                        <?php foreach ($objProject as $key => $value): ?>
+                            <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
+                                value="<?php echo $value->id; ?>"><?php
+                                if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <div class="control-group">
@@ -129,8 +147,8 @@ $this->load->view("sidebar_menu");
 
                 <div class="controls">
                     <input type="text" data-provide="typeahead" id="customer_name" name="customer_name"
-                           data-items="4" class="input-xlarge" autofocus=""
-                           data-source='[<?php echo implode(',', $arrayCustomer); ?>]'
+                           data-items="4" class="input-xlarge"
+                           data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCustomerName) . "&quot;"; ?>]'
                            value="<?php echo @$customer_name; ?>">
                 </div>
             </div>
@@ -140,7 +158,7 @@ $this->load->view("sidebar_menu");
                 <div class="controls">
                     <input type="text" data-provide="typeahead" id="company_name" name="company_name"
                            data-items="4" class="input-xlarge"
-                           data-source='[<?php echo implode(',', $arrayCompanyName); ?>]'
+                           data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCompanyName) . "&quot;"; ?>]'
                            value="<?php echo @$company_name; ?>">
                 </div>
             </div>
@@ -334,22 +352,22 @@ $this->load->view("sidebar_menu");
                         <td><input type="text" name="cost[]" maxlength="8"
                                    placeholder="Number" class="input-block-level cost"
                                    data-rule-number="true"
-                                   value="<?php echo $value->cost !=0 ? $value->cost : ''; ?>"></td>
+                                   value="<?php echo $value->cost != 0 ? $value->cost : ''; ?>"></td>
                         <td><input type="text" name="quantity[]" maxlength="8"
                                    placeholder="Number" class="input-block-level quantity"
                                    data-rule-number="true"
-                                   value="<?php echo $value->quantity !=0 ? $value->quantity : ''; ?>"></td>
+                                   value="<?php echo $value->quantity != 0 ? $value->quantity : ''; ?>"></td>
                         <td><input type="text" name="price[]" maxlength="8"
                                    placeholder="Number" class="input-block-level price"
                                    data-rule-number="true"
-                                   value="<?php echo $value->price !=0 ? $value->price : ''; ?>"></td>
+                                   value="<?php echo $value->price != 0 ? $value->price : ''; ?>"></td>
                         <td><input type="text" name="discount[]" maxlength="8"
                                    placeholder="Number" class="input-block-level discount"
                                    data-rule-number="true"
-                                   value="<?php echo $value->discount !=0 ? $value->discount : ''; ?>"></td>
+                                   value="<?php echo $value->discount != 0 ? $value->discount : ''; ?>"></td>
                         <td><input type="text" disabled
                                    placeholder="" class="input-block-level amount"
-                                   value="<?php echo $value->amount !=0 ? $value->amount : ''; ?>"></td>
+                                   value="<?php echo $value->amount != 0 ? $value->amount : ''; ?>"></td>
                         <td>
                             <button tabindex="999" class="btn btn-danger btnDeleteItem">
                                 <i class="glyphicon-bin"></i></button>

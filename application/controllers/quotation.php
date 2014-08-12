@@ -77,6 +77,26 @@ class Quotation extends CI_Controller
         $this->load->view("quotation/add", $data);
     }
 
+    function quotationPrint($id)
+    {
+//        $post = $this->input->post();
+//        if ($post) {
+//            $result = $this->Quotation_model->quotationEdit($id, $post);
+//            if ($result) {
+//                echo "edit success";
+//            } else {
+//                echo "edit fail";
+//            }
+//            exit();
+//        }
+        $data = array(
+            'id' => $id,
+            "selectMenu" => $this->selectMenu,
+            'permission' => $this->checkPermission(2)
+        );
+        $this->load->view("quotation/print", $data);
+    }
+
     function quotationItemEdit($id)
     {
         $post = $this->input->post();

@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('#btnCancel').click(function () {
         openUrl(url_list);
@@ -29,10 +28,26 @@ $(document).on("click", "#btnAddItem", function (e) {
     return false;
 });
 
+$(document).on("change", "#customer_name", function (e) {
+    var value = $(this).val();
+    for (var i = 0; i < array_customer_name.length; i++) {
+        if (value && value == array_customer_name[i]) {
+            $("#company_name").val(array_customer_data[i][0]);
+            $("#address").text(array_customer_data[i][1]);
+            $("#customer_mobile").val(array_customer_data[i][2]);
+            $("#customer_tel").val(array_customer_data[i][3]);
+            $("#customer_fax").val(array_customer_data[i][4]);
+            $("#customer_email").val(array_customer_data[i][5]);
+            focusToDiv(".icon-user-md", "#proposer");
+        }
+    }
+});
+
 $(document).on("click", ".btnDeleteItem", function (e) {
     if ($('.btnDeleteItem').length > 1) {
         var id = $(this).closest('tr').find(".item_id").val();
-        deleteItem(id);
+        if (id != 'add' && id)
+            deleteItem(id);
         $(this).closest('tr').fadeOut(function () {
             $(this).remove();
             $(".tr_items .item_no").focus();

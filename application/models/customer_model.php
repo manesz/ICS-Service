@@ -16,20 +16,32 @@ class Customer_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->tableName = $this->Constant_model->tbCustomer;
+        $this->tbCompany = $this->Constant_model->tbCompany;
     }
 
     private $tableName = "";
+    private $tbCompany = "";
 
-    function customerList($id = 0, $type = "", $orderBy = "")
+    function customerList($id = 0, $orderBy = "")
     {
-        $strAnd = $id == 0 ? "" : " AND id = $id";
-        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
+        $strAnd = $id == 0 ? "" : " AND a.id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
         $sql = "
             SELECT
-              *
-            FROM $this->tableName
+              a.*,
+              b.taxpayer_number,
+              b.id AS company_id,
+              b.name_th AS company_name_th,
+              b.name_en AS company_name_en,
+              b.address_th,
+              b.address_en,
+              b.telephone,
+              b.fax
+            FROM $this->tableName a
+            LEFT JOIN $this->tbCompany b
+            ON (a.company_id = b.id AND b.publish = 1)
             WHERE 1
-            AND publish = 1
+            AND a.publish = 1
             $strAnd
             $strOrder
         ";
