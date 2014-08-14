@@ -64,6 +64,7 @@ class Company_model extends CI_Model
             'email' => @$email,
             'image' => @$imagePath,
             'remark' => @$remark,
+            'location' => trim(@$location),
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
@@ -100,6 +101,7 @@ class Company_model extends CI_Model
             'email' => @$email,
             'image' => @$imagePath,
             'remark' => @$remark,
+            'location' => trim(@$location),
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );

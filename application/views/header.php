@@ -25,6 +25,9 @@ $baseUrl = base_url();
     <!-- jQuery UI -->
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/jquery-ui/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+
+    <!-- gmap -->
+    <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/gmap/gmap3-menu.css">
     <!-- Elfinder -->
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/elfinder/elfinder.min.css">
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>assets/css/plugins/elfinder/theme.css">
@@ -89,6 +92,12 @@ $baseUrl = base_url();
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo $baseUrl; ?>assets/js/bootstrap.min.js"></script>
+    <!-- Bootbox -->
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/bootbox/jquery.bootbox.js"></script>
+    <!-- gmap -->
+    <script src="http://maps.google.com/maps/api/js?sensor=false&language=th"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/gmap/gmap3.min.js"></script>
+    <script src="<?php echo $baseUrl; ?>assets/js/plugins/gmap/gmap3-menu.js"></script>
     <!-- vmap -->
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/vmap/jquery.vmap.min.js"></script>
     <script src="<?php echo $baseUrl; ?>assets/js/plugins/vmap/jquery.vmap.world.js"></script>
