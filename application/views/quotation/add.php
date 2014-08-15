@@ -374,7 +374,7 @@ $this->load->view("sidebar_menu");
                     </td>
                 </tr>
             <?php endforeach; ?>
-            <?php if (count($objQuotationItems) < 13):?>
+            <?php if (count(@$objQuotationItems) < 13):?>
             <tr class="tr_items">
                 <td><input type="hidden" name="item_id[]" class="item_id" value=""/>
                     <input type="text" name="item_no[]"
