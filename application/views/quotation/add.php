@@ -117,337 +117,338 @@ $this->load->view("sidebar_menu");
     </div>
     <!-- END: .box-title -->
     <?php if (@$permission): ?>
-        <div class="box-content nopadding">
-        <form action="" method="POST" autocomplete="off"
-              class='form-horizontal form-column form-bordered form-validate'
-              id="formPost" name="formPost">
-        <input type="hidden" id="quotation_id" name="quotation_id" value="<?php echo $id; ?>"/>
+    <div class="box-content nopadding">
+    <form action="" method="POST" autocomplete="off"
+          class='form-horizontal form-column form-bordered form-validate'
+          id="formPost" name="formPost">
+    <input type="hidden" id="quotation_id" name="quotation_id" value="<?php echo $id; ?>"/>
 
-        <div class="span12">
-            <div class="box-title">
-                <h3><i class="icon-user"></i> รายละเอียดลูกค้า</h3>
-            </div>
-            <div class="control-group">
-                <label for="project_id" class="control-label">Project :</label>
+    <div class="span12">
+        <div class="box-title">
+            <h3><i class="icon-user"></i> รายละเอียดลูกค้า</h3>
+        </div>
+        <div class="control-group">
+            <label for="project_id" class="control-label">Project :</label>
 
-                <div class="controls">
-                    <select name="project_id" id="project_id" data-rule-required="true"
-                            class="input-xlarge" autofocus="">
-                        <option value="">-- Select Project --</option>
-                        <?php foreach ($objProject as $key => $value): ?>
-                            <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
-                                value="<?php echo $value->id; ?>"><?php
-                                if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="customer_name" class="control-label">ชื่อลูกค้า / Customer : </label>
-
-                <div class="controls">
-                    <input type="text" data-provide="typeahead" id="customer_name" name="customer_name"
-                           data-items="4" class="input-xlarge"
-                           data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCustomerName) . "&quot;"; ?>]'
-                           value="<?php echo @$customer_name; ?>">
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="company_name" class="control-label">ชื่อบริษัท / Crop. Name : </label>
-
-                <div class="controls">
-                    <input type="text" data-provide="typeahead" id="company_name" name="company_name"
-                           data-items="4" class="input-xlarge"
-                           data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCompanyName) . "&quot;"; ?>]'
-                           value="<?php echo @$company_name; ?>">
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label for="address" class="control-label">ที่อยู่ / Address : </label>
-
-                <div class="controls">
-                    <textarea name="address" id="address" rows="4"
-                              class="input-xlarge"><?php echo @$address; ?></textarea>
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="customer_mobile" class="control-label">เบอร์มือถือ / Mobile : </label>
-
-                <div class="controls">
-                    <input type="text" name="customer_mobile" id="customer_mobile"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$customer_mobile; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="customer_tel" class="control-label">เบอร์ติดต่อ / Tel : </label>
-
-                <div class="controls">
-                    <input type="text" name="customer_tel" id="customer_tel"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$customer_tel; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="customer_fax" class="control-label">เบอร์แฟ็ก / Fax : </label>
-
-                <div class="controls">
-                    <input type="text" name="customer_fax" id="customer_fax"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$customer_fax; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="customer_email" class="control-label">อีเมลล์ / Email : </label>
-
-                <div class="controls">
-                    <input type="text" name="customer_email" id="customer_email"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$customer_email; ?>"
-                        >
-                </div>
+            <div class="controls">
+                <select name="project_id" id="project_id" data-rule-required="true"
+                        class="input-xlarge" autofocus="">
+                    <option value="">-- Select Project --</option>
+                    <?php foreach ($objProject as $key => $value): ?>
+                        <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
+                            value="<?php echo $value->id; ?>"><?php
+                            if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
-        <div class="span12">
-            <div class="box-title">
-                <h3><i class="icon-user-md"></i> รายละเอียดผู้เสนอ</h3>
-            </div>
-            <div class="control-group">
-                <label for="quotation_no" class="control-label">เลขที่เอกสาร / Quotation No. </label>
+        <div class="control-group">
+            <label for="customer_name" class="control-label">ชื่อลูกค้า / Customer : </label>
 
-                <div class="controls">
-                    <input type="text" name="quotation_no" id="quotation_no"
-                           placeholder="Text input" class="input-xlarge"
-                           data-rule-required="true"
-                           value="<?php echo @$quotation_no; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="quotation_date" class="control-label">วันที่เสนอ / Quotation Date
-                </label>
-
-                <div class="controls">
-                    <input type="text" name="quotation_date" id="quotation_date"
-                           placeholder="Text input" class="input-xlarge"
-                           data-rule-required="true"
-                           value="<?php echo @$quotation_date ? $quotation_date : date('Y-m-d'); ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="proposer" class="control-label">ผู้ที่เสนอ / Proposer
-
-                </label>
-
-                <div class="controls">
-                    <input type="text" name="proposer" id="proposer"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$proposer; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="mobile" class="control-label">เบอร์มือถือ / Mobile
-                </label>
-
-                <div class="controls">
-                    <input type="text" name="mobile" id="mobile"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$mobile; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="telephone" class="control-label">เบอร์ติดต่อ / Telephone : </label>
-
-                <div class="controls">
-                    <input type="text" name="telephone" id="telephone"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$telephone; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="fax" class="control-label">เบอร์แฟ็ก / Fax :</label>
-
-                <div class="controls">
-                    <input type="text" name="fax" id="fax"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$fax; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="email" class="control-label">อีเมล / Email :</label>
-
-                <div class="controls">
-                    <input type="text" name="email" id="email"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$email; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="pay_of_valid" class="control-label">การจ่ายเงิน/Pay of Valid :</label>
-
-                <div class="controls">
-                    <input type="text" name="pay_of_valid" id="pay_of_valid"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$pay_of_valid; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="term_of_payment" class="control-label">Term of payment :</label>
-
-                <div class="controls">
-                    <input type="text" name="term_of_payment" id="term_of_payment"
-                           placeholder="Text input" class="input-xlarge"
-                           value="<?php echo @$term_of_payment; ?>"
-                        >
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="remark" class="control-label">หมายเหตุ / Note : </label>
-
-                <div class="controls">
-                    <textarea name="remark" id="remark" rows="4"
-                              class="input-xlarge ckedi"><?php echo @$remark; ?></textarea>
-                </div>
+            <div class="controls">
+                <input type="text" data-provide="typeahead" id="customer_name" name="customer_name"
+                       data-items="4" class="input-xlarge"
+                       data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCustomerName) . "&quot;"; ?>]'
+                       value="<?php echo @$customer_name; ?>">
             </div>
         </div>
-        <div class="span12">
-            <div class="box-title">
-                <h3><i class="glyphicon-shopping_cart"></i> รายการสินค้า / บริการ</h3>
+        <div class="control-group">
+            <label for="company_name" class="control-label">ชื่อบริษัท / Crop. Name : </label>
+
+            <div class="controls">
+                <input type="text" data-provide="typeahead" id="company_name" name="company_name"
+                       data-items="4" class="input-xlarge"
+                       data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCompanyName) . "&quot;"; ?>]'
+                       value="<?php echo @$company_name; ?>">
             </div>
-            <table id="table_items" class="table table-hover table-bordered dataTable-scroll-x">
-                <thead>
-                <tr>
-                    <th class="span1 text-align-center">ลำดับที่<br/>Item No.</th>
-                    <th class="span5 text-align-center">รายการสินค้า/บริการ<br/> Description</th>
-                    <th class="span1 text-align-center">ต้นทุน Cost</th>
-                    <th class="span1 text-align-center">จำนวน<br/> Quantity</th>
-                    <th class="span1 text-align-center">ราคา/หน่วย<br/> Price/Unit</th>
-                    <th class="span1 text-align-center">ส่วนลด<br/> Discount</th>
-                    <th class="span2 text-align-center" colspan="2">รวม Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php if ($id) foreach ($objQuotationItems as $key => $value): ?>
-                    <tr class="tr_items">
-                        <td><input type="hidden" name="item_id[]" class="item_id"
-                                   value="<?php echo $value->id; ?>"/>
-                            <input type="text" name="item_no[]"
-                                   placeholder="Text" class="input-block-level item_no"
-                                   maxlength="4" value="<?php echo $value->item_no; ?>"></td>
-                        <td><input type="text" name="description[]"
-                                   placeholder="Text input"
-                                   class="input-block-level"
-                                   value="<?php echo $value->description; ?>"></td>
-                        <td><input type="text" name="cost[]" maxlength="8"
-                                   placeholder="Number" class="input-block-level cost"
-                                   data-rule-number="true"
-                                   value="<?php echo $value->cost != 0 ? $value->cost : ''; ?>"></td>
-                        <td><input type="text" name="quantity[]" maxlength="8"
-                                   placeholder="Number" class="input-block-level quantity"
-                                   data-rule-number="true"
-                                   value="<?php echo $value->quantity != 0 ? $value->quantity : ''; ?>"></td>
-                        <td><input type="text" name="price[]" maxlength="8"
-                                   placeholder="Number" class="input-block-level price"
-                                   data-rule-number="true"
-                                   value="<?php echo $value->price != 0 ? $value->price : ''; ?>"></td>
-                        <td><input type="text" name="discount[]" maxlength="8"
-                                   placeholder="Number" class="input-block-level discount"
-                                   data-rule-number="true"
-                                   value="<?php echo $value->discount != 0 ? $value->discount : ''; ?>"></td>
-                        <td><input type="text" disabled
-                                   placeholder="" class="input-block-level amount"
-                                   value="<?php echo $value->amount != 0 ? $value->amount : ''; ?>"></td>
-                        <td>
-                            <button tabindex="999" class="btn btn-danger btnDeleteItem">
-                                <i class="glyphicon-bin"></i></button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+        </div>
+
+        <div class="control-group">
+            <label for="address" class="control-label">ที่อยู่ / Address : </label>
+
+            <div class="controls">
+                <textarea name="address" id="address" rows="4"
+                          class="input-xlarge"><?php echo @$address; ?></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="customer_mobile" class="control-label">เบอร์มือถือ / Mobile : </label>
+
+            <div class="controls">
+                <input type="text" name="customer_mobile" id="customer_mobile"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$customer_mobile; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="customer_tel" class="control-label">เบอร์ติดต่อ / Tel : </label>
+
+            <div class="controls">
+                <input type="text" name="customer_tel" id="customer_tel"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$customer_tel; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="customer_fax" class="control-label">เบอร์แฟ็ก / Fax : </label>
+
+            <div class="controls">
+                <input type="text" name="customer_fax" id="customer_fax"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$customer_fax; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="customer_email" class="control-label">อีเมลล์ / Email : </label>
+
+            <div class="controls">
+                <input type="text" name="customer_email" id="customer_email"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$customer_email; ?>"
+                    >
+            </div>
+        </div>
+    </div>
+    <div class="span12">
+        <div class="box-title">
+            <h3><i class="icon-user-md"></i> รายละเอียดผู้เสนอ</h3>
+        </div>
+        <div class="control-group">
+            <label for="quotation_no" class="control-label">เลขที่เอกสาร / Quotation No. </label>
+
+            <div class="controls">
+                <input type="text" name="quotation_no" id="quotation_no"
+                       placeholder="Text input" class="input-xlarge"
+                       data-rule-required="true"
+                       value="<?php echo @$quotation_no; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="quotation_date" class="control-label">วันที่เสนอ / Quotation Date
+            </label>
+
+            <div class="controls">
+                <input type="text" name="quotation_date" id="quotation_date"
+                       placeholder="Text input" class="input-xlarge"
+                       data-rule-required="true"
+                       value="<?php echo @$quotation_date ? $quotation_date : date('Y-m-d'); ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="proposer" class="control-label">ผู้ที่เสนอ / Proposer
+
+            </label>
+
+            <div class="controls">
+                <input type="text" name="proposer" id="proposer"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$proposer; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="mobile" class="control-label">เบอร์มือถือ / Mobile
+            </label>
+
+            <div class="controls">
+                <input type="text" name="mobile" id="mobile"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$mobile; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="telephone" class="control-label">เบอร์ติดต่อ / Telephone : </label>
+
+            <div class="controls">
+                <input type="text" name="telephone" id="telephone"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$telephone; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="fax" class="control-label">เบอร์แฟ็ก / Fax :</label>
+
+            <div class="controls">
+                <input type="text" name="fax" id="fax"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$fax; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="email" class="control-label">อีเมล / Email :</label>
+
+            <div class="controls">
+                <input type="text" name="email" id="email"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$email; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="pay_of_valid" class="control-label">การจ่ายเงิน/Pay of Valid :</label>
+
+            <div class="controls">
+                <input type="text" name="pay_of_valid" id="pay_of_valid"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$pay_of_valid; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="term_of_payment" class="control-label">Term of payment :</label>
+
+            <div class="controls">
+                <input type="text" name="term_of_payment" id="term_of_payment"
+                       placeholder="Text input" class="input-xlarge"
+                       value="<?php echo @$term_of_payment; ?>"
+                    >
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="remark" class="control-label">หมายเหตุ / Note : </label>
+
+            <div class="controls">
+                <textarea name="remark" id="remark" rows="4"
+                          class="input-xlarge ckedi"><?php echo @$remark; ?></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="span12">
+        <div class="box-title">
+            <h3><i class="glyphicon-shopping_cart"></i> รายการสินค้า / บริการ</h3>
+        </div>
+        <table id="table_items" class="table table-hover table-bordered dataTable-scroll-x">
+            <thead>
+            <tr>
+                <th class="span1 text-align-center">ลำดับที่<br/>Item No.</th>
+                <th class="span5 text-align-center">รายการสินค้า/บริการ<br/> Description</th>
+                <th class="span1 text-align-center">ต้นทุน Cost</th>
+                <th class="span1 text-align-center">จำนวน<br/> Quantity</th>
+                <th class="span1 text-align-center">ราคา/หน่วย<br/> Price/Unit</th>
+                <th class="span1 text-align-center">ส่วนลด<br/> Discount</th>
+                <th class="span2 text-align-center" colspan="2">รวม Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if ($id) foreach ($objQuotationItems as $key => $value): ?>
                 <tr class="tr_items">
-                    <td><input type="hidden" name="item_id[]" class="item_id" value=""/>
+                    <td><input type="hidden" name="item_id[]" class="item_id"
+                               value="<?php echo $value->id; ?>"/>
                         <input type="text" name="item_no[]"
                                placeholder="Text" class="input-block-level item_no"
-                               maxlength="4"></td>
+                               maxlength="4" value="<?php echo $value->item_no; ?>"></td>
                     <td><input type="text" name="description[]"
-                               placeholder="Text input" class="input-block-level"></td>
+                               placeholder="Text input"
+                               class="input-block-level"
+                               value="<?php echo $value->description; ?>"></td>
                     <td><input type="text" name="cost[]" maxlength="8"
                                placeholder="Number" class="input-block-level cost"
-                               data-rule-number="true"></td>
+                               data-rule-number="true"
+                               value="<?php echo $value->cost != 0 ? $value->cost : ''; ?>"></td>
                     <td><input type="text" name="quantity[]" maxlength="8"
                                placeholder="Number" class="input-block-level quantity"
-                               data-rule-number="true"></td>
+                               data-rule-number="true"
+                               value="<?php echo $value->quantity != 0 ? $value->quantity : ''; ?>"></td>
                     <td><input type="text" name="price[]" maxlength="8"
                                placeholder="Number" class="input-block-level price"
-                               data-rule-number="true"></td>
+                               data-rule-number="true"
+                               value="<?php echo $value->price != 0 ? $value->price : ''; ?>"></td>
                     <td><input type="text" name="discount[]" maxlength="8"
                                placeholder="Number" class="input-block-level discount"
-                               data-rule-number="true"></td>
+                               data-rule-number="true"
+                               value="<?php echo $value->discount != 0 ? $value->discount : ''; ?>"></td>
                     <td><input type="text" disabled
-                               placeholder="" class="input-block-level amount"></td>
+                               placeholder="" class="input-block-level amount"
+                               value="<?php echo $value->amount != 0 ? $value->amount : ''; ?>"></td>
                     <td>
                         <button tabindex="999" class="btn btn-danger btnDeleteItem">
                             <i class="glyphicon-bin"></i></button>
                     </td>
                 </tr>
-
-                </tbody>
-            </table>
+            <?php endforeach; ?>
+            <?php if (count($objQuotationItems) < 13):?>
+            <tr class="tr_items">
+                <td><input type="hidden" name="item_id[]" class="item_id" value=""/>
+                    <input type="text" name="item_no[]"
+                           placeholder="Text" class="input-block-level item_no"
+                           maxlength="4"></td>
+                <td><input type="text" name="description[]"
+                           placeholder="Text input" class="input-block-level"></td>
+                <td><input type="text" name="cost[]" maxlength="8"
+                           placeholder="Number" class="input-block-level cost"
+                           data-rule-number="true"></td>
+                <td><input type="text" name="quantity[]" maxlength="8"
+                           placeholder="Number" class="input-block-level quantity"
+                           data-rule-number="true"></td>
+                <td><input type="text" name="price[]" maxlength="8"
+                           placeholder="Number" class="input-block-level price"
+                           data-rule-number="true"></td>
+                <td><input type="text" name="discount[]" maxlength="8"
+                           placeholder="Number" class="input-block-level discount"
+                           data-rule-number="true"></td>
+                <td><input type="text" disabled
+                           placeholder="" class="input-block-level amount"></td>
+                <td>
+                    <button tabindex="999" class="btn btn-danger btnDeleteItem">
+                        <i class="glyphicon-bin"></i></button>
+                </td>
+            </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="span12">
+        <div class="form-actions">
+            <button type="button" class="btn btn-inverse" id="btnAddItem"> New Item</button>
         </div>
-        <div class="span12">
-            <div class="form-actions">
-                <button type="button" class="btn btn-inverse" id="btnAddItem"> New Item</button>
-            </div>
+    </div>
+    <div class="span12">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td class="span10 text-align-right" colspan="6">Discount Total :</td>
+                <td class="span2 text-align-right" id="discount_total"><?php
+                    echo @$discount_total ? number_format($discount_total, 2) : "0.00"; ?></td>
+            </tr>
+            <tr>
+                <td class="span10 text-align-right" colspan="6">Amount :</td>
+                <td class="span2 text-align-right" id="amount"><?php
+                    echo @$amount ? number_format($amount, 2) : "0.00"; ?></td>
+            </tr>
+            <tr>
+                <td class="span10 text-align-right" colspan="6">Vat 7% :</td>
+                <td class="span2 text-align-right" id="vat"><?php
+                    echo @$vat ? number_format($vat, 2) : "0.00"; ?></td>
+            </tr>
+            <tr>
+                <td class="span10 text-align-right" colspan="6">Total Amount :</td>
+                <td class="span2 text-align-right" id="total_amount"><?php
+                    echo @$total_amount ? number_format($total_amount, 2) : "0.00"; ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span12">
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btnSave">Save changes
+            </button>
+            <button type="button" class="btn" id="btnCancel">Cancel</button>
         </div>
-        <div class="span12">
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td class="span10 text-align-right" colspan="6">Discount Total :</td>
-                    <td class="span2 text-align-right" id="discount_total"><?php
-                        echo @$discount_total ? number_format($discount_total, 2) : "0.00"; ?></td>
-                </tr>
-                <tr>
-                    <td class="span10 text-align-right" colspan="6">Amount :</td>
-                    <td class="span2 text-align-right" id="amount"><?php
-                        echo @$amount ? number_format($amount, 2) : "0.00"; ?></td>
-                </tr>
-                <tr>
-                    <td class="span10 text-align-right" colspan="6">Vat 7% :</td>
-                    <td class="span2 text-align-right" id="vat"><?php
-                        echo @$vat ? number_format($vat, 2) : "0.00"; ?></td>
-                </tr>
-                <tr>
-                    <td class="span10 text-align-right" colspan="6">Total Amount :</td>
-                    <td class="span2 text-align-right" id="total_amount"><?php
-                        echo @$total_amount ? number_format($total_amount, 2) : "0.00"; ?></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="span12">
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="btnSave">Save changes
-                </button>
-                <button type="button" class="btn" id="btnCancel">Cancel</button>
-            </div>
-        </div>
-        </form>
-        </div>
-        <!-- END: .box-content nopadding -->
+    </div>
+    </form>
+    </div>
+    <!-- END: .box-content nopadding -->
     <?php
     else:
-        $this->load->view("permission_page");
+    $this->load->view("permission_page");
     endif;?>
     </div>
     <!-- END: .box -->

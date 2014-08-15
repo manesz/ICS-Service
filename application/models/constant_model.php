@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: Administrator
@@ -6,8 +7,6 @@
  * Time: 22:55 น.
  * To change this template use File | Settings | File Templates.
  */
-
-
 class Constant_model extends CI_Model
 {
     function __construct()
@@ -139,6 +138,42 @@ class Constant_model extends CI_Model
             return $arrData;
         }
     }
+
+
+    public function thaiDate($time, $date = true, $show_time = true)
+    {
+        $thai_day_arr = array("อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์");
+        $thai_month_arr = array(
+            "0" => "",
+            "1" => "มกราคม",
+            "2" => "กุมภาพันธ์",
+            "3" => "มีนาคม",
+            "4" => "เมษายน",
+            "5" => "พฤษภาคม",
+            "6" => "มิถุนายน",
+            "7" => "กรกฎาคม",
+            "8" => "สิงหาคม",
+            "9" => "กันยายน",
+            "10" => "ตุลาคม",
+            "11" => "พฤศจิกายน",
+            "12" => "ธันวาคม"
+        );
+        $time = strtotime($time ? $time : date('Y-m-d'));
+        $thai_date_return = "";
+        if ($date) {
+            $thai_date_return .= "วัน" . $thai_day_arr[date("w", $time)];
+            $thai_date_return .= "ที่ " . date("d", ($time));
+        } else {
+            $thai_date_return .= date("d", ($time));
+        }
+        $thai_date_return .= " " . $thai_month_arr[date("n", ($time))];
+        $thai_date_return .= " " . (date("Y", ($time)) + 543);
+        if ($show_time) {
+            $thai_date_return .= "  " . date("H:i", $time) . " น.";
+        }
+        return $thai_date_return;
+    }
+
     /**
      * เวลาเรียกใช้ให้เรียก ThaiBahtConversion(1234020.25); ประมาณนี้
      * @param numberic $amount_number
@@ -146,27 +181,26 @@ class Constant_model extends CI_Model
      */
     function ThaiBahtConversion($amount_number)
     {
-        $amount_number = number_format($amount_number, 2, ".","");
+        $amount_number = number_format($amount_number, 2, ".", "");
         //echo "<br/>amount = " . $amount_number . "<br/>";
-        $pt = strpos($amount_number , ".");
+        $pt = strpos($amount_number, ".");
         $number = $fraction = "";
         if ($pt === false)
             $number = $amount_number;
-        else
-        {
+        else {
             $number = substr($amount_number, 0, $pt);
             $fraction = substr($amount_number, $pt + 1);
         }
 
         //list($number, $fraction) = explode(".", $number);
         $ret = "";
-        $baht = $this->ReadNumber ($number);
+        $baht = $this->ReadNumber($number);
         if ($baht != "")
             $ret .= $baht . "บาท";
 
         $satang = $this->ReadNumber($fraction);
         if ($satang != "")
-            $ret .=  $satang . "สตางค์";
+            $ret .= $satang . "สตางค์";
         else
             $ret .= "ถ้วน";
         //return iconv("UTF-8", "TIS-620", $ret);
@@ -180,16 +214,14 @@ class Constant_model extends CI_Model
         $number = $number + 0;
         $ret = "";
         if ($number == 0) return $ret;
-        if ($number > 1000000)
-        {
+        if ($number > 1000000) {
             $ret .= $this->ReadNumber(intval($number / 1000000)) . "ล้าน";
             $number = intval(fmod($number, 1000000));
         }
 
         $divider = 100000;
         $pos = 0;
-        while($number > 0)
-        {
+        while ($number > 0) {
             $d = intval($number / $divider);
             $ret .= (($divider == 10) && ($d == 2)) ? "ยี่" :
                 ((($divider == 10) && ($d == 1)) ? "" :
@@ -201,6 +233,7 @@ class Constant_model extends CI_Model
         }
         return $ret;
     }
+
     //---------------------------------Table name--------------------------------//
     public $sessionName = "ics_session_url";
     public $tbLog = "ics_log";

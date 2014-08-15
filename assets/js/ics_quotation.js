@@ -15,8 +15,13 @@ $(document).ready(function () {
         return false;
     });
 });
-
+var item = 0;
 $(document).on("click", "#btnAddItem", function (e) {
+    if ($(".tr_items").length >= 13) {
+        clickNotifyError("สร้างรายการได้สูงสุด 13 รายการ");
+        $(".tr_items .item_no").focus();
+        return false;
+    }
     var $tr = $(".tr_items").last();
     var $clone = $tr.clone();
     $clone.find(':text').val('');
@@ -138,9 +143,9 @@ function calculateAmount() {
         }
 
     });
+    sumAmount = sumAmount - sumDiscount;
     var vat = sumAmount * 0.07;
     var total_amount = sumAmount + vat;
-    total_amount = total_amount - sumDiscount;
     $("#discount_total").html(addCommas(sumDiscount));
     $("#amount").html(addCommas(sumAmount));
     $("#vat").html(addCommas(vat));
