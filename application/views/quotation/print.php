@@ -294,7 +294,7 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
             <tr>
                 <td width="120" align="left" valign="top">&nbsp;</td>
                 <td align="left" valign="top">&nbsp;</td>
-                <td height="20" colspan="2" align="right" bgcolor="#FFC000"
+                <td height="20" colspan="2" align="center" bgcolor="#FFC000"
                     class="border"><?php echo @$total_amount_text; ?></td>
             </tr>
             <tr>
