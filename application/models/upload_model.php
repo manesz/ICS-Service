@@ -16,15 +16,15 @@ class Upload_model extends CI_Model
     }
 
 
-    function uploadBase64($post)
+    function uploadBase64($data)
     {
-        if ($post) {
+        if ($data) {
             //$data_image
             //$imageName
             //$fileType
-            //$imagePatch
+            //$imagePath
 
-            extract($post);
+            extract($data);
             if (empty($data_image) || $data_image == "") {
                 return "";
             }
@@ -45,8 +45,8 @@ class Upload_model extends CI_Model
             }
             $fileName = str_replace(' ', '_', $fileName);
             $fileName = date("Ymd") . "-" . date('His') . "-$fileType-" . $fileName;
-            if (!$this->checkCreateFolder(@$imagePatch))return false;
-            $newName = "$imagePatch$fileName";
+            if (!$this->checkCreateFolder(@$imagePath))return false;
+            $newName = "$imagePath$fileName";
 
             list($type, $data) = explode(';', $data);
             list(, $data) = explode(',', $data);
@@ -62,14 +62,14 @@ class Upload_model extends CI_Model
         return false;
     }
 
-    function convertImageName($data = null, $imageName = "", $imagePatch = "'uploads/", $fileType = "image")
+    function convertImageName($data = null, $imageName = "", $imagePath = "'uploads/", $fileType = "image")
     {
 
         if ($data) {
             //$data_image
             //$imageName
             //$fileType
-            //$imagePatch
+            //$imagePath
 
             $getFileType = explode(';', $data);
             $getFileType = $getFileType[0];
@@ -85,8 +85,8 @@ class Upload_model extends CI_Model
             }
             $fileName = str_replace(' ', '_', $fileName);
             $fileName = date("Ymd") . "-" . date('His') . "-$fileType-" . $fileName;
-            if (!$this->checkCreateFolder(@$imagePatch))return false;
-            $newName = "$imagePatch$fileName";
+            if (!$this->checkCreateFolder(@$imagePath))return false;
+            $newName = "$imagePath$fileName";
 
             list($type, $data) = explode(';', $data);
             list(, $data) = explode(',', $data);

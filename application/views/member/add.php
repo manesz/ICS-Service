@@ -125,16 +125,23 @@ $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
 
     function postNewData() {
         var dataImg = "";
+        var dataImg2 = "";
         if ($(".fileupload-preview").html() != "") {
             dataImg = $(".fileupload-preview img").attr("src");
         }
+        if ($("#signature_path_data").html() != "") {
+            dataImg2 = $("#signature_path_data img").attr("src");
+        }
         var data = $('#formPost').serialize();
         var imageName = $("#imagefile").val();
+        var imageName2 = $("#imagefile2").val();
         data = data + '&' + $.param({
             data_image: dataImg,
+            data_image2: dataImg2,
             fileType: "image",
-            imagePatch: 'uploads/member/',
-            imageName: imageName
+            imagePath: 'uploads/member/',
+            imageName: imageName,
+            imageName2: imageName2
         });
         showWaitImage();
         $.post(url_post_data, data,
@@ -489,6 +496,26 @@ $this->load->view("sidebar_menu");
 
                         <div class="controls">
                             <textarea name="address" id="address" rows="5" class="input-block-level"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="signature_path" class="control-label">Image Signature</label>
+                        <div class="controls">
+                            <div class="fileupload fileupload-new" id="signature_path" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="<?php echo $baseUrl; ?>assets/img/no_img.gif"/>
+                                </div>
+                                <div id="signature_path_data" class="fileupload-preview fileupload-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">Select image</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" id="imagefile2" name='imagefile2'/>
+                            </span>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-actions">

@@ -55,28 +55,49 @@ class Member_model extends CI_Model
     function memberAdd($post)
     {
         extract($post);
-
-        $imagePath = $this->Upload_model->uploadBase64($post);
+        //รูปประจำตัว
+        $data_image = array(
+            'data_image' => @$data_image,
+            'imageName' => @$imageName,
+            'fileType' => @$fileType,
+            'imagePath' => @$imagePath,
+        );
+        $imagePath = $this->Upload_model->uploadBase64($data_image);
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
             $this->Upload_model->resizeToWidth(300);
             $this->Upload_model->save($imagePath);
         }
+        //รูปลายเซ็น
+        $data_image = array(
+            'data_image' => @$data_image2,
+            'imageName' => @$imageName2,
+            'fileType' => @$fileType,
+            'imagePath' => @$imagePath,
+        );
+        $imagePathSignature = $this->Upload_model->uploadBase64($data_image);
+        if (!empty($imagePathSignature)) {
+            $this->Upload_model->loadImage($imagePathSignature);
+            $this->Upload_model->resizeToWidth(300);
+            $this->Upload_model->save($imagePathSignature);
+        }
+
         $data = array(
             'employee_number' => ($employee_number),
-            'username' => trim($username),
+            'username' => trim(@$username),
             'password' => md5($password),
             'prefix' => $prefix,
-            'firstname' => trim($firstname),
-            'lastname' => trim($lastname),
+            'firstname' => trim(@$firstname),
+            'lastname' => trim(@$lastname),
             'gender' => intval(@$gender),
             'age' => intval($age),
-            'email' => trim($email),
-            'phone' => trim($phone),
-            'fax' => trim($fax),
-            'mobile' => trim($mobile),
-            'address' => trim($address),
+            'email' => trim(@$email),
+            'phone' => trim(@$phone),
+            'fax' => trim(@$fax),
+            'mobile' => trim(@$mobile),
+            'address' => trim(@$address),
             'image_path' => $imagePath,
+            'signature_path' => $imagePathSignature,
             'company_id' => intval($company_id),
             'department_id' => intval($department_id),
             'position_id' => intval($position_id),
@@ -104,103 +125,66 @@ class Member_model extends CI_Model
         }
 
         extract($post);
-        $imagePath = $this->Upload_model->uploadBase64($post);
+        //รูปประจำตัว
+        $data_image = array(
+            'data_image' => @$data_image,
+            'imageName' => @$imageName,
+            'fileType' => @$fileType,
+            'imagePath' => @$imagePath,
+        );
+        $imagePath = $this->Upload_model->uploadBase64($data_image);
         $imagePath = empty($imagePath) ? $image_path : $imagePath;
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
             $this->Upload_model->resizeToWidth(300);
             $this->Upload_model->save($imagePath);
         }
+        //รูปลายเซ็น
+        $data_image = array(
+            'data_image' => @$data_image2,
+            'imageName' => @$imageName2,
+            'fileType' => @$fileType,
+            'imagePath' => @$imagePath,
+        );
+        $imagePathSignature = $this->Upload_model->uploadBase64($data_image);
+        $imagePathSignature = empty($imagePathSignature) ? $signature_path : $imagePathSignature;
+        if (!empty($imagePathSignature)) {
+            $this->Upload_model->loadImage($imagePathSignature);
+            $this->Upload_model->resizeToWidth(300);
+            $this->Upload_model->save($imagePathSignature);
+        }
+        $data = array(
+        'employee_number' => (@$employee_number),
+        'prefix' => $prefix,
+        'firstname' => trim(@$firstname),
+        'lastname' => trim(@$lastname),
+        'gender' => intval(@$gender),
+        'age' => intval($age),
+        'email' => trim(@$email),
+        'phone' => trim(@$phone),
+        'mobile' => trim(@$mobile),
+        'fax' => trim(@$fax),
+        'address' => trim(@$address),
+        'image_path' => $imagePath,
+        'signature_path' => $imagePathSignature,
+        'user_group' => @$user_group,
+        'update_datetime' => date('Y-m-d H:i:s'),
+        'publish' => 1,
+    );
         if ($password == "") { //ไม่เปลี่ยพาส
             if ($checkEditUser) {
-                $data = array(
-                    'employee_number' => ($employee_number),
-                    'username' => trim($username),
-                    'prefix' => $prefix,
-                    'firstname' => trim($firstname),
-                    'lastname' => trim($lastname),
-                    'gender' => intval(@$gender),
-                    'age' => intval($age),
-                    'email' => trim($email),
-                    'phone' => trim($phone),
-                    'mobile' => trim($mobile),
-                    'fax' => trim($fax),
-                    'address' => trim($address),
-                    'image_path' => $imagePath,
-                    'company_id' => intval($company_id),
-                    'department_id' => intval($department_id),
-                    'position_id' => intval($position_id),
-                    'user_group' => @$user_group,
-                    'update_datetime' => date('Y-m-d H:i:s'),
-                    'publish' => 1,
-                );
-            } else { //ไม่เป็น admin
-                $data = array(
-                    'employee_number' => ($employee_number),
-                    //'username' => trim($username),
-                    'prefix' => $prefix,
-                    'firstname' => trim($firstname),
-                    'lastname' => trim($lastname),
-                    'gender' => intval(@$gender),
-                    'age' => intval($age),
-                    'email' => trim($email),
-                    'phone' => trim($phone),
-                    'mobile' => trim($mobile),
-                    'address' => trim($address),
-                    'image_path' => $imagePath,
-//            'company_id' => intval($company_id),
-//            'department_id' => intval($department_id),
-//            'position_id' => intval($position_id),
-                    'user_group' => @$user_group,
-                    'update_datetime' => date('Y-m-d H:i:s'),
-                    'publish' => 1,
-                );
+                $data['username'] = trim(@$username);
+                $data['company_id'] = intval(@$company_id);
+                $data['department_id'] = intval(@$department_id);
+                $data['position_id'] = intval(@$position_id);
             }
         } else { //เปลี่ยนพาส
             if ($checkEditUser) { //เป็น admin
-                $data = array(
-                    'employee_number' => ($employee_number),
-                    'username' => trim($username),
-                    'password' => md5($password),
-                    'prefix' => $prefix,
-                    'firstname' => trim($firstname),
-                    'lastname' => trim($lastname),
-                    'gender' => intval(@$gender),
-                    'age' => intval($age),
-                    'email' => trim($email),
-                    'phone' => trim($phone),
-                    'mobile' => trim($mobile),
-                    'address' => trim($address),
-                    'image_path' => $imagePath,
-                    'company_id' => intval($company_id),
-                    'department_id' => intval($department_id),
-                    'position_id' => intval($position_id),
-                    'user_group' => @$user_group,
-                    'update_datetime' => date('Y-m-d H:i:s'),
-                    'publish' => 1,
-                );
-            } else { //ไม่เป็น admin
-                $data = array(
-                    'employee_number' => ($employee_number),
-//            'username' => trim($username),
-                    'password' => md5($password),
-                    'prefix' => $prefix,
-                    'firstname' => trim($firstname),
-                    'lastname' => trim($lastname),
-                    'gender' => intval(@$gender),
-                    'age' => intval($age),
-                    'email' => trim($email),
-                    'phone' => trim($phone),
-                    'mobile' => trim($mobile),
-                    'address' => trim($address),
-                    'image_path' => $imagePath,
-//            'company_id' => intval($company_id),
-//            'department_id' => intval($department_id),
-//            'position_id' => intval($position_id),
-                    'user_group' => @$user_group,
-                    'update_datetime' => date('Y-m-d H:i:s'),
-                    'publish' => 1,
-                );
+                $data['password'] = md5(@$password);
+                $data['username'] = trim(@$username);
+                $data['company_id'] = intval(@$company_id);
+                $data['department_id'] = intval(@$department_id);
+                $data['position_id'] = intval(@$position_id);
             }
         }
         $data['id'] = $id;

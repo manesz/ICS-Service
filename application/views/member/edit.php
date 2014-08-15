@@ -65,16 +65,23 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
 
         function postData() {
             var dataImg = "";
+            var dataImg2 = "";
             if ($(".fileupload-preview").html() != "") {
                 dataImg = $(".fileupload-preview img").attr("src");
             }
+            if ($("#signature_path_data").html() != "") {
+                dataImg2 = $("#signature_path_data img").attr("src");
+            }
             var data = $('#formPost').serialize();
             var imageName = $("#imagefile").val();
+            var imageName2 = $("#imagefile2").val();
             data = data + '&' + $.param({
                 data_image: dataImg,
+                data_image2: dataImg2,
                 fileType: "image",
-                imagePatch: 'uploads/member/',
-                imageName: imageName
+                imagePath: 'uploads/member/',
+                imageName: imageName,
+                imageName2: imageName2
             });
             showWaitImage();
             $.post(url_post_data, data,
@@ -87,7 +94,7 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
                         clickNotifyUpdate();
                         enableID("btnSave1");
                         <?php if (@$id == $memberId):?>
-                        openUrl(window.location.href);
+                        //openUrl(window.location.href);
                         <?php else: ?>
                         openUrl(url_list);
                         <?php endif;?>
@@ -284,6 +291,8 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
         <div class="control-group">
             <input type="hidden" id="image_path" name="image_path"
                    value="<?php echo !file_exists(@$image_path) ? "" : $image_path; ?>"/>
+            <input type="hidden" id="signature_path" name="signature_path"
+                   value="<?php echo !file_exists(@$signature_path) ? "" : $signature_path; ?>"/>
             <label for="image" class="control-label">Image</label>
 
             <div class="controls">
@@ -513,6 +522,33 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             <div class="controls">
                 <textarea name="address" id="address" rows="5"
                           class="input-block-level"><?php echo @$address; ?></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="signature_path" class="control-label">Image Signature</label>
+            <div class="controls">
+                <div class="fileupload fileupload-new" id="signature_path" data-provides="fileupload">
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="<?php
+                        echo !file_exists(@$signature_path) ? $baseUrl . "assets/img/no_img.gif" :
+                            $baseUrl . $signature_path;
+                        ?>"/>
+                    </div>
+                    <div id="signature_path_data" class="fileupload-preview fileupload-exists thumbnail"
+                         style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                            <span class="btn btn-file <?php echo !file_exists(@$signature_path) ? "" : 'hide'; ?>">
+                                <span class="fileupload-new">Select image</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" id="imagefile2" name='imagefile2'/>
+                            </span><?php if (file_exists(@$signature_path)): ?>
+                            <input type="button" id="btnDeleteImage"
+                                   onclick="removeImage('<?php echo @$signature_path; ?>');" class="btn"
+                                   value="Remove">
+                        <?php endif; ?>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-actions">
