@@ -230,7 +230,7 @@ $this->load->view("sidebar_menu");
                                             }
 
                                             function initialize() {
-                                                var latLng = new google.maps.LatLng(13.726602, 100.510888);
+                                                var latLng = new google.maps.LatLng(0, 0);
                                                 var map = new google.maps.Map(document.getElementById('mapCanvas'), {
                                                     zoom: 8,
                                                     center: latLng,
