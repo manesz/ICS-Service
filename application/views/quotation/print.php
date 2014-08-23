@@ -219,30 +219,34 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
                 </td>
             </tr>
             <?php for ($i = 0;
-            $i < 12;
-            $i++): ?>
-            <tr height="20">
-                <td align="center" class="border-right border-left"><?php echo @$objQuotationItem[$i]->item_no; ?></td>
-                <td class="border-right"><?php echo @$objQuotationItem[$i]->description; ?></td>
-                <td height="31" align="right" class="border-right"><?php echo @$objQuotationItem[$i]->quantity; ?></td>
-                <td height="31" align="right"
-                    class="border-right"><?php echo number_format(@$objQuotationItem[$i]->price, 2); ?></td>
-                <td height="31" align="right"
-                    class="border-right"><?php echo number_format(@$objQuotationItem[$i]->discount, 2); ?></td>
-                <td height="31" align="right"
-                    class="border-right"><?php echo number_format(@$objQuotationItem[$i]->amount, 2); ?></td>
-            </tr>
+                       $i < 12;
+                       $i++): ?>
+                <tr height="20">
+                    <td align="center"
+                        class="border-right border-left"><?php echo @$objQuotationItem[$i]->item_no; ?></td>
+                    <td class="border-right"><?php echo @$objQuotationItem[$i]->description; ?></td>
+                    <td height="31" align="right"
+                        class="border-right"><?php echo @$objQuotationItem[$i]->quantity > 0 ? @$objQuotationItem[$i]->quantity : "-&nbsp;&nbsp;"; ?></td>
+                    <td height="31" align="right"
+                        class="border-right"><?php echo @$objQuotationItem[$i]->price > 0 ? number_format(@$objQuotationItem[$i]->price, 2) : "-&nbsp;&nbsp;"; ?></td>
+                    <td height="31" align="right"
+                        class="border-right"><?php echo @$objQuotationItem[$i]->discount > 0 ? number_format(@$objQuotationItem[$i]->discount, 2) : "-&nbsp;&nbsp;"; ?></td>
+                    <td height="31" align="right"
+                        class="border-right"><?php echo @$objQuotationItem[$i]->amount > 0 ? number_format(@$objQuotationItem[$i]->amount, 2) : "-&nbsp;&nbsp;"; ?></td>
+                </tr>
             <?php endfor; ?>
             <tr height="20">
-                <td align="center" class="border-right border-left border-bottom"><?php echo @$objQuotationItem[12]->item_no; ?></td>
+                <td align="center"
+                    class="border-right border-left border-bottom"><?php echo @$objQuotationItem[12]->item_no; ?></td>
                 <td class="border-right border-bottom"><?php echo @$objQuotationItem[12]->description; ?></td>
-                <td height="31" align="right" class="border-right border-bottom"><?php echo @$objQuotationItem[12]->quantity; ?></td>
                 <td height="31" align="right"
-                    class="border-right border-bottom"><?php echo number_format(@$objQuotationItem[12]->price, 2); ?></td>
+                    class="border-right border-bottom"><?php echo @$objQuotationItem[12]->quantity > 0 ? @$objQuotationItem[12]->quantity : "-&nbsp;&nbsp;"; ?></td>
                 <td height="31" align="right"
-                    class="border-right border-bottom"><?php echo number_format(@$objQuotationItem[12]->discount, 2); ?></td>
+                    class="border-right border-bottom"><?php echo @$objQuotationItem[12]->price > 0 ? number_format(@$objQuotationItem[12]->price, 2) : "-&nbsp;&nbsp;"; ?></td>
                 <td height="31" align="right"
-                    class="border-right border-bottom"><?php echo number_format(@$objQuotationItem[12]->amount, 2); ?></td>
+                    class="border-right border-bottom"><?php echo @$objQuotationItem[12]->discount > 0 ? number_format(@$objQuotationItem[12]->discount, 2) : "-&nbsp;&nbsp;"; ?></td>
+                <td height="31" align="right"
+                    class="border-right border-bottom"><?php echo @$objQuotationItem[12]->amount > 0 ? number_format(@$objQuotationItem[12]->amount, 2) : "-&nbsp;&nbsp;"; ?></td>
             </tr>
         </table>
     </td>

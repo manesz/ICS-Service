@@ -103,11 +103,11 @@ $objData = $this->Quotation_model->quotationList();
                                                             <i class="icon-remove"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <a href="<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>"
+                                                    <a onclick="window.open('<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>', '_blank');" href="#"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Print"><i
                                                             class="icon-print"></i></a>&nbsp;
-                                                    <a href="<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>"
+                                                    <a href="#"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Download Excel"><i
                                                             class="icon-download-alt"></i></a>
