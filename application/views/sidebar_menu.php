@@ -79,10 +79,10 @@ foreach ($objCheckModule as $key => $value) :
 endforeach;
 ?>
 <!-- #### iSpot #### -->
-<div class="subnav subnav-hidden">
-    <div class="subnav-title <?php echo $checkShowISPOTMenu ? "": 'hidden'; ?>">
-        <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>iSpot</span></a>
-    </div>
+<div class="subnav">
+<!--    <div class="subnav-title --><?php //echo $checkShowISPOTMenu ? "": 'hidden'; ?><!--">-->
+<!--        <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>iSpot</span></a>-->
+<!--    </div>-->
     <?php
     foreach ($objCheckModule as $key => $value) :
         $expResult = explode(',', $value->permission);
@@ -91,11 +91,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Company</a>
+                        <a href="<?php echo $webUrl; ?>company" data-toggle="dropdown">Company</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>company">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>company/add">Add new</a></li>
                             <?php endif; ?>
@@ -198,11 +195,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Device</a>
+                        <a href="<?php echo $webUrl; ?>device" data-toggle="dropdown">Device</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>device">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>device/add">Add new</a></li>
                             <?php endif; ?>
@@ -227,9 +221,9 @@ endforeach;
 </div>
 
 <!-- #### Settings #### -->
-<div class="subnav subnav-hidden">
+<div class="subnav">
     <div class="subnav-title <?php echo $checkShowSettingMenu ? "": 'hidden'; ?>">
-        <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
+        <a href="<?php echo $webUrl; ?>member" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
     </div>
     <?php
     foreach ($objCheckModule as $key => $value) :
@@ -239,11 +233,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Users</a>
+                        <a href="<?php echo $webUrl; ?>member" data-toggle="dropdown">Users</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>member">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>member/add">Add new</a></li>
                             <?php endif; ?>
@@ -257,12 +248,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Departments</a>
+                        <a href="<?php echo $webUrl; ?>department" data-toggle="dropdown">Departments</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>department">List</a>
-                                </li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>department/add">Add new</a>
                                 </li>
@@ -277,11 +264,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Position</a>
+                        <a href="<?php echo $webUrl; ?>position" data-toggle="dropdown">Position</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>position">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>position/add">Add new</a></li>
                             <?php endif; ?>
@@ -295,11 +279,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Modules</a>
+                        <a href="<?php echo $webUrl; ?>module" data-toggle="dropdown">Modules</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>module">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>module/add">Add new</a></li>
                             <?php endif; ?>
@@ -327,14 +308,11 @@ endforeach;
 </div>
 
 <!-- #### Issue #### -->
-<div class="subnav subnav-hidden">
+<div class="subnav">
     <div class="subnav-title <?php echo $checkShowIssueMenu ? "": 'hidden'; ?>">
-        <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Issue</span></a>
+        <a href="<?php echo $webUrl; ?>issue" class='toggle-subnav'><i class="icon-angle-down"></i><span>Issue</span></a>
     </div>
     <ul class="subnav-menu">
-        <li class=''>
-            <a href="<?php echo $webUrl; ?>issue">List</a>
-        </li>
         <li class=''>
             <a href="<?php echo $webUrl; ?>issue/add" data-toggle="dropdown">Add new</a>
         </li>

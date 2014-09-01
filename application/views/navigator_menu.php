@@ -81,14 +81,11 @@ foreach ($objCheckModule as $key => $value) :
             ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
             <!-- #### Company #### -->
             <li class="<?php echo $selectMenu == "company" ? "active" : ""; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>company" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Company</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <?php if (@$expResult[0]): ?>
-                        <li><a href="<?php echo $webUrl; ?>company">List</a></li>
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>company/add">Add new</a></li>
                     <?php endif; ?>
@@ -110,14 +107,11 @@ foreach ($objCheckModule as $key => $value) :
             ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
             <!-- #### Device #### -->
             <li class="<?php echo $selectMenu == "device" ? "active" : ""; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>device" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Device</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <?php if (@$expResult[0]): ?>
-                        <li><a href="<?php echo $webUrl; ?>device">List</a></li>
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>device/add">Add new</a></li>
                     <?php endif; ?>
@@ -139,14 +133,11 @@ foreach ($objCheckModule as $key => $value) :
             ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
             <!-- #### Device #### -->
             <li class="<?php echo $selectMenu == "quotation" ? "active" : ""; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>quotation" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Quotation</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <?php if (@$expResult[0]): ?>
-                        <li><a href="<?php echo $webUrl; ?>quotation">List</a></li>
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>quotation/add">Add new</a></li>
                     <?php endif; ?>
@@ -168,14 +159,11 @@ foreach ($objCheckModule as $key => $value) :
             ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
             <!-- #### Device #### -->
             <li class="<?php echo $selectMenu == "customer" ? "active" : ""; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>customer" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Customer</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <?php if (@$expResult[0]): ?>
-                        <li><a href="<?php echo $webUrl; ?>customer">List</a></li>
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>customer/add">Add new</a></li>
                     <?php endif; ?>
@@ -197,14 +185,11 @@ foreach ($objCheckModule as $key => $value) :
             ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
             <!-- #### Device #### -->
             <li class="<?php echo $selectMenu == "project" ? "active" : ""; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>project" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Project</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <?php if (@$expResult[0]): ?>
-                        <li><a href="<?php echo $webUrl; ?>project">List</a></li>
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>project/add">Add new</a></li>
                     <?php endif; ?>
@@ -228,7 +213,7 @@ endforeach;
 
 <!-- #### Settings #### -->
 <li class="<?php echo $selectMenu == "settings" ? "active" : ""; ?> <?php echo $checkShowSettingMenu ? "" : 'hidden'; ?>">
-    <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+    <a href="<?php echo $webUrl; ?>member" data-toggle="dropdown" class='dropdown-toggle'>
         <span>Settings</span>
         <span class="caret"></span>
     </a>
@@ -265,7 +250,7 @@ endforeach;
                 <?php
                 case "Log":
                     ?><?php if (@$expResult[0]):?>
-                    <li><a href="#">Log</a></li>
+                    <li><a href="<?php echo $webUrl; ?>log">Log</a></li>
                 <?php endif; ?>
                     <?php break; ?>
 
@@ -281,17 +266,11 @@ endforeach;
             ?>
             <!-- #### Issue #### -->
             <li class="<?php echo $selectMenu == "Issue" ? "active" : ""; ?> <?php echo $checkShowIssueMenu ? "" : 'hidden'; ?>">
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                <a href="<?php echo $webUrl; ?>issue" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Issue</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-
-                    <?php if (@$expResult[0]): ?>
-
-                        <li><a href="<?php echo $webUrl; ?>issue">List</a></li>
-
-                    <?php endif; ?>
                     <?php if (@$expResult[1]): ?>
                         <li><a href="<?php echo $webUrl; ?>issue/add">Add new</a></li>
                     <?php endif; ?>
@@ -308,7 +287,7 @@ endforeach;
 
 <div class="user">
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
+        <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>" class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
             <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$username; ?></span>
 
             <div
@@ -323,10 +302,6 @@ endforeach;
             </div>
         </a>
         <ul class="dropdown-menu pull-right">
-            <li>
-                <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>">Edit
-                    profile</a>
-            </li>
             <li>
                 <a href="<?php echo $webUrl; ?>signout">Sign out</a>
             </li>

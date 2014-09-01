@@ -314,6 +314,12 @@ function showHtmlFadeOut(id) {
 }
 
 $(function () {
+    $(".user").hover(function () {
+            $(".dropdown", this).addClass("open");
+        }, // over
+        function (e) {
+            $(".dropdown", this).removeClass("open");
+        });
     $("#frmSignIn").submit(function () {
         disableID("btnSignIn");
         var checkPost = checkValidateForm("#frmSignIn");
