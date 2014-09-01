@@ -186,6 +186,17 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label for="position" class="control-label">ตำแหน่ง :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="position" id="position"
+                                                       placeholder="Text input"
+                                                       class="input-xlarge"
+                                                       maxlength="120"
+                                                       value="<?php echo @$position; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label for="description" class="control-label">รายละเอียด :</label>
 
                                             <div class="controls">

@@ -60,6 +60,7 @@ $objData = $this->Contact_model->contactList();
                                             <th>#</th>
                                             <th>Name TH</th>
                                             <th>Name EN</th>
+                                            <th>Position</th>
                                             <th>Mobile</th>
                                             <th>Email</th>
                                             <th>Update Time</th>
@@ -74,6 +75,7 @@ $objData = $this->Contact_model->contactList();
                                                 <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->name_th; ?></td>
                                                 <td><?php echo $value->name_en; ?></td>
+                                                <td><?php echo $value->position; ?></td>
                                                 <td><?php echo "$value->mobile"; ?></td>
                                                 <td><?php echo $value->email; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
