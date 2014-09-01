@@ -115,11 +115,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Quotation</a>
+                        <a href="<?php echo $webUrl; ?>quotation" data-toggle="dropdown">Quotation</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>quotation">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>quotation/add">Add new</a></li>
                             <?php endif; ?>
@@ -141,11 +138,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Customer</a>
+                        <a href="<?php echo $webUrl; ?>customer" data-toggle="dropdown">Customer</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>customer">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>customer/add">Add new</a></li>
                             <?php endif; ?>
@@ -167,11 +161,8 @@ endforeach;
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="#" data-toggle="dropdown">Project</a>
+                        <a href="<?php echo $webUrl; ?>project" data-toggle="dropdown">Project</a>
                         <ul class="dropdown-menu">
-                            <?php if (@$expResult[0]): ?>
-                                <li><a href="<?php echo $webUrl; ?>project">List</a></li>
-                            <?php endif; ?>
                             <?php if (@$expResult[1]): ?>
                                 <li><a href="<?php echo $webUrl; ?>project/add">Add new</a></li>
                             <?php endif; ?>
