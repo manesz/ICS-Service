@@ -7,7 +7,7 @@ $this->load->view("navigator_menu");
 
 $objDepartment = $this->Department_model->departmentList();
 $objPosition = $this->Position_model->positionList();
-$objCompany = $this->Company_model->companyList();
+$objCustomer = $this->Customer_model->customerList();
 
 $objModule = $this->Module_model->moduleList();
 $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
@@ -420,12 +420,12 @@ $this->load->view("sidebar_menu");
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="company_id" class="control-label">Company</label>
+                        <label for="customer_id" class="control-label">Customer</label>
 
                         <div class="controls">
-                            <select name="company_id" id="company_id" data-rule-required="true">
+                            <select name="customer_id" id="customer_id" data-rule-required="true">
                                 <option value=""></option>
-                                <?php foreach ($objCompany as $key => $value): ?>
+                                <?php foreach ($objCustomer as $key => $value): ?>
                                     <option value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
                                 <?php endforeach; ?>
                             </select>

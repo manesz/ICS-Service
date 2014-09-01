@@ -4,18 +4,19 @@ $this->load->view("header");
 $this->load->view("navigator_menu");
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
-$id = @$id ? $id : 0;
-if ($id) {
-    $arrProject = $this->Project_model->projectList($id);
-    extract((array)$arrProject[0]);
-    $pathFileManager = "uploads/project/$id/files/";
-    $this->Helper_model->checkHaveFolder($pathFileManager, true);
-}
+
 $objCustomer = $this->Customer_model->customerList();
+if (@$id) {
+    $objData = $this->Contact_model->contactList($id);
+    extract((array)$objData[0]);
+} else {
+    $id = 0;
+}
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>project/<?php echo $id?"edit/$id":"add"; ?>";
-        var url_list = "<?php echo $webUrl; ?>project";
+
+        var url_post_data = "<?php echo $webUrl; ?>contact/<?php echo $id?"edit/$id":"add"; ?>";
+        var url_list = "<?php echo $webUrl; ?>contact";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(url_list);
@@ -30,12 +31,12 @@ $objCustomer = $this->Customer_model->customerList();
                     if ($(".fileupload-preview").html() != "") {
                         dataImg = $(".fileupload-preview img").attr("src");
                     }
-                    var data = $('#formPost').serialize();
+                    var data = $(this).serialize();
                     var imageName = $("#imagefile").val();
                     data = data + '&' + $.param({
                         data_image: dataImg,
                         fileType: "image",
-                        imagePatch: 'uploads/project/',
+                        imagePatch: 'uploads/contact/',
                         imageName: imageName
                     });
                     postData(url_post_data, data, url_list);
@@ -55,7 +56,7 @@ $this->load->view("sidebar_menu");
         <div class="container-fluid">
             <div class="page-header">
                 <div class="pull-left">
-                    <h1><?php echo $id ? "Edit" : "Add" ?> Project</h1>
+                    <h1><?php echo $id ? "Edit" : "Add" ?> Contact</h1>
                 </div>
             </div>
             <div class="breadcrumbs">
@@ -65,12 +66,12 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>project">Project</a>
+                        <a href="<?php echo $webUrl; ?>contact">Contact</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl;
-                        ?>project/<?php echo $id ? "edit/$id" : "add"; ?>"><?php echo $id ? "Edit" : "Add" ?> Project</a>
+                        <a href="<?php echo $webUrl; ?>contact/<?php echo $id ? "edit/$id" : "add"; ?>"
+                            ><?php echo $id ? "Edit" : "Add" ?> Contact</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -83,7 +84,7 @@ $this->load->view("sidebar_menu");
                     <div class="box box-color box-bordered">
                         <div class="box-title">
                             <h3>
-                                <i class="icon-list"></i> Project
+                                <i class="icon-list"></i> <?php echo $id ? "Edit" : "Add" ?> Contact
                             </h3>
                         </div>
                         <!-- END: .box-title -->
@@ -112,12 +113,12 @@ $this->load->view("sidebar_menu");
                                                     <div class="fileupload-preview fileupload-exists thumbnail"
                                                          style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                     <div>
-                                                        <span id="groupBtn"
-                                                              class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
-                                                            <span class="fileupload-new">Select image</span>
-                                                            <span class="fileupload-exists">Change</span>
-                                                            <input type="file" name='imagefile' id="imagefile"/>
-                                                        </span>
+                                            <span id="groupBtn"
+                                                  class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
+                                                <span class="fileupload-new">Select image</span>
+                                                <span class="fileupload-exists">Change</span>
+                                                <input type="file" name='imagefile' id="imagefile"/>
+                                            </span>
                                                         <?php if (file_exists(@$image)): ?>
                                                             <input type="button" id="btnDeleteImage"
                                                                    onclick="removeImage('<?php echo $image; ?>');"
@@ -131,73 +132,67 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="customer_id" class="control-label">Customer :</label>
+                                            <label for="customer_id" class="control-label">Customer</label>
 
                                             <div class="controls">
                                                 <div class="input-xlarge">
-                                                    <select name="customer_id" id="customer_id"
-                                                            class='chosen-select'>
+                                                    <select name="customer_id" id="customer_id" class='chosen-select'>
                                                         <option value=""></option>
                                                         <?php foreach ($objCustomer as $key => $value): ?>
-                                                            <option <?php echo @$customer_id == $value->id ? 'selected' : ''; ?>
-                                                                value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
+                                                            <option value="<?php echo $value->id; ?>"
+                                                                <?php echo $value->id == @$customer_id ? 'selected' : ''; ?>
+                                                                ><?php if ($value->name_th != "" && $value->name_th != "-") {
+                                                                    echo $value->name_th;
+                                                                } else echo $value->name_en ?></option>
                                                         <?php endforeach; ?>
-                                                    </select></div>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="name_th" class="control-label">Name TH :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="name_th" id="name_th" placeholder="Name"
-                                                       class="input-xlarge"
-                                                       value="<?php echo @$name_th; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="name_en" class="control-label">Name EN :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="name_en" id="name_en" placeholder="Name"
-                                                       class="input-xlarge"
-                                                       value="<?php echo @$name_en; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="project_start" class="control-label">Project Start :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="project_start" id="project_start"
-                                                       placeholder="Date"
-                                                       class="input-xlarge datepick"
-                                                       value="<?php echo @$project_start; ?>"
-                                                       data-rule-required="true">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="project_end" class="control-label">Project End :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="project_end" id="project_end"
-                                                       placeholder="Date"
-                                                       class="input-xlarge datepick"
-                                                       value="<?php echo @$project_end; ?>"
-                                                       data-rule-required="true">
-                                            </div>
-                                        </div>
-                                        <?php if ($id): ?>
-                                            <div class="control-group">
-                                                <div class="box">
-                                                    <div class="box-title">
-                                                        <h3><i class="icon-th"></i> Upload Image</h3>
-                                                    </div>
-                                                    <div class="box-content nopadding">
-                                                        <div class="file-manager" id="status_deliverd"
-                                                             data="<?php echo @$pathFileManager; ?>"></div>
-                                                    </div>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        <?php endif; ?>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="name_th" class="control-label">ชื่อภาษาไทย :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="name_th" id="name_th" placeholder="Text input"
+                                                       class="input-xlarge" value="<?php echo @$name_th; ?>"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="name_en" class="control-label">ชื่อภาษาอังกฤษ :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="name_en" id="name_en" placeholder="Text input"
+                                                       class="input-xlarge" value="<?php echo @$name_en; ?>"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="email" class="control-label">Email :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="email" id="email" placeholder="Text input"
+                                                       class="input-xlarge" value="<?php echo @$email; ?>"
+                                                       data-rule-email="true"></div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="mobile" class="control-label">Mobile :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="mobile" id="mobile"
+                                                       placeholder="Text input"
+                                                       class="input-xlarge"
+                                                       value="<?php echo @$mobile; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="description" class="control-label">รายละเอียด :</label>
+
+                                            <div class="controls">
+                                                <textarea id="description" name="description"
+                                                          class="input-xlarge"><?php echo @$description; ?></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="span12">
                                         <div class="form-actions">
@@ -214,8 +209,7 @@ $this->load->view("sidebar_menu");
                         <?php
                         else:
                             $this->load->view("permission_page");
-                        endif;
-                        ?>
+                        endif;?>
                     </div>
                     <!-- END: .box -->
                 </div>

@@ -58,9 +58,10 @@ $objData = $this->Customer_model->customerList();
                                         <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>TAX ID</th>
                                             <th>Name TH</th>
                                             <th>Name EN</th>
-                                            <th>Mobile</th>
+                                            <th>Telephone</th>
                                             <th>Email</th>
                                             <th>Update Time</th>
                                             <th>Edit</th>
@@ -72,9 +73,10 @@ $objData = $this->Customer_model->customerList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
+                                                <td><?php echo $value->taxpayer_number; ?></td>
                                                 <td><?php echo $value->name_th; ?></td>
                                                 <td><?php echo $value->name_en; ?></td>
-                                                <td><?php echo "$value->mobile"; ?></td>
+                                                <td><?php echo "$value->telephone"; ?></td>
                                                 <td><?php echo $value->email; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">

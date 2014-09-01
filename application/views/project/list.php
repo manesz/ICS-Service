@@ -56,7 +56,7 @@ $objData = $this->Project_model->projectList();
                                         <tr>
                                             <th>#</th>
                                             <th>Project Name</th>
-                                            <th>Company</th>
+                                            <th>Customer</th>
                                             <th>Project Start</th>
                                             <th>Project End</th>
                                             <th>Update Time</th>
@@ -76,7 +76,7 @@ $objData = $this->Project_model->projectList();
                                                     } else {
                                                         echo '-';
                                                     } ?></td>
-                                                <td><?php echo $value->company_name_th ? $value->company_name_th : $value->compnay_name_en; ?></td>
+                                                <td><?php echo $value->customer_name_th ? $value->customer_name_th : $value->compnay_name_en; ?></td>
                                                 <td><?php echo $value->project_start; ?></td>
                                                 <td><?php echo "$value->project_end"; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>

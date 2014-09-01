@@ -6,7 +6,7 @@ $baseUrl = base_url();
 $this->load->view("header");
 $this->load->view("navigator_menu");
 
-$objCompany = $this->Company_model->companyList();
+$objCustomer = $this->Customer_model->customerList();
 ?>
     <script>
 
@@ -113,16 +113,16 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="company_id" class="control-label">Company :</label>
+                                            <label for="customer_id" class="control-label">Customer :</label>
                                             <div class="controls">
                                                 <div class="input-xlarge">
-                                                    <select name="company_id" id="company_id"
+                                                    <select name="customer_id" id="customer_id"
                                                             class='chosen-select'>
                                                         <option value=""></option>
-                                                        <?php foreach($objCompany as $key => $value):?>
+                                                        <?php foreach($objCustomer as $key => $value):?>
                                                         <option value="<?php echo $value->id; ?>"><?php echo $value->name_th;?></option>
                                                         <?php endforeach; ?>
-                                                        <option value="0">No Company</option>
+                                                        <option value="0">No Customer</option>
                                                     </select></div>
                                             </div>
                                         </div>

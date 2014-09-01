@@ -2,33 +2,46 @@
 
 /**
  * Created by JetBrains PhpStorm.
- * User: Administrator
- * Date: 21/11/2556
- * Time: 19:35 น.
+ * User: Rux
+ * Date: 08/08/2557
+ * Time: 20:58 น.
  * To change this template use File | Settings | File Templates.
  */
-class Company_model extends CI_Model
+
+class Contact_model extends CI_Model
 {
 
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-        $this->tableName = $this->Constant_model->tbCompany;
+        $this->tableName = $this->Constant_model->tbContact;
+        $this->tbCustomer = $this->Constant_model->tbCustomer;
     }
 
     private $tableName = "";
+    private $tbCustomer = "";
 
-    function companyList($id = 0, $type = "", $orderBy = "")
+    function contactList($id = 0, $orderBy = "")
     {
-        $strAnd = $id == 0 ? "" : " AND id = $id";
-        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
+        $strAnd = $id == 0 ? "" : " AND a.id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
         $sql = "
             SELECT
-              *
-            FROM $this->tableName
+              a.*,
+              b.taxpayer_number,
+              b.id AS customer_id,
+              b.name_th AS customer_name_th,
+              b.name_en AS customer_name_en,
+              b.address_th,
+              b.address_en,
+              b.telephone,
+              b.fax
+            FROM $this->tableName a
+            LEFT JOIN $this->tbCustomer b
+            ON (a.customer_id = b.id AND b.publish = 1)
             WHERE 1
-            AND publish = 1
+            AND a.publish = 1
             $strAnd
             $strOrder
         ";
@@ -41,11 +54,10 @@ class Company_model extends CI_Model
         }
     }
 
-    function companyAdd($post)
+    function contactAdd($post)
     {
+        if (!$post) return false;
         extract($post);
-
-
         $imagePath = $this->Upload_model->uploadBase64($post);
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
@@ -54,17 +66,13 @@ class Company_model extends CI_Model
         }
 
         $data = array(
+            'customer_id' => @$customer_id,
             'name_th' => @$name_th,
             'name_en' => @$name_en,
-            'taxpayer_number' => @$taxpayer_number,
-            'address_th' => @$address_th,
-            'address_en' => @$address_en,
-            'telephone' => @$telephone,
-            'fax' => @$fax,
+            'mobile' => @$mobile,
             'email' => @$email,
             'image' => @$imagePath,
-            'remark' => @$remark,
-            'location' => trim(@$location),
+            'description' => @$description,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
@@ -73,12 +81,13 @@ class Company_model extends CI_Model
         $id = $this->db->insert_id($this->tableName);
         if (!$id) return false;
         $data['id'] = $id;
-        $this->Log_model->logAdd('add company', $this->tableName, __LINE__, $data);
+        $this->Log_model->logAdd('add contact', $this->tableName, __LINE__, $data);
         return $id;
     }
 
-    function companyEdit($id, $post)
+    function contactEdit($id, $post)
     {
+        if (!$id || !$post) return false;
         extract($post);
 
         $imagePath = $this->Upload_model->uploadBase64($post);
@@ -91,21 +100,17 @@ class Company_model extends CI_Model
 
         $data = array(
             'id' => $id,
+            'customer_id' => @$customer_id,
             'name_th' => @$name_th,
             'name_en' => @$name_en,
-            'taxpayer_number' => @$taxpayer_number,
-            'address_th' => @$address_th,
-            'address_en' => @$address_en,
-            'telephone' => @$telephone,
-            'fax' => @$fax,
+            'mobile' => @$mobile,
             'email' => @$email,
             'image' => @$imagePath,
-            'remark' => @$remark,
-            'location' => trim(@$location),
+            'description' => @$description,
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
-        $this->Log_model->logAdd('edit company', $this->tableName, __LINE__, $data);
+        $this->Log_model->logAdd('edit contact', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));
     }
 }

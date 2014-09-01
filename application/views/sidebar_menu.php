@@ -9,7 +9,7 @@ $checkShowIssueMenu = false;
 foreach ($objCheckModule as $key => $value) {
     $expResult = explode(',', $value->permission);
     switch ($value->title) {
-        case "Company":
+        case "Customer":
             if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]) {
                 $checkShowISPOTMenu = true;
             }
@@ -87,14 +87,14 @@ endforeach;
     foreach ($objCheckModule as $key => $value) :
         $expResult = explode(',', $value->permission);
         switch ($value->title) {
-            case "Company":
+            case "Customer":
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="<?php echo $webUrl; ?>company" data-toggle="dropdown">Company</a>
+                        <a href="<?php echo $webUrl; ?>customer" data-toggle="dropdown">Customer</a>
                         <ul class="dropdown-menu">
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>company/add">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>customer/add">Add new</a></li>
                             <?php endif; ?>
                             <?php if (@$expResult[4]): ?>
                                 <li><a href="#">Report-1</a></li>
@@ -134,14 +134,14 @@ endforeach;
                 </ul>
             <?php endif; ?>
                 <?php break;
-            case "Customer":
+            case "Contact":
                 ?><?php if (@$expResult[0] || @$expResult[1] || @$expResult[4] || @$expResult[5] || @$expResult[6]):?>
                 <ul class="subnav-menu">
                     <li class='dropdown'>
-                        <a href="<?php echo $webUrl; ?>customer" data-toggle="dropdown">Customer</a>
+                        <a href="<?php echo $webUrl; ?>contact" data-toggle="dropdown">Contact</a>
                         <ul class="dropdown-menu">
                             <?php if (@$expResult[1]): ?>
-                                <li><a href="<?php echo $webUrl; ?>customer/add">Add new</a></li>
+                                <li><a href="<?php echo $webUrl; ?>contact/add">Add new</a></li>
                             <?php endif; ?>
 <!--                            --><?php //if (@$expResult[4]): ?>
 <!--                                <li><a href="#">Report-1</a></li>-->

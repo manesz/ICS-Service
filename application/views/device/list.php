@@ -55,7 +55,7 @@ $objData = $this->Device_model->deviceList();
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Company</th>
+                                            <th>Customer</th>
                                             <th>Name</th>
                                             <th>Model</th>
                                             <th>Brand</th>

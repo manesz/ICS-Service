@@ -2,12 +2,11 @@
 
 /**
  * Created by JetBrains PhpStorm.
- * User: Rux
- * Date: 08/08/2557
- * Time: 20:58 น.
+ * User: Administrator
+ * Date: 21/11/2556
+ * Time: 19:35 น.
  * To change this template use File | Settings | File Templates.
  */
-
 class Customer_model extends CI_Model
 {
 
@@ -16,32 +15,20 @@ class Customer_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->tableName = $this->Constant_model->tbCustomer;
-        $this->tbCompany = $this->Constant_model->tbCompany;
     }
 
     private $tableName = "";
-    private $tbCompany = "";
 
-    function customerList($id = 0, $orderBy = "")
+    function customerList($id = 0, $type = "", $orderBy = "")
     {
-        $strAnd = $id == 0 ? "" : " AND a.id = $id";
-        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
+        $strAnd = $id == 0 ? "" : " AND id = $id";
+        $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY id DESC";
         $sql = "
             SELECT
-              a.*,
-              b.taxpayer_number,
-              b.id AS company_id,
-              b.name_th AS company_name_th,
-              b.name_en AS company_name_en,
-              b.address_th,
-              b.address_en,
-              b.telephone,
-              b.fax
-            FROM $this->tableName a
-            LEFT JOIN $this->tbCompany b
-            ON (a.company_id = b.id AND b.publish = 1)
+              *
+            FROM $this->tableName
             WHERE 1
-            AND a.publish = 1
+            AND publish = 1
             $strAnd
             $strOrder
         ";
@@ -56,8 +43,9 @@ class Customer_model extends CI_Model
 
     function customerAdd($post)
     {
-        if (!$post) return false;
         extract($post);
+
+
         $imagePath = $this->Upload_model->uploadBase64($post);
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
@@ -66,13 +54,17 @@ class Customer_model extends CI_Model
         }
 
         $data = array(
-            'company_id' => @$company_id,
             'name_th' => @$name_th,
             'name_en' => @$name_en,
-            'mobile' => @$mobile,
+            'taxpayer_number' => @$taxpayer_number,
+            'address_th' => @$address_th,
+            'address_en' => @$address_en,
+            'telephone' => @$telephone,
+            'fax' => @$fax,
             'email' => @$email,
             'image' => @$imagePath,
-            'description' => @$description,
+            'remark' => @$remark,
+            'location' => trim(@$location),
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
@@ -87,7 +79,6 @@ class Customer_model extends CI_Model
 
     function customerEdit($id, $post)
     {
-        if (!$id || !$post) return false;
         extract($post);
 
         $imagePath = $this->Upload_model->uploadBase64($post);
@@ -100,13 +91,17 @@ class Customer_model extends CI_Model
 
         $data = array(
             'id' => $id,
-            'company_id' => @$company_id,
             'name_th' => @$name_th,
             'name_en' => @$name_en,
-            'mobile' => @$mobile,
+            'taxpayer_number' => @$taxpayer_number,
+            'address_th' => @$address_th,
+            'address_en' => @$address_en,
+            'telephone' => @$telephone,
+            'fax' => @$fax,
             'email' => @$email,
             'image' => @$imagePath,
-            'description' => @$description,
+            'remark' => @$remark,
+            'location' => trim(@$location),
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );

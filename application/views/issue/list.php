@@ -56,8 +56,8 @@ $objData = $this->Issue_model->issueList();
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
-                                            <th>Company_TH</th>
-                                            <th>Company_EN</th>
+                                            <th>Customer_TH</th>
+                                            <th>Customer_EN</th>
                                             <th>Status</th>
                                             <th>Crate Time</th>
                                             <th>Update Time</th>

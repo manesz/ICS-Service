@@ -15,13 +15,13 @@ class Quotation_model extends CI_Model
         $this->tbQuotation = $this->Constant_model->tbQuotation;
         $this->tbQuotationItem = $this->Constant_model->tbQuotationItem;
         $this->tbProject = $this->Constant_model->tbProject;
-        $this->tbCompany = $this->Constant_model->tbCompany;
+        $this->tbCustomer = $this->Constant_model->tbCustomer;
     }
 
     private $tbQuotation = "";
     private $tbQuotationItem = "";
     private $tbProject = "";
-    private $tbCompany = "";
+    private $tbCustomer = "";
 
     function quotationList($id = 0, $orderBy = "")
     {
@@ -32,14 +32,14 @@ class Quotation_model extends CI_Model
               a.*,
               b.name_en AS project_name_en,
               b.name_th AS project_name_th,
-              c.name_en AS company_name_en,
-              c.name_th AS company_name_th
+              c.name_en AS customer_name_en,
+              c.name_th AS customer_name_th
             FROM
               `$this->tbQuotation` a
             LEFT JOIN `$this->tbProject` b
             ON (a.project_id = b.id AND b.publish = 1)
-            LEFT JOIN `$this->tbCompany` c
-            ON (b.company_id = c.id AND c.publish = 1)
+            LEFT JOIN `$this->tbCustomer` c
+            ON (b.customer_id = c.id AND c.publish = 1)
             WHERE 1
             AND a.publish = 1
             $strAnd
@@ -83,13 +83,13 @@ class Quotation_model extends CI_Model
         extract($post);
         $data = array(
             'project_id' => intval(@$project_id),
+            'contact_name' => trim(@$contact_name),
             'customer_name' => trim(@$customer_name),
-            'company_name' => trim(@$company_name),
             'address' => trim(@$address),
-            'customer_mobile' => trim(@$customer_mobile),
-            'customer_tel' => trim(@$customer_tel),
-            'customer_fax' => trim(@$customer_fax),
-            'customer_email' => trim(@$customer_email),
+            'contact_mobile' => trim(@$contact_mobile),
+            'contact_tel' => trim(@$contact_tel),
+            'contact_fax' => trim(@$contact_fax),
+            'contact_email' => trim(@$contact_email),
             'quotation_no' => trim(@$quotation_no),
             'quotation_date' => @$quotation_date,
             'proposer' => trim(@$proposer),
@@ -125,13 +125,13 @@ class Quotation_model extends CI_Model
         $data = array(
             'id' => $id,
             'project_id' => intval(@$project_id),
+            'contact_name' => trim(@$contact_name),
             'customer_name' => trim(@$customer_name),
-            'company_name' => trim(@$company_name),
             'address' => trim(@$address),
-            'customer_mobile' => trim(@$customer_mobile),
-            'customer_tel' => trim(@$customer_tel),
-            'customer_fax' => trim(@$customer_fax),
-            'customer_email' => trim(@$customer_email),
+            'contact_mobile' => trim(@$contact_mobile),
+            'contact_tel' => trim(@$contact_tel),
+            'contact_fax' => trim(@$contact_fax),
+            'contact_email' => trim(@$contact_email),
             'quotation_no' => trim(@$quotation_no),
             'quotation_date' => @$quotation_date,
             'proposer' => trim(@$proposer),

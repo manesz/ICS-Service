@@ -17,24 +17,24 @@ class Issue_model extends CI_Model
         $this->tableName = $this->Constant_model->tbIssue;
         $this->tableImageName = $this->Constant_model->tbImage;
         $this->tableMapImageName = $this->Constant_model->tbMapImageIssue;
-        $this->tableCompanyName = $this->Constant_model->tbCompany;
+        $this->tableCustomerName = $this->Constant_model->tbCustomer;
     }
 
     private $tableName = "";
     private $tableImageName = "";
     private $tableMapImageName = "";
-    private $tableCompanyName = "";
+    private $tableCustomerName = "";
 
     function issueList($id = 0, $orderBy = "")
     {
         $memberID = @$this->session->userdata['id'];
         $objMember = $this->Member_model->memberList($memberID);
         $usernameLogin = @$this->session->userdata['username'];
-        $companyID = $objMember[0]->company_id;
+        $customerID = $objMember[0]->customer_id;
 
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
-        if ($usernameLogin != 'admin' && $companyID != 1) {
-            $strAnd .= " AND a.company_id = $companyID";
+        if ($usernameLogin != 'admin' && $customerID != 1) {
+            $strAnd .= " AND a.customer_id = $customerID";
         }
         $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
 
@@ -44,8 +44,8 @@ class Issue_model extends CI_Model
               b.name_th,
               b.name_en
             FROM $this->tableName a
-            INNER JOIN $this->tableCompanyName b ON (
-              a.company_id = b.id AND b.publish = 1
+            INNER JOIN $this->tableCustomerName b ON (
+              a.customer_id = b.id AND b.publish = 1
             )
             WHERE 1
             AND a.publish = 1
@@ -66,12 +66,12 @@ class Issue_model extends CI_Model
         extract($post);
         $memberID = @$this->session->userdata['id'];
         $objMember = $this->Member_model->memberList($memberID);
-        $companyID = $objMember[0]->company_id;
+        $customerID = $objMember[0]->customer_id;
         $data = array(
             'title' => trim(@$title),
             'description' => @$description,
             'status' => "create",
-            'company_id' => @$companyID,
+            'customer_id' => @$customerID,
             'member_id' => @$memberID,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
@@ -225,13 +225,13 @@ class Issue_model extends CI_Model
         }
         $memberID = @$this->session->userdata['id'];
         $objMember = $this->Member_model->memberList($memberID);
-        $companyID = $objMember[0]->company_id;
+        $customerID = $objMember[0]->customer_id;
         $data = array(
             'id' => $id,
             'title' => trim(@$title),
             'description' => @$description,
 //            'status' => "create",
-//            'company_id' => @$companyID,
+//            'customer_id' => @$customerID,
 //            'member_id' => @$memberID,
             'update_datetime' => date('Y-m-d H:i:s'),
         );

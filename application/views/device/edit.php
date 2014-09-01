@@ -9,7 +9,7 @@ $arrDevice = $this->Device_model->deviceList($id);
 extract((array)$arrDevice[0]);
 $pathFileManager = "uploads/device/$id/files/";
 $this->Helper_model->checkHaveFolder($pathFileManager, true);
-$objCompany = $this->Company_model->companyList();
+$objCustomer = $this->Customer_model->customerList();
 ?>
     <script>
         var url_post_data = "<?php echo $webUrl; ?>device/edit/<?php echo @$id; ?>";
@@ -128,20 +128,20 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="company_id" class="control-label">Company :</label>
+                                            <label for="customer_id" class="control-label">Customer :</label>
 
                                             <div class="controls">
                                                 <div class="input-xlarge">
-                                                    <select name="company_id" id="company_id"
+                                                    <select name="customer_id" id="customer_id"
                                                             class='chosen-select'>
                                                         <option value=""></option>
-                                                        <?php foreach ($objCompany as $key => $value): ?>
-                                                            <option <?php echo @$company_id == $value->id ? 'selected' : ''; ?>
+                                                        <?php foreach ($objCustomer as $key => $value): ?>
+                                                            <option <?php echo @$customer_id == $value->id ? 'selected' : ''; ?>
                                                                 value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
                                                         <?php endforeach; ?>
                                                         <option
-                                                            <?php echo @$company_id == 0 ? 'selected' : ''; ?>
-                                                            value="0">No Company</option>
+                                                            <?php echo @$customer_id == 0 ? 'selected' : ''; ?>
+                                                            value="0">No Customer</option>
                                                     </select></div>
                                             </div>
                                         </div>

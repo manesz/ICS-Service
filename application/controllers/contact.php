@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by JetBrains PhpStorm.
- * User: Administrator
- * Date: 29/10/2556
- * Time: 13:52 น.
+ * User: Rux
+ * Date: 08/08/2557
+ * Time: 20:58 น.
  * To change this template use File | Settings | File Templates.
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Company extends CI_Controller
+class Contact extends CI_Controller
 {
     function __construct()
     {
@@ -19,8 +19,8 @@ class Company extends CI_Controller
         $this->Authentication_model->checkSignIn();
     }
 
-    private $selectMenu = "company";
-    private $moduleName = "Company";
+    private $selectMenu = "contact";
+    private $moduleName = "Contact";
 
     function checkPermission($index)
     {
@@ -36,14 +36,14 @@ class Company extends CI_Controller
             'permissionUpdate' => $this->checkPermission(2),
             'permissionDelete' => $this->checkPermission(3)
         );
-        $this->load->view("company/list", $data);
+        $this->load->view("contact/list", $data);
     }
 
-    function companyAdd()
+    function contactAdd()
     {
         $post = $this->input->post();
         if ($post) {
-            $result = $this->Company_model->companyAdd($post);
+            $result = $this->Contact_model->contactAdd($post);
             if ($result){
                 echo "add success";
             } else {
@@ -55,14 +55,14 @@ class Company extends CI_Controller
             "selectMenu" => $this->selectMenu,
             'permission' => $this->checkPermission(1)
         );
-        $this->load->view("company/add", $data);
+        $this->load->view("contact/add", $data);
     }
 
-    function companyEdit($id)
+    function contactEdit($id)
     {
         $post = $this->input->post();
         if ($post) {//var_dump($post);exit;
-            $result = $this->Company_model->companyEdit($id, $post);
+            $result = $this->Contact_model->contactEdit($id, $post);
             if ($result) {
                 echo "edit success";
             } else {
@@ -75,12 +75,12 @@ class Company extends CI_Controller
             "selectMenu" => $this->selectMenu,
             'permission' => $this->checkPermission(2)
         );
-        $this->load->view("company/edit", $data);
+        $this->load->view("contact/add", $data);
     }
 
-    function companyDelete($id)
+    function contactDelete($id)
     {
-        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbCompany);
+        $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbContact);
         if (!$result)
         {
             echo "delete fail";

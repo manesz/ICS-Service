@@ -7,11 +7,11 @@ $baseUrl = base_url();
 
 $memberId = @$this->session->userdata['id'];
 $usernameLogin = @$this->session->userdata['username'];
-$companyIDLogin = @$this->session->userdata['company_id'];
+$customerIDLogin = @$this->session->userdata['customer_id'];
 
 $objDepartment = $this->Department_model->departmentList();
 $objPosition = $this->Position_model->positionList();
-$arrCompany = $this->Company_model->companyList();
+$arrCustomer = $this->Customer_model->customerList();
 
 $arrMember = $this->Member_model->memberList($id);
 extract((array)$arrMember[0]);
@@ -21,7 +21,7 @@ $objModule = $this->Module_model->moduleList();
 $permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
 
 $checkEditUser = false;
-if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
+if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
     $checkEditUser = true;
 }
 ?>
@@ -420,20 +420,20 @@ if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
             </div>
         </div>
         <div class="control-group">
-            <label for="company_id" class="control-label">Company</label>
+            <label for="customer_id" class="control-label">Customer</label>
 
             <div class="controls">
                 <?php if ($checkEditUser): ?>
-                    <select name="company_id" id="company_id" data-rule-required="true">
+                    <select name="customer_id" id="customer_id" data-rule-required="true">
                         <option value=""></option>
-                        <?php foreach ($arrCompany as $key => $value): ?>
+                        <?php foreach ($arrCustomer as $key => $value): ?>
                             <option value="<?php echo @$value->id; ?>"
-                                <?php echo @$company_id == $value->id ? 'selected' : '' ?>><?php echo @$value->name_th; ?></option>
+                                <?php echo @$customer_id == $value->id ? 'selected' : '' ?>><?php echo @$value->name_th; ?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
-                    <?php foreach ($arrCompany as $key => $value): ?>
-                        <?php echo @$company_id == $value->id ? $value->name_th : ""; ?>
+                    <?php foreach ($arrCustomer as $key => $value): ?>
+                        <?php echo @$customer_id == $value->id ? $value->name_th : ""; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>

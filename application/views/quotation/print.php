@@ -120,7 +120,7 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
                 <td width="120" align="left" valign="top" class="border-top border-left">To :</td>
-                <td align="left" valign="top" class="border-top"> <?php echo @$customer_name; ?></td>
+                <td align="left" valign="top" class="border-top"> <?php echo @$contact_name; ?></td>
                 <td width="150" colspan="" align="left" valign="top" class="border-top border-left">เลขที่เอกสาร /
                     Quotation No. :
                 </td>
@@ -129,7 +129,7 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
             </tr>
             <tr>
                 <td align="left" valign="top" class="border-left">ชื่อบริษัท / Crop. Name :</td>
-                <td align="left" valign="top"> <?php echo @$company_name; ?></td>
+                <td align="left" valign="top"> <?php echo @$customer_name; ?></td>
                 <td align="left" valign="top" class="border-left">วันที่เสนอ / Quotation Date :</td>
                 <td align="left" valign="top"
                     class="border-top border-left border-right"><?php echo $this->Constant_model->thaiDate(@$quotation_date, false, false); ?></td>
@@ -142,26 +142,26 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
             </tr>
             <tr>
                 <td align="left" valign="top" class="border-left">เบอร์มือถือ / Mobile :</td>
-                <td align="left" valign="top"> <?php echo @$customer_mobile; ?></td>
+                <td align="left" valign="top"> <?php echo @$contact_mobile; ?></td>
                 <td align="left" valign="top" class="border-left">เบอร์มือถือ / Mobile :</td>
                 <td align="left" valign="top" class="border-top border-left border-right"><?php echo @$mobile; ?></td>
             </tr>
             <tr>
                 <td align="left" valign="top" class="border-left">เบอร์ติดต่อ / Tel :</td>
-                <td align="left" valign="top"> <?php echo @$customer_tel; ?></td>
+                <td align="left" valign="top"> <?php echo @$contact_tel; ?></td>
                 <td align="left" valign="top" class="border-left">เบอร์ติดต่อ / Telephone :</td>
                 <td align="left" valign="top"
                     class="border-top border-left border-right"><?php echo @$telephone; ?></td>
             </tr>
             <tr>
                 <td align="left" valign="top" class="border-left">เบอร์แฟ็ก / Fax :</td>
-                <td align="left" valign="top"> <?php echo @$customer_fax; ?></td>
+                <td align="left" valign="top"> <?php echo @$contact_fax; ?></td>
                 <td align="left" valign="top" class="border-left">เบอร์แฟ็ก / Fax:</td>
                 <td align="left" valign="top" class="border-top border-left border-right"><?php echo @$fax; ?></td>
             </tr>
             <tr>
                 <td align="left" valign="top" class="border-left">อีเมลล์ / Email :</td>
-                <td align="left" valign="top"> <?php echo @$customer_email; ?></td>
+                <td align="left" valign="top"> <?php echo @$contact_email; ?></td>
                 <td align="left" valign="top" class="border-left">อีเมล / Email :</td>
                 <td align="left" valign="top" class="border-top border-left border-right"><?php echo @$email; ?></td>
             </tr>

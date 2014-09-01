@@ -279,7 +279,7 @@ class Log_model extends CI_Model
         @$request['pre_alert'] ? $arrOtherSearch[] = " a.pre_alert = '" .
             $this->Helper_model->convertDate(trim($request['pre_alert'])) . "'" : null;
         @$request['pending'] ? $arrOtherSearch[] = " a.pending = '" . ($request['pending']) . "'" : null;
-        @$request['company_id'] ? $arrOtherSearch[] = " a.company_id = '" . ($request['company_id']) . "'" : null;
+        @$request['customer_id'] ? $arrOtherSearch[] = " a.customer_id = '" . ($request['customer_id']) . "'" : null;
         @$request['shipment_type'] ? $arrOtherSearch[] = " a.shipment_type = '" . ($request['shipment_type']) . "'" : null;
         @$request['transport_type'] ? $arrOtherSearch[] = " a.transport_type = '" . ($request['transport_type']) . "'" : null;
         @$request['pod_id'] ? $arrOtherSearch[] = " a.pod_id = '" . ($request['pod_id']) . "'" : null;

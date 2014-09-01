@@ -98,7 +98,7 @@ class Member_model extends CI_Model
             'address' => trim(@$address),
             'image_path' => $imagePath,
             'signature_path' => $imagePathSignature,
-            'company_id' => intval($company_id),
+            'customer_id' => intval($customer_id),
             'department_id' => intval($department_id),
             'position_id' => intval($position_id),
             'user_group' => @$user_group,
@@ -118,9 +118,9 @@ class Member_model extends CI_Model
     {
         $memberId = @$this->session->userdata['id'];
         $usernameLogin = @$this->session->userdata['username'];
-        $companyIDLogin = @$this->session->userdata['company_id'];
+        $customerIDLogin = @$this->session->userdata['customer_id'];
         $checkEditUser = false;
-        if ($usernameLogin == 'admin' || $companyIDLogin == 1) {
+        if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
             $checkEditUser = true;
         }
 
@@ -174,7 +174,7 @@ class Member_model extends CI_Model
         if ($password == "") { //ไม่เปลี่ยพาส
             if ($checkEditUser) {
                 $data['username'] = trim(@$username);
-                $data['company_id'] = intval(@$company_id);
+                $data['customer_id'] = intval(@$customer_id);
                 $data['department_id'] = intval(@$department_id);
                 $data['position_id'] = intval(@$position_id);
             }
@@ -182,7 +182,7 @@ class Member_model extends CI_Model
             if ($checkEditUser) { //เป็น admin
                 $data['password'] = md5(@$password);
                 $data['username'] = trim(@$username);
-                $data['company_id'] = intval(@$company_id);
+                $data['customer_id'] = intval(@$customer_id);
                 $data['department_id'] = intval(@$department_id);
                 $data['position_id'] = intval(@$position_id);
             }

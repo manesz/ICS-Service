@@ -52,15 +52,15 @@ $route['member/add'] = 'member/memberadd';
 $route['member/edit/(:any).*'] = 'member/memberedit/$1';
 $route['member/delete/(:any).*'] = 'member/memberdelete/$1';
 
-//Company
-$route['company/add'] = 'company/companyadd';
-$route['company/edit/(:any).*'] = 'company/companyedit/$1';
-$route['company/delete/(:any).*'] = 'company/companydelete/$1';
-
 //Customer
 $route['customer/add'] = 'customer/customeradd';
 $route['customer/edit/(:any).*'] = 'customer/customeredit/$1';
 $route['customer/delete/(:any).*'] = 'customer/customerdelete/$1';
+
+//Customer
+$route['contact/add'] = 'contact/contactadd';
+$route['contact/edit/(:any).*'] = 'contact/contactedit/$1';
+$route['contact/delete/(:any).*'] = 'contact/contactdelete/$1';
 
 //Device
 $route['device/add'] = 'device/deviceadd';

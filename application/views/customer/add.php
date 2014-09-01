@@ -1,21 +1,14 @@
 <?php
 
-$this->load->view("header");
-$this->load->view("navigator_menu");
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 
-$objCompany = $this->Company_model->companyList();
-if (@$id) {
-    $objData = $this->Customer_model->customerList($id);
-    extract((array)$objData[0]);
-} else {
-    $id = 0;
-}
+$this->load->view("header");
+$this->load->view("navigator_menu");
 ?>
     <script>
 
-        var url_post_data = "<?php echo $webUrl; ?>customer/<?php echo $id?"edit/$id":"add"; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>customer/add";
         var url_list = "<?php echo $webUrl; ?>customer";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -31,7 +24,7 @@ if (@$id) {
                     if ($(".fileupload-preview").html() != "") {
                         dataImg = $(".fileupload-preview img").attr("src");
                     }
-                    var data = $(this).serialize();
+                    var data = $('#formPost').serialize();
                     var imageName = $("#imagefile").val();
                     data = data + '&' + $.param({
                         data_image: dataImg,
@@ -56,13 +49,13 @@ $this->load->view("sidebar_menu");
         <div class="container-fluid">
             <div class="page-header">
                 <div class="pull-left">
-                    <h1><?php echo $id ? "Edit" : "Add" ?> Customer</h1>
+                    <h1>New Customer</h1>
                 </div>
             </div>
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a href="<?php echo $webUrl; ?>Dashboard">Home</a>
+                        <a href="<?php echo $webUrl; ?>dashboard">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
@@ -70,8 +63,7 @@ $this->load->view("sidebar_menu");
                         <i class="icon-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo $webUrl; ?>customer/<?php echo $id ? "edit/$id" : "add"; ?>"
-                            ><?php echo $id ? "Edit" : "Add" ?> Customer</a>
+                        <a class="" href="<?php echo $webUrl; ?>customer/add">New Customer</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -84,7 +76,7 @@ $this->load->view("sidebar_menu");
                     <div class="box box-color box-bordered">
                         <div class="box-title">
                             <h3>
-                                <i class="icon-list"></i> <?php echo $id ? "Edit" : "Add" ?> Customer
+                                <i class="icon-list"></i> Customer
                             </h3>
                         </div>
                         <!-- END: .box-title -->
@@ -96,35 +88,23 @@ $this->load->view("sidebar_menu");
 
                                     <div class="span12">
                                         <div class="control-group">
-                                            <input type="hidden" id="image_path" name="image_path"
-                                                   value="<?php echo !file_exists(@$image) ? "" : $image; ?>"/>
                                             <label for="image" class="control-label">Image</label>
 
                                             <div class="controls">
                                                 <div class="fileupload fileupload-new" id="image"
                                                      data-provides="fileupload">
-                                                    <div id="imgThumbnail" class="fileupload-new thumbnail"
+                                                    <div class="fileupload-new thumbnail"
                                                          style="width: 200px; height: 150px;">
-                                                        <img src="<?php
-                                                        echo !file_exists(@$image) ? $baseUrl . "assets/img/no_img.gif" :
-                                                            $baseUrl . $image;
-                                                        ?>"/>
+                                                        <img src="<?php echo $baseUrl; ?>assets/img/no_img.gif"/>
                                                     </div>
                                                     <div class="fileupload-preview fileupload-exists thumbnail"
                                                          style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                     <div>
-                                            <span id="groupBtn"
-                                                  class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
-                                                <span class="fileupload-new">Select image</span>
-                                                <span class="fileupload-exists">Change</span>
-                                                <input type="file" name='imagefile' id="imagefile"/>
-                                            </span>
-                                                        <?php if (file_exists(@$image)): ?>
-                                                            <input type="button" id="btnDeleteImage"
-                                                                   onclick="removeImage('<?php echo $image; ?>');"
-                                                                   class="btn"
-                                                                   value="Remove">
-                                                        <?php endif; ?>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">Select image</span>
+                                <span class="fileupload-exists">Change</span>
+                                <input type="file" id="imagefile" name='imagefile'/>
+                            </span>
                                                         <a href="#" class="btn fileupload-exists"
                                                            data-dismiss="fileupload">Remove</a>
                                                     </div>
@@ -132,21 +112,28 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="company_id" class="control-label">Company</label>
+                                            <label for="email" class="control-label">Email :</label>
 
                                             <div class="controls">
-                                                <div class="input-xlarge">
-                                                    <select name="company_id" id="company_id" class='chosen-select'>
-                                                        <option value=""></option>
-                                                        <?php foreach ($objCompany as $key => $value): ?>
-                                                            <option value="<?php echo $value->id; ?>"
-                                                                <?php echo $value->id == @$company_id ? 'selected' : ''; ?>
-                                                                ><?php if ($value->name_th != "" && $value->name_th != "-") {
-                                                                    echo $value->name_th;
-                                                                } else echo $value->name_en ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
+                                                <input type="text" name="email" id="email" placeholder="Text input"
+                                                       class="input-xlarge" data-rule-email="true"
+                                                       data-rule-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="fax" class="control-label">Fax :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="fax" id="fax" placeholder="Text input"
+                                                       class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="taxpayer_number" class="control-label">เลขที่ผู้เสียภาษี :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="taxpayer_number" id="taxpayer_number" placeholder="Text input"
+                                                       class="input-xlarge">
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -154,8 +141,15 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="name_th" id="name_th" placeholder="Text input"
-                                                       class="input-xlarge" value="<?php echo @$name_th; ?>"
-                                                    >
+                                                       class="input-xlarge" data-rule-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="address_th" class="control-label">ที่อยู่ภาษาไทย :</label>
+
+                                            <div class="controls">
+                                                <textarea id="address_th" name="address_th"
+                                                          class="input-xlarge"></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -163,41 +157,152 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="name_en" id="name_en" placeholder="Text input"
-                                                       class="input-xlarge" value="<?php echo @$name_en; ?>"
-                                                    >
+                                                       class="input-xlarge" data-rule-required="true">
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="email" class="control-label">Email :</label>
+                                            <label for="address_en" class="control-label">ที่อยู่อังกฤษ :</label>
 
                                             <div class="controls">
-                                                <input type="text" name="email" id="email" placeholder="Text input"
-                                                       class="input-xlarge" value="<?php echo @$email; ?>"
-                                                       data-rule-email="true"></div>
+                                                <textarea id="address_en" name="address_en"
+                                                          class="input-xlarge"></textarea>
+                                            </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="mobile" class="control-label">Mobile :</label>
+                                            <label for="telephone" class="control-label">Telephone :</label>
 
                                             <div class="controls">
-                                                <input type="text" name="mobile" id="mobile"
+                                                <input type="text" name="telephone" id="telephone"
                                                        placeholder="Text input"
-                                                       class="input-xlarge"
-                                                       value="<?php echo @$mobile; ?>">
+                                                       class="input-xlarge" data-rule-required="true">
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="description" class="control-label">รายละเอียด :</label>
+                                            <label for="remark" class="control-label">รายละเอียด :</label>
 
                                             <div class="controls">
-                                                <textarea id="description" name="description"
-                                                          class="input-xlarge"><?php echo @$description; ?></textarea>
+                                                <textarea id="remark" name="remark"
+                                                          class="input-xlarge"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="location" class="control-label">Location :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="location" id="location"
+                                                       class="input-xlarge">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span12">
+                                        <script type="text/javascript">
+                                            var geocoder = new google.maps.Geocoder();
+
+                                            function geocodePosition(pos) {
+                                                geocoder.geocode({
+                                                    latLng: pos
+                                                }, function(responses) {
+                                                    if (responses && responses.length > 0) {
+                                                        updateMarkerAddress(responses[0].formatted_address);
+                                                    } else {
+                                                        updateMarkerAddress('Cannot determine address at this location.');
+                                                    }
+                                                });
+                                            }
+
+                                            function updateMarkerStatus(str) {
+                                                document.getElementById('markerStatus').innerHTML = str;
+                                            }
+
+                                            function updateMarkerPosition(latLng) {
+                                                document.getElementById('info').innerHTML = [
+                                                    latLng.lat(),
+                                                    latLng.lng()
+                                                ].join(', ');
+                                                document.getElementById('location').value = [
+                                                    latLng.lat(),
+                                                    latLng.lng()
+                                                ].join(', ');
+                                            }
+
+                                            function updateMarkerAddress(str) {
+                                                document.getElementById('address').innerHTML = str;
+                                            }
+
+                                            function initialize() {
+                                                var latLng = new google.maps.LatLng(0, 0);
+                                                var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                                                    zoom: 8,
+                                                    center: latLng,
+                                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                });
+                                                var marker = new google.maps.Marker({
+                                                    position: latLng,
+                                                    title: 'Point A',
+                                                    map: map,
+                                                    draggable: true
+                                                });
+
+                                                // Update current position info.
+                                                updateMarkerPosition(latLng);
+                                                geocodePosition(latLng);
+
+                                                // Add dragging event listeners.
+                                                google.maps.event.addListener(marker, 'dragstart', function() {
+                                                    updateMarkerAddress('Dragging...');
+                                                });
+
+                                                google.maps.event.addListener(marker, 'drag', function() {
+                                                    updateMarkerStatus('Dragging...');
+                                                    updateMarkerPosition(marker.getPosition());
+                                                });
+
+                                                google.maps.event.addListener(marker, 'dragend', function() {
+                                                    updateMarkerStatus('Drag ended');
+                                                    geocodePosition(marker.getPosition());
+                                                });
+                                            }
+
+                                            // Onload handler to fire off the app.
+                                            google.maps.event.addDomListener(window, 'load', initialize);
+                                        </script>
+                                        <style>
+                                            #mapCanvas {
+                                                width: 500px;
+                                                height: 400px;
+                                                float: left;
+                                            }
+                                            #infoPanel {
+                                                float: left;
+                                                margin-left: 10px;
+                                            }
+                                            #infoPanel div {
+                                                margin-bottom: 5px;
+                                            }
+                                        </style>
+                                        <div class="box">
+                                            <div class="box-title">
+                                                <h3>
+                                                    <i class="icon-map-marker"></i>
+                                                    Map
+                                                </h3>
+                                            </div>
+                                            <div class="box-content">
+                                                <div id="mapCanvas"></div>
+                                                <div id="infoPanel">
+                                                    <b>Marker status:</b>
+                                                    <div id="markerStatus"><i>Click and drag the marker.</i></div>
+                                                    <b>Current position:</b>
+                                                    <div id="info"></div>
+                                                    <b>Closest matching address:</b>
+                                                    <div id="address"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="span12">
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary" id="btnSave">Save changes
-                                            </button>
+                                            <button type="submit" class="btn btn-primary" id="btnSave">Add</button>
                                             <button type="button" class="btn" id="btnCancel">Cancel</button>
                                         </div>
                                     </div>
@@ -206,10 +311,10 @@ $this->load->view("sidebar_menu");
                                 </form>
                             </div>
                             <!-- END: .box-content nopadding -->
-                        <?php
-                        else:
+                        <?php else:
                             $this->load->view("permission_page");
-                        endif;?>
+                        endif;
+                        ?>
                     </div>
                     <!-- END: .box -->
                 </div>

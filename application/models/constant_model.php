@@ -237,8 +237,8 @@ class Constant_model extends CI_Model
     //---------------------------------Table name--------------------------------//
     public $sessionName = "ics_session_url";
     public $tbLog = "ics_log";
-    public $tbCompany = "ics_company";
     public $tbCustomer = "ics_customer";
+    public $tbContact = "ics_contact";
     public $tbDevice = "ics_device";
     public $tbProject = "ics_project";
     public $tbMember = "ics_member";

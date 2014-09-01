@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by JetBrains PhpStorm.
- * User: Rux
- * Date: 08/08/2557
- * Time: 20:58 น.
+ * User: Administrator
+ * Date: 29/10/2556
+ * Time: 13:52 น.
  * To change this template use File | Settings | File Templates.
  */
 
@@ -75,7 +75,7 @@ class Customer extends CI_Controller
             "selectMenu" => $this->selectMenu,
             'permission' => $this->checkPermission(2)
         );
-        $this->load->view("customer/add", $data);
+        $this->load->view("customer/edit", $data);
     }
 
     function customerDelete($id)

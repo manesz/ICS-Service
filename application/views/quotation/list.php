@@ -68,7 +68,7 @@ $objData = $this->Quotation_model->quotationList();
                                             <th class="">#</th>
                                             <th class="">Quotation No</th>
                                             <th class="">Project</th>
-                                            <th class="">Company</th>
+                                            <th class="">Customer</th>
                                             <th class="">Total Amount</th>
                                             <th class="">Quotation Date</th>
                                             <th class="">Update Datetime</th>
@@ -84,7 +84,7 @@ $objData = $this->Quotation_model->quotationList();
                                                 <td class="center"><?php echo $key + 1; ?></td>
                                                 <td><?php echo $value->quotation_no; ?></td>
                                                 <td><?php echo $value->project_name_th; ?></td>
-                                                <td><?php echo $value->company_name_th; ?></td>
+                                                <td><?php echo $value->customer_name_th; ?></td>
                                                 <td><?php echo number_format($value->total_amount, 2); ?></td>
                                                 <td><?php echo "$value->quotation_date"; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
@@ -106,11 +106,7 @@ $objData = $this->Quotation_model->quotationList();
                                                     <a onclick="window.open('<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>', '_blank');" href="#"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Print"><i
-                                                            class="icon-print"></i></a>&nbsp;
-                                                    <a href="#"
-                                                       class="btn" rel="tooltip" title=""
-                                                       data-original-title="Download Excel"><i
-                                                            class="icon-download-alt"></i></a>
+                                                            class="icon-print"></i></a>
                                                 </td>
                                             </tr>
 

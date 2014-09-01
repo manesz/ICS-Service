@@ -25,31 +25,14 @@ if ($id) {
     $email = @$this->session->userdata['email'];
 }
 $objProject = $this->Project_model->projectList();
-$objCompany = $this->Company_model->companyList();
-
-$arrayCompanyName = array();
-$arrayCompanyData = array();
-$arrayCompanyAddress = array();
-$arrayCompanyTelephone = array();
-$arrayCompanyFax = array();
-$arrayCompanyEmail = array();
-foreach ($objCompany as $key => $value) {
-    $name_th = str_replace('"', "'", $value->name_th);
-//    if ($value->name_th && $value->name_th != '-') {
-//        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
-//    } else if ($value->name_en && $value->name_en != '-') {
-//        $arrayCompanyName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
-//    }
-    $arrayCompanyName[] = $name_th;
-    $arrayCompanyAddress[] = $value->address_th;
-    $arrayCompanyTelephone[] = $value->telephone;
-    $arrayCompanyFax[] = $value->fax;
-    $arrayCompanyEmail[] = $value->email;
-}
-
 $objCustomer = $this->Customer_model->customerList();
+
 $arrayCustomerName = array();
 $arrayCustomerData = array();
+$arrayCustomerAddress = array();
+$arrayCustomerTelephone = array();
+$arrayCustomerFax = array();
+$arrayCustomerEmail = array();
 foreach ($objCustomer as $key => $value) {
     $name_th = str_replace('"', "'", $value->name_th);
 //    if ($value->name_th && $value->name_th != '-') {
@@ -58,7 +41,24 @@ foreach ($objCustomer as $key => $value) {
 //        $arrayCustomerName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
 //    }
     $arrayCustomerName[] = $name_th;
-    $arrayCustomerData[] = "['$value->company_name_th', '$value->address_th', '$value->mobile', '$value->telephone', '$value->fax', '$value->email']";
+    $arrayCustomerAddress[] = $value->address_th;
+    $arrayCustomerTelephone[] = $value->telephone;
+    $arrayCustomerFax[] = $value->fax;
+    $arrayCustomerEmail[] = $value->email;
+}
+
+$objContact = $this->Contact_model->customerList();
+$arrayContactName = array();
+$arrayContactData = array();
+foreach ($objContact as $key => $value) {
+    $name_th = str_replace('"', "'", $value->name_th);
+//    if ($value->name_th && $value->name_th != '-') {
+//        $arrayContactName[] = "&quot;" . str_replace('"', "'", $value->name_th) . "&quot;";
+//    } else if ($value->name_en && $value->name_en != '-') {
+//        $arrayContactName[] = "&quot;" . str_replace('"', "'", $value->name_en) . "&quot;";
+//    }
+    $arrayContactName[] = $name_th;
+    $arrayContactData[] = "['$value->customer_name_th', '$value->address_th', '$value->mobile', '$value->telephone', '$value->fax', '$value->email']";
 }
 
 ?>
@@ -68,11 +68,11 @@ foreach ($objCustomer as $key => $value) {
         var url_post_edit_item = "<?php echo $webUrl; ?>quotation/item/edit/";
         var url_post_delete_item = "<?php echo $webUrl; ?>quotation/item/delete/";
 
-        var array_company_name = [<?php echo "'". implode("', '", $arrayCompanyName) . "'"; ?>];
-        var array_company_data = [<?php echo implode(',', $arrayCompanyData); ?>];
-
         var array_customer_name = [<?php echo "'". implode("', '", $arrayCustomerName) . "'"; ?>];
         var array_customer_data = [<?php echo implode(',', $arrayCustomerData); ?>];
+
+        var array_customer_name = [<?php echo "'". implode("', '", $arrayContactName) . "'"; ?>];
+        var array_customer_data = [<?php echo implode(',', $arrayContactData); ?>];
     </script>
     <script src="<?php echo $baseUrl; ?>assets/js/ics_quotation.js"></script>
 <div class="container-fluid" id="content">
@@ -143,23 +143,23 @@ $this->load->view("sidebar_menu");
             </div>
         </div>
         <div class="control-group">
-            <label for="customer_name" class="control-label">ชื่อลูกค้า / Customer : </label>
+            <label for="customer_name" class="control-label">ชื่อลูกค้า / Contact : </label>
+
+            <div class="controls">
+                <input type="text" data-provide="typeahead" id="customer_name" name="customer_name"
+                       data-items="4" class="input-xlarge"
+                       data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayContactName) . "&quot;"; ?>]'
+                       value="<?php echo @$customer_name; ?>">
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="customer_name" class="control-label">ชื่อบริษัท / Crop. Name : </label>
 
             <div class="controls">
                 <input type="text" data-provide="typeahead" id="customer_name" name="customer_name"
                        data-items="4" class="input-xlarge"
                        data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCustomerName) . "&quot;"; ?>]'
                        value="<?php echo @$customer_name; ?>">
-            </div>
-        </div>
-        <div class="control-group">
-            <label for="company_name" class="control-label">ชื่อบริษัท / Crop. Name : </label>
-
-            <div class="controls">
-                <input type="text" data-provide="typeahead" id="company_name" name="company_name"
-                       data-items="4" class="input-xlarge"
-                       data-source='[<?php echo "&quot;" . implode('&quot;,&quot;', $arrayCompanyName) . "&quot;"; ?>]'
-                       value="<?php echo @$company_name; ?>">
             </div>
         </div>
 

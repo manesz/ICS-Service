@@ -33,16 +33,16 @@ $(document).on("click", "#btnAddItem", function (e) {
     return false;
 });
 
-$(document).on("change", "#customer_name", function (e) {
+$(document).on("change", "#contact_name", function (e) {
     var value = $(this).val();
-    for (var i = 0; i < array_customer_name.length; i++) {
-        if (value && value == array_customer_name[i]) {
-            $("#company_name").val(array_customer_data[i][0]);
-            $("#address").text(array_customer_data[i][1]);
-            $("#customer_mobile").val(array_customer_data[i][2]);
-            $("#customer_tel").val(array_customer_data[i][3]);
-            $("#customer_fax").val(array_customer_data[i][4]);
-            $("#customer_email").val(array_customer_data[i][5]);
+    for (var i = 0; i < array_contact_name.length; i++) {
+        if (value && value == array_contact_name[i]) {
+            $("#customer_name").val(array_contact_data[i][0]);
+            $("#address").text(array_contact_data[i][1]);
+            $("#contact_mobile").val(array_contact_data[i][2]);
+            $("#contact_tel").val(array_contact_data[i][3]);
+            $("#contact_fax").val(array_contact_data[i][4]);
+            $("#contact_email").val(array_contact_data[i][5]);
             focusToDiv(".icon-user-md", "#proposer");
         }
     }

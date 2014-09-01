@@ -16,11 +16,11 @@ class Project_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->tableName = $this->Constant_model->tbProject;
-        $this->tbCompany = $this->Constant_model->tbCompany;
+        $this->tbCustomer = $this->Constant_model->tbCustomer;
     }
 
     private $tableName = "";
-    private $tbCompany = "";
+    private $tbCustomer = "";
     function projectList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
@@ -28,11 +28,11 @@ class Project_model extends CI_Model
         $sql = "
             SELECT
               a.*,
-              b.name_th AS company_name_th,
-              b.name_en AS company_name_en
+              b.name_th AS customer_name_th,
+              b.name_en AS customer_name_en
             FROM $this->tableName a
-            LEFT JOIN $this->tbCompany b
-            ON (a.company_id = b.id AND b.publish = 1)
+            LEFT JOIN $this->tbCustomer b
+            ON (a.customer_id = b.id AND b.publish = 1)
             WHERE 1
             AND a.publish = 1
             $strAnd
@@ -59,7 +59,7 @@ class Project_model extends CI_Model
         }
 
         $data = array(
-            'company_id' => @$company_id,
+            'customer_id' => @$customer_id,
             'name_th' => trim($name_th),
             'name_en' => trim($name_en),
             'project_start' => @$project_start,
@@ -92,7 +92,7 @@ class Project_model extends CI_Model
 
         $data = array(
             'id' => $id,
-            'company_id' => @$company_id,
+            'customer_id' => @$customer_id,
             'name_th' => trim($name_th),
             'name_en' => trim($name_en),
             'project_start' => @$project_start,

@@ -4,7 +4,7 @@ $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $this->load->view("header");
 $this->load->view("navigator_menu");
-$objData = $this->Company_model->companyList();
+$objData = $this->Contact_model->contactList();
 
 ?>
     <script>
@@ -18,7 +18,7 @@ $objData = $this->Company_model->companyList();
             <div class="container-fluid">
                 <div class="page-header">
                     <div class="pull-left">
-                        <h1>Company</h1>
+                        <h1>Contact</h1>
                     </div>
                 </div>
                 <div class="breadcrumbs">
@@ -28,7 +28,7 @@ $objData = $this->Company_model->companyList();
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a class="active link" href="<?php echo $webUrl; ?>company">Company</a>
+                            <a class="active link" href="<?php echo $webUrl; ?>contact">Contact</a>
                         </li>
                     </ul>
                     <div class="close-bread">
@@ -41,12 +41,12 @@ $objData = $this->Company_model->companyList();
                             <div class="box-title">
                                 <h3>
                                     <i class="icon-list"></i>
-                                    Company
+                                    Contact
                                 </h3>
 
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
-                                        <a href="<?php echo $webUrl; ?>company/add" class="btn btn-mini"><i
+                                        <a href="<?php echo $webUrl; ?>contact/add" class="btn btn-mini"><i
                                                 title="Add" class="icon-plus"></i></a>
                                     <?php endif; ?>
                                 </div>
@@ -58,10 +58,9 @@ $objData = $this->Company_model->companyList();
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>TAX ID</th>
                                             <th>Name TH</th>
                                             <th>Name EN</th>
-                                            <th>Telephone</th>
+                                            <th>Mobile</th>
                                             <th>Email</th>
                                             <th>Update Time</th>
                                             <th>Edit</th>
@@ -73,15 +72,14 @@ $objData = $this->Company_model->companyList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
-                                                <td><?php echo $value->taxpayer_number; ?></td>
                                                 <td><?php echo $value->name_th; ?></td>
                                                 <td><?php echo $value->name_en; ?></td>
-                                                <td><?php echo "$value->telephone"; ?></td>
+                                                <td><?php echo "$value->mobile"; ?></td>
                                                 <td><?php echo $value->email; ?></td>
                                                 <td><?php echo $value->update_datetime; ?></td>
                                                 <td class="hidden-400">
                                                     <?php if (@$permissionUpdate): ?>
-                                                        <a href="<?php echo $webUrl; ?>company/edit/<?php echo $value->id; ?>"
+                                                        <a href="<?php echo $webUrl; ?>contact/edit/<?php echo $value->id; ?>"
                                                            class="btn link" rel="tooltip" title=""
                                                            data-original-title="Edit"><i
                                                                 class="icon-edit"></i></a>
@@ -89,7 +87,7 @@ $objData = $this->Company_model->companyList();
                                                     <?php if (@$permissionDelete): ?>
                                                         <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
                                                            data-original-title="Delete"
-                                                           onclick="urlDelete='<?php echo $webUrl; ?>company/delete/<?php echo $value->id; ?>';"
+                                                           onclick="urlDelete='<?php echo $webUrl; ?>contact/delete/<?php echo $value->id; ?>';"
                                                            role="button" data-toggle="modal">
                                                             <i class="icon-remove"></i>
                                                         </a>

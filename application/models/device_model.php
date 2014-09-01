@@ -16,11 +16,11 @@ class Device_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
         $this->tableName = $this->Constant_model->tbDevice;
-        $this->tbCompany = $this->Constant_model->tbCompany;
+        $this->tbCustomer = $this->Constant_model->tbCustomer;
     }
 
     private $tableName = "";
-    private $tbCompany = "";
+    private $tbCustomer = "";
     function deviceList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
@@ -30,8 +30,8 @@ class Device_model extends CI_Model
               a.*,
               b.name_th
             FROM $this->tableName a
-            LEFT JOIN $this->tbCompany b
-            ON (a.company_id = b.id AND b.publish = 1)
+            LEFT JOIN $this->tbCustomer b
+            ON (a.customer_id = b.id AND b.publish = 1)
             WHERE 1
             AND a.publish = 1
             $strAnd
@@ -59,7 +59,7 @@ class Device_model extends CI_Model
 
         $data = array(
             'name' => trim($name),
-            'company_id' => @$company_id,
+            'customer_id' => @$customer_id,
             'model' => trim($model),
             'brand' => trim($brand),
             'type' => @$type,
@@ -91,7 +91,7 @@ class Device_model extends CI_Model
 
         $data = array(
             'id' => $id,
-            'company_id' => intval(@$company_id),
+            'customer_id' => intval(@$customer_id),
             'name' => trim($name),
             'model' => trim($model),
             'brand' => trim($brand),
