@@ -177,8 +177,10 @@ function openUrl(url) {
 }
 
 function redirectUrl(url) {
-    showWaitImageOnTop();
-    window.location.href = url;
+//    showWaitImageOnTop();
+//    window.location.href = url;
+    window.location.replace(url);
+    hideWaitImageOnTop();
 }
 
 function disableID(id) {
@@ -314,6 +316,10 @@ function showHtmlFadeOut(id) {
 }
 
 $(function () {
+    var hash = location.hash.slice(1);
+    if (hash) {
+        focusToDiv("#" + hash);
+    }
     $(".user").hover(function () {
             $(".dropdown", this).addClass("open");
         }, // over

@@ -22,9 +22,10 @@ class Contact_model extends CI_Model
     private $tableName = "";
     private $tbCustomer = "";
 
-    function contactList($id = 0, $orderBy = "")
+    function contactList($id = 0, $customerID = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
+        $strAnd .= $customerID ? " AND b.id=$customerID" : "";
         $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
         $sql = "
             SELECT

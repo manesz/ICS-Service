@@ -4,15 +4,28 @@ $this->load->view("header");
 $this->load->view("navigator_menu");
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
-
+if (!@$id) {
+    $id = 0;
+}
 $objData = $this->Customer_model->customerList($id);
+$objContact = $this->Contact_model->contactList(0, $id);
 extract((array)$objData[0]);
+
 ?>
     <script>
 
         var url_post_data = "<?php echo $webUrl; ?>customer/edit/<?php echo $id; ?>";
         var url_list = "<?php echo $webUrl; ?>customer";
+        var url_contact_list = "<?php echo $webUrl; ?>contact";
+        var url_post_add_contact = "<?php echo $webUrl; ?>contact/add";
+        var url_post_edit_contact = "<?php echo $webUrl; ?>contact/edit/";
+        var customer_id = <?php echo $id; ?>;
+        var noImgUrl = baseUrl + "assets/img/no_img.gif";
+        var image_contact = "";
         $(document).ready(function () {
+            <?php if (@$_GET['contact']): ?>
+            focusToDiv("#contact");
+            <?php endif; ?>
             $('#btnCancel').click(function () {
                 openUrl(url_list);
                 return false;
@@ -40,7 +53,109 @@ extract((array)$objData[0]);
                 }
                 return false;
             });
+
+            $("#form_post_contact").submit(function () {
+                disableID("btnSaveContact");
+                var checkPost = checkValidateForm("#form_post_contact");
+                if (checkPost) {
+                    var dataImg = "";
+                    if ($(".fileupload-preview", this).html() != "") {
+                        dataImg = $(".fileupload-preview img", this).attr("src");
+                    }
+                    var data = $(this).serialize();
+                    var imageName = $("#imagefileContact").val();
+                    data = data + '&' + $.param({
+                        data_image: dataImg,
+                        fileType: "image",
+                        imagePatch: 'uploads/contact/',
+                        imageName: imageName
+                    });
+                    var urlPost = "";
+                    if ($("#contact_id").val() == "") {
+                        urlPost = url_post_add_contact;
+                    } else {
+                        urlPost = url_post_edit_contact + $("#contact_id").val();
+                    }
+                    postData(urlPost, data, url_post_data + "?contact=true");
+                } else {
+                    enableID("btnSaveContact");
+                }
+                return false;
+            });
+
+            $("#btnClear").click(function () {
+                clearFormContact();
+                return false;
+            });
+
+            $("#btnDeleteImageContact").click(function () {
+                if (confirm("ต้องการลบรูปใช่หรือไม่")) {
+                    var url = webUrl + "upload/deleteimage";
+                    $.post(url, {
+                            path: image_contact
+                        },
+                        function (result) {
+                            if (result == "delete fail") {
+                                clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+                            } else {
+                                $("#form_post_contact .thumbnail img").attr('src', noImgUrl);
+                                $("#form_post_contact #image_path_contact").val("");
+                                $("#form_post_contact #groupBtnContact").show();
+                                $("#btnDeleteImageContact").hide();
+                            }
+                        }
+                    ).done(function () {
+                            //alert("second success");
+                        })
+                        .fail(function () {
+                            clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+                        })
+                        .always(function () {
+                            //alert("finished");
+                        });
+                }
+                return false;
+            });
         });
+
+        function clearFormContact() {
+            $('#form_post_contact').trigger("reset");
+            $("#contact_id").val('');
+//            $("#contact_name_th").focus();
+            $("#form_post_contact .thumbnail img").attr('src', noImgUrl);
+            $("#form_post_contact #image_path_contact").val("");
+            $("#form_post_contact #groupBtnContact").show();
+            $("#btnDeleteImageContact").hide();
+            focusToDiv("#contact_name_th", "#contact_name_th");
+        }
+
+        function loadEditFormContact(id) {
+            $.ajax({
+                type: "GET",
+                url: url_post_edit_contact + id,
+                dataType: 'json',
+                crossDomain: true,
+                success: function (json) {
+                    $("#contact_name_th").val(json['name_th']);
+                    $("#contact_name_en").val(json['name_en']);
+                    $("#contact_email").val(json['email']);
+                    $("#contact_mobile").val(json['mobile']);
+                    $("#contact_position").val(json['position']);
+                    $("#contact_description").text(json['description']);
+                    $("#contact_id").val(json['id']);
+                    $("#customer_id").val(json['customer_id']);
+                    $("#image_path_contact").val(json['image']);
+                    if (json['image']) {
+                        $("#form_post_contact .thumbnail img").attr("src", baseUrl + json['image']);
+                        $("#btnDeleteImageContact").show();
+                        $("#groupBtnContact").hide();
+                        image_contact = json['image'];
+                    } else {
+                        image_contact = "";
+                    }
+                    focusToDiv("#contact_name_th", "#contact_name_th");
+                }});
+        }
     </script>
 <div class="container-fluid" id="content">
 
@@ -131,7 +246,7 @@ $this->load->view("sidebar_menu");
                 <div class="controls">
                     <input type="text" name="email" id="email" placeholder="Text input"
                            class="input-xlarge" value="<?php echo @$email; ?>"
-                           data-rule-email="true" data-rule-required="true">
+                           data-rule-email="true">
                 </div>
             </div>
             <div class="control-group">
@@ -173,7 +288,7 @@ $this->load->view("sidebar_menu");
 
                 <div class="controls">
                     <input type="text" name="name_en" id="name_en" placeholder="Text input"
-                           class="input-xlarge" data-rule-required="true"
+                           class="input-xlarge"
                            value="<?php echo @$name_en; ?>">
                 </div>
             </div>
@@ -191,7 +306,7 @@ $this->load->view("sidebar_menu");
                 <div class="controls">
                     <input type="text" name="telephone" id="telephone"
                            placeholder="Text input"
-                           class="input-xlarge" data-rule-required="true"
+                           class="input-xlarge"
                            value="<?php echo @$telephone; ?>">
                 </div>
             </div>
@@ -334,6 +449,165 @@ $this->load->view("sidebar_menu");
         <!--END:span6 -->
 
         </form>
+        <div class="box" id="contact">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-user"></i>
+                    Contact
+                </h3>
+            </div>
+            <table
+                class="table table-hover table-nomargin dataTable dataTable-tools table-bordered display dataTable-scroll-x">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name TH</th>
+                    <th>Name EN</th>
+                    <th>Position</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Update Time</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach ($objContact as $key => $value):
+                    ?>
+                    <tr>
+                        <td class="center"><?php echo $key + 1; ?></td>
+                        <td><?php echo $value->name_th; ?></td>
+                        <td><?php echo $value->name_en; ?></td>
+                        <td><?php echo $value->position; ?></td>
+                        <td><?php echo "$value->mobile"; ?></td>
+                        <td><?php echo $value->email; ?></td>
+                        <td><?php echo $value->update_datetime; ?></td>
+                        <td class="hidden-400">
+                            <a href="#" onclick="loadEditFormContact(<?php echo @$value->id; ?>);return false;"
+                               class="btn link" rel="tooltip" title=""
+                               data-original-title="Edit"><i
+                                    class="icon-edit"></i></a>
+                            <a href="#messageDeleteData" class="btn" rel="tooltip" title=""
+                               data-original-title="Delete"
+                               onclick="urlDelete='<?php echo $webUrl; ?>contact/delete/<?php echo $value->id; ?>';"
+                               role="button" data-toggle="modal">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                <?php
+                endforeach;
+                ?>
+                </tbody>
+            </table>
+            <form action="" method="POST" autocomplete="off"
+                  class='form-horizontal form-column form-bordered form-validate'
+                  id="form_post_contact" name="form_post_contact">
+
+                <div class="span12">
+                    <div class="control-group">
+                        <input type="hidden" id="customer_id" name="customer_id"
+                               value="<?php echo @$id; ?>"/>
+                        <input type="hidden" id="contact_id" name="contact_id"
+                               value=""/>
+                        <input type="hidden" id="image_path_contact" name="image_path"
+                               value="<?php echo !file_exists(@$image) ? "" : $image; ?>"/>
+                        <label for="image_contact" class="control-label">Image</label>
+
+                        <div class="controls">
+                            <div class="fileupload fileupload-new" id="image_contact"
+                                 data-provides="fileupload">
+                                <div class="fileupload-new thumbnail"
+                                     style="width: 200px; height: 150px;">
+                                    <img src="<?php echo $baseUrl; ?>assets/img/no_img.gif"/>
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail"
+                                     style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
+                                    <span id="groupBtnContact" class="btn btn-file">
+                                        <span class="fileupload-new">Select image</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file" id="imagefileContact" name='imagefile'/>
+                                    </span>
+                                    <input type="button" id="btnDeleteImageContact"
+                                           class="btn hide"
+                                           value="Remove">
+                                    <a href="#" class="btn fileupload-exists"
+                                       data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_name_th" class="control-label">ชื่อภาษาไทย :</label>
+
+                        <div class="controls">
+                            <input type="text" name="name_th" id="contact_name_th"
+                                   placeholder="Text input" data-rule-required="true"
+                                   class="input-xlarge" value=""
+                                >
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_name_en" class="control-label">ชื่อภาษาอังกฤษ :</label>
+
+                        <div class="controls">
+                            <input type="text" name="name_en" id="contact_name_en" placeholder="Text input"
+                                   class="input-xlarge" value=""
+                                >
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_email" class="control-label">Email :</label>
+
+                        <div class="controls">
+                            <input type="text" name="email" id="contact_email" placeholder="Text input"
+                                   class="input-xlarge" value=""
+                                   data-rule-email="true"></div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_mobile" class="control-label">Mobile :</label>
+
+                        <div class="controls">
+                            <input type="text" name="mobile" id="contact_mobile"
+                                   placeholder="Text input"
+                                   class="input-xlarge"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_position" class="control-label">ตำแหน่ง :</label>
+
+                        <div class="controls">
+                            <input type="text" name="position" id="contact_position"
+                                   placeholder="Text input"
+                                   class="input-xlarge"
+                                   maxlength="120"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="contact_description" class="control-label">รายละเอียด :</label>
+
+                        <div class="controls">
+                            <textarea id="contact_description" name="description"
+                                      class="input-xlarge"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSaveContact">Save changes
+                        </button>
+                        <button type="button" class="btn" id="btnClear">Clear</button>
+                    </div>
+                </div>
+                <!--END:span6 -->
+
+            </form>
+
+        </div>
         </div>
         <!-- END: .box-content nopadding -->
     <?php

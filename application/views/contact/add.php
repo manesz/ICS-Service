@@ -23,9 +23,9 @@ if (@$id) {
                 return false;
             });
 
-            $("#formPost").submit(function () {
+            $("#form_post_contact").submit(function () {
                 disableID("btnSave");
-                var checkPost = checkValidateForm("#formPost");
+                var checkPost = checkValidateForm("#form_post_contact");
                 if (checkPost) {
                     var dataImg = "";
                     if ($(".fileupload-preview").html() != "") {
@@ -92,7 +92,7 @@ $this->load->view("sidebar_menu");
                             <div class="box-content nopadding">
                                 <form action="" method="POST" autocomplete="off"
                                       class='form-horizontal form-column form-bordered form-validate'
-                                      id="formPost" name="formPost">
+                                      id="form_post_contact" name="form_post_contact">
 
                                     <div class="span12">
                                         <div class="control-group">

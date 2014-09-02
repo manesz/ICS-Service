@@ -70,12 +70,15 @@ class Contact extends CI_Controller
             }
             exit();
         }
-        $data = array(
-            'id' => $id,
-            "selectMenu" => $this->selectMenu,
-            'permission' => $this->checkPermission(2)
-        );
-        $this->load->view("contact/add", $data);
+//        $data = array(
+//            'id' => $id,
+//            "selectMenu" => $this->selectMenu,
+//            'permission' => $this->checkPermission(2)
+//        );
+        $objData = $this->Contact_model->contactList($id);
+        extract((array)$objData[0]);
+        echo json_encode((array)$objData[0]);
+//        $this->load->view("contact/add", $data);
     }
 
     function contactDelete($id)
