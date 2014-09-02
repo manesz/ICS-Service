@@ -70,7 +70,7 @@ $(document).on("keydown", ".tr_items input", function (e) {
 
 $(document).on("change", ".tr_items input", function (e) {
     var id = $(this).closest('tr').find('.item_id').val();
-    if (id) {
+    if (id != 'add' && id) {
         var url = url_post_edit_item + id;
         var quotation_id = $("#quotation_id").val();
         var data = $(this).closest('tr').find('input').serialize();

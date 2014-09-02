@@ -14,6 +14,7 @@ $baseUrl = base_url();
 $objQuotation = $this->Quotation_model->quotationList($id);
 extract((array)$objQuotation[0]);
 $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
+$countQuotationItem = count($objQuotationItem)
 ?>
 
 <!doctype html>
@@ -218,6 +219,7 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
                     Amount
                 </td>
             </tr>
+            <?php if ($countQuotationItem): ?>
             <?php for ($i = 0;
                        $i < 12;
                        $i++): ?>
@@ -248,6 +250,7 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
                 <td height="31" align="right"
                     class="border-right border-bottom"><?php echo @$objQuotationItem[12]->amount > 0 ? number_format(@$objQuotationItem[12]->amount, 2) : "-&nbsp;&nbsp;"; ?></td>
             </tr>
+            <?php endif; ?>
         </table>
     </td>
 </tr>
@@ -325,9 +328,12 @@ $objQuotationItem = $this->Quotation_model->quotationItemList(0, $id);
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                 </td>
-                <td width="300" align="left" valign="top"><p>Present By
+                <td width="300" align="left" valign="top" ><p>Present By
                     </p>
-
+                    <?php
+                    echo file_exists(@$signature_path) ?
+                        "<img style='margin-top:-65px;position:absolute;margin-left:80px;z-index: -1;' width='200' src='" . $baseUrl . $signature_path . "'/>" : "";
+                    ?>
                     <p align="center">_________________________________________________</p>
 
                     <p align="center"><strong><?php echo @$proposer ? "( &nbsp; $proposer &nbsp; )" : ""; ?></strong>
