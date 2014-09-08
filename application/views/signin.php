@@ -5,10 +5,13 @@ $this->load->view("header");
 ?>
 <!--        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
     <script>
-        $(function () {
-            if (localStorage.chkbx && localStorage.chkbx != '') {
-                $('#username').val(localStorage.usrname);
-                $('#password').val(localStorage.pass);
+        $(document).ready(function () {
+            var username = getCookie("username");
+            var password = getCookie("password");
+            var remember = getCookie("remember_me");
+            if (remember && remember != '') {
+                $('#username').val(username);
+                $('#password').val(password);
                 $(".remember div").addClass('checked');
             } else {
                 $('#remember_me').removeAttr('checked');
@@ -22,15 +25,25 @@ $this->load->view("header");
         });
         function addRememberMe() {
             if ($('#remember_me').is(':checked')) {
-                // save username and password
-                localStorage.usrname = $('#username').val();
-                localStorage.pass = $('#password').val();
-                localStorage.chkbx = $('#remember_me').val();
+                setCookie('username', $('#username').val());
+                setCookie('password', $('#password').val());
+                setCookie('remember_me', "true");
             } else {
-                localStorage.usrname = '';
-                localStorage.pass = '';
-                localStorage.chkbx = '';
+                setCookie('username', "");
+                setCookie('password', "");
+                setCookie('remember_me', "");
             }
+        }
+
+        function getCookie(key) {
+            var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+            return keyValue ? keyValue[2] : null;
+        }
+
+        function setCookie(key, value) {
+            var expires = new Date();
+            expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000));
+            document.cookie = key + '=' + value +';path=/'+ ';expires=' + expires.toUTCString();
         }
     </script>
     <body class='login'>
