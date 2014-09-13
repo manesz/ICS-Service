@@ -132,15 +132,17 @@ $this->load->view("sidebar_menu");
                 <label for="project_id" class="control-label">Project :</label>
 
                 <div class="controls">
-                    <select name="project_id" id="project_id" data-rule-required="true"
-                            class="input-xlarge" autofocus="">
-                        <option value="">-- Select Project --</option>
-                        <?php foreach ($objProject as $key => $value): ?>
-                            <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
-                                value="<?php echo $value->id; ?>"><?php
-                                if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="input-xlarge">
+                        <select name="project_id" id="project_id" data-rule-required="true"
+                                class="chosen-select" autofocus="">
+                            <option value="">-- Select Project --</option>
+                            <?php foreach ($objProject as $key => $value): ?>
+                                <option <?php echo @$project_id == $value->id ? 'selected' : ''; ?>
+                                    value="<?php echo $value->id; ?>"><?php
+                                    if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
@@ -304,6 +306,16 @@ $this->load->view("sidebar_menu");
                 </div>
             </div>
             <div class="control-group">
+                <label for="term_of_valid" class="control-label">Term of valid :</label>
+
+                <div class="controls">
+                    <input type="text" name="term_of_valid" id="term_of_valid"
+                           placeholder="Text input" class="input-xlarge"
+                           value="<?php echo @$term_of_valid; ?>"
+                        >
+                </div>
+            </div>
+            <div class="control-group">
                 <label for="pay_of_valid" class="control-label">การจ่ายเงิน/Pay of Valid :</label>
 
                 <div class="controls">
@@ -385,7 +397,7 @@ $this->load->view("sidebar_menu");
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                <?php if (count(@$objQuotationItems) < 13):?>
+                <?php if (count(@$objQuotationItems) < 13): ?>
                     <tr class="tr_items">
                         <td><input type="hidden" name="item_id[]" class="item_id" value=""/>
                             <input type="text" name="item_no[]"

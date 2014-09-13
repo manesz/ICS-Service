@@ -55,14 +55,14 @@ $objData = $this->Quotation_model->quotationList();
                                     <?php if (@$permissionInsert): ?>
                                         <a href="<?php echo $webUrl; ?>quotation/add" class="btn btn-mini">
                                             <i title="Add"
-                                               class="icon-plus"></i></a>
+                                               class="icon-plus"> Add</i></a>
                                     <?php endif; ?>
                                 </div>
                             </div>
                             <?php if (@$permission): ?>
                                 <div class="box-content nopadding">
                                     <table
-                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered dataTable-scroll-x">
+                                        class="table table-hover table-nomargin dataTable table-bordered dataTable-scroll-x">
                                         <thead>
                                         <tr>
                                             <th class="">#</th>
