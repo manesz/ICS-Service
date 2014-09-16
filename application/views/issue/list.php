@@ -44,7 +44,7 @@ $objData = $this->Issue_model->issueList();
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
                                         <a href="<?php echo $webUrl; ?>issue/add" class="btn btn-mini"><i
-                                                title="Add" class="icon-plus"></i></a>
+                                                title="Add" class="icon-plus"> Add</i></a>
                                     <?php endif; ?>
                                 </div>
                             </div>

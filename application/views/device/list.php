@@ -44,7 +44,7 @@ $objData = $this->Device_model->deviceList();
                                 <div class="actions">
                                     <?php if (@$permissionInsert): ?>
                                         <a href="<?php echo $webUrl; ?>device/add" class="btn btn-mini"><i
-                                                title="Add" class="icon-plus"></i></a>
+                                                title="Add" class="icon-plus"> Add</i></a>
                                     <?php endif; ?>
                                 </div>
                             </div>

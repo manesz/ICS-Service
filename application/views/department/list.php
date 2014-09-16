@@ -49,7 +49,7 @@ $objData = $this->Department_model->departmentList();
                                     <?php if (@$permissionInsert): ?>
                                         <a href="<?php echo $webUrl; ?>department/add" class="btn btn-mini">
                                             <i title="Add"
-                                               class="icon-plus"></i></a>
+                                               class="icon-plus"> Add</i></a>
                                     <?php endif; ?>
                                 </div>
                             </div>

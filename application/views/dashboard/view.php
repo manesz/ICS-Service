@@ -106,7 +106,7 @@ $this->load->view("navigator_menu");
                             </tr>
                         <?php endforeach; ?>
                         <!--                        <tr>-->
-                        <!--                            <td>1.<span class="label"><i class="icon-plus"></i></span> <a href="#">John Doe</a> added a-->
+                        <!--                            <td>1.<span class="label"><i class="icon-plus"> Add</i></span> <a href="#">John Doe</a> added a-->
                         <!--                                new photo-->
                         <!--                            </td>-->
                         <!--                        </tr>-->
