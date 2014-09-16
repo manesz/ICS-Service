@@ -155,6 +155,15 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label for="serial" class="control-label">Serial :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="serial" id="serial" placeholder="Serial"
+                                                       class="input-xlarge" value="<?php echo @$serial; ?>"
+                                                       data-rule-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label for="model" class="control-label">Model :</label>
 
                                             <div class="controls">
@@ -189,6 +198,14 @@ $this->load->view("sidebar_menu");
                                                        placeholder="Date input"
                                                        class="input-xlarge datepick" data-rule-required="true"
                                                        data-rule-dateiso="true" value="<?php echo @$datesheet; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="remark" class="control-label">รายละเอียด :</label>
+
+                                            <div class="controls">
+                                                <textarea id="remark" name="remark"
+                                                          class="input-xlarge"><?php echo @$remark; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
