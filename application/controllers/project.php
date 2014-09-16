@@ -18,6 +18,7 @@ class Project extends CI_Controller
         //check สถานะ login
         $this->Authentication_model->checkSignIn();
     }
+
     private $selectMenu = "project";
     private $moduleName = "Project";
 
@@ -38,12 +39,25 @@ class Project extends CI_Controller
         $this->load->view("project/list", $data);
     }
 
+    function projectListOption()
+    {
+        $objProject = $this->Project_model->projectList();
+        $arrProject = array();
+        foreach ($objProject as $key => $value) {
+            $arrProject[] = array(
+                'id' => $value->id,
+                'name' => $value->name_th ? $value->name_th : $value->name_en
+            );
+        }
+        echo json_encode($arrProject);
+    }
+
     function projectAdd()
     {
         $post = $this->input->post();
         if ($post) {
             $result = $this->Project_model->projectAdd($post);
-            if ($result){
+            if ($result) {
                 echo "add success";
             } else {
                 echo 'add fail';
@@ -80,8 +94,7 @@ class Project extends CI_Controller
     function projectDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbProject);
-        if (!$result)
-        {
+        if (!$result) {
             echo "delete fail";
             exit;
         }

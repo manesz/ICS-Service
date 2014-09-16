@@ -187,13 +187,7 @@ $(document).ready(function () {
     }
     // Chosen (chosen)
     if ($('.chosen-select').length > 0) {
-        $('.chosen-select').each(function () {
-            var $el = $(this);
-            var search = ($el.attr("data-nosearch") === "true") ? true : false,
-                opt = {};
-            if (search) opt.disable_search_threshold = 9999999;
-            $el.chosen(opt);
-        });
+        setChosenSelect();
     }
 
     if ($(".select2-me").length > 0) {
@@ -547,6 +541,18 @@ $(window).resize(function () {
     // chosen resize bug
     resize_chosen();
 });
+
+function setChosenSelect()
+{
+    $('.chosen-select').each(function () {
+        var $el = $(this);
+        $el.removeClass("chzn-done");
+        var search = ($el.attr("data-nosearch") === "true") ? true : false,
+            opt = {};
+        if (search) opt.disable_search_threshold = 9999999;
+        $el.chosen(opt);
+    });
+}
 
 function resize_chosen() {
     $('.chzn-container').each(function () {

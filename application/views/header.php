@@ -216,7 +216,26 @@ $baseUrl = base_url();
            data-dismiss="modal" onclick="deleteData();">Yes</a>
     </div>
 </div>
-<!--End confirm-->
+<!--End Confirm delete data-->
+
+<!--Massage Confirm-->
+<div id="message_confirm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="message_confirm_title"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-header">
+        <!--        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+        <h3 id="message_confirm_title">Confirm Revise</h3>
+    </div>
+    <div class="modal-body">
+        <p>ยืนยันข้อมูลที่คุณเลือก ใช่ หรือไม่</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+        <a href="#" class="btn btn-primary notify" data-notify-title="Success!"
+           data-notify-message="The user has been successfully." role="button"
+           data-dismiss="modal" onclick="openUrlRevise();">Yes</a>
+    </div>
+</div>
+<!--End Massage Confirm-->
 
 <!--Update success-->
 <a href="#" role="button" class="notify" data-notify-time="2000" data-notify-title="Success!"

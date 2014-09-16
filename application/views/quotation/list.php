@@ -15,6 +15,12 @@ $objData = $this->Quotation_model->quotationList();
 ?>
 
     <script>
+        var urlRevise = "";
+        function openUrlRevise()
+        {
+            if (urlRevise)
+                redirectUrl(urlRevise);
+        }
     </script>
     <div class="container-fluid" id="content">
 
@@ -103,7 +109,14 @@ $objData = $this->Quotation_model->quotationList();
                                                             <i class="icon-remove"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <a onclick="window.open('<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>', '_blank');" href="#"
+                                                    <a href="#message_confirm" class="btn" rel="tooltip" title=""
+                                                        data-original-title="Revise"
+                                                        onclick="urlRevise='<?php echo $webUrl; ?>quotation/revise/<?php echo $value->id; ?>';"
+                                                        data-toggle="modal">
+                                                        <i class="glyphicon-new_window"></i>
+                                                    </a>
+                                                    <a onclick="openNewTab('<?php echo $webUrl; ?>quotation/print/<?php echo $value->id; ?>', '_blank');"
+                                                       href="#"
                                                        class="btn" rel="tooltip" title=""
                                                        data-original-title="Print"><i
                                                             class="icon-print"></i></a>

@@ -75,6 +75,7 @@ $route['project/delete/(:any).*'] = 'project/projectdelete/$1';
 //Quotation
 $route['quotation/add'] = 'quotation/quotationadd';
 $route['quotation/edit/(:any).*'] = 'quotation/quotationedit/$1';
+$route['quotation/revise/(:any).*'] = 'quotation/quotationRevise/$1';
 $route['quotation/print/(:any).*'] = 'quotation/quotationprint/$1';
 $route['quotation/delete/(:any).*'] = 'quotation/quotationdelete/$1';
 $route['quotation/item/edit/(:any).*'] = 'quotation/quotationitemedit/$1';

@@ -74,6 +74,36 @@ foreach ($objContact as $key => $value) {
 
         var array_contact_name = [<?php echo "'". implode("', '", $arrayContactName) . "'"; ?>];
         var array_contact_data = [<?php echo implode(',', $arrayContactData); ?>];
+        var url_get_project_option = "<?php echo $webUrl; ?>project/projectListOption";
+        var string_project_option = "";
+        var countProject = <?php echo count($objProject); ?>;
+        $(document).ready(function () {
+            checkLoadOptionValue();
+        });
+        function checkLoadOptionValue() {
+            $.ajax({
+                type: "GET",
+                url: url_get_project_option,
+                dataType: 'json',
+                crossDomain: true,
+                success: function (json) {
+                    var items = [];
+                    var countNewProject = 0;
+                    items.push("<option value=''>-- Select Project --</option>");
+                    $.each(json, function (key, val) {
+                        countNewProject++;
+                        items.push("<option value='" + val['id'] + "'>" + val['name'] + "</option>");
+                    });
+                    if (countProject != countNewProject) {
+                        countProject = countNewProject;
+                        $("#project_id_chzn").remove();
+                        var $el = $("#project_id");
+                        $el.html(items.join(""));
+                        setChosenSelect();
+                    }
+                    setTimeout('checkLoadOptionValue()', 3000);
+                }});
+        }
     </script>
     <script src="<?php echo $baseUrl; ?>assets/js/ics_quotation.js"></script>
 <div class="container-fluid" id="content">
@@ -123,6 +153,7 @@ $this->load->view("sidebar_menu");
               class='form-horizontal form-column form-bordered form-validate'
               id="formPost" name="formPost">
         <input type="hidden" id="quotation_id" name="quotation_id" value="<?php echo $id; ?>"/>
+        <input type="hidden" id="quotation_no" name="quotation_no" value="<?php echo @$quotation_no; ?>"/>
 
         <div class="span12">
             <div class="box-title">
@@ -132,8 +163,8 @@ $this->load->view("sidebar_menu");
                 <label for="project_id" class="control-label">Project :</label>
 
                 <div class="controls">
-                    <div class="input-xlarge">
-                        <select name="project_id" id="project_id" data-rule-required="true"
+                    <div class="input-xlarge input-append" id="project_id_div" data-rule-required="true">
+                        <select name="project_id" id="project_id"
                                 class="chosen-select" autofocus="">
                             <option value="">-- Select Project --</option>
                             <?php foreach ($objProject as $key => $value): ?>
@@ -142,6 +173,8 @@ $this->load->view("sidebar_menu");
                                     if ($value->name_th) echo $value->name_th; else $value->name_en; ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <a class="btn" onclick="openNewTab('<?php echo $webUrl; ?>project/add?window=close');"
+                           href="#"> New</a>
                     </div>
                 </div>
             </div>
@@ -220,12 +253,12 @@ $this->load->view("sidebar_menu");
                 <h3><i class="icon-user-md"></i> รายละเอียดผู้เสนอ</h3>
             </div>
             <div class="control-group">
-                <label for="quotation_no" class="control-label">เลขที่เอกสาร / Quotation No. </label>
+                <label for="quotation_no_show" class="control-label">เลขที่เอกสาร / Quotation No. </label>
 
                 <div class="controls">
-                    <input type="text" name="quotation_no" id="quotation_no"
+                    <input type="text" name="quotation_no_show" id="quotation_no_show"
                            placeholder="Text input" class="input-xlarge"
-                           data-rule-required="true"
+                           disabled
                            value="<?php echo @$quotation_no; ?>"
                         >
                 </div>

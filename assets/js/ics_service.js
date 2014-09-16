@@ -85,7 +85,9 @@ function postData(url, data, urlRedirect) {
             clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
         } else {
             clickNotifyUpdate();
-            if (urlRedirect != "" && urlRedirect != false)
+            if (urlRedirect == "close") {
+                window.close();
+            } else if (urlRedirect != "" && urlRedirect != false)
                 openUrl(urlRedirect);
         }
 //        alert(result);
@@ -171,6 +173,8 @@ function openUrl(url) {
     showWaitImageOnTop();
 //    setTimeout(redirectUrl(url), 1000);
     //$('html, body').animate({ scrollTop: $("body").offset().top }, 'slow', function () {
+    if (url == 'close')
+        window.close();
     redirectUrl(url);
     //});
     return false;
@@ -286,6 +290,11 @@ function focusToDiv(id, focusID) {
             $(focusID).focus();
         }
     });
+}
+
+function openNewTab(url) {
+    window.open(url, '_blank');
+    return false;
 }
 
 function scrollTop() {

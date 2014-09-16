@@ -12,13 +12,14 @@ if ($id) {
     $this->Helper_model->checkHaveFolder($pathFileManager, true);
 }
 $objCustomer = $this->Customer_model->customerList();
+$windowClose = @$_GET['window'];
 ?>
     <script>
         var url_post_data = "<?php echo $webUrl; ?>project/<?php echo $id?"edit/$id":"add"; ?>";
         var url_list = "<?php echo $webUrl; ?>project";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
-                openUrl(url_list);
+                openUrl(<?php echo $windowClose=="close"?"'close'": "url_list"; ?>);
                 return false;
             });
 
@@ -38,7 +39,8 @@ $objCustomer = $this->Customer_model->customerList();
                         imagePatch: 'uploads/project/',
                         imageName: imageName
                     });
-                    postData(url_post_data, data, url_list);
+                    var urlRedirect = <?php echo $windowClose=="close"?"'close'": "url_list"; ?>;
+                    postData(url_post_data, data, urlRedirect);
                 } else {
                     enableID("btnSave");
                 }
@@ -70,7 +72,8 @@ $this->load->view("sidebar_menu");
                     </li>
                     <li>
                         <a href="<?php echo $webUrl;
-                        ?>project/<?php echo $id ? "edit/$id" : "add"; ?>"><?php echo $id ? "Edit" : "Add" ?> Project</a>
+                        ?>project/<?php echo $id ? "edit/$id" : "add"; ?>"><?php echo $id ? "Edit" : "Add" ?>
+                            Project</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -134,7 +137,7 @@ $this->load->view("sidebar_menu");
                                             <label for="customer_id" class="control-label">Customer :</label>
 
                                             <div class="controls">
-                                                <div class="input-xlarge">
+                                                <div class="input-xlarge input-append">
                                                     <select name="customer_id" id="customer_id"
                                                             class='chosen-select'>
                                                         <option value=""></option>
@@ -142,7 +145,11 @@ $this->load->view("sidebar_menu");
                                                             <option <?php echo @$customer_id == $value->id ? 'selected' : ''; ?>
                                                                 value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
                                                         <?php endforeach; ?>
-                                                    </select></div>
+                                                    </select>
+                                                    <a class="btn"
+                                                       onclick="openNewTab('<?php echo $webUrl; ?>customer/add?window=close');"
+                                                       href="#"> New</a>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -150,7 +157,7 @@ $this->load->view("sidebar_menu");
 
                                             <div class="controls">
                                                 <input type="text" name="name_th" id="name_th" placeholder="Name"
-                                                       class="input-xlarge"
+                                                       class="input-xlarge" data-rule-required="true"
                                                        value="<?php echo @$name_th; ?>">
                                             </div>
                                         </div>

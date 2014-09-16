@@ -180,4 +180,3 @@ function addCommas(nStr) {
     x2 = x2 ? x2 : '.00';
     return x1 + x2;
 }
-

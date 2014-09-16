@@ -18,6 +18,7 @@ class Quotation extends CI_Controller
         //check สถานะ login
         $this->Authentication_model->checkSignIn();
     }
+
     private $selectMenu = "quotation";
     private $moduleName = "Quotation";
 
@@ -43,7 +44,7 @@ class Quotation extends CI_Controller
         $post = $this->input->post();
         if ($post) {
             $result = $this->Quotation_model->quotationAdd($post);
-            if ($result){
+            if ($result) {
                 echo "add success";
             } else {
                 echo 'add fail';
@@ -75,6 +76,14 @@ class Quotation extends CI_Controller
             'permission' => $this->checkPermission(2)
         );
         $this->load->view("quotation/add", $data);
+    }
+
+    function quotationRevise($id)
+    {
+        $webUrl = $this->Constant_model->webUrl();
+        $newID = $this->Quotation_model->quotationRevise($id);
+        $url = $webUrl . "quotation/edit/" . $newID;
+        header('Location: ' . $url);
     }
 
     function quotationPrint($id)
@@ -114,8 +123,7 @@ class Quotation extends CI_Controller
     function quotationDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbQuotation);
-        if (!$result)
-        {
+        if (!$result) {
             echo "delete fail";
             exit;
         }
@@ -125,8 +133,7 @@ class Quotation extends CI_Controller
     function quotationItemDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbQuotationItem);
-        if (!$result)
-        {
+        if (!$result) {
             echo "delete fail";
             exit;
         }

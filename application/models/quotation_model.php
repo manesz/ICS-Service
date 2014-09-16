@@ -23,17 +23,20 @@ class Quotation_model extends CI_Model
     private $tbProject = "";
     private $tbCustomer = "";
 
-    function quotationList($id = 0, $orderBy = "")
+    function quotationList($id = 0, $orderBy = "", $selectProject = true, $selectCustomer = true)
     {
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
         $strOrder = $orderBy ? " ORDER BY $orderBy" : " ORDER BY a.id DESC";
+        $strSelect = $selectProject ? ",
+              b.name_en AS project_name_en,
+              b.name_th AS project_name_th" : "";
+        $strSelect .= $selectProject ? ",
+              c.name_en AS customer_name_en,
+              c.name_th AS customer_name_th" : "";
         $sql = "
             SELECT
-              a.*,
-              b.name_en AS project_name_en,
-              b.name_th AS project_name_th,
-              c.name_en AS customer_name_en,
-              c.name_th AS customer_name_th
+              a.*
+              $strSelect
             FROM
               `$this->tbQuotation` a
             LEFT JOIN `$this->tbProject` b
@@ -107,16 +110,24 @@ class Quotation_model extends CI_Model
             'publish' => 1,
         );
         $data = $this->calculateAmount($data, $post);
-        $this->db->insert($this->tbQuotation, $data);
-        $id = $this->db->insert_id($this->tbQuotation);
+        $id = $this->quotationAddOne($data);
         if (!$id) return false;
-        $data['id'] = $id;
-        $this->Log_model->logAdd('add quotation', $this->tbQuotation, __LINE__, $data);
 
         //add quotation item
         $post['quotation_id'] = $id;
         if (!$this->quotationItemAdd($post))
             return false;
+        return $id;
+    }
+
+    function quotationAddOne($data)
+    {
+        $result = $this->db->insert($this->tbQuotation, $data);
+        if (!$result)
+            return false;
+        $id = $this->db->insert_id($this->tbQuotation);
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add quotation', $this->tbQuotation, __LINE__, $data);
         return $id;
     }
 
@@ -162,6 +173,58 @@ class Quotation_model extends CI_Model
         return $this->db->update($this->tbQuotation, $data, array('id' => $id));
     }
 
+    function quotationRevise($quotation_id)
+    {
+        //clone quotation
+        $objQuotation = $this->quotationList($quotation_id, "", false, false);
+        $arrayQuotation = (array)$objQuotation[0];
+        $arrayQuotation['create_datetime'] = date("Y-m-d H:i:s");
+        $arrayQuotation['update_datetime'] = "0000-00-00 00:00:00";
+        unset($arrayQuotation['id']);
+        $quotationNo = $arrayQuotation['quotation_no'];
+        $countQuotationNo = $this->countQuotationForRevise($quotationNo);
+        if (!$countQuotationNo)
+            return false;
+        $expVal = explode('#', $quotationNo);
+        $quotationNo = $expVal[0] . "#" . ($countQuotationNo + 1);
+        $arrayQuotation['quotation_no'] = $quotationNo;
+        $idNew = $this->quotationAddOne($arrayQuotation);
+
+        //clone quotation item
+        $objQuotationItem = $this->quotationItemList(0, $quotation_id);
+        foreach ($objQuotationItem as $value) {
+            $data = (array)$value;
+            unset($data['id']);
+            $data['quotation_id'] = $idNew;
+            $data['create_datetime'] = date("Y-m-d H:i:s");
+            $data['update_datetime'] = "0000-00-00 00:00:00";
+            $result = $this->quotationItemAddOne($data);
+            if (!$result)
+                return false;
+        }
+        return $idNew;
+    }
+
+    function countQuotationForRevise($quotation_no)
+    {
+        $sql = "
+            SELECT
+              count(id) AS count_id
+            FROM
+              `$this->tbQuotation`
+            WHERE 1
+            AND quotation_no LIKE '%$quotation_no%'
+            AND publish = 1
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            $result = $query->result();
+            return $result[0]->count_id;
+        } else {
+            return 0;
+        }
+    }
+
     function quotationItemAdd($post)
     {
         extract($post);
@@ -180,14 +243,24 @@ class Quotation_model extends CI_Model
                 'update_datetime' => "0000-00-00 00:00:00",
                 'publish' => 1,
             );
-            if (@$item_id[$key] == 'add') {//ถ้ายังไม่มีการสร้าง quotation item
-                $result = $this->db->insert($this->tbQuotationItem, $data);
+            if (@$item_id[$key] == 'add') { //ถ้ายังไม่มีการสร้าง quotation item
+                $result = $this->quotationItemAddOne($data);
                 if (!$result)
                     return false;
-                $this->Log_model->logAdd('add quotation item', $this->tbQuotationItem, __LINE__, $data);
             }
         }
         return true;
+    }
+
+    function quotationItemAddOne($data)
+    {
+        $result = $this->db->insert($this->tbQuotationItem, $data);
+        if (!$result)
+            return false;
+        $id = $this->db->insert_id($this->tbQuotationItem);
+        $data['id'] = $id;
+        $this->Log_model->logAdd('add quotation item', $this->tbQuotationItem, __LINE__, $data);
+        return $id;
     }
 
     function quotationItemEdit($id, $post)
