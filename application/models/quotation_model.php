@@ -186,7 +186,7 @@ class Quotation_model extends CI_Model
         if (!$countQuotationNo)
             return false;
         $expVal = explode('#', $quotationNo);
-        $quotationNo = $expVal[0] . "#" . ($countQuotationNo + 1);
+        $quotationNo = $expVal[0] . "#" . ($countQuotationNo);
         $arrayQuotation['quotation_no'] = $quotationNo;
         $idNew = $this->quotationAddOne($arrayQuotation);
 
