@@ -55,7 +55,7 @@ $objData = $this->Member_model->memberList();
                             <?php if (@$permission): ?>
                                 <div class="box-content nopadding">
                                     <table
-                                        class="table table-hover  dataTable dataTable-tools table-bordered dataTable-scroll-x"
+                                        class="table table-hover  dataTable table-bordered dataTable-scroll-x"
                                         id="">
                                         <thead>
                                         <tr>

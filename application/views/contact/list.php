@@ -54,7 +54,7 @@ $objData = $this->Contact_model->contactList();
                             <?php if (@$permission): ?>
                                 <div class="box-content nopadding">
                                     <table
-                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered display dataTable-scroll-x">
+                                        class="table table-hover table-nomargin dataTable table-bordered display dataTable-scroll-x">
                                         <thead>
                                         <tr>
                                             <th>#</th>

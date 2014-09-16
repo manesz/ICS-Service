@@ -56,7 +56,7 @@ $objData = $this->Module_model->moduleList();
                             <?php if (@$permission): ?>
                                 <div class="box-content nopadding">
                                     <table
-                                        class="table table-hover table-nomargin dataTable dataTable-tools table-bordered">
+                                        class="table table-hover table-nomargin dataTable table-bordered">
                                         <thead>
                                         <tr>
                                             <th>#</th>
