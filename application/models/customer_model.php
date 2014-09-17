@@ -41,16 +41,16 @@ class Customer_model extends CI_Model
         }
     }
 
-    function customerAdd($post)
+    function customerAdd($post, $publish = 1)
     {
         extract($post);
-
-
-        $imagePath = $this->Upload_model->uploadBase64($post);
-        if (!empty($imagePath)) {
-            $this->Upload_model->loadImage($imagePath);
-            $this->Upload_model->resizeToWidth(300);
-            $this->Upload_model->save($imagePath);
+        if ($post) {
+            $imagePath = $this->Upload_model->uploadBase64($post);
+            if (!empty($imagePath)) {
+                $this->Upload_model->loadImage($imagePath);
+                $this->Upload_model->resizeToWidth(300);
+                $this->Upload_model->save($imagePath);
+            }
         }
 
         $data = array(
@@ -67,7 +67,7 @@ class Customer_model extends CI_Model
             'location' => trim(@$location),
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->db->insert($this->tableName, $data);
         $id = $this->db->insert_id($this->tableName);
@@ -77,7 +77,7 @@ class Customer_model extends CI_Model
         return $id;
     }
 
-    function customerEdit($id, $post)
+    function customerEdit($id, $post, $publish = 1)
     {
         extract($post);
 
@@ -103,7 +103,7 @@ class Customer_model extends CI_Model
             'remark' => @$remark,
             'location' => trim(@$location),
             'update_datetime' => date('Y-m-d H:i:s'),
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->Log_model->logAdd('edit customer', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));

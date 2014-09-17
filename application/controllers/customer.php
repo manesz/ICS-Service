@@ -51,9 +51,12 @@ class Customer extends CI_Controller
             }
             exit();
         }
+        $id = $this->Customer_model->customerAdd(array(), 0);
         $data = array(
+            'id' => $id,
             "selectMenu" => $this->selectMenu,
-            'permission' => $this->checkPermission(1)
+            'permission' => $this->checkPermission(1),
+            'page' => "Add",
         );
         $this->load->view("customer/add", $data);
     }
@@ -73,18 +76,20 @@ class Customer extends CI_Controller
         $data = array(
             'id' => $id,
             "selectMenu" => $this->selectMenu,
-            'permission' => $this->checkPermission(2)
+            'permission' => $this->checkPermission(2),
+            'page' => "Edit",
         );
-        $this->load->view("customer/edit", $data);
+        $this->load->view("customer/add", $data);
     }
 
     function customerView($id)
     {
         $data = array(
             'id' => $id,
-            "selectMenu" => $this->selectMenu
+            "selectMenu" => $this->selectMenu,
+            'page' => "View",
         );
-        $this->load->view("customer/view", $data);
+        $this->load->view("customer/add", $data);
     }
 
     function customerDelete($id)
