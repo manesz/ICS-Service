@@ -78,6 +78,15 @@ class Customer extends CI_Controller
         $this->load->view("customer/edit", $data);
     }
 
+    function customerView($id)
+    {
+        $data = array(
+            'id' => $id,
+            "selectMenu" => $this->selectMenu
+        );
+        $this->load->view("customer/view", $data);
+    }
+
     function customerDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbCustomer);

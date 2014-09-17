@@ -74,7 +74,7 @@ $objData = $this->Customer_model->customerList();
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->taxpayer_number; ?></td>
-                                                <td><?php echo $value->name_th; ?></td>
+                                                <td><a href="<?php echo $webUrl; ?>customer/view/<?php echo $value->id; ?>"><?php echo $value->name_th; ?></a></td>
                                                 <td><?php echo $value->name_en; ?></td>
                                                 <td><?php echo "$value->telephone"; ?></td>
                                                 <td><?php echo $value->email; ?></td>
