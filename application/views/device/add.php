@@ -5,8 +5,7 @@ $this->load->view("navigator_menu");
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $id = @$id ? $id : 0;
-$view = @$view ? $view : false;
-if ($page == "Edit" || $page == "View") {
+if ($page != "Add") {
     $arrDevice = $this->Device_model->deviceList($id);
     extract((array)$arrDevice[0]);
 }
@@ -22,7 +21,9 @@ $objCustomer = $this->Customer_model->customerList();
                 openUrl(url_list);
                 return false;
             });
-            <?php if (!$view): ?>
+            <?php if ($page == "View"): ?>
+            $("#formPost :input").prop("disabled", true);
+            <?php else: ?>
             $("#formPost").submit(function () {
                 disableID("btnSave");
                 var checkPost = checkValidateForm("#formPost");
@@ -89,7 +90,7 @@ $this->load->view("sidebar_menu");
                     </h3>
                 </div>
                 <!-- END: .box-title -->
-                <?php if (@$permission || $view): ?>
+                <?php if (@$permission || $page == "View"): ?>
                     <div class="box-content nopadding">
                         <form action="" method="POST" autocomplete="off"
                               class='form-horizontal form-column form-bordered form-validate'
@@ -111,7 +112,7 @@ $this->load->view("sidebar_menu");
                                                     $baseUrl . $image;
                                                 ?>"/>
                                             </div>
-                                            <?php if (!$view): ?>
+                                            <?php if ($page != "View"): ?>
                                                 <div class="fileupload-preview fileupload-exists thumbnail"
                                                      style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                 <div>
@@ -139,7 +140,7 @@ $this->load->view("sidebar_menu");
 
                                     <div class="controls">
                                         <div class="input-xlarge">
-                                            <select <?php echo $view ? "disabled" : ""; ?>
+                                            <select
                                                 name="customer_id"
                                                 id="customer_id"
                                                 class='chosen-select'>
@@ -159,7 +160,7 @@ $this->load->view("sidebar_menu");
                                     <label for="name" class="control-label">Name :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="name"
                                             id="name" placeholder="Name"
                                             class="input-xlarge"
@@ -171,7 +172,7 @@ $this->load->view("sidebar_menu");
                                     <label for="serial" class="control-label">Serial :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="serial"
                                             id="serial"
                                             placeholder="Serial"
@@ -184,7 +185,7 @@ $this->load->view("sidebar_menu");
                                     <label for="model" class="control-label">Model :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="model"
                                             id="model" placeholder="Model"
                                             class="input-xlarge"
@@ -196,7 +197,7 @@ $this->load->view("sidebar_menu");
                                     <label for="brand" class="control-label">Brand :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="brand"
                                             id="brand" placeholder="Brand"
                                             class="input-xlarge"
@@ -208,7 +209,7 @@ $this->load->view("sidebar_menu");
                                     <label for="type" class="control-label">Type :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="type"
                                             id="type" placeholder="Type"
                                             class="input-xlarge"
@@ -220,7 +221,7 @@ $this->load->view("sidebar_menu");
                                     <label for="datesheet" class="control-label">Date Sheet :</label>
 
                                     <div class="controls">
-                                        <input <?php echo $view ? "disabled" : ""; ?>
+                                        <input
                                             type="text" name="datesheet"
                                             id="datesheet"
                                             placeholder="Date input"
@@ -234,8 +235,8 @@ $this->load->view("sidebar_menu");
                                     <label for="remark" class="control-label">รายละเอียด :</label>
 
                                     <div class="controls">
-                                        <textarea <?php echo $view ? "disabled" : ""; ?> id="remark" name="remark"
-                                                                                         class="input-xlarge"><?php echo @$remark; ?></textarea>
+                                        <textarea id="remark" name="remark"
+                                                  class="input-xlarge"><?php echo @$remark; ?></textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -252,11 +253,12 @@ $this->load->view("sidebar_menu");
                             </div>
                             <div class="span12">
                                 <div class="form-actions">
-                                    <?php if (!$view): ?>
+                                    <?php if ($page != "View") { ?>
                                         <button type="submit" class="btn btn-primary" id="btnSave">Save changes</button>
-                                    <?php endif; ?>
-                                    <button type="button" class="btn"
-                                            id="btnCancel"><?php echo $view ? "Back" : "Cancel"; ?></button>
+                                        <a type="button" class="btn" id="btnCancel">Cancel</a>
+                                    <?php } else { ?>
+                                        <a type="button" class="btn btn-primary" id="btnCancel">Back</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <!--END:span6 -->
