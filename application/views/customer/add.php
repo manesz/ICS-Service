@@ -121,14 +121,6 @@ $this->load->view("sidebar_menu");
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label for="fax" class="control-label">Fax :</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="fax" id="fax" placeholder="Text input"
-                                                       class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
                                             <label for="taxpayer_number" class="control-label">เลขที่ผู้เสียภาษี :</label>
 
                                             <div class="controls">
@@ -175,6 +167,14 @@ $this->load->view("sidebar_menu");
                                                 <input type="text" name="telephone" id="telephone"
                                                        placeholder="Text input"
                                                        class="input-xlarge" data-rule-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="fax" class="control-label">Fax :</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="fax" id="fax" placeholder="Text input"
+                                                       class="input-xlarge">
                                             </div>
                                         </div>
                                         <div class="control-group">
