@@ -140,7 +140,7 @@ $this->load->view("sidebar_menu");
 
                                     <div class="controls">
                                         <div class="input-xlarge">
-                                            <select
+                                            <select <?php echo $page == "View" ? "disabled" : ""; ?>
                                                 name="customer_id"
                                                 id="customer_id"
                                                 class='chosen-select'>

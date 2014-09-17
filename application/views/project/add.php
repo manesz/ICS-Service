@@ -5,24 +5,26 @@ $this->load->view("navigator_menu");
 $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $id = @$id ? $id : 0;
-if ($id) {
+if ($page != "Add") {
     $arrProject = $this->Project_model->projectList($id);
     extract((array)$arrProject[0]);
-    $pathFileManager = "uploads/project/$id/files/";
-    $this->Helper_model->checkHaveFolder($pathFileManager, true);
 }
+$pathFileManager = "uploads/project/$id/files/";
+$this->Helper_model->checkHaveFolder($pathFileManager, true);
 $objCustomer = $this->Customer_model->customerList();
 $windowClose = @$_GET['window'];
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>project/<?php echo $id?"edit/$id":"add"; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>project/edit/<?php echo $id; ?>";
         var url_list = "<?php echo $webUrl; ?>project";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
                 openUrl(<?php echo $windowClose=="close"?"'close'": "url_list"; ?>);
                 return false;
             });
-
+            <?php if ($page == "View"): ?>
+            $("#formPost :input").prop("disabled", true);
+            <?php else: ?>
             $("#formPost").submit(function () {
                 disableID("btnSave");
                 var checkPost = checkValidateForm("#formPost");
@@ -46,6 +48,7 @@ $windowClose = @$_GET['window'];
                 }
                 return false;
             });
+            <?php endif; ?>
         });
     </script>
 <div class="container-fluid" id="content">
@@ -72,8 +75,8 @@ $this->load->view("sidebar_menu");
                     </li>
                     <li>
                         <a href="<?php echo $webUrl;
-                        ?>project/<?php echo $id ? "edit/$id" : "add"; ?>"><?php echo $id ? "Edit" : "Add" ?>
-                            Project</a>
+                        ?>project/<?php echo $id ? "edit/$id" : "add"; ?>"
+                            ><?php echo $page; ?> Project</a>
                     </li>
                 </ul>
                 <div class="close-bread">
@@ -90,7 +93,7 @@ $this->load->view("sidebar_menu");
                             </h3>
                         </div>
                         <!-- END: .box-title -->
-                        <?php if (@$permission): ?>
+                        <?php if (@$permission || $page == "View"): ?>
                             <div class="box-content nopadding">
                                 <form action="" method="POST" autocomplete="off"
                                       class='form-horizontal form-column form-bordered form-validate'
@@ -112,24 +115,26 @@ $this->load->view("sidebar_menu");
                                                             $baseUrl . $image;
                                                         ?>"/>
                                                     </div>
-                                                    <div class="fileupload-preview fileupload-exists thumbnail"
-                                                         style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                                    <div>
+                                                    <?php if ($page != "View"): ?>
+                                                        <div class="fileupload-preview fileupload-exists thumbnail"
+                                                             style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                        <div>
                                                         <span id="groupBtn"
                                                               class="btn btn-file <?php echo !file_exists(@$image) ? "" : 'hide'; ?>">
                                                             <span class="fileupload-new">Select image</span>
                                                             <span class="fileupload-exists">Change</span>
                                                             <input type="file" name='imagefile' id="imagefile"/>
                                                         </span>
-                                                        <?php if (file_exists(@$image)): ?>
-                                                            <input type="button" id="btnDeleteImage"
-                                                                   onclick="removeImage('<?php echo $image; ?>');"
-                                                                   class="btn"
-                                                                   value="Remove">
-                                                        <?php endif; ?>
-                                                        <a href="#" class="btn fileupload-exists"
-                                                           data-dismiss="fileupload">Remove</a>
-                                                    </div>
+                                                            <?php if (file_exists(@$image)): ?>
+                                                                <input type="button" id="btnDeleteImage"
+                                                                       onclick="removeImage('<?php echo $image; ?>');"
+                                                                       class="btn"
+                                                                       value="Remove">
+                                                            <?php endif; ?>
+                                                            <a href="#" class="btn fileupload-exists"
+                                                               data-dismiss="fileupload">Remove</a>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,16 +144,19 @@ $this->load->view("sidebar_menu");
                                             <div class="controls">
                                                 <div class="input-xlarge input-append">
                                                     <select name="customer_id" id="customer_id"
-                                                            class='chosen-select'>
+                                                            class='chosen-select'
+                                                        <?php echo $page == "View" ? "disabled" : ""; ?>>
                                                         <option value=""></option>
                                                         <?php foreach ($objCustomer as $key => $value): ?>
                                                             <option <?php echo @$customer_id == $value->id ? 'selected' : ''; ?>
                                                                 value="<?php echo $value->id; ?>"><?php echo $value->name_th; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <a class="btn"
-                                                       onclick="openNewTab('<?php echo $webUrl; ?>customer/add?window=close');"
-                                                       href="#"> New</a>
+                                                    <?php if ($page != "View"): ?>
+                                                        <a class="btn"
+                                                           onclick="openNewTab('<?php echo $webUrl; ?>customer/add?window=close');"
+                                                           href="#"> New</a>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +208,8 @@ $this->load->view("sidebar_menu");
                                                     </div>
                                                     <div class="box-content nopadding">
                                                         <div class="file-manager" id="status_deliverd"
-                                                             data="<?php echo @$pathFileManager; ?>"></div>
+                                                             data="<?php echo @$pathFileManager; ?>"
+                                                             write="<?php echo $page == "View" ? "false" : "true"; ?>"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,9 +217,13 @@ $this->load->view("sidebar_menu");
                                     </div>
                                     <div class="span12">
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary" id="btnSave">Save changes
-                                            </button>
-                                            <button type="button" class="btn" id="btnCancel">Cancel</button>
+                                            <?php if ($page != "View"): ?>
+                                                <button type="submit" class="btn btn-primary" id="btnSave">Save changes
+                                                </button>
+                                                <a type="button" class="btn" id="btnCancel">Cancel</a>
+                                            <?php else : ?>
+                                                <a type="button" class="btn btn-primary" id="btnCancel">Back</a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <!--END:span6 -->

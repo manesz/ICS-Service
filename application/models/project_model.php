@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: Rux
@@ -6,8 +7,6 @@
  * Time: 12:57 น.
  * To change this template use File | Settings | File Templates.
  */
-
-
 class Project_model extends CI_Model
 {
 
@@ -21,6 +20,7 @@ class Project_model extends CI_Model
 
     private $tableName = "";
     private $tbCustomer = "";
+
     function projectList($id = 0, $orderBy = "")
     {
         $strAnd = $id == 0 ? "" : " AND a.id = $id";
@@ -47,28 +47,30 @@ class Project_model extends CI_Model
         }
     }
 
-    function projectAdd($post)
+    function projectAdd($post, $publish = 1)
     {
         extract($post);
 
-        $imagePath = $this->Upload_model->uploadBase64($post);
-        if (!empty($imagePath)) {
-            $this->Upload_model->loadImage($imagePath);
-            $this->Upload_model->resizeToWidth(300);
-            $this->Upload_model->save($imagePath);
+        if ($post) {
+            $imagePath = $this->Upload_model->uploadBase64($post);
+            if (!empty($imagePath)) {
+                $this->Upload_model->loadImage($imagePath);
+                $this->Upload_model->resizeToWidth(300);
+                $this->Upload_model->save($imagePath);
+            }
         }
 
         $data = array(
             'customer_id' => @$customer_id,
-            'name_th' => trim($name_th),
-            'name_en' => trim($name_en),
+            'name_th' => trim(@$name_th),
+            'name_en' => trim(@$name_en),
             'project_start' => @$project_start,
             'project_end' => @$project_end,
             'image' => @$imagePath,
             'description' => @$description,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->db->insert($this->tableName, $data);
         $id = $this->db->insert_id($this->tableName);
@@ -78,7 +80,7 @@ class Project_model extends CI_Model
         return $id;
     }
 
-    function projectEdit($id, $post)
+    function projectEdit($id, $post, $publish = 1)
     {
         extract($post);
 
@@ -93,14 +95,14 @@ class Project_model extends CI_Model
         $data = array(
             'id' => $id,
             'customer_id' => @$customer_id,
-            'name_th' => trim($name_th),
-            'name_en' => trim($name_en),
+            'name_th' => trim(@$name_th),
+            'name_en' => trim(@$name_en),
             'project_start' => @$project_start,
             'project_end' => @$project_end,
             'image' => @$imagePath,
             'description' => @$description,
             'update_datetime' => date('Y-m-d H:i:s'),
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->Log_model->logAdd('edit project', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));

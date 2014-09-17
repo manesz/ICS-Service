@@ -69,13 +69,13 @@ $objData = $this->Project_model->projectList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key + 1; ?></td>
-                                                <td><?php if ($value->name_en && $value->name_th) {
+                                                <td><a href="<?php echo $webUrl; ?>project/view/<?php echo $value->id; ?>"><?php if ($value->name_en && $value->name_th) {
                                                         echo "$value->name_en ($value->name_th)";
                                                     } else if (!$value->name_en && $value->name_th) {
                                                         echo $value->name_th;
                                                     } else {
                                                         echo '-';
-                                                    } ?></td>
+                                                    } ?></a></td>
                                                 <td><?php echo $value->customer_name_th ? $value->customer_name_th : $value->customer_name_en; ?></td>
                                                 <td><?php echo $value->project_start; ?></td>
                                                 <td><?php echo "$value->project_end"; ?></td>
