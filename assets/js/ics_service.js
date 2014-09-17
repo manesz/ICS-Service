@@ -183,8 +183,8 @@ function openUrl(url) {
 function redirectUrl(url) {
 //    showWaitImageOnTop();
 //    window.location.href = url;
-    window.location.replace(url);
-    hideWaitImageOnTop();
+    window.location = url;
+//    hideWaitImageOnTop();
 }
 
 function disableID(id) {
@@ -349,8 +349,7 @@ $(function () {
     $("#navigation").prepend(strWaitImageOnTop);
     $("a").click(function () {
         if (this.href.indexOf("#") < 0 && this.href.indexOf("javascript") < 0 && this.href != "") {
-            openUrl(this.href);
-            return false;
+            openUrl(this.href)
         }
     });
     $("#title").focus();
