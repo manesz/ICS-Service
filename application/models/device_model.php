@@ -58,7 +58,7 @@ class Device_model extends CI_Model
         }
 
         $data = array(
-            'name' => trim($name),
+            'name' => trim(@$name),
             'customer_id' => @$customer_id,
             'serial' => trim(@$serial),
             'model' => trim(@$model),

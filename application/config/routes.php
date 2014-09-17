@@ -66,6 +66,7 @@ $route['contact/delete/(:any).*'] = 'contact/contactdelete/$1';
 //Device
 $route['device/add'] = 'device/deviceadd';
 $route['device/edit/(:any).*'] = 'device/deviceedit/$1';
+$route['device/view/(:any).*'] = 'device/deviceview/$1';
 $route['device/delete/(:any).*'] = 'device/devicedelete/$1';
 
 //Project

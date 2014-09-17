@@ -73,7 +73,7 @@ $objData = $this->Device_model->deviceList();
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
                                                 <td><?php echo $value->name_th ? $value->name_th: '-'; ?></td>
-                                                <td><?php echo $value->name; ?></td>
+                                                <td><a href="<?php echo $webUrl; ?>device/view/<?php echo $value->id; ?>"><?php echo $value->name; ?></a></td>
                                                 <td><?php echo $value->serial; ?></td>
                                                 <td><?php echo $value->model; ?></td>
                                                 <td><?php echo "$value->brand"; ?></td>
