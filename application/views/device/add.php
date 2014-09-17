@@ -246,7 +246,8 @@ $this->load->view("sidebar_menu");
                                         </div>
                                         <div class="box-content nopadding">
                                             <div class="file-manager" id="status_deliverd"
-                                                 data="<?php echo "$pathFileManager"; ?>"></div>
+                                                 data="<?php echo "$pathFileManager"; ?>"
+                                                write="<?php echo $page=="View"?"false":"true";?>"></div>
                                         </div>
                                     </div>
                                 </div>

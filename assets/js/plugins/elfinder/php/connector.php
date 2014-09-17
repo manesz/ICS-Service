@@ -2,10 +2,10 @@
 
 error_reporting(0); // Set E_ALL for debuging
 
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderConnector.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinder.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeDriver.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeLocalFileSystem.class.php';
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderConnector.class.php';
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinder.class.php';
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderVolumeDriver.class.php';
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFinderVolumeLocalFileSystem.class.php';
 // Required for MySQL storage connector
 // include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeMySQL.class.php';
 // Required for FTP connector support
@@ -26,46 +26,53 @@ include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeLocalFileSyste
  * Simple function to demonstrate how to control file access using "accessControl" callback.
  * This method will disable accessing files/folders starting from '.' (dot)
  *
- * @param  string  $attr  attribute name (read|write|locked|hidden)
- * @param  string  $path  file path relative to volume root directory started with directory separator
+ * @param  string $attr attribute name (read|write|locked|hidden)
+ * @param  string $path file path relative to volume root directory started with directory separator
  * @return bool|null
  **/
-function access($attr, $path, $data, $volume) {
-	return strpos(basename($path), '.') === 0       // if file/folder begins with '.' (dot)
-		? !($attr == 'read' || $attr == 'write')    // set read+write to false, other (locked+hidden) set to true
-		:  null;                                    // else elFinder decide it itself
+function access($attr, $path, $data, $volume)
+{
+    return strpos(basename($path), '.') === 0 // if file/folder begins with '.' (dot)
+        ? !($attr == 'read' || $attr == 'write') // set read+write to false, other (locked+hidden) set to true
+        : null; // else elFinder decide it itself
 }
 
-$getPath = @$_GET['path'];// ตัวอย่าง path=uploads/folder_name
+$getPath = @$_GET['path']; // ตัวอย่าง path=uploads/folder_name
 $baseUrl = @$_GET['base_url'];
+$write = @$_GET['write'] ? $_GET['write'] : true;
+if ($write == "false") {
+    $write = false;
+}else {
+    $write = true;
+}
 if (!$getPath) {
     $pathFolder = '../files/';
     $urlFolder = dirname($_SERVER['PHP_SELF']) . '/../files/';
 } else {
     $getPath = str_replace('#', "", $getPath);
     $pathFolder = "../../../../../$getPath/";
-    $urlFolder = $baseUrl . $getPath;//dirname($_SERVER['PHP_SELF']) . "/$getPath/";
+    $urlFolder = $baseUrl . $getPath; //dirname($_SERVER['PHP_SELF']) . "/$getPath/";
 }
 // Documentation for connector options:
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 $opts = array(
-	 'debug' => true,
-	'roots' => array(
-		array(
-			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => $pathFolder,         // path to files (REQUIRED)
-			'URL'           => $urlFolder, // URL to files (REQUIRED)
-			'accessControl' => 'access',             // disable and hide dot starting files (OPTIONAL)
-			'attributes' => array(
-		        array(
-		            'pattern' => '!^/*.*$!',
-		            'read' => true,
-		            'write' => true,
-		            'locked' => true
-		        )
-		    ),
-		)
-	)
+    'debug' => true,
+    'roots' => array(
+        array(
+            'driver' => 'LocalFileSystem', // driver for accessing file system (REQUIRED)
+            'path' => $pathFolder, // path to files (REQUIRED)
+            'URL' => $urlFolder, // URL to files (REQUIRED)
+            'accessControl' => 'access', // disable and hide dot starting files (OPTIONAL)
+            'attributes' => array(
+                array(
+                    'pattern' => '!^/*.*$!',
+                    'read' => true,
+                    'write' => $write,
+                    'locked' => true
+                )
+            ),
+        )
+    )
 );
 
 // run elFinder

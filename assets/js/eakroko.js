@@ -479,8 +479,9 @@ $(document).ready(function () {
         $(".file-manager").each(function () {
             var $el = $(this);
             var data = $el.attr('data');
+            var write = $el.attr('write') || "true";
             var urlConnector = baseUrl + 'assets/js/plugins/elfinder/php/connector.php?path=' + data +
-                '&base_url=' + baseUrl;//alert(urlConnector);
+                '&base_url=' + baseUrl + "&write=" + write;//alert(urlConnector);
             $el.elfinder({
                 url: urlConnector
             });
@@ -542,8 +543,7 @@ $(window).resize(function () {
     resize_chosen();
 });
 
-function setChosenSelect()
-{
+function setChosenSelect() {
     $('.chosen-select').each(function () {
         var $el = $(this);
         $el.removeClass("chzn-done");
