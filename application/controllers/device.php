@@ -86,7 +86,6 @@ class Device extends CI_Controller
         $data = array(
             'id' => $id,
             "selectMenu" => $this->selectMenu,
-            'view' => true,
             'page' => "View",
         );
         $this->load->view("device/add", $data);
