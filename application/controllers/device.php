@@ -50,11 +50,12 @@ class Device extends CI_Controller
             }
             exit();
         }
-        $id = $this->Device_model->deviceAdd(array());
+        $id = $this->Device_model->deviceAdd(array(), 0);
         $data = array(
             "selectMenu" => $this->selectMenu,
             "id" => $id,
-            'permission' => $this->checkPermission(1)
+            'permission' => $this->checkPermission(1),
+            'page' => "Add",
         );
         $this->load->view("device/add", $data);
     }
@@ -74,7 +75,8 @@ class Device extends CI_Controller
         $data = array(
             'id' => $id,
             "selectMenu" => $this->selectMenu,
-            'permission' => $this->checkPermission(2)
+            'permission' => $this->checkPermission(2),
+            'page' => "Edit",
         );
         $this->load->view("device/add", $data);
     }
@@ -84,7 +86,8 @@ class Device extends CI_Controller
         $data = array(
             'id' => $id,
             "selectMenu" => $this->selectMenu,
-            'view' => true
+            'view' => true,
+            'page' => "View",
         );
         $this->load->view("device/add", $data);
     }

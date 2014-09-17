@@ -46,7 +46,7 @@ class Device_model extends CI_Model
         }
     }
 
-    function deviceAdd($post)
+    function deviceAdd($post, $publish = 1)
     {
         extract($post);
 
@@ -69,7 +69,7 @@ class Device_model extends CI_Model
             'remark' => @$remark,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->db->insert($this->tableName, $data);
         $id = $this->db->insert_id($this->tableName);
@@ -79,7 +79,7 @@ class Device_model extends CI_Model
         return $id;
     }
 
-    function deviceEdit($id, $post)
+    function deviceEdit($id, $post, $publish = 1)
     {
         extract($post);
 
@@ -103,7 +103,7 @@ class Device_model extends CI_Model
             'datesheet' => @$datesheet,
             'remark' => @$remark,
             'update_datetime' => date('Y-m-d H:i:s'),
-            'publish' => 1,
+            'publish' => $publish,
         );
         $this->Log_model->logAdd('edit device', $this->tableName, __LINE__, $data);
         return $this->db->update($this->tableName, $data, array('id' => $id));

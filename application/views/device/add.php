@@ -6,7 +6,7 @@ $webUrl = $this->Constant_model->webUrl();
 $baseUrl = base_url();
 $id = @$id ? $id : 0;
 $view = @$view ? $view : false;
-if ($id) {
+if ($page == "Edit" || $page == "View") {
     $arrDevice = $this->Device_model->deviceList($id);
     extract((array)$arrDevice[0]);
 }
@@ -15,7 +15,7 @@ $this->Helper_model->checkHaveFolder($pathFileManager, true);
 $objCustomer = $this->Customer_model->customerList();
 ?>
     <script>
-        var url_post_data = "<?php echo $webUrl; ?>device/<?php echo $id ? "edit/$id" : "add"; ?>";
+        var url_post_data = "<?php echo $webUrl; ?>device/edit/<?php echo $id; ?>";
         var url_list = "<?php echo $webUrl; ?>device";
         $(document).ready(function () {
             $('#btnCancel').click(function () {
@@ -57,7 +57,7 @@ $this->load->view("sidebar_menu");
     <div class="container-fluid">
     <div class="page-header">
         <div class="pull-left">
-            <h1><?php echo $id ? "Edit" : "Add" ?> Device</h1>
+            <h1><?php echo @$page; ?> Device</h1>
         </div>
     </div>
     <div class="breadcrumbs">
@@ -72,7 +72,7 @@ $this->load->view("sidebar_menu");
             </li>
             <li>
                 <a href="<?php echo $webUrl; ?>device/<?php echo $id ? "edit/$id" : "add"; ?>"
-                    ><?php echo $id ? "Edit" : "Add" ?> Device</a>
+                    ><?php echo @$page; ?> Device</a>
             </li>
         </ul>
         <div class="close-bread">
