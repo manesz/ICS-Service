@@ -60,7 +60,7 @@ $this->load->view("sidebar_menu");
         <div class="container-fluid">
             <div class="page-header">
                 <div class="pull-left">
-                    <h1><?php echo $id ? "Edit" : "Add" ?> Project</h1>
+                    <h1><?php echo $page; ?> Project</h1>
                 </div>
             </div>
             <div class="breadcrumbs">
