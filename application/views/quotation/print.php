@@ -114,8 +114,8 @@ $countQuotationItem = count($objQuotationItem)
                             </td>
                         </tr>
                         <tr>
-                            <td height="23"><span style="font-size:10px;"><strong>Tel :</strong> 084-672-7423 Email  :  info@ideacorners.comWebsite : http://www.ideacorners.com<br/>
-                          <strong>Facebook : </strong>facebook@ideacorners Twitter : @ideacorners</span></td>
+                            <td height="23"><span style="font-size:10px;"><strong>Tel :</strong> 084-672-7423 <strong>Email  : </strong>info@ideacorners.com <strong>Website : </strong>http://www.ideacorners.com<br/>
+                          <strong>Facebook : </strong>facebook@ideacorners <strong>Twitter : </strong>@ideacorners</span></td>
                             <td width="300" align="center" bgcolor="#FFC000" class="border">
                                 <span>ใบเสนอราคา / QUOTATION</span>
                             </td>
@@ -242,7 +242,7 @@ $countQuotationItem = count($objQuotationItem)
                             class="border-right border-left"><?php echo @$objQuotationItem[$i]->item_no; ?></td>
                         <td class="border-right"><?php echo @$objQuotationItem[$i]->description; ?></td>
                         <td height="31" align="right"
-                            class="border-right"><?php echo @$objQuotationItem[$i]->quantity > 0 ? @$objQuotationItem[$i]->quantity : "-&nbsp;&nbsp;"; ?></td>
+                            class="border-right"><?php echo @$objQuotationItem[$i]->quantity > 0 ? str_replace('.00', '&nbsp;&nbsp;', @$objQuotationItem[$i]->quantity."") : "-&nbsp;&nbsp;"; ?></td>
                         <td height="31" align="right"
                             class="border-right"><?php echo @$objQuotationItem[$i]->price > 0 ? number_format(@$objQuotationItem[$i]->price, 2) : "-&nbsp;&nbsp;"; ?></td>
                         <td height="31" align="right"
