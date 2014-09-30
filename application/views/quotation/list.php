@@ -88,7 +88,8 @@ $objData = $this->Quotation_model->quotationList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key + 1; ?></td>
-                                                <td><?php echo $value->quotation_no; ?></td>
+                                                <td><a href="<?php echo $webUrl; ?>quotation/edit/<?php echo $value->id; ?>">
+                                                        <?php echo $value->quotation_no; ?></a></td>
                                                 <td><?php echo $value->project_name_th; ?></td>
                                                 <td><?php echo $value->customer_name_th; ?></td>
                                                 <td><?php echo number_format($value->total_amount, 2); ?></td>
