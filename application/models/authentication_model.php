@@ -48,6 +48,7 @@ class Authentication_model extends CI_Model
             //$this->Log_model->deleteLog();
 
             $result[$this->sessionUrl] = $sessionUrl;
+            $result[$this->sessionLock] = false;
             $result[$this->strCheck] = 'true';
             $this->session->set_userdata($result);
 

@@ -42,9 +42,10 @@
 $route['default_controller'] = "dashboard";
 $route['404_override'] = '';
 
-
+//Authentication
 $route['signin'] = 'authentication';
 $route['signout'] = 'authentication/signOut';
+$route['lock'] = 'authentication/sessionLock';
 
 
 //Member
