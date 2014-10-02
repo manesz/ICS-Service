@@ -16,6 +16,7 @@ $baseUrl = base_url();
     <script>
         var baseUrl = "<?php echo $baseUrl; ?>";
         var webUrl = "<?php echo $webUrl; ?>";
+        var user_login = <?php echo $this->Authentication_model->checkUserLogin() ? '"login"':'"logout"';?>;
     </script>
     <!-- ####################################### css ################################################################## -->
     <!-- Bootstrap -->

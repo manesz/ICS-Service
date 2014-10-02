@@ -46,6 +46,7 @@ $route['404_override'] = '';
 $route['signin'] = 'authentication';
 $route['signout'] = 'authentication/signOut';
 $route['lock'] = 'authentication/sessionLock';
+$route['sessiontime'] = 'authentication/sessiontime';
 
 
 //Member

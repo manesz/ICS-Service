@@ -1,10 +1,11 @@
 var urlDelete = "";
-var strWaitImage = "<div class='wait hidden'></div>";
+var strWaitImage = "<div style='z-index: 999;background-color: #ffffff !important;width: 100%;' class='wait hidden'></div>";
 var strWaitImageOnTop = "<div class='wait-ontop hidden'></div>";
 
 //function list
 function userAuthen() {
-    $("#authenResult").html(strWaitImage);
+    showWaitImage();
+    $("#authenResult").html('');
     var data = {
         username: $("#username").val(),
         password: $("#password").val()
@@ -16,9 +17,13 @@ function userAuthen() {
         data: data,
         success: function (data) {
             $("#authenResult").html(data);
+            addRememberMe();
+            hideWaitImage();
             enableID("btnSignIn");
         }, error: function (XMLHttpRequest, textStatus, errorThrown) {
             clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
+            enableID("btnSignIn");
+            hideWaitImage();
         }
 
     });//END: ajax
@@ -355,4 +360,45 @@ $(function () {
     $("#title").focus();
     $("#name").focus();
     $("#to").focus();
+
+    countSessionTime();
 });
+
+
+//-----------------------Session Timeout--------------------------------------//
+var count_loop_session_time = 0;
+var session_time = 0;
+function countSessionTime() {
+    var urlSessionTime = webUrl + 'sessiontime';
+    setTimeout(function () {
+        session_time++;
+        if (count_loop_session_time >= 5) {//check login ทุกๆ 5 วิ
+            count_loop_session_time = 0;
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: urlSessionTime,
+                success: function (data) {
+                    if (data == "fail") {
+                        alert("เกิดข้อผิดพลาด");
+                    } else if (data == "login" && user_login != "login") {
+                        window.location.href = webUrl;
+                    } else if (data == "logout" && user_login != "logout") {
+                        window.location.href = webUrl + 'signin';
+                    } else if (data == "lock" && user_login != "lock") {
+                        window.location.href = webUrl + 'lock';
+                    }
+                }
+            });
+
+        } else {
+            count_loop_session_time++;
+        }
+        /*else if (session_time > 3600) {//Log out 1 ชม.
+         window.location.href = webUrl + "logout";
+         }*/
+        countSessionTime();
+    }, 1000);
+
+}
+//-----------------------End Session Timeout--------------------------------------//

@@ -18,6 +18,7 @@ class Authentication extends CI_Controller
     }
 
     private $sessionUrl = "";
+
     function index()
     {
         $post = $this->input->post();
@@ -28,7 +29,7 @@ class Authentication extends CI_Controller
             if ($resultLogin) {
                 if (empty($sessionUrl)) {
                     $urlRedirect = $this->Constant_model->webUrl();
-                }else {
+                } else {
                     $urlRedirect = $sessionUrl;
                 }
                 echo "<script type='text/javascript'>window.location='$urlRedirect'</script>";
@@ -55,10 +56,34 @@ class Authentication extends CI_Controller
         }
     }
 
+    function sessionTime()
+    {
+        if ($this->Authentication_model->checkUserLogin()) {
+            $oldSessionTime = $this->Authentication_model->getSessionTime();
+            $currentSessionTime = strtotime('now');
+            $timeDiff = round(($currentSessionTime - $oldSessionTime) / (60), 2); // 1 นาที =  *60
+            if ($timeDiff > 15) {
+                if ($timeDiff > 30) { //logout
+                    $this->Authentication_model->signOut();
+                    echo 'logout';
+                } else {
+                    $this->Authentication_model->setSessionLock();
+                    echo 'lock';
+                }
+            } else {
+                $this->Authentication_model->setSessionLock(false);
+                echo 'login';
+            }
+        } else {
+            echo 'logout';
+        }
+        exit;
+    }
+
     function sessionLock()
     {
         $post = $this->input->post();
-        $sessionUrl = @$this->session->userdata['cms_session_url'];
+        $sessionUrl = @$this->session->userdata[$this->sessionUrl];
         $message = "";
         if ($post) {
             extract($post);
@@ -74,7 +99,7 @@ class Authentication extends CI_Controller
             }
             exit;
         } else {
-            $this->Authentication_model->setSessionLock();//set session lock
+            $this->Authentication_model->setSessionLock(); //set session lock
         }
         $data = array(
             'message' => $message

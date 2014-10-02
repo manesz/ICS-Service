@@ -5,20 +5,26 @@ $this->load->view("header");
 ?>
 <!--        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
     <script>
+        var c_username = '';
+        var c_password = '';
+        var c_remember = '';
+
         $(document).ready(function () {
-            var username = getCookie("username");
-            var password = getCookie("password");
-            var remember = getCookie("remember_me");
-            if (remember && remember != '') {
-                $('#username').val(username);
-                $('#password').val(password);
+            $("body").prepend(strWaitImage);
+            c_username = getCookie("username");
+            c_password = getCookie("password");
+            c_remember = getCookie("remember_me");
+//            alert(c_remember)
+            if (c_remember) {
+                $('#username').val(c_username);
+                $('#password').val(c_password);
                 $(".remember div").addClass('checked');
+                $('#remember_me').attr('checked', true);
             } else {
                 $('#remember_me').removeAttr('checked');
                 $('#username').val('');
                 $('#password').val('');
             }
-
             $('#remember_me').click(function () {
                 addRememberMe();
             });
@@ -29,6 +35,8 @@ $this->load->view("header");
                 setCookie('password', $('#password').val());
                 setCookie('remember_me', "true");
             } else {
+                $(".remember div").removeClass('checked');
+                $('#remember_me').removeAttr('checked');
                 setCookie('username', "");
                 setCookie('password', "");
                 setCookie('remember_me', "");
@@ -58,17 +66,20 @@ $this->load->view("header");
         <div class="login-body">
             <h2>SIGN IN</h2>
 
-            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn"
-                onsubmit="addRememberMe();">
+            <form action="#" method='post' class='form-validate' id="frmSignIn" name="frmSignIn">
                 <div class="control-group">
                     <div class="email controls">
-                        <input type="text" id="username" autofocus="" name='username' placeholder="Username / Email"
+                        <input type="text" id="username" autofocus=""
+                               maxlength="50"
+                               name='username' placeholder="Username / Email"
                                class='input-block-level' data-rule-required="true">
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="pw controls">
-                        <input type="password" id="password" name="password" placeholder="Password"
+                        <input type="password" id="password"
+                               maxlength="50"
+                               name="password" placeholder="Password"
                                class='input-block-level' data-rule-required="true">
                     </div>
                 </div>

@@ -57,7 +57,7 @@ foreach ($objCheckModule as $key => $value) {
 ?>
 <div id="navigation">
 <div class="container-fluid">
-<a href="#" id="brand">ICS-Services</a>
+<a href="<?php echo $webUrl; ?>" id="brand">ICS-Services</a>
 <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i
         class="icon-reorder"></i></a>
 

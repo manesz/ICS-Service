@@ -26,9 +26,12 @@ $id = @$this->session->userdata['id'];
 $arrMember = $this->Member_model->memberList($id);
 extract((array)$arrMember[0]);
 
-$name = "$prefix $firstname";
+$name = "$firstname $lastname";
 $imagePath = file_exists($image_path) ? $baseUrl . $image_path : $baseUrl . "assets/img/no_img.gif";
 ?>
+<script>
+    user_login = 'lock';
+</script>
     <body class='locked'>
     <div class="wrapper ">
         <div class="pull-left">

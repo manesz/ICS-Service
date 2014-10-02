@@ -16,11 +16,13 @@ class Authentication_model extends CI_Model
         $this->tableNameMember = $this->Constant_model->tbMember;
         $this->sessionUrl = $this->Constant_model->sessionUrl;
         $this->sessionLock = $this->Constant_model->sessionLock;
+        $this->sessionTime = $this->Constant_model->sessionTime;
     }
 
     private $tableNameMember = "";
     private $sessionUrl = "";
     private $sessionLock = "";
+    private $sessionTime = "";
     private $strCheck = "ics_check";
 
     function signIn($post)
@@ -48,6 +50,7 @@ class Authentication_model extends CI_Model
             //$this->Log_model->deleteLog();
 
             $result[$this->sessionUrl] = $sessionUrl;
+            $result = $this->setSessionTime($result);
             $result[$this->sessionLock] = false;
             $result[$this->strCheck] = 'true';
             $this->session->set_userdata($result);
@@ -55,7 +58,7 @@ class Authentication_model extends CI_Model
             $this->Log_model->logAdd('Sign in',
                 $this->tableNameMember, __LINE__, array('id' => $result['id'], 'username' => $result['username']));
             $id = $result['id'];
-            $this->setSessionLogin($id);
+            //$this->setSessionLogin($id);
 //            session_start();
 //            $_SESSION['userdata'] = $this->session->userdata;
 //            $_SESSION['webUrl'] = $this->Constant_model->webUrl();
@@ -70,32 +73,74 @@ class Authentication_model extends CI_Model
         $this->Log_model->logAdd('Sign out',
             $this->tableNameMember, __LINE__, null);
         $this->session->sess_destroy();
-        session_start();
-//        unset($_SESSION["userdata"]);
-//        $_SESSION['webUrl'] = $this->Constant_model->webUrl();
         return true;
     }
 
     function checkSignIn()
     {
-        $strOldSession = @$this->session->userdata['session_login'];
-        $id = @$this->session->userdata['id'];
-        if (empty($this->session->userdata[$this->strCheck]) && !$_GET) {
-            $webUrl = $this->Constant_model->webUrl();
+//        $strOldSession = @$this->session->userdata['session_login'];
+//        $id = @$this->session->userdata['id'];
+        $webUrl = $this->Constant_model->webUrl();
+        if (!$this->checkUserLogin()) {
             if (!$_POST) {
                 $setSession = array(
                     $this->sessionUrl => $webUrl . uri_string()
                 );
                 $this->session->set_userdata($setSession);
             }
-            redirect($webUrl . "signin");
-        } else if ($strOldSession && $strOldSession != $this->checkSessionLogin($id)) {
+            redirect($webUrl. 'signin');
+        } else if ($this->checkUserLock()) {
+            redirect($webUrl . 'lock');
+        } /*else if ($strOldSession && $strOldSession != $this->checkSessionLogin($id)) {
 //            $webUrl = $this->Constant_model->webUrl();
 //            $setSession = array(
 //                $this->sessionUrl => $webUrl . uri_string()
 //            );
 //            $this->session->set_userdata($setSession);
 //            redirect($webUrl . "signin");
+        }*/
+        if (!$_POST)
+            $this->setSessionTime();
+        return true;
+    }
+
+    function checkUserLogin()
+    {
+//        var_dump($this->session->userdata['username']);
+        if (!@$this->session->userdata['username']) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkUserLock()
+    {
+        $checkLogin = $this->checkUserLogin();
+        if ($checkLogin) {
+            $result = @$this->session->userdata[$this->sessionLock];
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    function getSessionTime()
+    {
+        $sessionTime = @$this->session->userdata[$this->sessionTime];
+        return $sessionTime;
+    }
+
+    function setSessionTime($data = null)
+    {
+        if ($data) {
+            $data[$this->sessionTime] = strtotime(date('YmdHis'));
+            return $data;
+        } else {
+            $setSession = array(
+                $this->sessionTime => strtotime(date('YmdHis'))
+            );
+            $this->session->set_userdata($setSession);
         }
         return true;
     }
@@ -119,19 +164,18 @@ class Authentication_model extends CI_Model
         }
     }
 
-    function setSessionLogin($id)
-    {
-        $strSession = strtotime(date("YmdHis"));
-        $data = array(
-            'session_login' => $strSession
-        );
-        return $this->db->update($this->tableNameMember, $data, array('id' => $id));
-    }
+//    function setSessionLogin($id)
+//    {
+//        $strSession = strtotime(date("YmdHis"));
+//        $data = array(
+//            'session_login' => $strSession
+//        );
+//        return $this->db->update($this->tableNameMember, $data, array('id' => $id));
+//    }
 
 
     function setSessionLock($set = true)
     {
-//        $uri = $this->Constant_model->webUrl();
         $setSession = array(
             $this->sessionLock => $set
         );
