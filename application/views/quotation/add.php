@@ -408,22 +408,22 @@ $this->load->view("sidebar_menu");
                         <td><input type="text" name="cost[]" maxlength="8"
                                    placeholder="Number" class="input-block-level cost"
                                    data-rule-number="true"
-                                   value="<?php echo $value->cost != 0 ? $value->cost : ''; ?>"></td>
+                                   value="<?php echo $value->cost != 0 ? str_replace(".00", "", $value->cost) : ''; ?>"></td>
                         <td><input type="text" name="quantity[]" maxlength="8"
                                    placeholder="Number" class="input-block-level quantity"
                                    data-rule-number="true"
-                                   value="<?php echo $value->quantity != 0 ? $value->quantity : ''; ?>"></td>
+                                   value="<?php echo $value->quantity != 0 ? str_replace(".00", "", $value->quantity) : ''; ?>"></td>
                         <td><input type="text" name="price[]" maxlength="8"
                                    placeholder="Number" class="input-block-level price"
                                    data-rule-number="true"
-                                   value="<?php echo $value->price != 0 ? $value->price : ''; ?>"></td>
+                                   value="<?php echo $value->price != 0 ? str_replace(".00", "", $value->price) : ''; ?>"></td>
                         <td><input type="text" name="discount[]" maxlength="8"
                                    placeholder="Number" class="input-block-level discount"
                                    data-rule-number="true"
-                                   value="<?php echo $value->discount != 0 ? $value->discount : ''; ?>"></td>
+                                   value="<?php echo $value->discount != 0 ? str_replace(".00", "", $value->discount) : ''; ?>"></td>
                         <td><input type="text" disabled
                                    placeholder="" class="input-block-level amount"
-                                   value="<?php echo $value->amount != 0 ? $value->amount : ''; ?>"></td>
+                                   value="<?php echo $value->amount != 0 ? str_replace(".00", "", $value->amount) : ''; ?>"></td>
                         <td>
                             <button tabindex="999" class="btn btn-danger btnDeleteItem">
                                 <i class="glyphicon-bin"></i></button>
