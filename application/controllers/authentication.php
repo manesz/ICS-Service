@@ -71,8 +71,12 @@ class Authentication extends CI_Controller
                     echo 'lock';
                 }
             } else {
-                $this->Authentication_model->setSessionLock(false);
-                echo 'login';
+                if ($this->Authentication_model->checkUserLock()) {
+                    echo 'lock';
+                } else {
+                    $this->Authentication_model->setSessionLock(false);
+                    echo 'login';
+                }
             }
         } else {
             echo 'logout';

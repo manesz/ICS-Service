@@ -250,7 +250,7 @@ $config['encryption_key'] = '1234qwer';
 |
 */
 $config['sess_cookie_name']		= 'ci_session_ics_service_dev';
-$config['sess_expiration']		= 86400;
+$config['sess_expiration']		= 0;
 $config['sess_expire_on_close']	= true;
 $config['sess_encrypt_cookie']	= true;
 $config['sess_use_database']	= true;
