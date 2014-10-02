@@ -1,10 +1,10 @@
 var urlDelete = "";
-var strWaitImage = "<div style='z-index: 999;background-color: #ffffff !important;width: 100%;' class='wait hidden'></div>";
+var strWaitImage = "<div style='z-index: 999;background-color: #ffffff !important;wid' class='wait hidden'></div>";
 var strWaitImageOnTop = "<div class='wait-ontop hidden'></div>";
 
 //function list
 function userAuthen() {
-    showWaitImage();
+    showWaitImageOnTop();
     $("#authenResult").html('');
     var data = {
         username: $("#username").val(),
@@ -18,12 +18,12 @@ function userAuthen() {
         success: function (data) {
             $("#authenResult").html(data);
             addRememberMe();
-            hideWaitImage();
+            hideWaitImageOnTop();
             enableID("btnSignIn");
         }, error: function (XMLHttpRequest, textStatus, errorThrown) {
             clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
             enableID("btnSignIn");
-            hideWaitImage();
+            hideWaitImageOnTop();
         }
 
     });//END: ajax

@@ -32,9 +32,9 @@ class Authentication extends CI_Controller
                 } else {
                     $urlRedirect = $sessionUrl;
                 }
-                echo "<script type='text/javascript'>window.location='$urlRedirect'</script>";
+                echo "<font color='green'>Login Success</font><script type='text/javascript'>openUrl('$urlRedirect');</script>";
             } else {
-                echo 'username or password is not correct.';
+                echo 'Username or Password is not correct.';
             }
             exit();
         }

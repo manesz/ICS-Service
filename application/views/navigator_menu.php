@@ -303,6 +303,9 @@ endforeach;
         </a>
         <ul class="dropdown-menu pull-right">
             <li>
+                <a href="<?php echo $webUrl; ?>lock">Lock Screen</a>
+            </li>
+            <li>
                 <a href="<?php echo $webUrl; ?>signout">Sign out</a>
             </li>
         </ul>

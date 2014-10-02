@@ -10,7 +10,7 @@ $this->load->view("header");
         var c_remember = '';
 
         $(document).ready(function () {
-            $("body").prepend(strWaitImage);
+            $('body').prepend(strWaitImageOnTop);
             c_username = getCookie("username");
             c_password = getCookie("password");
             c_remember = getCookie("remember_me");
