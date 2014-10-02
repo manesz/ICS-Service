@@ -14,18 +14,20 @@ class Authentication extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->sessionUrl = $this->Constant_model->sessionUrl;
     }
 
+    private $sessionUrl = "";
     function index()
     {
         $post = $this->input->post();
         $message = "";
-        $sessionUrl = @$this->session->userdata[$this->Constant_model->tbModule->sessionName];
+        $sessionUrl = @$this->session->userdata[$this->sessionUrl];
         if ($post) {
             $resultLogin = $this->Authentication_model->signIn($post);
             if ($resultLogin) {
                 if (empty($sessionUrl)) {
-                    $urlRedirect = $this->Constant_model->webUrl() . "dashboard";
+                    $urlRedirect = $this->Constant_model->webUrl();
                 }else {
                     $urlRedirect = $sessionUrl;
                 }
@@ -51,5 +53,32 @@ class Authentication extends CI_Controller
         if ($resultLogout) {
             redirect($this->Constant_model->webUrl() . 'signin');
         }
+    }
+
+    function sessionLock()
+    {
+        $post = $this->input->post();
+        $sessionUrl = @$this->session->userdata['cms_session_url'];
+        $message = "";
+        if ($post) {
+            extract($post);
+            $resultLogin = $this->Authentication_model->signIn($post);
+            if ($resultLogin) {
+                if (empty($sessionUrl)) {
+                    redirect($this->Constant_model->webUrl());
+                } else {
+                    redirect($sessionUrl);
+                }
+            } else {
+                $message = 'login fail';
+            }
+            exit;
+        } else {
+            $this->Authentication_model->setSessionLock();//set session lock
+        }
+        $data = array(
+            'message' => $message
+        );
+        $this->load->view("lock_screen", $data);
     }
 }
