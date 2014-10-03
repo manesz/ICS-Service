@@ -80,11 +80,19 @@ class Member extends CI_Controller
             'selectSubMenu' => $this->moduleName,
             'permission' => $this->checkPermission(2)
         );
-        if (is_numeric($id)) {
-            $this->load->view('member/edit', $data);
-        } else {
-            $this->load->view('member/list', $data);
-        }
+        $this->load->view('member/edit', $data);
+    }
+
+    function memberView($id)
+    {
+        $data = array(
+            'message' => "",
+            'id' => $id,
+            'selectMenu' => $this->selectMenu,
+            'selectSubMenu' => $this->moduleName,
+            'permission' => $this->checkPermission(2)
+        );
+        $this->load->view('member/view', $data);
     }
 
     function memberDelete($id)

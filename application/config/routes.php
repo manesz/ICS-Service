@@ -52,6 +52,7 @@ $route['sessiontime'] = 'authentication/sessiontime';
 //Member
 $route['member/add'] = 'member/memberadd';
 $route['member/edit/(:any).*'] = 'member/memberedit/$1';
+$route['member/view/(:any).*'] = 'member/memberView/$1';
 $route['member/delete/(:any).*'] = 'member/memberdelete/$1';
 
 //Customer

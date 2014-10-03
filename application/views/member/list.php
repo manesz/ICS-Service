@@ -75,7 +75,7 @@ $objData = $this->Member_model->memberList();
                                             ?>
                                             <tr>
                                                 <td class="center"><?php echo $key+1; ?></td>
-                                                <td><?php echo $value->username; ?></td>
+                                                <td><a href="<?php echo $webUrl; ?>member/view/<?php echo $value->id; ?>"><?php echo $value->username; ?></a></td>
                                                 <td><?php echo @"$value->prefix$value->firstname $value->lastname"; ?></td>
                                                 <td><?php echo $value->phone; ?></td>
                                                 <td><?php echo "$value->mobile"; ?></td>

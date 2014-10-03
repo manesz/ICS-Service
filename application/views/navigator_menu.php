@@ -287,8 +287,11 @@ endforeach;
 
 <div class="user">
     <div class="dropdown">
-        <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>" class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
-            <span style="float: left; margin-right: 5px;">Welcome : <?php echo @$username; ?></span>
+        <a href="<?php echo $webUrl; ?>member/view/<?php echo $id; ?>"
+           class='dropdown-toggle' data-toggle="dropdown" style="height: 22px; min-width: 140px;">
+            <span
+                title="Edit Profile"
+                style="float: left; margin-right: 5px;">Welcome : <?php echo @$username; ?></span>
 
             <div
                 style="width: 24px; height: 24px;margin: 0 auto; overflow:hidden; position: relative; float: right;">
@@ -303,10 +306,14 @@ endforeach;
         </a>
         <ul class="dropdown-menu pull-right">
             <li>
-                <a href="<?php echo $webUrl; ?>lock">Lock Screen</a>
+                <a href="<?php echo $webUrl; ?>member/edit/<?php echo $id; ?>">
+                    <i class="icon-edit"></i> Edit Profile</a>
             </li>
             <li>
-                <a href="<?php echo $webUrl; ?>signout">Sign out</a>
+                <a href="<?php echo $webUrl; ?>lock"><i class="icon-lock"></i> Lock Screen</a>
+            </li>
+            <li>
+                <a href="<?php echo $webUrl; ?>signout"><i class="icon-signout"></i> Sign out</a>
             </li>
         </ul>
     </div>
