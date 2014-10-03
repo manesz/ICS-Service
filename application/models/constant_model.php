@@ -36,7 +36,12 @@ class Constant_model extends CI_Model
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 0
         );
-        return $this->db->update($table, $data, array('id' => $id));
+        $result = $this->db->update($table, $data, array('id' => $id));
+        if ($result) {
+            $this->Log_model->logAdd('delete '. $table, $table, __LINE__, $data);
+            return true;
+        }
+        return false;
     }
 
     /**

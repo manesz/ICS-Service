@@ -77,26 +77,37 @@ $this->load->view("navigator_menu");
                                 $strTextShow = "$value->title";
                                 $strTextShow .= " &nbsp;<i style='color: brown;'>$value->create_datetime</i>";
                                 $arrayDesc = (array)json_decode($value->description);
+                                $arrayNotShowBtn = array(
+                                    "permission",
+                                    "module",
+                                    "user group",
+                                    "contact",
+                                    "image",
+                                    "quotation item"
+                                );
+                                $keyCheck = str_replace('add ', '', $value->title);
+                                $keyCheck = str_replace('edit ', '', $keyCheck);
+                                $mathNotShowBtn = in_array($keyCheck, $arrayNotShowBtn);
                                 if (strstr($value->title, 'add')) {
                                     $strClass = "icon-plus";
-                                    if (!strstr($value->title, 'image'))
+                                    if (!$mathNotShowBtn)
                                         $strTextShow .= " &nbsp;<a href='$webUrl" .
-                                            str_replace('add ', '', $value->title) . "/edit/" . @$arrayDesc['id'] .
+                                            str_replace('add ', '', $value->title) . "/view/" . @$arrayDesc['id'] .
                                                 "'>#Link</a>";
                                 } else if (strstr($value->title, 'edit')) {
                                     $strClass = "icon-edit";
-                                    if (!strstr($value->title, 'image'))
+                                    if (!$mathNotShowBtn)
                                         $strTextShow .= " &nbsp;<a href='$webUrl" .
-                                            str_replace('edit ', '', $value->title) . "/edit/" . @$arrayDesc['id'] .
+                                            str_replace('edit ', '', $value->title) . "/view/" . @$arrayDesc['id'] .
                                                 "'>#Link</a>";
                                 } else if (strstr($value->title, 'delete')) {
-                                    $strClass = "icon-edit";
+                                    $strClass = "glyphicon-bin";
                                 } else if (strstr($value->title, 'Sign in')) {
                                     $strClass = "icon-signin";
                                 } else if (strstr($value->title, 'Sign out')) {
-                                    $strClass = "icon-signout";
+                                    $strClass = "icon-reply";
                                 }
-                                $strLink = $webUrl . "member/edit/" . $value->member_id;
+                                $strLink = $webUrl . "member/view/" . $value->member_id;
                                 ?>
                                 <td><span class="label"><i class="<?php echo $strClass; ?>"></i></span>
                                     <a href="<?php echo $strLink; ?>"><?php echo $value->name; ?></a>
