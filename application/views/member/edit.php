@@ -83,7 +83,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
                 imageName: imageName,
                 imageName2: imageName2
             });
-            showWaitImage();
+            showWaitImageOnTop();
             $.post(url_post_data, data,
                 function (result) {
                     if (result == "edit fail") {
@@ -98,6 +98,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
                         <?php else: ?>
                         openUrl(url_list);
                         <?php endif;?>
+                        hideWaitImageOnTop();
                     }
                 }
             )
@@ -106,7 +107,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
                 })
                 .fail(function () {
                     clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
-                    hideWaitImage();
+                    hideWaitImageOnTop();
                 })
                 .always(function () {
                     //alert("finished");
@@ -133,6 +134,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
         }
 
         function postDataSetPermission(id) {
+            showWaitImageOnTop();
             disableID("btnFinish");
             var rows = document.getElementsByClassName('cbModule_' + id);
             var permission = [];
@@ -154,7 +156,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
                     clickNotifyUpdate();
                 }
                 enableID("btnFinish");
-
+                hideWaitImageOnTop();
             })
                 .done(function () {
                     //alert("second success");
@@ -162,6 +164,7 @@ if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
                 .fail(function () {
                     clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
                     enableID("btnFinish");
+                    hideWaitImageOnTop();
                 })
                 .always(function () {
                     //alert("finished");

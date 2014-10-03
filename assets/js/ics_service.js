@@ -82,7 +82,7 @@ function logFeed() {
 }
 function postData(url, data, urlRedirect) {
     urlRedirect = urlRedirect || false;
-    showWaitImage();
+    showWaitImageOnTop();
     disableID("btnAdd");
     disableID("btnSave");
     disableID("btnCancel");
@@ -103,7 +103,7 @@ function postData(url, data, urlRedirect) {
         enableID("btnAdd");
         enableID("btnSave");
         enableID("btnCancel");
-        hideWaitImage();
+        hideWaitImageOnTop();
     })
         .done(function () {
             //alert("second success");
@@ -113,7 +113,7 @@ function postData(url, data, urlRedirect) {
             enableID("btnAdd");
             enableID("btnSave");
             enableID("btnCancel");
-            hideWaitImage();
+            hideWaitImageOnTop();
         })
         .always(function () {
             //alert("finished");
