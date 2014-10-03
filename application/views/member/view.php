@@ -18,7 +18,11 @@ extract((array)$arrMember[0]);
 
 $objModule = $this->Module_model->moduleList();
 
-$checkEditUser = true;
+$checkEditUser = false;
+if ($usernameLogin == 'admin' || $customerIDLogin == 1) {
+    $checkEditUser = true;
+}
+$permissionUpdate = $this->Module_model->checkModuleByPermission("Users", 2);
 ?>
 
     <script>
@@ -89,9 +93,11 @@ $checkEditUser = true;
         <li class='active' id="liPorfile">
             <a href="#profile" data-toggle='tab'><i class="icon-user"></i> Profile</a>
         </li>
+<?php if ($permissionUpdate || $usernameLogin == 'admin'): ?>
         <li id="liModulePermission">
             <a href="#module_permission" data-toggle='tab'><i class="icon-lock"></i> Module Permission</a>
         </li>
+<?php endif; ?>
     </ul>
     <div class="tab-content tab-content-top tab-content-inline tab-content-bottom nopadding"
          style="margin-top: 20px !important;">
