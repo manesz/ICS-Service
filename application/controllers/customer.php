@@ -44,7 +44,7 @@ class Customer extends CI_Controller
         $post = $this->input->post();
         if ($post) {
             $result = $this->Customer_model->customerAdd($post);
-            if ($result){
+            if ($result) {
                 echo "add success";
             } else {
                 echo 'add fail';
@@ -64,10 +64,22 @@ class Customer extends CI_Controller
     function customerEdit($id)
     {
         $post = $this->input->post();
-        if ($post) {//var_dump($post);exit;
+        if ($post) {
             $result = $this->Customer_model->customerEdit($id, $post);
             if ($result) {
-                echo "edit success";
+                extract($post);
+                if (@$contact_name_th || @$contact_name_en)
+                    if (@$contact_id) {
+                        $result = $this->Contact_model->contactEdit($contact_id, $post);
+                        if ($result) {
+                            echo "edit success";
+                        }
+                    } else {
+                        $result = $this->Contact_model->contactAdd($post);
+                        if ($result) {
+                            echo "edit success";
+                        }
+                    }
             } else {
                 echo "edit fail";
             }
@@ -95,8 +107,7 @@ class Customer extends CI_Controller
     function customerDelete($id)
     {
         $result = $this->Constant_model->setPublish($id, $this->Constant_model->tbCustomer);
-        if (!$result)
-        {
+        if (!$result) {
             echo "delete fail";
             exit;
         }

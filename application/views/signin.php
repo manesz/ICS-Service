@@ -57,7 +57,7 @@ $this->load->view("header");
     <body class='login'>
     <div class="wrapper">
         <h1>
-            <a href="<?php echo $webUrl; ?>dashboard">
+            <a href="#">
                 <img src="<?php echo $baseUrl; ?>assets/img/logo.png" alt="" class='retina-ready' width="64"
                      height="auto">ICS
                 <small style="color: #FFF;">-Services</small>

@@ -81,6 +81,7 @@ function logFeed() {
         });
 }
 function postData(url, data, urlRedirect) {
+    urlRedirect = urlRedirect || false;
     showWaitImage();
     disableID("btnAdd");
     disableID("btnSave");
@@ -92,8 +93,11 @@ function postData(url, data, urlRedirect) {
             clickNotifyUpdate();
             if (urlRedirect == "close") {
                 window.close();
-            } else if (urlRedirect != "" && urlRedirect != false)
-                openUrl(urlRedirect);
+            } else if (urlRedirect != "" && urlRedirect != false) {
+                if (urlRedirect != url)
+                    openUrl(urlRedirect);
+                else window.location.reload();
+            }
         }
 //        alert(result);
         enableID("btnAdd");
@@ -246,7 +250,7 @@ function deleteData() {
                 clickNotifyError('เกิดข้อผิดพลาด กรุณาลองใหม่');
             } else {
                 clickNotifyUpdate();
-                openUrl(window.location.href);
+                window.location.reload();
             }
         })
             .done(function () {
@@ -290,8 +294,9 @@ function focusToDiv(id, focusID) {
 //            focusID = "#" + focusID;
 //        }
 //    }
-    $('html, body').animate({ scrollTop: $(id).offset().top }, 'slow', function () {
-        if (focusID != undefined) {
+    focusID = focusID || false;
+    $('html, body').animate({ scrollTop: $(id).offset().top }, 'first', function () {
+        if (focusID && focusID != undefined) {
             $(focusID).focus();
         }
     });

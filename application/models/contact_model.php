@@ -59,7 +59,13 @@ class Contact_model extends CI_Model
     {
         if (!$post) return false;
         extract($post);
-        $imagePath = $this->Upload_model->uploadBase64($post);
+        $arraySendToImage = array(
+            'imagePatch' => $imageContactPatch,
+            'data_image' => $contact_data_image,
+            'imageName' => $imageContactName,
+            'fileType' => $fileType,
+        );
+        $imagePath = $this->Upload_model->uploadBase64($arraySendToImage);
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
             $this->Upload_model->resizeToWidth(300);
@@ -68,13 +74,13 @@ class Contact_model extends CI_Model
 
         $data = array(
             'customer_id' => @$customer_id,
-            'name_th' => @$name_th,
-            'name_en' => @$name_en,
-            'mobile' => @$mobile,
-            'email' => @$email,
+            'name_th' => @$contact_name_th,
+            'name_en' => @$contact_name_en,
+            'mobile' => @$contact_mobile,
+            'email' => @$contact_email,
             'image' => @$imagePath,
-            'position' => @$position,
-            'description' => @$description,
+            'position' => @$contact_position,
+            'description' => @$contact_description,
             'create_datetime' => date('Y-m-d H:i:s'),
             'update_datetime' => "0000-00-00 00:00:00",
             'publish' => 1,
@@ -92,8 +98,14 @@ class Contact_model extends CI_Model
         if (!$id || !$post) return false;
         extract($post);
 
-        $imagePath = $this->Upload_model->uploadBase64($post);
-        $imagePath = empty($imagePath) ? $image_path : $imagePath;
+        $arraySendToImage =array(
+            'imagePatch' => $imageContactPatch,
+            'data_image' => $contact_data_image,
+            'imageName' => $imageContactName,
+            'fileType' => $fileType,
+        );
+        $imagePath = $this->Upload_model->uploadBase64($arraySendToImage);
+        $imagePath = empty($imagePath) ? @$contact_image_path : $imagePath;
         if (!empty($imagePath)) {
             $this->Upload_model->loadImage($imagePath);
             $this->Upload_model->resizeToWidth(300);
@@ -103,13 +115,13 @@ class Contact_model extends CI_Model
         $data = array(
             'id' => $id,
             'customer_id' => @$customer_id,
-            'name_th' => @$name_th,
-            'name_en' => @$name_en,
-            'mobile' => @$mobile,
-            'email' => @$email,
+            'name_th' => @$contact_name_th,
+            'name_en' => @$contact_name_en,
+            'mobile' => @$contact_mobile,
+            'email' => @$contact_email,
             'image' => @$imagePath,
-            'position' => @$position,
-            'description' => @$description,
+            'position' => @$contact_position,
+            'description' => @$contact_description,
             'update_datetime' => date('Y-m-d H:i:s'),
             'publish' => 1,
         );
